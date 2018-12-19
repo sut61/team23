@@ -21,9 +21,9 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@Table(name="Treatmenthistory") //ชื่อตาราง
+@Table(name="Treatmenthistory")
 public class Treatmenthistory {
-    @Id  //  Annotations  @Id  บอกว่าเป็น  Primary  key
+    @Id
     @SequenceGenerator(name="treatmenthistory_seq",sequenceName="treatmenthistory_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="treatmenthistory_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="TREATMENTHISTORY_ID",unique = true, nullable = false)
