@@ -14,8 +14,8 @@ import java.time.*;
 
 import java.util.*;
 
-@Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
-@Data  // lombox จะสร้าง method getter setter ให้เอง
+@Entity
+@Data
 @ToString
 @Getter
 @Setter
