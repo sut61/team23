@@ -8,6 +8,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import { HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -71,6 +72,9 @@ export class GoldCardRegisterComponent implements OnInit {
                 );
 
   }
+  passwordFormControl = new FormControl('', [
+            Validators.required,
+  ]);
 
   ngOnInit() {
       this.goldcardService.getRightsType().subscribe(data =>{
@@ -91,11 +95,5 @@ export class GoldCardRegisterComponent implements OnInit {
             });
   }
 
-onSubmit(form: NgForm) {
-    console.log(form);
-}
-  passwordFormControl = new FormControl('', [
-            Validators.required,
-  ]);
 
 }

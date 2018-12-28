@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 navLinks = [
-     {path: 'goldcardregister', label: 'GoldCardRegister'},
+     {path: 'goldCardRegister', label: 'GoldCardRegister'},
    ];
 
   isLoggedIn$: Observable<boolean>;                  // {1}
@@ -23,6 +23,7 @@ check: String;
     }
 
     onLogout(){
+      alert("Good Bye\n"+localStorage.getItem('currentUser'));
       this.authService.logout();                      // {3}
     }
 

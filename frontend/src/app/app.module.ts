@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { GoldCardRegisterComponent } from './gold-card-register/gold-card-register.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent ,ErrorComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+
 import {
   MatAutocompleteModule,
   MatBadgeModule,

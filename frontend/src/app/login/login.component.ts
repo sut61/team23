@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,15 +14,17 @@ import { Observable } from 'rxjs/Observable';
 export class LoginComponent implements OnInit {
   form: FormGroup;                    // {1}
   private formSubmitAttempt: boolean; // {2}
+  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
   navLinks = [
-     {path: 'goldcardregister', label: 'GoldCardRegister'},
+     {path: 'goldCardRegister', label: 'GoldCardRegister'},
    ];
 
   isLoggedIn$: Observable<boolean>;
   constructor(
     private fb: FormBuilder,         // {3}
-    private authService: AuthService // {4}
+    private authService: AuthService, // {4}
+     private router: Router
   ) {}
 
   ngOnInit() {
@@ -28,7 +33,9 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-     this.isLoggedIn$ = this.authService.isLoggedIn
+
+             this.isLoggedIn$ = this.authService.isLoggedIn;
+
   }
 
   isFieldInvalid(field: string) { // {6}
@@ -39,10 +46,22 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.authService.login(this.form.value); // {7}
+      if (this.form.valid) {
+        this.authService.login(this.form.value); // {7}
+
+      }
+      this.formSubmitAttempt = true;             // {8}
     }
-    this.formSubmitAttempt = true;             // {8}
-  }
+    regis(){
+                 this.loggedIn.next(true);
+
+    }
 }
 
+@Component({
+  selector: 'error',
+  templateUrl: './error.html'
+})
+export class ErrorComponent{
+
+}

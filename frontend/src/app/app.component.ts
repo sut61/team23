@@ -9,7 +9,6 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Home';
 
    contructor(){}
 
