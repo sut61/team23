@@ -30,9 +30,9 @@ public class Treatmenthistory {
     private @NonNull Long treatId;
     private @NonNull LocalDate treatDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Goldcard.class)
-    @JoinColumn(name= "goldcard", insertable = true)
-    private Goldcard goldcards;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = RightRegistration.class)
+    @JoinColumn(name= "rightregistration", insertable = true)
+    private RightRegistration rightRegistration;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Drug.class)
     @JoinColumn(name= "drug", insertable = true)

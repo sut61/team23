@@ -17,13 +17,21 @@ export class AuthService {
 
   login(user: User){
 
-      localStorage.setItem('currentUser', "admin");
+      localStorage.setItem('currentUser', "user");
+       localStorage.setItem('currentAdmin', "admin");
     if (user.userName == localStorage.getItem('currentUser') && user.password == localStorage.getItem('currentUser'))  { // {3}
       this.loggedIn.next(true);
       this.router.navigate(['/home']);
     }
+    else if (user.userName == localStorage.getItem('currentAdmin') && user.password == localStorage.getItem('currentAdmin'))  { // {3}
+          localStorage.setItem('currentUser',localStorage.getItem('currentAdmin'));
+          this.loggedIn.next(true);
+          this.router.navigate(['/goldCardRegister']);
+
+    }
     else{
       alert("Error Username or password is wrong\nPlease try again");
+
     }
   }
 

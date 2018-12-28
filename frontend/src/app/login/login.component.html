@@ -5,20 +5,19 @@
         <p class="font1">Please login to continue</p>
         <mat-form-field class="full-width-input">
           <input matInput placeholder="User" formControlName="userName" required>
-          <mat-error *ngIf="isFieldInvalid('userName')">
-            Please inform your user name
-          </mat-error>
+
         </mat-form-field>
         <mat-form-field class="full-width-input">
           <input matInput type="password" placeholder="Password" formControlName="password" required>
-          <mat-error *ngIf="isFieldInvalid('userName')">
-            Please inform your password
-          </mat-error>
+
         </mat-form-field>
         <!-- -->
-        <button mat-menu-item routerLink="goldcardregister" *ngIf="isLoggedIn;" >Register(GoldCard)</button>
+
         <button mat-raised-button color="primary">Login</button>
 
       </form>
     </mat-card-content>
+    <button mat-raised-button routerLink="goldCardRegister"  >Register(GoldCard)</button>
+
   </mat-card>
+
