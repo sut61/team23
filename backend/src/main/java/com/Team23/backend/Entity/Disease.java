@@ -30,4 +30,7 @@ public class Disease {
     private @NonNull Long diseaseId;
 
     private @NonNull String diseaseName;
+	public Disease(String diseaseName) {
+        this.diseaseName=diseaseName;
+    }
 }
