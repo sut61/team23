@@ -16,9 +16,6 @@ export class LoginComponent implements OnInit {
   private formSubmitAttempt: boolean; // {2}
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
-  navLinks = [
-     {path: 'goldCardRegister', label: 'GoldCardRegister'},
-   ];
 
   isLoggedIn$: Observable<boolean>;
   constructor(
@@ -32,7 +29,6 @@ export class LoginComponent implements OnInit {
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
-
 
              this.isLoggedIn$ = this.authService.isLoggedIn;
 
@@ -48,13 +44,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
       if (this.form.valid) {
         this.authService.login(this.form.value); // {7}
-
       }
       this.formSubmitAttempt = true;             // {8}
     }
-    regis(){
-                 this.loggedIn.next(true);
-
+    register(){
+          this.authService.register();
+          this.formSubmitAttempt = true;
     }
 }
 

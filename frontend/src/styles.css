@@ -1,5 +1,8 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
+.th{
+  font-family: 'Sarabun', sans-serif;
+}
 .font1{
   font-family: 'Tangerine', serif;
    font-size: 50px;
