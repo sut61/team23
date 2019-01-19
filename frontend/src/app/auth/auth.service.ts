@@ -17,17 +17,18 @@ export class AuthService {
 
   login(user: User){
 
-      localStorage.setItem('currentUser', "user");
-       localStorage.setItem('currentAdmin', "admin");
-    if (user.userName == localStorage.getItem('currentUser') && user.password == localStorage.getItem('currentUser'))  { // {3}
+    localStorage.setItem('currentUser', "user");
+    localStorage.setItem('currentAdmin', "admin");
+   if (user.userName == localStorage.getItem('currentUser') && user.password == localStorage.getItem('currentUser'))  { // {3}
       this.loggedIn.next(true);
       this.router.navigate(['/home']);
     }
     else if (user.userName == localStorage.getItem('currentAdmin') && user.password == localStorage.getItem('currentAdmin'))  { // {3}
           localStorage.setItem('currentUser',localStorage.getItem('currentAdmin'));
-          this.loggedIn.next(true);
-          this.router.navigate(['/goldCardRegister']);
 
+          this.loggedIn.next(true);
+
+          this.router.navigate(['/home']);
     }
     else{
       alert("Error Username or password is wrong\nPlease try again");
@@ -35,10 +36,14 @@ export class AuthService {
     }
   }
 
-
   logout() {                            // {4}
     this.loggedIn.next(false);
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
+  }
+  register(){
+    localStorage.setItem('currentRegis', "test");
+    this.loggedIn.next(true);
+    this.router.navigate(['/goldCardRegister']);
   }
 }

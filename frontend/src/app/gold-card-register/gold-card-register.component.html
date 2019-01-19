@@ -1,40 +1,44 @@
 
 <div class="card">
-<p class = "center">วันที่สมัคร : {{CurrentDate | date:'fullDate' }}</p>
+<h4 class = "center">วันที่สมัคร : {{CurrentDate | date:'fullDate' }}</h4>
+
+  <mat-divider></mat-divider>
 
   <br>
 
-  <mat-form-field >
+  <mat-form-field class="form">
     <input matInput  placeholder="Username"  [(ngModel)]="input.username">
   </mat-form-field>
 
-  <mat-form-field class="tab">
+  <mat-form-field class="formtab">
     <input matInput  placeholder="Password"  [(ngModel)]="input.password">
   </mat-form-field>
 
   <br>
 
-  <mat-form-field >
+  <mat-form-field class="form">
     <input matInput placeholder="Firstname"  [(ngModel)]="input.firstname">
   </mat-form-field>
 
-  <mat-form-field class="tab">
+  <mat-form-field class="formtab">
     <input matInput  placeholder="Surname"  [(ngModel)]="input.surname">
   </mat-form-field>
-
   <br>
 
-  <mat-form-field>
-    <mat-select placeholder="Province" [(ngModel)]="select.provincename">
-      <mat-option *ngFor="let province of provinces" [value]="province.provinceName">
-        {{province.provinceName}}
-      </mat-option>
-    </mat-select>
+  <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel" class="form">
+    <mat-label>บัตรปชช*</mat-label>
+    <input matInput placeholder="" [(ngModel)]="input.personalcard">
+  </mat-form-field>
+
+  <mat-form-field class="formtab">
+    <input matInput [matDatepicker]="picker" placeholder="เลือกวันเกิด" [(ngModel)]="input.birthday">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
   </mat-form-field>
 
   <br>
 
-<mat-form-field>
+<mat-form-field class="formcenter">
   <mat-select placeholder="ชนิดสัญญา" [(ngModel)]="select.rightstypename">
     <mat-option *ngFor="let rightstype of rightstypes" [value]="rightstype.rightsTypeName">
       {{rightstype.rightsTypeName}}
@@ -44,7 +48,7 @@
 
 <br>
 
-<mat-form-field>
+<mat-form-field class="formcenter">
   <mat-select placeholder="Hostpital" [(ngModel)]="select.hostpitalname">
     <mat-option *ngFor="let hostpital of hostpitals" [value]="hostpital.hostpitalName">
       {{hostpital.hostpitalName}}
@@ -52,32 +56,28 @@
   </mat-select>
 </mat-form-field>
 
-<br>
-
-<mat-form-field>
-  <input matInput [matDatepicker]="picker" placeholder="เลือกวันเกิด" [(ngModel)]="input.birthday">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-</mat-form-field>
-
   <br>
 
-  <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel">
-    <mat-label>บัตรปชช*</mat-label>
-    <input matInput placeholder="" [(ngModel)]="input.personalcard">
+  <mat-form-field class="formcenter">
+    <mat-select placeholder="Province" [(ngModel)]="select.provincename">
+      <mat-option *ngFor="let province of provinces" [value]="province.provinceName">
+        {{province.provinceName}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
   <br>
 
-  <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel">
+  <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel" class="formcenter">
     <mat-label>Phone*</mat-label>
     <input matInput placeholder="" [(ngModel)]="input.tel">
 
   </mat-form-field>
 
+
   <br>
 
-  <div class="text-align:center">
+  <div class="formcenter">
     <button mat-raised-button  (click)="regis()" color="primary" >Register</button>
   </div>
 </div>

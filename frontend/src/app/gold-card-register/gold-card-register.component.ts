@@ -7,7 +7,9 @@ import {Observable} from 'rxjs';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -52,22 +54,31 @@ export class GoldCardRegisterComponent implements OnInit {
   lock: FormGroup;
   myControl = new FormControl();
 
-  constructor(fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient){
+  constructor(private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
        this.lock = fb.group({
           hideRequiredMarker: false,
           floatLabel: 'never',
        });
   }
+
+  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+
+    get isLoggedIn() {
+      return this.loggedIn.asObservable(); // {2}
+    }
+
   regis(){
   // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hostpitalname}
               this.httpClient.post('http://localhost:8080/Rightregistration/'+ this.input.username+ '/' + this.input.password+'/'+this.input.firstname+'/'+this.input.surname+'/'+this.input.tel+'/'+this.input.personalcard+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(this.input.birthday,'dd:MM:yyyy')+'/'+this.select.provincename+'/'+this.select.rightstypename+'/'+this.select.hostpitalname,this.input)
                 .subscribe(
                     data => {
                         console.log('PUT Request is successful', data);
+                        alert('การขอสิทธิ์เรียบร้อยแล้ว\nlogin เพื่อที่จะรอการยืนยันสิทธิ์ของคุณ');
+                        this.authService.logout();
                     },
                     error => {
                         console.log('Error', error);
-                        alert('ไม่สำเร็จ\nกรุณากรอกข้อมูลอีกครั้ง');
+                        alert('Username มีผู้ใช้งานแล้ว\nกรุณาเปลี่ยน Username');
                     }
                 );
 

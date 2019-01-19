@@ -18,6 +18,16 @@
 .center{
   text-align : center;
 }
-.tab{
+.form{
+  width : 230px;
+}
+.formcenter{
+  width : 230px;
+  margin-left: 25% ;
+
+  text-align : center;
+}
+.formtab{
   margin-left : 30px;
+  width : 230px;
 }

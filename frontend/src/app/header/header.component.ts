@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-navLinks = [
-     {path: 'goldCardRegister', label: 'GoldCardRegister'},
-   ];
 
   isLoggedIn$: Observable<boolean>;                  // {1}
 check: String;
