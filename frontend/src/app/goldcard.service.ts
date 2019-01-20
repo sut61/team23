@@ -9,13 +9,13 @@ export class GoldcardService {
   constructor(private http: HttpClient) { }
 
   getRightRegistration(): Observable<any> {
-      return this.http.get('//localhost:8080/Rightregistration');
+      return this.http.get('//localhost:8080/Members');
   }
   getRightsType(): Observable<any> {
         return this.http.get('//localhost:8080/RightsType');
     }
-    getHostpital(): Observable<any> {
-          return this.http.get('//localhost:8080/Hostpital');
+    getHospital(): Observable<any> {
+         return this.http.get('//localhost:8080/listhospital');
       }
       getProvince(): Observable<any> {
             return this.http.get('//localhost:8080/Province');

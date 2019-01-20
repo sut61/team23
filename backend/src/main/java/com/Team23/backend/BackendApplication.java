@@ -40,7 +40,7 @@ public class BackendApplication  {
 
 	@Bean
 	ApplicationRunner init(RightsTypeRepository rightsTypeRepository, RightRegistrationRepository rightRegistrationRepository,
-						   ProvinceRepository provinceRepository,gHostpitalRepository ghostpitalRepository) throws Exception {
+						   ProvinceRepository provinceRepository,HospitalRepository hospitalRepository) throws Exception {
 
 		return args -> {
 
@@ -50,10 +50,10 @@ public class BackendApplication  {
 				rightsTypeRepository.save(rightstype);
 			});
 
-			Stream.of("รพ.นครราชสีมา","รพ.กรุงเทพ","testhostpital").forEach(hostpitalName -> {
-				gHostpital ghostpital = new gHostpital();
-				ghostpital.setHostpitalName(hostpitalName);
-				ghostpitalRepository.save(ghostpital);
+			Stream.of("รพ.นครราชสีมา","รพ.กรุงเทพ","testhostpital").forEach(hospitalName -> {
+				Hospital hospital = new Hospital();
+				hospital.setHospitalName(hospitalName);
+				hospitalRepository.save(hospital);
 			});
 
 			Stream.of("นครราชสีมา","กรุงเทพ","testprovince").forEach(provinceName -> {
@@ -65,7 +65,7 @@ public class BackendApplication  {
 			Stream.of("Graph", "Sun").forEach(userName -> {
 
 				RightRegistration rightRegistration = new RightRegistration();
-				gHostpital ghostpitalid = new gHostpital();
+				Hospital hospitalid = new Hospital();
 				RightsType rightsTypeid = new RightsType();
 				Province provinceid = new Province();
 
@@ -99,8 +99,8 @@ public class BackendApplication  {
 					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
 					rightRegistration.setRightsType(rightsTypeid);
 
-					ghostpitalid = ghostpitalRepository.findByHostpitalName("รพ.กรุงเทพ");
-					rightRegistration.setGhostpital(ghostpitalid);
+					hospitalid = hospitalRepository.findByHospitalName("รพ.กรุงเทพ");
+					rightRegistration.setHospital(hospitalid);
 
 					rightRegistrationRepository.save(rightRegistration);
 				} else if (userName == "Sun") {
@@ -119,8 +119,8 @@ public class BackendApplication  {
 					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
 					rightRegistration.setRightsType(rightsTypeid);
 
-					ghostpitalid = ghostpitalRepository.findByHostpitalName("รพ.นครราชสีมา");
-					rightRegistration.setGhostpital(ghostpitalid);
+					hospitalid = hospitalRepository.findByHospitalName("รพ.นครราชสีมา");
+					rightRegistration.setHospital(hospitalid);
 
 					rightRegistrationRepository.save(rightRegistration);
 				}
@@ -129,7 +129,6 @@ public class BackendApplication  {
 			rightsTypeRepository.findAll().forEach(System.out::println);
 			rightRegistrationRepository.findAll().forEach(System.out::println);
 			provinceRepository.findAll().forEach(System.out::println);
-			ghostpitalRepository.findAll().forEach(System.out::println);
 		};
 
 	}
