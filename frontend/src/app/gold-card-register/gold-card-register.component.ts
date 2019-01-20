@@ -29,7 +29,7 @@ export class GoldCardRegisterComponent implements OnInit {
 
   provinces : Array<any>;
   rightstypes : Array<any>;
-  hostpitals : Array<any>;
+  hospitals : Array<any>;
   rightregistrations : Array<any>;
   input: any = {
       username: '',
@@ -43,7 +43,7 @@ export class GoldCardRegisterComponent implements OnInit {
     };
     select: any = {
           rightstypename: '',
-          hostpitalname: '',
+          hospitalname: '',
           provincename:  '',
     };
 
@@ -68,17 +68,17 @@ export class GoldCardRegisterComponent implements OnInit {
     }
 
   regis(){
-  // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hostpitalname}
-              this.httpClient.post('http://localhost:8080/Rightregistration/'+ this.input.username+ '/' + this.input.password+'/'+this.input.firstname+'/'+this.input.surname+'/'+this.input.tel+'/'+this.input.personalcard+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(this.input.birthday,'dd:MM:yyyy')+'/'+this.select.provincename+'/'+this.select.rightstypename+'/'+this.select.hostpitalname,this.input)
+  // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}
+              this.httpClient.post('http://localhost:8080/Rightregistration/'+ this.input.username+ '/' + this.input.password+'/'+this.input.firstname+'/'+this.input.surname+'/'+this.input.tel+'/'+this.input.personalcard+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(this.input.birthday,'dd:MM:yyyy')+'/'+this.select.provincename+'/'+this.select.rightstypename+'/'+this.select.hospitalname,this.input)
                 .subscribe(
                     data => {
                         console.log('PUT Request is successful', data);
-                        alert('การขอสิทธิ์เรียบร้อยแล้ว\nlogin เพื่อที่จะรอการยืนยันสิทธิ์ของคุณ');
+                        alert('การขอสิทธิ์เรียบร้อยแล้ว');
                         this.authService.logout();
                     },
                     error => {
                         console.log('Error', error);
-                        alert('Username มีผู้ใช้งานแล้ว\nกรุณาเปลี่ยน Username');
+                        alert('Error Username มอาจจะมีผู้ใช้งานแล้ว\nหรือ กรอกข้อมูลผิดพลาด');
                     }
                 );
 
@@ -86,6 +86,7 @@ export class GoldCardRegisterComponent implements OnInit {
   passwordFormControl = new FormControl('', [
             Validators.required,
   ]);
+  isLoggedIn$: Observable<boolean>;                  // {1}
 
   ngOnInit() {
       this.goldcardService.getRightsType().subscribe(data =>{
@@ -96,9 +97,9 @@ export class GoldCardRegisterComponent implements OnInit {
             this.provinces = data;
             console.log(this.provinces);
       });
-      this.goldcardService.getHostpital().subscribe(data =>{
-            this.hostpitals = data;
-            console.log(this.hostpitals);
+      this.goldcardService.getHospital().subscribe(data =>{
+            this.hospitals = data;
+            console.log(this.hospitals);
       });
       this.goldcardService.getRightRegistration().subscribe(data =>{
                   this.rightregistrations = data;

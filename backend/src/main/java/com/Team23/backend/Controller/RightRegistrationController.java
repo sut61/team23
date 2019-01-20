@@ -22,32 +22,32 @@ import java.time.*;
 
 public class RightRegistrationController {
     @Autowired private final RightRegistrationRepository rightRegistrationRepository;
-    @Autowired private gHostpitalRepository ghostpitalRepository;
+    @Autowired private HospitalRepository hospitalRepository;
     @Autowired private  RightsTypeRepository rightsTypeRepository;
     @Autowired private  ProvinceRepository provinceRepository;
 
-    public RightRegistrationController(RightRegistrationRepository rightRegistrationRepository,gHostpitalRepository ghostpitalRepository,RightsTypeRepository rightsTypeRepository) {
+    public RightRegistrationController(RightRegistrationRepository rightRegistrationRepository,HospitalRepository hospitalRepository,RightsTypeRepository rightsTypeRepository) {
         this.rightRegistrationRepository = rightRegistrationRepository;
-        this.ghostpitalRepository = ghostpitalRepository;
+        this.hospitalRepository = hospitalRepository;
         this.rightsTypeRepository = rightsTypeRepository;
         this.provinceRepository = provinceRepository;
 
     }
 
 
-    @GetMapping("/Rightregistration")
+    @GetMapping("/Members")
     public Collection<RightRegistration> RightRegistration() {
         return rightRegistrationRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hostpitalname}")
+    @PostMapping("/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}")
     public RightRegistration newnameMember(@PathVariable String username,@PathVariable String password, @PathVariable String firstname,@PathVariable String surname,@PathVariable String tel,
                                 @PathVariable Long personal,@PathVariable String dateregis,@PathVariable String birthdate,
-                                @PathVariable String provincename,@PathVariable String rightstypename,@PathVariable String hostpitalname
+                                @PathVariable String provincename,@PathVariable String rightstypename,@PathVariable String hospitalname
     ){
 
         RightRegistration newMember = new RightRegistration();
-        gHostpital ghostpitalid = new gHostpital();
+        Hospital hospitalid = new Hospital();
         RightsType rightsTypeid = new RightsType();
         Province provinceid  = new Province();
 
@@ -70,10 +70,19 @@ public class RightRegistrationController {
         rightsTypeid = rightsTypeRepository.findByRightsTypeName(rightstypename);
         newMember.setRightsType(rightsTypeid);
 
-        ghostpitalid = ghostpitalRepository.findByHostpitalName(hostpitalname);
-        newMember.setGhostpital(ghostpitalid);
+        hospitalid = hospitalRepository.findByHospitalName(hospitalname);
+        newMember.setHospital(hospitalid);
 
         return rightRegistrationRepository.save(newMember);
+    }
+    @GetMapping("/Login/{username}/{password}")
+    public RightRegistration login(@PathVariable String username,@PathVariable String password) {
+        RightRegistration u = rightRegistrationRepository.findByUsername(username);
+        RightRegistration p = rightRegistrationRepository.findByPassword(password);
+        if(u == p){
+            return u;
+        }
+        return null;
     }
 
 

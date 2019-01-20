@@ -16,13 +16,14 @@ import java.util.stream.Collectors;
 public class HospitalController {
     @Autowired
     private final HospitalRepository hospitalRepository;
+/*
     @Autowired
     private AffiliationRepository affiliationRepository;
     @Autowired
     private ProvinceregisterRepository provinceregisterRepository;
     @Autowired
     private TypeRepository typeRepository;
-
+*/
     public HospitalController(HospitalRepository hospitalRepository) {
         this.hospitalRepository = hospitalRepository;
     }
@@ -36,7 +37,7 @@ public class HospitalController {
     public Hospital newHospital(@PathVariable Long branceNine, @PathVariable Long branceFive,
             @PathVariable String hospitalName, @PathVariable String affiliationName, @PathVariable String typeName,
             @PathVariable String hospitalAddress, @PathVariable String provinceName,
-            @PathVariable Long hospitalPostcode, @PathVariable Long hospitalPhone) {
+            @PathVariable Long hospitalPostcode, @PathVariable String hospitalPhone) {
         Hospital hos = new Hospital();
         hos.setBranceNine(branceNine);
         hos.setBranceFive(branceFive);
@@ -45,6 +46,7 @@ public class HospitalController {
         hos.setHospitalPostcode(hospitalPostcode);
         hos.setHospitalPhone(hospitalPhone);
 
+/*
         Affiliation a = affiliationRepository.findByAffiliationName(affiliationName);
         hos.setAffiliationName(a);
 
@@ -53,7 +55,7 @@ public class HospitalController {
 
         Type t = typeRepository.findByTypeName(typeName);
         hos.setTypeName(t);
-
+*/
         return hospitalRepository.save(hos);
 
     }

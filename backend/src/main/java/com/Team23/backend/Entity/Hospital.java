@@ -34,8 +34,9 @@ public class Hospital {
     private @NonNull Long branceFive;
     private @NonNull String hospitalAddress;
     private @NonNull Long hospitalPostcode;
-    private @NonNull Long hospitalPhone;
+    private @NonNull String HospitalPhone; // เบอร์มันใส่ 0 กับ long ข้างหน้าไม่ได้
 
+/*
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Affiliation.class)
     @JoinColumn(name = "hospital_affiliation", insertable = true)
     private Affiliation affiliationName;
@@ -47,6 +48,7 @@ public class Hospital {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Type.class)
     @JoinColumn(name = "hospital_type", insertable = true)
     private Type typeName;
+
 
     public void setBranceFive(Long branceFive) {
         this.branceFive = branceFive;
@@ -83,4 +85,6 @@ public class Hospital {
     public void setAffiliationName(Affiliation affiliationName) {
         this.affiliationName = affiliationName;
     }
+
+    */
 }

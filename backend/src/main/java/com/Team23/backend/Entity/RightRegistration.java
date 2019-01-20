@@ -47,8 +47,8 @@ public class RightRegistration {
     @JoinColumn(name= "RIGHTSTYPE_ID", insertable = true)
     private RightsType rightsType;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = gHostpital.class)
-    @JoinColumn(name= "GHOSTPITAL_ID", insertable = true)
-    private gHostpital ghostpital;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Hospital.class)
+    @JoinColumn(name= "HOSPITAL_ID", insertable = true)
+    private Hospital hospital;
 
 }

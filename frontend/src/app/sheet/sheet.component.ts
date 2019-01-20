@@ -40,7 +40,7 @@ export class Opensheet implements OnInit {
 
   province : Array<any>;
   rightstype : Array<any>;
-  hostpital : Array<any>;
+  hospitals : Array<any>;
   rightregistration : Array<any>;
   input: any = {
       username: '',
@@ -54,7 +54,7 @@ export class Opensheet implements OnInit {
     };
     select: any = {
           rightstypename: '',
-          hostpitalname: '',
+          hospitalname: '',
           provincename:  '',
     };
 
@@ -102,9 +102,9 @@ export class Opensheet implements OnInit {
                 this.province = data;
                 console.log(this.province);
           });
-          this.goldcardService.getHostpital().subscribe(data =>{
-                this.hostpital = data;
-                console.log(this.hostpital);
+          this.goldcardService.getHospital().subscribe(data =>{
+                this.hospitals = data;
+                console.log(this.hospitals);
           });
       }
 

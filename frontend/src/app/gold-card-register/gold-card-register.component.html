@@ -49,9 +49,9 @@
 <br>
 
 <mat-form-field class="formcenter">
-  <mat-select placeholder="Hostpital" [(ngModel)]="select.hostpitalname">
-    <mat-option *ngFor="let hostpital of hostpitals" [value]="hostpital.hostpitalName">
-      {{hostpital.hostpitalName}}
+  <mat-select placeholder="Hospital" [(ngModel)]="select.hospitalname">
+    <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
+      {{hospital.hospitalName}}
     </mat-option>
   </mat-select>
 </mat-form-field>
