@@ -20,18 +20,25 @@ export class AuthService{
     localStorage.setItem('currentUser', user);
     localStorage.setItem('currentAdmin', "admin");
     this.loggedIn.next(true);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/userview']);
+// ไว้ดึง user localStorage.getItem('currentUser')
+  }
+loginadmin(user: string){
+
+    localStorage.setItem('currentUser', user);
+    localStorage.setItem('currentAdmin', "admin");
+    this.loggedIn.next(true);
+    this.router.navigate(['/goldCardRegister']);
 // ไว้ดึง user localStorage.getItem('currentUser')
 
   }
-
   logout() {                            // {4}
     this.loggedIn.next(false);
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
   register(){
-    localStorage.setItem('currentRegis', "test");
+    localStorage.setItem('currentUser', "test");
     this.loggedIn.next(true);
     this.router.navigate(['/goldCardRegister']);
   }

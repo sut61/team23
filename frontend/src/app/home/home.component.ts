@@ -9,8 +9,9 @@ import { AlertService } from '../alert.service';
 export class HomeComponent implements OnInit {
 
   constructor(private alertService: AlertService) { }
-
+  username:String;
   ngOnInit() {
+        this.username = localStorage.getItem('currentUser');
   }
 
   success(message: string) {

@@ -2,10 +2,19 @@ mat-card {
   max-width: 400px;
   margin: 2em auto;
   text-align: center;
+  padding-bottom:0px;
+  background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(255, 255, 255,0.7);
 }
 .signin-content {
-  padding: 60px 1rem;
+  padding: 50px 50px 50px 30px;
 }
 .full-width-input {
   width: 100%;
+}
+.version{
+  margin: 0;
+    position: absolute;
+    top: 94%;
+    left: 92%;
 }
