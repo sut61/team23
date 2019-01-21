@@ -39,18 +39,35 @@ public class BackendApplication  {
 	}
 
 	@Bean
-	ApplicationRunner init(RightsTypeRepository rightsTypeRepository, RightRegistrationRepository rightRegistrationRepository,
-						   ProvinceRepository provinceRepository,HospitalRepository hospitalRepository, DiseaseRepository diseaseRepository,DocumentRepositoty documentRepositoty,
-						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty , OfficerRepositoty officerRepositoty) throws Exception {
+	ApplicationRunner init(RightsTypeRepository       rightsTypeRepository,             RightRegistrationRepository  rightRegistrationRepository,
+						   ProvinceRepository         provinceRepository,               HospitalRepository           hospitalRepository, 
+						   DiseaseRepository          diseaseRepository,                DocumentRepositoty           documentRepositoty,
+						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty ,      OfficerRepositoty            officerRepositoty, 
+						   GoldcardRepository         goldcardRepository,               TypesOfDrugsRepository       typesOfDrugsRepository,
+						   DrugRegistrationRepository drugRegistrationRepository,       TypesOfDosageFormsRepository typesOfDosageFormsRepository,
+						   DrugRepository             drugRepository
+
+						   ) throws Exception {
 
 		return args -> {
-
-			Officer off1 = new Officer("kanathip", "user1","0");
-			Officer off2 = new Officer("pack", "user2","0");
-			Officer off3 = new Officer("se", "user3","0");
-			officerRepositoty.save(off1);
-			officerRepositoty.save(off2);
-			officerRepositoty.save(off3);
+			Stream.of("kanathip","pack","se").forEach(officerName -> {
+				Officer officer = new Officer();
+				officer.setName(officerName);
+				officerRepositoty.save(officer);
+				if (officerName == "kanathip") {
+					officer.setUserName("user1");
+					officer.setPassWord("0");
+					officerRepositoty.save(officer);
+				}else if (officerName == "pack"){
+					officer.setUserName("user2");
+					officer.setPassWord("0");
+					officerRepositoty.save(officer);
+				}else if (officerName == "se"){
+					officer.setUserName("user3");
+					officer.setPassWord("0");
+					officerRepositoty.save(officer);
+				}
+			});
 
 			DocumentWork doc1 = new DocumentWork("10001","รับรอง-เพิ่ม-โรค-ปอด#1","https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
 			DocumentWork doc2 = new DocumentWork("10002","รับรอง-เพิ่ม-โรค-หัวใจ#1","https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
@@ -72,43 +89,34 @@ public class BackendApplication  {
 			documentRepositoty.save(doc8);
 			documentRepositoty.save(doc9);
 			documentRepositoty.save(doc10);
-			Disease dis1 = new Disease("ปอด");
-			Disease dis2 = new Disease("หัวใจ");
-			Disease dis3 = new Disease("ประสาท");
-			Disease dis4 = new Disease("มะเร็งตับอ่อน");
-			Disease dis5 = new Disease("โรคถุงลมปอดโป่งพอง");
-			Disease dis6 = new Disease("กระดูกพรุน");
-			Disease dis7 = new Disease("ข้อเสื่อม");
-			Disease dis8 = new Disease("กล้ามเนื้ออ่อนแรง");
-			Disease dis9 = new Disease("ต้อกระจก");
-			Disease dis10 = new Disease("อาหารเป็นพิษ");
-			diseaseRepository.save(dis1);
-			diseaseRepository.save(dis2);
-			diseaseRepository.save(dis3);
-			diseaseRepository.save(dis4);
-			diseaseRepository.save(dis5);
-			diseaseRepository.save(dis6);
-			diseaseRepository.save(dis7);
-			diseaseRepository.save(dis8);
-			diseaseRepository.save(dis9);
-			diseaseRepository.save(dis10);
 
-
-			EligibleDiseases elig2 = new EligibleDiseases(dis4,doc4,off1);
-			EligibleDiseases elig3 = new EligibleDiseases(dis5,doc5,off3);
-			EligibleDiseases elig4 = new EligibleDiseases(dis6,doc6,off2);
-			EligibleDiseases elig5 = new EligibleDiseases(dis7,doc7,off2);
-			EligibleDiseases elig6 = new EligibleDiseases(dis8,doc8,off1);
-			EligibleDiseases elig7 = new EligibleDiseases(dis9,doc9,off3);
-			EligibleDiseases elig1 = new EligibleDiseases(dis10,doc10,off3);
-			eligibleDiseasesRepositoty.save(elig1);
+			Disease diseaseid = new Disease();
+			diseaseid = diseaseRepository.findByDiseaseName("ธาลัสซีเมีย");
+			Officer officerid = new Officer();
+			officerid = officerRepositoty.findByUserName("pack");
+			EligibleDiseases elig2 = new EligibleDiseases(diseaseid,doc4,officerid);
 			eligibleDiseasesRepositoty.save(elig2);
-			eligibleDiseasesRepositoty.save(elig3);
-			eligibleDiseasesRepositoty.save(elig4);
-			eligibleDiseasesRepositoty.save(elig5);
-			eligibleDiseasesRepositoty.save(elig6);
-			eligibleDiseasesRepositoty.save(elig7);
 
+			Disease diseaseid1 = new Disease();
+			diseaseid1 = diseaseRepository.findByDiseaseName("ปอดอักเสบ (ปอดบวม)");
+			Officer officerid1 = new Officer();
+			officerid1 = officerRepositoty.findByUserName("kanathip");
+			EligibleDiseases elig3 = new EligibleDiseases(diseaseid1,doc5,officerid1);
+			eligibleDiseasesRepositoty.save(elig3);
+
+			Disease diseaseid2 = new Disease();
+			diseaseid2 = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+			Officer officerid2 = new Officer();
+			officerid2 = officerRepositoty.findByUserName("se");
+			EligibleDiseases elig4 = new EligibleDiseases(diseaseid2,doc6,officerid2);
+			eligibleDiseasesRepositoty.save(elig4);
+
+			Disease diseaseid3 = new Disease();
+			diseaseid3 = diseaseRepository.findByDiseaseName("ธาลัสซีเมีย");
+			Officer officerid3 = new Officer();
+			officerid3 = officerRepositoty.findByUserName("kanathip");
+			EligibleDiseases elig1 = new EligibleDiseases(diseaseid3,doc10,officerid3);
+			eligibleDiseasesRepositoty.save(elig1);
 
 			Stream.of("บัตรทอง","รับราชการ","testrights").forEach(rightsTypeName -> {
 				RightsType rightstype = new RightsType();
@@ -127,6 +135,27 @@ public class BackendApplication  {
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);
 			});
+			Stream.of("ยาสามัญ","ยาสามัญประจำบ้าน","ยาอันตราย","ยาควบคุมพิเศษ","ผลิตภัณฑ์เสริมอาหาร").forEach(typesOfDrugsName -> {
+		    TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+			typesOfDrugs.setTypesOfDrugsName(typesOfDrugsName);
+				typesOfDrugsRepository.save(typesOfDrugs);
+				});
+				typesOfDrugsRepository.findAll().forEach(System.out::println);
+
+			Stream.of("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล","ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด").forEach(drugRegistrationName -> {
+			DrugRegistration drugRegistration = new DrugRegistration();
+			drugRegistration.setDrugRegistrationName(drugRegistrationName);
+			drugRegistrationRepository.save(drugRegistration);
+			});
+			drugRegistrationRepository.findAll().forEach(System.out::println);
+			
+			
+		    Stream.of("เม็ดสี่เหลี่ยม","เม็ดสามเหลี่ยม","เม็ดวงกลม","เม็ดวงรี","เม็ดแคปซูล","น้ำ").forEach(typesOfDosageFormsName -> {
+			TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+			typesOfDosageForms.setTypesOfDosageFormsName(typesOfDosageFormsName);
+			typesOfDosageFormsRepository.save(typesOfDosageForms);
+			});
+			typesOfDosageFormsRepository.findAll().forEach(System.out::println);
 
 			Stream.of("Graph", "Sun").forEach(userName -> {
 
@@ -192,6 +221,27 @@ public class BackendApplication  {
 				}
 			});
 
+			Stream.of("กรดไหลย้อน (เกิร์ด)", "โรคเบาหวาน", "โรคความดันโลหิตสูง", "ไขมันในเลือดสูง", "โรคหลอดเลือดหัวใจ", "ถุงลมโป่งพอง", "ธาลัสซีเมีย", "กรวยไตอักเสบ", "ไข้เลือดออก", "ปอดอักเสบ (ปอดบวม)").forEach(diseaseName -> {
+				Disease disease = new Disease();
+				disease.setDiseaseName(diseaseName);
+				diseaseRepository.save(disease);
+			});
+
+			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)", "Mannitol (แมนนิทอล)", "Flavoxate (ฟลาโวเซท)").forEach(drugName -> {
+				Drug grug = new Drug();
+				grug.setDrugName(drugName);
+				drugRepository.save(grug);
+			});
+
+			Stream.of("Graph", "Sun").forEach(goldcardName -> {
+				Goldcard goldcard = new Goldcard();
+				goldcard.setGoldcardName(goldcardName);
+				goldcardRepository.save(goldcard);
+			});
+
+			goldcardRepository.findAll().forEach(System.out::println);
+			drugRepository.findAll().forEach(System.out::println);
+			diseaseRepository.findAll().forEach(System.out::println);
 			rightsTypeRepository.findAll().forEach(System.out::println);
 			rightRegistrationRepository.findAll().forEach(System.out::println);
 			provinceRepository.findAll().forEach(System.out::println);
