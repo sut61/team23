@@ -1,5 +1,4 @@
 .mat-card {
-
   max-width: 500px;
   margin: 2em auto;
   margin-top : 0px;
@@ -19,15 +18,14 @@
   text-align : center;
 }
 .form{
-  width : 230px;
+  width : 210px;
 }
 .formcenter{
-  width : 230px;
-  margin-left: 25% ;
-
+  width : 210px;
+  margin-left: 25%;
   text-align : center;
 }
 .formtab{
   margin-left : 30px;
-  width : 230px;
+  width : 210px;
 }

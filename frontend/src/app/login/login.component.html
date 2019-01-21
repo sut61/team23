@@ -1,10 +1,8 @@
 
-  <mat-card style="padding-left:40px;padding-right:40px">
+  <mat-card style="padding-left:40px;padding-right:40px;margin-top:130px">
+    <alert></alert>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-        <p>Version 1.1.0.1 </p>
-
         <p class="font1">Please login to continue</p>
         <mat-form-field class="full-width-input">
           <input matInput placeholder="Username" formControlName="userName" required>
@@ -15,12 +13,15 @@
 
         </mat-form-field>
         <!-- -->
-
         <button mat-raised-button color="primary">Login</button>
 
       </form>
+      <br>
+      <p style="font-size:17px" >
+        If you don't have account :
+      <button stype="align:center" mat-stroked-button color="primary" click="register()" matTooltip="Bug" matTooltipPosition="right">Register</button>
+      </p>
+      <br>
     </mat-card-content>
-    <br>
-    <button mat-raised-button color="primary" click="register()" matTooltip="Bug" matTooltipPosition="right">Register(GoldCard)</button>
   </mat-card>
-
+  <p class="version" >Version 2.1.0.1</p>

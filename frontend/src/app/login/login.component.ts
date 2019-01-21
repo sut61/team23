@@ -6,6 +6,7 @@ import { GoldcardService } from '../goldcard.service';
 import { User } from './user';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { AlertService } from '../alert.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,         // {3}
     private authService: AuthService, // {4}
-     private router: Router,private goldcardService: GoldcardService
+     private router: Router,private goldcardService: GoldcardService,private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
       userName: ['', Validators.required],
       password: ['', Validators.required]
     });
+
     this.goldcardService.getRightRegistration().subscribe(data =>{
               this.members = data;
               console.log(this.members);
@@ -54,7 +56,6 @@ export class LoginComponent implements OnInit {
       if (this.form.valid) {
   //      this.authService.login(this.form.value); // {7}
           this.login2(this.form.value);
-
       }
       this.formSubmitAttempt = true;             // {8}
     }
@@ -71,7 +72,7 @@ export class LoginComponent implements OnInit {
                 }
                 else if(user.userName == item.username &&  user.password ==  item.password){
                   status = 'user';
-                  this.router.navigate(['/home']);
+                  this.router.navigate(['/userview']);
                   break;
                 }
                 else if(user.userName == "admin" && user.password == "admin"){
@@ -87,19 +88,18 @@ export class LoginComponent implements OnInit {
                   alert('กรุณากรอก Username และ password');
           }
               else if(status == 'user'){
-                  alert('Welcome to '+ item.username);
                   this.authService.login(item.username);
                   localStorage.setItem('currentUser',item.username);
                   this.loggedIn.next(true);
               }
               else if(status == 'admin'){
-                                alert('Welcome to Admin');
-                                this.authService.login("admin");
-                                localStorage.setItem('currentUser',"admin");
-                                this.loggedIn.next(true);
+                   this.authService.loginadmin("admin");
+                   localStorage.setItem('currentUser',"admin");
+                   this.loggedIn.next(true);
               }
               else if((status == 'error')){
-                  alert('Username หรือ password คุณผิด\nกรุณากรอกใหม่อีกครั้ง');
+                  this.alertService.error('Incorrect username or password.');
+
                 }
     }
 }

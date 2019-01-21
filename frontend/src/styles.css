@@ -42,6 +42,10 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   color: #000;
 }
 
+body{
+  background-image: url(https://acrobatant.com/wp-content/uploads/2014/12/shutterstock_146147567-1.jpg);
+  background-size: 100%;
+}
 
 .version-info {
   font-size: 8pt;

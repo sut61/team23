@@ -58,6 +58,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
+import { UserviewComponent } from './userview/userview.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { AlertService } from './alert.service';
     HomeComponent,
     SheetComponent,
     Opensheet,
-    AlertComponent
+    AlertComponent,
+    UserviewComponent
   ],
   imports: [
     BrowserModule,
