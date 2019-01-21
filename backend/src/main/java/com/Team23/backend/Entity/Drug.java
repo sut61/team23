@@ -29,6 +29,20 @@ public class Drug {
     @Column(name="DRUG_ID",unique = true, nullable = false)
     private @NonNull Long drugId;
     private @NonNull String drugName;
+    @ManyToOne()
+    @JoinColumn(name="typesOfDrugsnameId")
+    private TypesOfDrugs  typesOfDrugs;
 
+    @ManyToOne()
+    @JoinColumn(name=" drugRegistrationId")
+    private DrugRegistration  drugRegistration;
+
+    @ManyToOne()
+    @JoinColumn(name="typesOfDosageFormsNameId")
+    private TypesOfDosageForms  typesOfDosageForms;
+
+    @ManyToOne()
+    @JoinColumn(name="diseaseId")
+    private Disease  disease;
 
 }
