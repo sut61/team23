@@ -39,10 +39,15 @@ public class BackendApplication  {
 	}
 
 	@Bean
-	ApplicationRunner init(RightsTypeRepository rightsTypeRepository, RightRegistrationRepository rightRegistrationRepository,
-						   ProvinceRepository provinceRepository,HospitalRepository hospitalRepository, DiseaseRepository diseaseRepository,DocumentRepositoty documentRepositoty,
-						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty , OfficerRepositoty officerRepositoty, GoldcardRepository goldcardRepository,
-						   DrugRepository drugRepository) throws Exception {
+	ApplicationRunner init(RightsTypeRepository       rightsTypeRepository,             RightRegistrationRepository  rightRegistrationRepository,
+						   ProvinceRepository         provinceRepository,               HospitalRepository           hospitalRepository, 
+						   DiseaseRepository          diseaseRepository,                DocumentRepositoty           documentRepositoty,
+						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty ,      OfficerRepositoty            officerRepositoty, 
+						   GoldcardRepository         goldcardRepository,               TypesOfDrugsRepository       typesOfDrugsRepository,
+						   DrugRegistrationRepository drugRegistrationRepository,       TypesOfDosageFormsRepository typesOfDosageFormsRepository,
+						   DrugRepository             drugRepository
+
+						   ) throws Exception {
 
 		return args -> {
 			Stream.of("kanathip","pack","se").forEach(officerName -> {
@@ -130,6 +135,27 @@ public class BackendApplication  {
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);
 			});
+			Stream.of("ยาสามัญ","ยาสามัญประจำบ้าน","ยาอันตราย","ยาควบคุมพิเศษ","ผลิตภัณฑ์เสริมอาหาร").forEach(typesOfDrugsName -> {
+		    TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+			typesOfDrugs.setTypesOfDrugsName(typesOfDrugsName);
+				typesOfDrugsRepository.save(typesOfDrugs);
+				});
+				typesOfDrugsRepository.findAll().forEach(System.out::println);
+
+			Stream.of("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล","ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด").forEach(drugRegistrationName -> {
+			DrugRegistration drugRegistration = new DrugRegistration();
+			drugRegistration.setDrugRegistrationName(drugRegistrationName);
+			drugRegistrationRepository.save(drugRegistration);
+			});
+			drugRegistrationRepository.findAll().forEach(System.out::println);
+			
+			
+		    Stream.of("เม็ดสี่เหลี่ยม","เม็ดสามเหลี่ยม","เม็ดวงกลม","เม็ดวงรี","เม็ดแคปซูล","น้ำ").forEach(typesOfDosageFormsName -> {
+			TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+			typesOfDosageForms.setTypesOfDosageFormsName(typesOfDosageFormsName);
+			typesOfDosageFormsRepository.save(typesOfDosageForms);
+			});
+			typesOfDosageFormsRepository.findAll().forEach(System.out::println);
 
 			Stream.of("Graph", "Sun").forEach(userName -> {
 
