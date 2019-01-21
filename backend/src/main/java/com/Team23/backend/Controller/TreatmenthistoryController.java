@@ -22,13 +22,13 @@ import java.time.*;
 @RestController
 public class TreatmenthistoryController {
     @Autowired private final TreatmenthistoryRepository treatmenthistoryRepository;
-    @Autowired private RightRegistrationRepository rightRegistrationRepository;
+    @Autowired private GoldcardRepository goldcardRepository;
     @Autowired private DrugRepository drugRepository;
     @Autowired private DiseaseRepository diseaseRepository;
 
     public TreatmenthistoryController(TreatmenthistoryRepository treatmenthistoryRepository) {
         this.treatmenthistoryRepository = treatmenthistoryRepository;
-        this.rightRegistrationRepository = rightRegistrationRepository;
+        this.goldcardRepository = goldcardRepository;
         this.drugRepository = drugRepository;
         this.diseaseRepository = diseaseRepository;
     }
@@ -38,22 +38,22 @@ public class TreatmenthistoryController {
         return treatmenthistoryRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/Treatmenthistory/{username}/{diseaseName}/{drugName}/{treatDate}")
-    public Treatmenthistory newTreatmenthistory(@PathVariable String username,
+    @PostMapping("/Treatmenthistory/{goldcardName}/{diseaseName}/{drugName}/{treatDate}")
+    public Treatmenthistory newTreatmenthistory(@PathVariable String goldcardName,
                                                 @PathVariable String diseaseName,
                                                 @PathVariable String drugName,
                                                 @PathVariable String treatDate
     ){
         Treatmenthistory newTreat = new Treatmenthistory();
-        RightRegistration goldcardid = new RightRegistration();
+        Goldcard goldcardid = new Goldcard();
         Drug drugid = new Drug();
         Disease diseaseid = new Disease();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate tdate = LocalDate.parse(treatDate,formatter);
         newTreat.setTreatDate(tdate);
-        goldcardid = rightRegistrationRepository.findByUsername(username);
-        newTreat.setRightRegistration(goldcardid);
+        goldcardid = goldcardRepository.findByGoldcardName(goldcardName);
+        newTreat.setGoldcards(goldcardid);
 
         drugid = drugRepository.findByDrugName(drugName);
         newTreat.setDrugs(drugid);
