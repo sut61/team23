@@ -14,10 +14,10 @@ export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;                  // {1}
 check: String;
     constructor(private authService: AuthService) { }
-
+    hidden : string;
     ngOnInit() {
-      this.isLoggedIn$ = this.authService.isLoggedIn; // {2}
 
+        this.isLoggedIn$ = this.authService.isLoggedIn;
     }
 
     onLogout(){
