@@ -40,9 +40,9 @@ public class Hospital {
     @JoinColumn(name = "hospital_affiliation", insertable = true)
     private Affiliation affiliationName;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Provinceregister.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "hospital_province", insertable = true)
-    private Provinceregister provinceName;
+    private Province provinceName;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TypeHospital.class)
     @JoinColumn(name = "hospital_type", insertable = true)
@@ -74,10 +74,6 @@ public class Hospital {
 
     public void setTypeName(TypeHospital typeName) {
         this.typeName = typeName;
-    }
-
-    public void setProvinceName(Provinceregister provinceName) {
-        this.provinceName = provinceName;
     }
 
     public void setAffiliationName(Affiliation affiliationName) {
