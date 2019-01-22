@@ -26,6 +26,7 @@ border-radius: 5px;
   margin-top : 0px;
   padding-top : 10px;
   padding : 10px 50px 50px 50px;
+      background: rgba(255, 255, 255,0.9);
 box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
@@ -45,6 +46,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 body{
   background-image: url(https://acrobatant.com/wp-content/uploads/2014/12/shutterstock_146147567-1.jpg);
   background-size: 100%;
+  max-height: 100%;
 }
 
 .version-info {
@@ -52,6 +54,37 @@ body{
   float: right;
 }
 
+.hidden {
+  visibility: hidden;
+}
+.nonhidden{
 
+}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.popupsuccess{
+  padding : 5px;
+
+border-radius: 5px;
+background-color: green;
+}
+.popuperror{
+  padding : 5px;
+
+border-radius: 5px;
+background-color: red;
+
+}
+.popupinfo{
+  padding : 5px;
+border-radius: 5px;
+background-color: blue;
+
+}
+.popupwarning{
+  padding : 5px;
+
+border-radius: 5px;
+background-color: orange;
+
+}

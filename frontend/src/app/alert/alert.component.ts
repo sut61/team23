@@ -40,13 +40,13 @@ export class AlertComponent {
         // return css class based on alert type
         switch (alert.type) {
             case AlertType.Success:
-                return 'alert alert-success';
+                return 'popupsuccess';
             case AlertType.Error:
-                return 'alert alert-danger';
+                return 'popuperror';
             case AlertType.Info:
-                return 'alert alert-info';
+                return 'popupinfo';
             case AlertType.Warning:
-                return 'alert alert-warning';
+                return 'popupwarning';
         }
     }
 }
