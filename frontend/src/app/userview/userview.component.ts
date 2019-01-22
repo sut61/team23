@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserviewComponent implements OnInit {
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
   isLoggedIn$: Observable<boolean>;
-
+  username : string;
   constructor(private authService: AuthService) { }
 
    get isLoggedIn() {
@@ -20,7 +20,10 @@ export class UserviewComponent implements OnInit {
 
   ngOnInit() {
       this.isLoggedIn$ = this.authService.isLoggedIn;
-
+      this.username = localStorage.getItem('currentUser')
   }
-
+    onLogout(){
+          alert("Good Bye\n"+localStorage.getItem('currentUser'));
+          this.authService.logout();                      // {3}
+    }
 }

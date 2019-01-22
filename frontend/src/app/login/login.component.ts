@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
           this.formSubmitAttempt = true;
   }
   login2(user: User){
+       this.alertService.clear();
        for(var item of this.members){
                 if(user.userName === '' &&  user.password ===  ''){
                   status = 'non';
@@ -99,7 +100,6 @@ export class LoginComponent implements OnInit {
               }
               else if((status == 'error')){
                   this.alertService.error('Incorrect username or password.');
-
                 }
     }
 }

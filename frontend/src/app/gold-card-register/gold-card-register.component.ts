@@ -10,6 +10,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { AlertService } from '../alert.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -54,7 +55,7 @@ export class GoldCardRegisterComponent implements OnInit {
   lock: FormGroup;
   myControl = new FormControl();
 
-  constructor(private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
+  constructor(private alertService:AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
        this.lock = fb.group({
           hideRequiredMarker: false,
           floatLabel: 'never',
@@ -68,20 +69,26 @@ export class GoldCardRegisterComponent implements OnInit {
     }
 
   regis(){
+              this.alertService.clear();
+
   // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}
               this.httpClient.post('http://localhost:8080/Rightregistration/'+ this.input.username+ '/' + this.input.password+'/'+this.input.firstname+'/'+this.input.surname+'/'+this.input.tel+'/'+this.input.personalcard+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(this.input.birthday,'dd:MM:yyyy')+'/'+this.select.provincename+'/'+this.select.rightstypename+'/'+this.select.hospitalname,this.input)
                 .subscribe(
                     data => {
                         console.log('PUT Request is successful', data);
-                        alert('การขอสิทธิ์เรียบร้อยแล้ว');
+                        this.alertService.success('ทำการขอสิทธิ์แล้ว');
                         this.authService.logout();
                     },
                     error => {
                         console.log('Error', error);
-                        alert('Error Username มอาจจะมีผู้ใช้งานแล้ว\nหรือ กรอกข้อมูลผิดพลาด');
+                        this.alertService.error('Error Username อาจจะมีผู้ใช้งานแล้ว\nหรือ กรอกข้อมูลผิดพลาด');
+
                     }
                 );
 
+  }
+  login(){
+           this.authService.logout();
   }
   passwordFormControl = new FormControl('', [
             Validators.required,
