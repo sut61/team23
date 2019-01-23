@@ -6,11 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AppComponent } from './app.component';
 import { UserviewComponent } from './userview/userview.component';
+import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
 
 const routes: Routes = [
     { path: '', redirectTo:'/login' , pathMatch: 'full'},
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
+    { path: 'EligibleDiseases', component: EligibleDiseasesComponent, canActivate: [AuthGuard]},
     { path: 'userview', component: UserviewComponent, canActivate: [AuthGuard]},
 //    { path: '**', redirectTo:'/Error'},
     { path: 'goldCardRegister', component: GoldCardRegisterComponent, canActivate: [AuthGuard]},

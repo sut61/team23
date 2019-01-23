@@ -40,9 +40,9 @@ public class BackendApplication  {
 
 	@Bean
 	ApplicationRunner init(RightsTypeRepository       rightsTypeRepository,             RightRegistrationRepository  rightRegistrationRepository,
-						   ProvinceRepository         provinceRepository,               HospitalRepository           hospitalRepository, 
+						   ProvinceRepository         provinceRepository,               HospitalRepository           hospitalRepository,
 						   DiseaseRepository          diseaseRepository,                DocumentRepositoty           documentRepositoty,
-						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty ,      OfficerRepositoty            officerRepositoty, 
+						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty ,      OfficerRepositoty            officerRepositoty,
 						   GoldcardRepository         goldcardRepository,               TypesOfDrugsRepository       typesOfDrugsRepository,
 						   DrugRegistrationRepository drugRegistrationRepository,       TypesOfDosageFormsRepository typesOfDosageFormsRepository,
 						   DrugRepository             drugRepository
@@ -50,25 +50,13 @@ public class BackendApplication  {
 						   ) throws Exception {
 
 		return args -> {
-			Stream.of("kanathip","pack","se").forEach(officerName -> {
-				Officer officer = new Officer();
-				officer.setName(officerName);
-				officerRepositoty.save(officer);
-				if (officerName == "kanathip") {
-					officer.setUserName("user1");
-					officer.setPassWord("0");
-					officerRepositoty.save(officer);
-				}else if (officerName == "pack"){
-					officer.setUserName("user2");
-					officer.setPassWord("0");
-					officerRepositoty.save(officer);
-				}else if (officerName == "se"){
-					officer.setUserName("user3");
-					officer.setPassWord("0");
-					officerRepositoty.save(officer);
-				}
-			});
 
+			Officer officerid1 = new Officer("Kanathip Poungtham", "user1","0");
+			Officer officerid2 = new Officer("Pichakorn Lohanut", "user2","0");
+			Officer officerid3 = new Officer("Pantamit Sombaddee", "user3","0");
+			officerRepositoty.save(officerid1);
+			officerRepositoty.save(officerid2);
+			officerRepositoty.save(officerid3);
 			DocumentWork doc1 = new DocumentWork("10001","รับรอง-เพิ่ม-โรค-ปอด#1","https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
 			DocumentWork doc2 = new DocumentWork("10002","รับรอง-เพิ่ม-โรค-หัวใจ#1","https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
 			DocumentWork doc3 = new DocumentWork("10003","รับรอง-เพิ่ม-โรค-ประสาท#1","https://www.honestdocs.co/psychosis-and-neurosis-difference");
@@ -79,44 +67,38 @@ public class BackendApplication  {
 			DocumentWork doc8 = new DocumentWork("10008","รับรอง-เพิ่ม-โรค-กล้ามเนื้ออ่อนแรง#1","https://www.honestdocs.co/what-is-myasthenia-gravis");
 			DocumentWork doc9 = new DocumentWork("10009","รับรอง-เพิ่ม-โรค-ต้อกระจก#1","https://www.honestdocs.co/cataracts");
 			DocumentWork doc10 = new DocumentWork("10010","รับรอง-เพิ่ม-โรค-อาหารเป็นพิษ#1","https://www.honestdocs.co/food-poisoning");
-			documentRepositoty.save(doc1);
-			documentRepositoty.save(doc2);
-			documentRepositoty.save(doc3);
-			documentRepositoty.save(doc4);
-			documentRepositoty.save(doc5);
-			documentRepositoty.save(doc6);
-			documentRepositoty.save(doc7);
-			documentRepositoty.save(doc8);
-			documentRepositoty.save(doc9);
-			documentRepositoty.save(doc10);
+			DocumentWork doc11 = new DocumentWork("10011","รับรอง-เพิ่ม-โรค-กรดไหลย้อน#1","https://www.bumrungrad.com/th/digestive-diseases-gi-center-treatment-bangkok-thailand/conditions/gerd-gastroesophageal-reflux-disease");
+			DocumentWork doc12 = new DocumentWork("10012","รับรอง-เพิ่ม-โรค-โรคเบาหวาน#1","https://www.honestdocs.co/diabetes-symptoms-diagnosis-management-treatment");
+			DocumentWork doc13 = new DocumentWork("10013","รับรอง-เพิ่ม-โรค-โรคความดันโลหิตสูง#1","https://www.honestdocs.co/high-blood-pressure-in-adult-males");
+			DocumentWork doc14 = new DocumentWork("10014","รับรอง-เพิ่ม-โรค-ไขมันในเลือดสูง#1","http://www.thaihealth.or.th/blog/myblog/topic/961/");
+			DocumentWork doc15 = new DocumentWork("10015","รับรอง-เพิ่ม-โรค-โรคหลอดเลือดหัวใจตีบ#1","https://www.bangkokhospital.com/hearthospital/th/heart-health-info/heart-disease-and-treatment/72/full_detail/disease");
+			DocumentWork doc16 = new DocumentWork("10016","รับรอง-เพิ่ม-โรค-ถุงลมโป่งพอง#1","https://www.honestdocs.co/copd/emphysema");
+			DocumentWork doc17 = new DocumentWork("10017","รับรอง-เพิ่ม-โรค-ธาลัสซีเมีย#1","https://www.honestdocs.co/hematologic-lymphatic/thalassemia-disease");
+			DocumentWork doc18 = new DocumentWork("10018","รับรอง-เพิ่ม-โรค-กรวยไตอักเสบ#1","https://www.honestdocs.co/what-is-pyelonephritis");
+			DocumentWork doc19 = new DocumentWork("10019","รับรอง-เพิ่ม-โรค-ไข้เลือดออก#1","https://www.honestdocs.co/dengue-symptoms-and-prevention");
+			DocumentWork doc20 = new DocumentWork("10020","รับรอง-เพิ่ม-โรค-ปอดบวม#1","https://www.honestdocs.co/pneumonia");
+			documentRepositoty.save(doc1);	documentRepositoty.save(doc2);	documentRepositoty.save(doc3);	documentRepositoty.save(doc4);
+			documentRepositoty.save(doc5);	documentRepositoty.save(doc6);	documentRepositoty.save(doc7);	documentRepositoty.save(doc8);
+			documentRepositoty.save(doc9);	documentRepositoty.save(doc10);	documentRepositoty.save(doc11);	documentRepositoty.save(doc12);
+			documentRepositoty.save(doc13);	documentRepositoty.save(doc14);	documentRepositoty.save(doc15);	documentRepositoty.save(doc16);
+			documentRepositoty.save(doc17);	documentRepositoty.save(doc18);	documentRepositoty.save(doc19);	documentRepositoty.save(doc20);
 
-			Disease diseaseid = new Disease();
-			diseaseid = diseaseRepository.findByDiseaseName("ธาลัสซีเมีย");
-			Officer officerid = new Officer();
-			officerid = officerRepositoty.findByUserName("pack");
-			EligibleDiseases elig2 = new EligibleDiseases(diseaseid,doc4,officerid);
-			eligibleDiseasesRepositoty.save(elig2);
+			Disease dis1 = new Disease("ปอด");			diseaseRepository.save(dis1);
+			Disease dis2 = new Disease("หัวใจ");			diseaseRepository.save(dis2);
+			Disease dis3 = new Disease("ประสาท");			diseaseRepository.save(dis3);
+			Disease dis4 = new Disease("มะเร็งตับอ่อน");		diseaseRepository.save(dis4);
+			Disease dis5 = new Disease("โรคถุงลมปอดโป่งพอง");	diseaseRepository.save(dis5);
+			Disease dis6 = new Disease("กระดูกพรุน");		diseaseRepository.save(dis6);
+			Disease dis7 = new Disease("ข้อเสื่อม");			diseaseRepository.save(dis7);
+			Disease dis8 = new Disease("กล้ามเนื้ออ่อนแรง");		diseaseRepository.save(dis8);
+			Disease dis9 = new Disease("ต้อกระจก");			diseaseRepository.save(dis9);
+			Disease dis10 = new Disease("อาหารเป็นพิษ");		diseaseRepository.save(dis10);
 
-			Disease diseaseid1 = new Disease();
-			diseaseid1 = diseaseRepository.findByDiseaseName("ปอดอักเสบ (ปอดบวม)");
-			Officer officerid1 = new Officer();
-			officerid1 = officerRepositoty.findByUserName("kanathip");
-			EligibleDiseases elig3 = new EligibleDiseases(diseaseid1,doc5,officerid1);
-			eligibleDiseasesRepositoty.save(elig3);
+			EligibleDiseases elig2 = new EligibleDiseases(dis1,doc1,officerid1);	eligibleDiseasesRepositoty.save(elig2);
+			EligibleDiseases elig3 = new EligibleDiseases(dis2,doc2,officerid1);	eligibleDiseasesRepositoty.save(elig3);
+			EligibleDiseases elig4 = new EligibleDiseases(dis3,doc3,officerid2);	eligibleDiseasesRepositoty.save(elig4);
+			EligibleDiseases elig1 = new EligibleDiseases(dis4,doc4,officerid3);	eligibleDiseasesRepositoty.save(elig1);
 
-			Disease diseaseid2 = new Disease();
-			diseaseid2 = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
-			Officer officerid2 = new Officer();
-			officerid2 = officerRepositoty.findByUserName("se");
-			EligibleDiseases elig4 = new EligibleDiseases(diseaseid2,doc6,officerid2);
-			eligibleDiseasesRepositoty.save(elig4);
-
-			Disease diseaseid3 = new Disease();
-			diseaseid3 = diseaseRepository.findByDiseaseName("ธาลัสซีเมีย");
-			Officer officerid3 = new Officer();
-			officerid3 = officerRepositoty.findByUserName("kanathip");
-			EligibleDiseases elig1 = new EligibleDiseases(diseaseid3,doc10,officerid3);
-			eligibleDiseasesRepositoty.save(elig1);
 
 			Stream.of("บัตรทอง","รับราชการ","testrights").forEach(rightsTypeName -> {
 				RightsType rightstype = new RightsType();
@@ -148,8 +130,8 @@ public class BackendApplication  {
 			drugRegistrationRepository.save(drugRegistration);
 			});
 			drugRegistrationRepository.findAll().forEach(System.out::println);
-			
-			
+
+
 		    Stream.of("เม็ดสี่เหลี่ยม","เม็ดสามเหลี่ยม","เม็ดวงกลม","เม็ดวงรี","เม็ดแคปซูล","น้ำ").forEach(typesOfDosageFormsName -> {
 			TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
 			typesOfDosageForms.setTypesOfDosageFormsName(typesOfDosageFormsName);
