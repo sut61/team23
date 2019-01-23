@@ -1,0 +1,22 @@
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+.signin-content {
+  padding: 60px 1rem;
+}
+.full-width-input {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+
+}
+body2 {
+ margin: 0;
+ font-family: Kanit, sans-serif;
+
+text-decoration: none;
+}

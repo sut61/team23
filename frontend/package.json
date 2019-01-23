@@ -24,6 +24,7 @@
     "@material/theme": "^0.43.0",
     "core-js": "^2.6.2",
     "hammerjs": "^2.0.8",
+    "mat": "^1.0.5",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.3.3",
     "tslib": "^1.9.0",
