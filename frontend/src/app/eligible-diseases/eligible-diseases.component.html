@@ -40,7 +40,7 @@
 
       <div style="background-color: #ffc000">
         <br>
-        <mat-card style="padding-left:40px;padding-right:40px">
+        <mat-card style="width:400px">
           <mat-card-content>
             <h3 style="background-color: #ffc000">&nbsp;&nbsp;โรค</h3>
 
@@ -95,7 +95,7 @@
       </mat-expansion-panel-header>
       <div style="background-color: #d64541">
         <br/>
-        <mat-card style="padding-left:40px;padding-right:40px">
+        <mat-card style="width:400px">
           <mat-card-content>
             <h3 style="background-color: #d64541; color:white">&nbsp;&nbsp;โรค</h3>
             <br/><br/>
@@ -124,12 +124,12 @@
   <br><br><br>
 
   <h3 style="background-color: #3fc380; color: white"  >&nbsp;&nbsp;&nbsp;&nbsp;โรคที่มีสิทธิ์</h3>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+  <mat-card>
+    <mat-card-content>
   <div align="center">
     <table class="mat-elevation-z8">
       <tr>
-        <th class="hidden">No</th>
+        <th>No</th>
         <th>ชื่อโรค</th>
         <th>เอกสารอ้างอิง</th>
         <th>ผู้ยืนยัน</th>
@@ -137,14 +137,15 @@
       </tr>
 
       <tr *ngFor="let EligibleDiseases of eligibleDiseases">
-        <td class="hidden">{{EligibleDiseases.ideligibleDiseases}}</td>
+        <td>{{EligibleDiseases.ideligibleDiseases}}</td>
         <td>{{EligibleDiseases.disease.diseaseName}}</td>
         <td>{{EligibleDiseases.documentWork.numberDocument}}  {{EligibleDiseases.documentWork.title}}</td>
         <td>{{EligibleDiseases.officer.name}}</td>
       </tr>
     </table>
   </div>
-
+    </mat-card-content>
+  </mat-card>
 
   </body>
 
