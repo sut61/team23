@@ -59,6 +59,7 @@ import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
 import { UserviewComponent } from './userview/userview.component';
+import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { UserviewComponent } from './userview/userview.component';
     SheetComponent,
     Opensheet,
     AlertComponent,
-    UserviewComponent
+    UserviewComponent,
+    EligibleDiseasesComponent
   ],
   imports: [
     BrowserModule,

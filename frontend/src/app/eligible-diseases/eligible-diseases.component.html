@@ -1,0 +1,153 @@
+
+
+<p style="font-size: 22px; background-color: #ffc000">
+  &nbsp;&nbsp; &nbsp; เพิ่ม-ลบ โรคที่มีสิทธิ์ในการรับรักษาด้วยบัตรประกันสุขภาพ
+
+</p>
+
+
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 90%;
+    }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+<div class="body2">
+  <body>
+
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3  align="center"> เพิ่ม </h3>
+        </mat-panel-title>
+        <mat-panel-description>
+
+          <h3  align="center" style="color: #f7ca18"><mat-icon>add_circle</mat-icon>  เพิ่ม โรคที่มีสิทธิ์  </h3>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div style="background-color: #ffc000">
+        <br>
+        <mat-card style="padding-left:40px;padding-right:40px">
+          <mat-card-content>
+            <h3 style="background-color: #ffc000">&nbsp;&nbsp;โรค</h3>
+
+
+
+
+
+            <mat-form-field style="width :100%">
+              <mat-select placeholder="โรค" [(ngModel)]="ed.DiseaseSelect" name="diseaseName">
+                <mat-option *ngFor="let Disease of diseases" [value]="Disease.diseaseName">
+                  {{Disease.diseaseName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+
+            <mat-form-field hintLabel="" style="width :100%">
+              <input matInput placeholder="เลขเอกสารอ้างอิง" [(ngModel)]="ed.DocumentSelect" name="Document">
+            </mat-form-field>
+            <br><br>
+            <h3 style="background-color: #ffc000">ผู้ยืนยัน</h3>
+
+
+            <form #checkdataUser="ngForm" (ngSubmit)="CheckdataUser(checkdataUser.value)" class="flex-item">
+
+              <mat-form-field hintLabel="" style="width :100%">
+                <input matInput placeholder="Username" [(ngModel)]="checkdataUser.username"  [(ngModel)]="ed.UsernameSelect" name="username">
+              </mat-form-field>
+              <mat-form-field style="width :100%">
+                <input matInput type="password" placeholder="Password" [(ngModel)]="checkdataUser.password" name="password">
+              </mat-form-field>
+
+            </form>
+            <button type="submit" mat-stroked-button (click)="CheckdataUser(checkdataUser.value)" color="warn">เพิ่ม</button>
+
+          </mat-card-content>
+        </mat-card>
+        <br>
+      </div>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3  align="center">    ลบ </h3>
+        </mat-panel-title>
+        <mat-panel-description>
+          <h3  align="center" style="color: #cf000f"><mat-icon>block</mat-icon>  ลบ โรคที่มีสิทธิ์       </h3>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div style="background-color: #d64541">
+        <br/>
+        <mat-card style="padding-left:40px;padding-right:40px">
+          <mat-card-content>
+            <h3 style="background-color: #d64541; color:white">&nbsp;&nbsp;โรค</h3>
+            <br/><br/>
+            <mat-form-field style="width :100%">
+              <mat-select placeholder="No - ชื่อโรค" [(ngModel)]="ed.DeleteSelect" name="IDEligibleDiseases">
+                <mat-option *ngFor="let EligibleDiseases of eligibleDiseases" [value]="EligibleDiseases.ideligibleDiseases">
+                  {{EligibleDiseases.ideligibleDiseases}}      {{EligibleDiseases.disease.diseaseName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+
+            <button mat-raised-button (click)="Delete()" color="warn">ลบ</button>
+
+            <br/><br/><br/>
+
+
+          </mat-card-content>
+        </mat-card>
+        <br/>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <br><br><br>
+
+  <h3 style="background-color: #3fc380; color: white"  >&nbsp;&nbsp;&nbsp;&nbsp;โรคที่มีสิทธิ์</h3>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <div align="center">
+    <table class="mat-elevation-z8">
+      <tr>
+        <th class="hidden">No</th>
+        <th>ชื่อโรค</th>
+        <th>เอกสารอ้างอิง</th>
+        <th>ผู้ยืนยัน</th>
+
+      </tr>
+
+      <tr *ngFor="let EligibleDiseases of eligibleDiseases">
+        <td class="hidden">{{EligibleDiseases.ideligibleDiseases}}</td>
+        <td>{{EligibleDiseases.disease.diseaseName}}</td>
+        <td>{{EligibleDiseases.documentWork.numberDocument}}  {{EligibleDiseases.documentWork.title}}</td>
+        <td>{{EligibleDiseases.officer.name}}</td>
+      </tr>
+    </table>
+  </div>
+
+
+  </body>
+
+</div>
+
+
