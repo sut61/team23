@@ -1,38 +1,38 @@
 
 <div class="card">
   <alert></alert>
-<h4 class = "center">วันที่สมัคร : {{CurrentDate | date:'fullDate' }}</h4>
+<h4 class = "center">วันที่ขอรับสิทธิ์ : {{CurrentDate | date:'fullDate' }}</h4>
 
   <mat-divider></mat-divider>
 
   <br>
 
   <mat-form-field class="form">
-    <input matInput  placeholder="Username"  [(ngModel)]="input.username">
+    <input matInput  placeholder="Username"  [(ngModel)]="input.username" autocomplete="off">
   </mat-form-field>
 
   <mat-form-field class="formtab">
-    <input matInput  placeholder="Password"  [(ngModel)]="input.password">
+    <input matInput  placeholder="Password" type="password" [(ngModel)]="input.password" autocomplete="off">
   </mat-form-field>
 
   <br>
 
   <mat-form-field class="form">
-    <input matInput placeholder="Firstname"  [(ngModel)]="input.firstname">
+    <input matInput placeholder="Firstname"  [(ngModel)]="input.firstname" autocomplete="off">
   </mat-form-field>
 
   <mat-form-field class="formtab">
-    <input matInput  placeholder="Surname"  [(ngModel)]="input.surname">
+    <input matInput  placeholder="Surname"  [(ngModel)]="input.surname" autocomplete="off">
   </mat-form-field>
   <br>
 
   <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel" class="form">
-    <mat-label>บัตรปชช*</mat-label>
-    <input matInput placeholder="" [(ngModel)]="input.personalcard">
+    <mat-label>บัตรประชาชน</mat-label>
+    <input matInput placeholder="" [(ngModel)]="input.personalcard" autocomplete="off">
   </mat-form-field>
 
   <mat-form-field class="formtab">
-    <input matInput [matDatepicker]="picker" placeholder="เลือกวันเกิด" [(ngModel)]="input.birthday">
+    <input matInput [matDatepicker]="picker" placeholder="เลือกวันเกิด" [(ngModel)]="input.birthday" autocomplete="off">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
   </mat-form-field>
@@ -50,7 +50,7 @@
 <br>
 
 <mat-form-field class="formcenter">
-  <mat-select placeholder="Hospital" [(ngModel)]="select.hospitalname">
+  <mat-select placeholder="โรงพยาบาล" [(ngModel)]="select.hospitalname">
     <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
       {{hospital.hospitalName}}
     </mat-option>
@@ -60,7 +60,7 @@
   <br>
 
   <mat-form-field class="formcenter">
-    <mat-select placeholder="Province" [(ngModel)]="select.provincename">
+    <mat-select placeholder="จังหวัด" [(ngModel)]="select.provincename">
       <mat-option *ngFor="let province of provinces" [value]="province.provinceName">
         {{province.provinceName}}
       </mat-option>
@@ -70,8 +70,8 @@
   <br>
 
   <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel" class="formcenter">
-    <mat-label>Phone*</mat-label>
-    <input matInput placeholder="" [(ngModel)]="input.tel">
+    <mat-label>โทรศัพท์*</mat-label>
+    <input matInput placeholder="" [(ngModel)]="input.tel" autocomplete="off">
 
   </mat-form-field>
 

@@ -101,19 +101,19 @@ public class BackendApplication  {
 			EligibleDiseases elig1 = new EligibleDiseases(dis4,doc4,officerid3);	eligibleDiseasesRepositoty.save(elig1);
 
 
-			Stream.of("บัตรทอง","รับราชการ","testrights").forEach(rightsTypeName -> {
+			Stream.of("บัตรทอง","รับราชการ").forEach(rightsTypeName -> {
 				RightsType rightstype = new RightsType();
 				rightstype.setRightsTypeName(rightsTypeName);
 				rightsTypeRepository.save(rightstype);
 			});
 
-			Stream.of("รพ.นครราชสีมา","รพ.กรุงเทพ","testhostpital").forEach(hospitalName -> {
+			Stream.of("รพ.นครราชสีมา","รพ.กรุงเทพ").forEach(hospitalName -> {
 				Hospital hospital = new Hospital();
 				hospital.setHospitalName(hospitalName);
 				hospitalRepository.save(hospital);
 			});
 
-			Stream.of("นครราชสีมา","กรุงเทพ","testprovince").forEach(provinceName -> {
+			Stream.of("นครราชสีมา","กรุงเทพ").forEach(provinceName -> {
 				Province province = new Province();
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);

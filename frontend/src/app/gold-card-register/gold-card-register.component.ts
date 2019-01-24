@@ -76,8 +76,7 @@ export class GoldCardRegisterComponent implements OnInit {
                 .subscribe(
                     data => {
                         console.log('PUT Request is successful', data);
-                        this.alertService.success('ทำการขอสิทธิ์แล้ว');
-                        this.authService.logout();
+                        this.alertService.success('ก็มา Login ดิครับ');
                     },
                     error => {
                         console.log('Error', error);

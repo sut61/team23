@@ -3,15 +3,26 @@
 <h3>
   Username : {{members.username}}
 </h3>
-  <p>Firstname : {{members.firstname}}</p>
-  <p>Surname : {{members.surname}}</p>
-  <p>Birthday : {{members.birthday}}</p>
-  <p>วันที่สมัคร : {{members.dateregis | date:'fullDate'}}</p>
-  <p>เบอร์โทร : {{members.tel}}</p>
-  <p>บัตรประจำตัวประชาชน : {{members.personalcard}}</p>
-  <p>สิทธิ์ : {{members.rightsType.rightsTypeName}}</p>
-  <p>โรงพยาบาล : {{members.hospital.hospitalName}}</p>
-  <p>จังหวัด : {{members.province.provinceName}}</p>
+  <mat-list>
+    <mat-list-item><b>Firstname </b> : {{members.firstname}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>Surname </b> : {{members.surname}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>Birthday </b> : {{members.birthday}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>วันที่ขอรับสิทธิ์ </b> : {{members.dateregis | date:'fullDate'}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>เบอร์โทร </b> : {{members.tel}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>บัตรประจำตัวประชาชน </b> : {{members.personalcard}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>สิทธิ์ </b> : {{members.rightsType.rightsTypeName}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>โรงพยาบาล </b> : {{members.hospital.hospitalName}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item><b>จังหวัด </b> : {{members.province.provinceName}}</mat-list-item>
+  </mat-list>
+  <br>
   <button mat-raised-button color="primary" (click)="onLogout()" *ngIf="isLoggedIn" style="margin-left:85%">Logout</button>
 </div>
 
