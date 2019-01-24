@@ -5,11 +5,11 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <p class="font1">Please login to continue</p>
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="Username" formControlName="userName" required>
+          <input matInput placeholder="Username" formControlName="userName" required autocomplete="off">
 
         </mat-form-field>
         <mat-form-field class="full-width-input">
-          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <input matInput type="password" placeholder="Password" formControlName="password" required autocomplete="off">
 
         </mat-form-field>
         <!-- -->
@@ -21,10 +21,10 @@
 <!--      matTooltip="Bug" matTooltipPosition="right"   แปะข้อความ  -->
 
       <p style="font-size:17px" >
-        If you don't have account : &nbsp;
-      <button stype="align:center" mat-stroked-button color="primary" (click)="register()">Register</button>
+        ถ้าคุณยังไม่เคยขอสิทธิ์ : &nbsp;
+        <button stype="align:center" mat-stroked-button color="primary" (click)="register()"><b>สมัครขอสิทธิ์บัตรทอง</b></button>
       </p>
       <br>
     </mat-card-content>
   </mat-card>
-  <p class="version" >Version 3.1.1.1</p>
+  <p class="version" >Version 3.2.4.5</p>

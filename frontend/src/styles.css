@@ -61,12 +61,13 @@ body{
 }
 .popupsuccess{
   padding : 5px;
-
+  color:white;
 border-radius: 5px;
 background-color: green;
 }
 .popuperror{
   padding : 5px;
+color:white;
 
 border-radius: 5px;
 background-color: red;
@@ -74,13 +75,14 @@ background-color: red;
 }
 .popupinfo{
   padding : 5px;
+  color:white;
 border-radius: 5px;
 background-color: blue;
 
 }
 .popupwarning{
   padding : 5px;
-
+color:white;
 border-radius: 5px;
 background-color: orange;
 

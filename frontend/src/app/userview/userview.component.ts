@@ -37,7 +37,7 @@ export class UserviewComponent implements OnInit {
       });
   }
     onLogout(){
-          alert("Good Bye\n"+localStorage.getItem('currentUser'));
+          alert("Goodbye "+localStorage.getItem('currentUser'));
           this.authService.logout();                      // {3}
     }
 
