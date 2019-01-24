@@ -16,14 +16,13 @@ import java.util.stream.Collectors;
 public class HospitalController {
     @Autowired
     private final HospitalRepository hospitalRepository;
-/*
     @Autowired
     private AffiliationRepository affiliationRepository;
     @Autowired
-    private ProvinceregisterRepository provinceregisterRepository;
+    private ProvinceRepository provinceRepository;
     @Autowired
-    private TypeRepository typeRepository;
-*/
+    private TypeHospitalRepository typeHospitalRepository;
+
     public HospitalController(HospitalRepository hospitalRepository) {
         this.hospitalRepository = hospitalRepository;
     }
@@ -46,16 +45,15 @@ public class HospitalController {
         hos.setHospitalPostcode(hospitalPostcode);
         hos.setHospitalPhone(hospitalPhone);
 
-/*
         Affiliation a = affiliationRepository.findByAffiliationName(affiliationName);
         hos.setAffiliationName(a);
 
-        Provinceregister p = provinceregisterRepository.findByProvinceName(provinceName);
+        Province p = provinceRepository.findByProvinceName(provinceName);
         hos.setProvinceName(p);
 
-        Type t = typeRepository.findByTypeName(typeName);
+        TypeHospital t = typeHospitalRepository.findByTypeName(typeName);
         hos.setTypeName(t);
-*/
+
         return hospitalRepository.save(hos);
 
     }

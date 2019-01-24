@@ -45,7 +45,8 @@ public class BackendApplication  {
 						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty ,      OfficerRepositoty            officerRepositoty,
 						   GoldcardRepository         goldcardRepository,               TypesOfDrugsRepository       typesOfDrugsRepository,
 						   DrugRegistrationRepository drugRegistrationRepository,       TypesOfDosageFormsRepository typesOfDosageFormsRepository,
-						   DrugRepository             drugRepository
+						   DrugRepository             drugRepository,					AffiliationRepository		affiliationRepository,
+						   TypeHospitalRepository	  typeHospitalRepository
 
 						   ) throws Exception {
 
@@ -219,6 +220,17 @@ public class BackendApplication  {
 				Goldcard goldcard = new Goldcard();
 				goldcard.setGoldcardName(goldcardName);
 				goldcardRepository.save(goldcard);
+			});
+			Stream.of("เอกชน","รัฐวิสาหกิจ").forEach(typeName -> {
+				TypeHospital typehos = new TypeHospital();
+				typehos.setTypeName(typeName);
+				typeHospitalRepository.save(typehos);
+
+			});
+			Stream.of("โรงพยาบาล","คลินิค").forEach(affiliationName -> {
+				Affiliation affi = new Affiliation();
+				affi.setAffiliationName(affiliationName);
+				affiliationRepository.save(affi);
 			});
 
 			goldcardRepository.findAll().forEach(System.out::println);
