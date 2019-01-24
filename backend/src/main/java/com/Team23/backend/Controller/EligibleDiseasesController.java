@@ -15,7 +15,7 @@ public class EligibleDiseasesController {
     @Autowired private DiseaseRepository DiseaseRepo;
     @Autowired private DocumentRepositoty DocRepo;
     @Autowired private OfficerRepositoty officerRepositoty;
-
+    
     public EligibleDiseasesController(EligibleDiseasesRepositoty EDR){
         this.EDR = EDR;
     }

@@ -1,5 +1,4 @@
 package com.Team23.backend.Entity;
-
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.persistence.Table;

@@ -61,6 +61,8 @@ import { UserviewComponent } from './userview/userview.component';
 import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
 import { ReloadpageComponent } from './reloadpage/reloadpage.component';
 import { TreatmentHistoryComponent } from './treatment-history/treatment-history.component';
+import { AddMidicineComponent } from './add-midicine/add-midicine.component';
+import { EditMidicineComponent } from './edit-midicine/edit-midicine.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,9 @@ import { TreatmentHistoryComponent } from './treatment-history/treatment-history
     EligibleDiseasesComponent,
     ReloadpageComponent,
     TreatmentHistoryComponent,
-    HospitalRegisterComponent
+    HospitalRegisterComponent,
+    AddMidicineComponent,
+    EditMidicineComponent
   ],
   imports: [
     BrowserModule,
@@ -123,8 +127,11 @@ import { TreatmentHistoryComponent } from './treatment-history/treatment-history
             MatNativeDateModule,
             FormsModule
   ],
+  exports:[
+    MatDialogModule
+  ],
   providers: [AuthService, AuthGuard,Opensheet,GoldcardService,AlertService],
-  entryComponents: [SheetComponent,Opensheet],
+  entryComponents: [SheetComponent,Opensheet,EditMidicineComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

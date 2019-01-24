@@ -7,5 +7,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource
 public interface DrugRepository extends  JpaRepository<Drug ,Long> {
+    DrugRegistration findById(long drugRegistrationId);
     Drug findByDrugName(String drugName);
 }
