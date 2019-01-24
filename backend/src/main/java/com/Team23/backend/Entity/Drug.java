@@ -45,4 +45,13 @@ public class Drug {
     @JoinColumn(name="diseaseId")
     private Disease  disease;
 
+    
+    //เพิ่ม ID
+    public Long findById(long drugId){
+        return this.drugId=drugId;
+    }
+    public String deleteByDrugName(String drugName){
+        return this.drugName=drugName;
+    }
+
 }
