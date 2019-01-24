@@ -61,6 +61,7 @@ import { AlertService } from './alert.service';
 import { UserviewComponent } from './userview/userview.component';
 import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
 import { ReloadpageComponent } from './reloadpage/reloadpage.component';
+import { TreatmentHistoryComponent } from './treatment-history/treatment-history.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ReloadpageComponent } from './reloadpage/reloadpage.component';
     AlertComponent,
     UserviewComponent,
     EligibleDiseasesComponent,
-    ReloadpageComponent
+    ReloadpageComponent,
+    TreatmentHistoryComponent
   ],
   imports: [
     BrowserModule,
