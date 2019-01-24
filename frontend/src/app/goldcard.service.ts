@@ -39,6 +39,13 @@ public API = '//localhost:8080';
   getGoldcard(): Observable<any> {
       return this.http.get('//localhost:8080/Goldcard');
   }
+  getAffiliation(): Observable<any> {
+    return this.http.get('//localhost:8080/listaffiliation');
+ }
+ getTypeHospital(): Observable<any> {
+    return this.http.get('//localhost:8080/listtype');
+ }
+ 
 
 
 }
