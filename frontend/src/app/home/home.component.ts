@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../alert.service';
 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,9 +9,13 @@ import { AlertService } from '../alert.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private alertService: AlertService) { }
+  constructor(private alertService: AlertService,
+  private route: ActivatedRoute,
+   private router: Router ) { }
   username:String;
   ngOnInit() {
+
+
         this.username = localStorage.getItem('currentUser');
   }
 
