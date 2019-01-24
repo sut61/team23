@@ -26,7 +26,7 @@ loginadmin(user: string){
 
     localStorage.setItem('currentUser', user);
     this.loggedIn.next(true);
-    this.router.navigate(['/goldCardRegister']);
+    this.router.navigate(['/home']);
 // ไว้ดึง user localStorage.getItem('currentUser')
 
   }

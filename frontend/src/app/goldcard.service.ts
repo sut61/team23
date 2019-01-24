@@ -30,6 +30,15 @@ public API = '//localhost:8080';
   getEligibleDiseases(): Observable<any> {
      return this.http.get(this.API + '/EligibleDiseases');
   }
+  getTreatmenthistory(): Observable<any> {
+      return this.http.get('//localhost:8080/Treatmenthistory');
+  }
+  getDrug(): Observable<any> {
+      return this.http.get('//localhost:8080/Drug');
+  }
+  getGoldcard(): Observable<any> {
+      return this.http.get('//localhost:8080/Goldcard');
+  }
 
 
 }
