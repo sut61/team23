@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { GoldCardRegisterComponent } from './gold-card-register/gold-card-register.component';
 import { LoginComponent ,ErrorComponent } from './login/login.component';
@@ -13,6 +11,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
 
 import {
   MatAutocompleteModule,
@@ -76,7 +75,8 @@ import { TreatmentHistoryComponent } from './treatment-history/treatment-history
     UserviewComponent,
     EligibleDiseasesComponent,
     ReloadpageComponent,
-    TreatmentHistoryComponent
+    TreatmentHistoryComponent,
+    HospitalRegisterComponent
   ],
   imports: [
     BrowserModule,
