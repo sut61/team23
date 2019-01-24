@@ -95,6 +95,9 @@
         <span>Disable alerts</span>
       </button>
       <button mat-menu-item routerLink="goldCardRegister" *ngIf="isLoggedIn" >Register(GoldCard)</button>
+      
+      <button mat-menu-item routerLink="hospitalRegister" *ngIf="isLoggedIn" >Hospital</button>
+
       <button mat-menu-item (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
     </mat-menu>
 

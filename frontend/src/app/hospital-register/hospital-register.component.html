@@ -1,0 +1,117 @@
+<div class="headerhospital" xmlns="http://www.w3.org/1999/html">
+
+  <i class="material-icons md-48">
+      <div class="blink">cloud</div>
+  </i> &nbsp;
+  ระบบลงทะเบียนโรงพยาบาลที่ใช้สิทธิ์หลักประกัน | Hospital Register
+
+</div>
+
+<div class="bodyhospital">
+
+
+<div class="slide-out-right">
+  
+  <img src="https://static1.squarespace.com/static/597faf52d7bdce13b056edd2/t/59fa1a4f652dea55353bf5fa/1509562959675/birds.gif">
+</div>
+
+  <mat-form-field class="inputstlyehospital">
+    <textarea matInput placeholder="กรอกรหัส 9 หลัก" type="number" [(ngModel)]="input.branceNine"></textarea>
+    <mat-icon matSuffix>text_fields</mat-icon>
+  </mat-form-field>
+
+  &nbsp;&nbsp;
+
+  <mat-form-field class="inputstlyehospital">
+    <textarea matInput placeholder="กรอกรหัส 5 หลัก" type="number" [(ngModel)]="input.branceFive"></textarea>
+    <mat-icon matSuffix>text_fields</mat-icon>
+  </mat-form-field>
+
+<br><br>
+
+
+
+
+
+<mat-form-field class="inputstlyehospital">
+  <textarea matInput placeholder="ระบุชื่อ" [(ngModel)]="input.hospitalName"></textarea>
+  <mat-icon matSuffix>person</mat-icon>
+</mat-form-field>
+
+  &nbsp;&nbsp;
+
+  <mat-form-field class = "dropboxstylehospital">
+    <mat-select placeholder="สังกัด" [(ngModel)]="select.affiliationName" >
+      <mat-option *ngFor="let affiliation of affiliations" [value]="affiliation.affiliationName">
+        {{affiliation.affiliationName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br><br>
+
+   <mat-form-field class = "dropboxstylehospital">
+    <mat-select placeholder="ประเภท" [(ngModel)]="select.typeName">
+      <mat-option *ngFor="let typehospital of typehospitals" [value]="typehospital.typeName">
+        {{typehospital.typeName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  &nbsp;&nbsp;
+
+  <mat-form-field class="inputstlyehospital">
+    <textarea matInput placeholder="กรอกที่อยู่" [(ngModel)]="input.hospitalAddress"></textarea>
+    <mat-icon matSuffix>home</mat-icon>
+
+  </mat-form-field>
+
+
+  <br><br>
+
+  <mat-form-field class = "dropboxstylehospital">
+    <mat-select placeholder="จังหวัด" [(ngModel)]="select.provinceName">
+      <mat-option *ngFor="let province of provinces" [value]="province.provinceName">
+        {{province.provinceName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  &nbsp;&nbsp;
+
+
+  <mat-form-field class="inputstlyehospital">
+    <textarea matInput placeholder="รหัสไปรษณีย์" type="number" [(ngModel)]="input.hospitalPostcode" ></textarea>
+    <mat-icon matSuffix>local_post_office</mat-icon>
+
+  </mat-form-field>
+
+
+
+  <br><br>
+  <mat-form-field class="inputstlyehospital" >
+    <textarea matInput placeholder="กรอกเบอร์โทรศัพท์" type="number" [(ngModel)]="input.hospitalPhone"></textarea>
+    <mat-icon matSuffix>phone</mat-icon>
+
+  </mat-form-field>
+  <br><br>
+  <button mat-raised-button  (click)="hospitalregis()" > บันทึก </button>
+
+  <br><br>
+
+
+
+</div>
+
+
+
+<div class="footerhospital">
+
+  <mat-card class="searchstylehospital"><h2>เครื่องมือค้นหา  <mat-icon matSuffix>search</mat-icon></h2>
+  </mat-card>
+  <!--<app-hospital-table></app-hospital-table>-->
+  <br>
+</div>
+

@@ -9,6 +9,8 @@ import { UserviewComponent } from './userview/userview.component';
 import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
 import { TreatmentHistoryComponent } from './treatment-history/treatment-history.component';
 import { ReloadpageComponent } from './reloadpage/reloadpage.component';
+import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo:'/login' , pathMatch: 'full'},
@@ -20,7 +22,9 @@ const routes: Routes = [
     { path: 'userview', component: UserviewComponent, canActivate: [AuthGuard]},
 //    { path: '**', redirectTo:'/Error'},
     { path: 'goldCardRegister', component: GoldCardRegisterComponent, canActivate: [AuthGuard]},
-];
+    { path: 'hospitalRegister', component: HospitalRegisterComponent, canActivate: [AuthGuard]},
+
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
