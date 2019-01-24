@@ -35,9 +35,7 @@ PasswordSelect:''
 constructor(private service: GoldcardService ,
   private httpClient: HttpClient,
   private route: ActivatedRoute,
-   private router: Router  ) {this.router.routeReuseStrategy.shouldReuseRoute = function(){
-        return false;
-     } }
+   private router: Router  ) { }
 
   ngOnInit() {
  this.service.getDisease().subscribe(data => {
@@ -73,8 +71,9 @@ this.httpClient.post("http://localhost:8080/checkdoc/"+this.ed.DocumentSelect,th
         console.log("add  success");
          alert("เพิ่มแล้วเรียบร้อย");
 
-this.router.navigated = false;
-        this.router.navigate([this.router.url]);
+
+        this.router.navigate(['/reload/EligibleDiseases']);
+
       },
       error => {
         console.log("Error", error);
@@ -112,8 +111,8 @@ Delete(){
       .subscribe(
           data => {
               console.log('Delete Request is successful', data);
-this.router.navigated = false;
-        this.router.navigate([this.router.url]);
+        this.router.navigate(['/reload/EligibleDiseases']);
+
           },
           error => {
               console.log('Error', error);

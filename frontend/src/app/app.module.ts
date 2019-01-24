@@ -60,6 +60,7 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert.service';
 import { UserviewComponent } from './userview/userview.component';
 import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
+import { ReloadpageComponent } from './reloadpage/reloadpage.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases
     Opensheet,
     AlertComponent,
     UserviewComponent,
-    EligibleDiseasesComponent
+    EligibleDiseasesComponent,
+    ReloadpageComponent
   ],
   imports: [
     BrowserModule,
