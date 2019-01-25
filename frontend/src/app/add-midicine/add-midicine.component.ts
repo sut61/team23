@@ -108,7 +108,6 @@ export class AddMidicineComponent implements OnInit {
       data =>{
       alert('บันทึกเรียบร้อย');
       console.log('Post Request is seccessful',data);
-      window.location.reload();
     },
     error=>{
       console.log('Rrror',error);
