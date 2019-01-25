@@ -9,6 +9,7 @@
   <span>
     <button mat-button  routerLink="EligibleDiseases">โรคที่มีสิทธิ์</button>
     <button mat-button  routerLink="TreatmentHistory">ประวัติการรักษาโรค</button>
+    <button mat-button routerLink="hospitalRegister" >ลงทะเบียนโรงพยาบาล</button>
   </span>
 
   <!-- -->
@@ -26,7 +27,6 @@
 
     <mat-menu #menu2="matMenu">
       <button mat-menu-item routerLink="goldCardRegister" *ngIf="isLoggedIn" >Register(GoldCard)</button>
-      <button mat-menu-item routerLink="hospitalRegister" *ngIf="isLoggedIn" >Add Hospital</button>
     </mat-menu>
 
     </span>
