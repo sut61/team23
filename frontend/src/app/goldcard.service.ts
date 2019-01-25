@@ -45,6 +45,12 @@ public API = '//localhost:8080';
  getTypeHospital(): Observable<any> {
     return this.http.get('//localhost:8080/listtype');
  }
+getOfficer(): Observable<any> {
+    return this.http.get('//localhost:8080/Officer');
+  }
+  getMember(): Observable<any> {
+    return this.http.get('//localhost:8080/Member');
+  }
  
 
 
