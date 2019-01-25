@@ -112,6 +112,50 @@
   <mat-card class="searchstylehospital"><h2>เครื่องมือค้นหา  <mat-icon matSuffix>search</mat-icon></h2>
   </mat-card>
   <!--<app-hospital-table></app-hospital-table>-->
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSourceHospital" class="mat-elevation-z8">
+  
+    <!-- five brance -->
+    <ng-container matColumnDef="branceFive">
+      <th mat-header-cell *matHeaderCellDef> รหัส </th>
+      <td mat-cell *matCellDef="let element"> {{element.branceFive}} </td>
+    </ng-container>
+  
+    <!-- hospitalName -->
+    <ng-container matColumnDef="hospitalName">
+      <th mat-header-cell *matHeaderCellDef> ชื่อ </th>
+      <td mat-cell *matCellDef="let element"> {{element.hospitalName}} </td>
+    </ng-container>
+  
+    <!--  hospitalAddress -->
+    <ng-container matColumnDef="hospitalAddress">
+      <th mat-header-cell *matHeaderCellDef> ที่อยู่ </th>
+      <td mat-cell *matCellDef="let element"> {{element.hospitalAddress}} </td>
+    </ng-container>
+
+     <!--  province -->
+     <ng-container matColumnDef="provinceName">
+      <th mat-header-cell *matHeaderCellDef>จังหวัด </th>
+      <td mat-cell *matCellDef="let element"> {{element.provinceName.provinceName}} </td>
+    </ng-container>
+  
+    <!-- hospitalPhoneNumber -->
+    <ng-container matColumnDef="hospitalPhone">
+      <th mat-header-cell *matHeaderCellDef> เบอร์โทรศัพท์ </th>
+      <td mat-cell *matCellDef="let element"> {{element.hospitalPhone}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+
+
+
+
   <br>
 </div>
 
