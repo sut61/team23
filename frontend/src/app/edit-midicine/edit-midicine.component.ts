@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material';
 
 import { HttpClient } from '@angular/common/http'
 import { MidicineService } from '../midicine.service';
+import { GoldcardService } from '../goldcard.service';
 @Component({
   selector: 'app-edit-midicine',
   templateUrl: './edit-midicine.component.html',
@@ -25,9 +26,10 @@ export class EditMidicineComponent implements OnInit {
 
   constructor(private midicineService:MidicineService,
               private httpClient: HttpClient,
+              private goldcardService:GoldcardService,
               public dialogRef: MatDialogRef<EditMidicineComponent>) { }
               ngOnInit() {
-                this.midicineService.getDrugs().subscribe(drug => {
+                this.goldcardService.getDrug().subscribe(drug => {
                   this.Drug = drug;
                   console.log(this.Drug);
                   
@@ -44,7 +46,7 @@ export class EditMidicineComponent implements OnInit {
                   this.TypesOfDosageForms = typesOfDosageForms;
                   console.log(this.TypesOfDosageForms);
                 });
-                this.midicineService.getDisease().subscribe(diseases => {
+                this.goldcardService.getDisease().subscribe(diseases => {
                   this.Diseases = diseases;
                   console.log(this.Diseases);
                   
@@ -53,7 +55,7 @@ export class EditMidicineComponent implements OnInit {
               }
      onUpdate(){
          console.log(this.drugId);
-                this.httpClient.put('http://localhost:8080/Drug/'+ this.drugId +'/'+ this.view.drug + '/'+ this.view.typesOfDrugs +'/'+ this.view.drugRegistration +'/' + this.view.typesOfDosageForms + '/' + this.view.diseases)
+                this.httpClient.put('http://localhost:8080/Drug/'+ this.drugId +'/'+ this.view.drug + '/'+ this.view.typesOfDrugs +'/'+ this.view.drugRegistration +'/' + this.view.typesOfDosageForms + '/' + this.view.diseases,this.view)
                 .subscribe
                 (
                   data =>{

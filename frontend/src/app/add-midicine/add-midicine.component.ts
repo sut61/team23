@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { EditMidicineComponent } from '../edit-midicine/edit-midicine.component';
 import { MidicineService } from '../midicine.service';
+import { GoldcardService } from '../goldcard.service';
 export interface Drug{
   drugId:number;
   typesOfDrugs:{
@@ -45,12 +46,14 @@ export class AddMidicineComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   
-  // applyFilter(filterValue:String){
-  //  this.newMethod(filterValue);
+
+  // applyFilter(filterValue: string) {
+  //   this.newMethod(filterValue);
   // }
-  // private newMethod(filterValue: String){
+  // private newMethod(filterValue: string) {
   //   this.dataSource.filter = filterValue.trim().toLowerCase();
   // }
+
   Drug: Array<any>;
   TypesOfDrugs: Array<any>;
   DrugRegistration: Array<any>;
@@ -66,10 +69,10 @@ export class AddMidicineComponent implements OnInit {
   /** --------------------------------------------------------------------------------------------- */
   
   
-  constructor(private midicineService: MidicineService , private httpClient: HttpClient ,private dialog: MatDialog) { }
+  constructor(private midicineService: MidicineService , private httpClient: HttpClient ,private dialog: MatDialog,private goldcardService:GoldcardService) { }
 
   ngOnInit() {
-    this.midicineService.getDrugs().subscribe(drug => {
+    this.goldcardService.getDrug().subscribe(drug => {
       this.Drug = drug;
       console.log(this.Drug);
       
@@ -86,7 +89,7 @@ export class AddMidicineComponent implements OnInit {
       this.TypesOfDosageForms = typesOfDosageForms;
       console.log(this.TypesOfDosageForms);
     });
-    this.midicineService.getDisease().subscribe(diseases => {
+    this.goldcardService.getDisease().subscribe(diseases => {
       this.Diseases = diseases;
       console.log(this.Diseases);
       
@@ -99,12 +102,13 @@ export class AddMidicineComponent implements OnInit {
     console.log(this.view.typesOfDosageForms);
     console.log(this.view.diseases);
     this.httpClient.post('http://localhost:8080/Drug/'+ this.view.drug + '/'+ this.view.typesOfDrugs +
-    '/'+ this.view.drugRegistration +'/' + this.view.typesOfDosageForms + '/' + this.view.diseases)
+    '/'+ this.view.drugRegistration +'/' + this.view.typesOfDosageForms + '/' + this.view.diseases,this.view)
     .subscribe
     (
       data =>{
       alert('บันทึกเรียบร้อย');
       console.log('Post Request is seccessful',data);
+      window.location.reload();
     },
     error=>{
       console.log('Rrror',error);
@@ -119,6 +123,7 @@ export class AddMidicineComponent implements OnInit {
       data =>{
       alert('ลบเรียบร้อย');
       console.log('Delete Request is seccessful',data);
+      window.location.reload();
     },
     error=>{
       console.log('Rrror',error);

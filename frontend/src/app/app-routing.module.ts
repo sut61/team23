@@ -10,6 +10,7 @@ import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases
 import { TreatmentHistoryComponent } from './treatment-history/treatment-history.component';
 import { ReloadpageComponent } from './reloadpage/reloadpage.component';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
+import { AddMidicineComponent } from './add-midicine/add-midicine.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'userview', component: UserviewComponent, canActivate: [AuthGuard]},
 //    { path: '**', redirectTo:'/Error'},
     { path: 'goldCardRegister', component: GoldCardRegisterComponent, canActivate: [AuthGuard]},
+    { path: 'addMidicine', component: AddMidicineComponent, canActivate: [AuthGuard]},
     { path: 'hospitalRegister', component: HospitalRegisterComponent, canActivate: [AuthGuard]},
 
   ];
