@@ -5,6 +5,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RepositoryRestResource
-public interface OfficerRepositoty extends  JpaRepository<Officer ,Long>{
+public interface OfficerRepositoty extends  JpaRepository<Officer ,Long> {
     Officer findByUserName(String username);
+    Officer findByOfficerName(String officerName);
+    Officer findByCallNumber(String callNumber);
 }

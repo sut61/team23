@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-public class OfficerController {
-    @Autowired final OfficerRepository officerRepository;
+@CrossOrigin(origins = "http://localhost:4200")
+public class MemberController {
+    @Autowired
+    private final MemberRepository memberRepository;
 
-    public OfficerController(OfficerRepository officerRepository) {
-        this.officerRepository = officerRepository;
+    public MemberController(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
-    @GetMapping("/Officer")
-    public Collection<Officer> Officer() {
-        return officerRepository.findAll().stream().collect(Collectors.toList());
+
+    @GetMapping("/Member")
+    public Collection<Member> Member() {
+        return memberRepository.findAll().stream().collect(Collectors.toList());
     }
+
 }

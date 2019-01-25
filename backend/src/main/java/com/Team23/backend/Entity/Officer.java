@@ -16,18 +16,20 @@ import java.util.Collection;
 @Table(name = "Officer")
 public class Officer {
     @Id
-    @SequenceGenerator(name="No_Off",sequenceName="No_Off")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="No_Off")
-    @Column(name = "No")
-    private @NonNull Long idOfficer;
-    private @NonNull String Name;
-    @JsonIgnore
-    private @NonNull String userName;
-    @JsonIgnore
-    private @NonNull String passWord;
-    public Officer(String Name, String userName, String passWord){
-        this.Name = Name;
-        this.userName = userName;
-        this.passWord = passWord;
-    }
+        @SequenceGenerator(name="No_Off",sequenceName="No_Off")
+        @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="No_Off")
+        @Column(name = "No")
+        private @NonNull Long idOfficer;
+        //private @NonNull String Name;
+        private @NonNull String officerName;
+        private @NonNull String callNumber;
+
+        @JsonIgnore private @NonNull String userName;
+        @JsonIgnore private @NonNull String passWord;
+        public Officer(String Name, String userName, String passWord ,String callNumber){
+            this.officerName = Name;
+            this.userName = userName;
+            this.passWord = passWord;
+            this.callNumber = callNumber;
+        }
 }
