@@ -107,12 +107,7 @@ public class BackendApplication  {
 				rightsTypeRepository.save(rightstype);
 			});
 
-			Stream.of("รพ.นครราชสีมา","รพ.กรุงเทพ").forEach(hospitalName -> {
-				Hospital hospital = new Hospital();
-				hospital.setHospitalName(hospitalName);
-				hospitalRepository.save(hospital);
-			});
-
+			
 			Stream.of("นครราชสีมา","กรุงเทพ").forEach(provinceName -> {
 				Province province = new Province();
 				province.setProvinceName(provinceName);
@@ -210,10 +205,47 @@ public class BackendApplication  {
 				diseaseRepository.save(disease);
 			});
 
-			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)", "Mannitol (แมนนิทอล)", "Flavoxate (ฟลาโวเซท)").forEach(drugName -> {
-				Drug grug = new Drug();
-				grug.setDrugName(drugName);
-				drugRepository.save(grug);
+			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)").forEach(drugName -> {
+				Drug               grug               = new Drug();
+				TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+				DrugRegistration   drugRegistration   = new DrugRegistration();
+				TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+				Disease            disease            = new Disease();
+				
+				if(drugName=="Ampicillin (แอมพิซิลลิน)"){
+					grug.setDrugName("Ampicillin (แอมพิซิลลิน)");
+					typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+					grug.setTypesOfDrugs(typesOfDrugs);
+
+					drugRegistration =drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+					grug.setDrugRegistration(drugRegistration);
+					
+					typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+					grug.setTypesOfDosageForms(typesOfDosageForms);
+
+					disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+					grug.setDisease(disease);
+
+					drugRepository.save(grug);
+
+				}else if(drugName=="Enalapril (อีนาลาพริล)"){
+
+					grug.setDrugName("Enalapril (อีนาลาพริล)");
+					typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาควบคุมพิเศษ");
+					grug.setTypesOfDrugs(typesOfDrugs);
+
+					drugRegistration =drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+					grug.setDrugRegistration(drugRegistration);
+					
+					typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+					grug.setTypesOfDosageForms(typesOfDosageForms);
+
+					disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+					grug.setDisease(disease);
+					drugRepository.save(grug);
+				}
+
+
 			});
 
 			Stream.of("Graph", "Sun").forEach(goldcardName -> {
@@ -231,6 +263,32 @@ public class BackendApplication  {
 				Affiliation affi = new Affiliation();
 				affi.setAffiliationName(affiliationName);
 				affiliationRepository.save(affi);
+			});
+			Stream.of("รพ.นครราชสีมา").forEach(hospitalName -> {
+				Province pro = new Province();
+				Affiliation aff = new Affiliation();
+				TypeHospital ty = new TypeHospital();
+				Hospital hospital = new Hospital();
+				hospital.setHospitalName(hospitalName);
+				hospital.setBranceFive(12345L);
+				hospital.setBranceNine(123456789L);
+				hospital.setHospitalAddress("hospitalAddress1");
+				hospital.setHospitalPhone("044000000");
+				hospital.setHospitalPostcode(30000L);
+
+				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+				hospital.setAffiliationName(aff);
+
+				pro = provinceRepository.findByProvinceName("นครราชสีมา");
+				hospital.setProvinceName(pro);
+
+				ty = typeHospitalRepository.findByTypeName("เอกชน");
+				hospital.setTypeName(ty);
+
+
+				hospitalRepository.save(hospital);
+
+
 			});
 
 			goldcardRepository.findAll().forEach(System.out::println);
