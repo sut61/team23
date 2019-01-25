@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http'
 import { MidicineService } from '../midicine.service';
@@ -26,7 +27,8 @@ export class EditMidicineComponent implements OnInit {
 
   constructor(private midicineService:MidicineService,
               private httpClient: HttpClient,
-              private goldcardService:GoldcardService,
+              private goldcardService:GoldcardService,private route: ActivatedRoute,
+   private router: Router ,
               public dialogRef: MatDialogRef<EditMidicineComponent>) { }
               ngOnInit() {
                 this.goldcardService.getDrug().subscribe(drug => {
@@ -61,6 +63,7 @@ export class EditMidicineComponent implements OnInit {
                   data =>{
                   alert('อัพเดตเรียบร้อย');
                   console.log('Post Request is seccessful',data);
+                  this.router.navigate(['/reload/addMidicine']);
                 },
                 error=>{
                   console.log('Rrror',error);
@@ -69,10 +72,8 @@ export class EditMidicineComponent implements OnInit {
                 );
                 this.dialogRef.close();
               }
-                
-              onCancel(){
-               
-                this.dialogRef.close();
-              }
-            }
+  onCancel(){
+    this.dialogRef.close();
+  }
+}
 

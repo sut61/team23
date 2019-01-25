@@ -71,8 +71,7 @@ hospitalregis(){
       data => {
         console.log("add  success", data);
         alert("ลงทะเบียนเรียบร้อย");
-        window.location.reload();
-
+this.router.navigate(['/reload/hospitalRegister']);
       },
       error => {
           console.log('Error', error);

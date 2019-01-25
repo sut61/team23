@@ -11,6 +11,7 @@ import { TreatmentHistoryComponent } from './treatment-history/treatment-history
 import { ReloadpageComponent } from './reloadpage/reloadpage.component';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
 import { AddMidicineComponent } from './add-midicine/add-midicine.component';
+import { GDCardComponent } from './gd-card/gd-card.component';
 
 
 const routes: Routes = [
@@ -25,8 +26,9 @@ const routes: Routes = [
     { path: 'goldCardRegister', component: GoldCardRegisterComponent, canActivate: [AuthGuard]},
     { path: 'addMidicine', component: AddMidicineComponent, canActivate: [AuthGuard]},
     { path: 'hospitalRegister', component: HospitalRegisterComponent, canActivate: [AuthGuard]},
+    { path: 'GDCard', component: GDCardComponent, canActivate: [AuthGuard]},
 
-  ];
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

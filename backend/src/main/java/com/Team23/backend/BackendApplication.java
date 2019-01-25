@@ -148,11 +148,41 @@ public class BackendApplication  {
 				rightsTypeRepository.save(rightstype);
 			});
 
-			
+			Stream.of("เอกชน","รัฐวิสาหกิจ").forEach(typeName -> {
+				TypeHospital typehos = new TypeHospital();
+				typehos.setTypeName(typeName);
+				typeHospitalRepository.save(typehos);
+
+			});
+			Stream.of("โรงพยาบาล","คลินิค").forEach(affiliationName -> {
+				Affiliation affi = new Affiliation();
+				affi.setAffiliationName(affiliationName);
+				affiliationRepository.save(affi);
+			});
 			Stream.of("นครราชสีมา","กรุงเทพ").forEach(provinceName -> {
 				Province province = new Province();
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);
+			});
+			Stream.of("รพ.นครราชสีมา").forEach(hospitalName -> {
+				Province pro = new Province();
+				Affiliation aff = new Affiliation();
+				TypeHospital ty = new TypeHospital();
+				Hospital hospital = new Hospital();
+				hospital.setHospitalName(hospitalName);
+				hospital.setBranceFive(12345L);
+				hospital.setBranceNine(123456789L);
+				hospital.setHospitalAddress("hospitalAddress1");
+				hospital.setHospitalPhone("044000000");
+				hospital.setHospitalPostcode(30000L);
+
+				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+				hospital.setAffiliationName(aff);
+				pro = provinceRepository.findByProvinceName("นครราชสีมา");
+				hospital.setProvinceName(pro);
+				ty = typeHospitalRepository.findByTypeName("เอกชน");
+				hospital.setTypeName(ty);
+				hospitalRepository.save(hospital);
 			});
 			Stream.of("ยาสามัญ","ยาสามัญประจำบ้าน","ยาอันตราย","ยาควบคุมพิเศษ","ผลิตภัณฑ์เสริมอาหาร").forEach(typesOfDrugsName -> {
 		    TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
@@ -213,7 +243,7 @@ public class BackendApplication  {
 					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
 					rightRegistration.setRightsType(rightsTypeid);
 
-					hospitalid = hospitalRepository.findByHospitalName("รพ.กรุงเทพ");
+					hospitalid = hospitalRepository.findByHospitalName("รพ.นครราชสีมา");
 					rightRegistration.setHospital(hospitalid);
 
 					rightRegistrationRepository.save(rightRegistration);
@@ -294,37 +324,8 @@ public class BackendApplication  {
 				goldcard.setGoldcardName(goldcardName);
 				goldcardRepository.save(goldcard);
 			});
-			Stream.of("เอกชน","รัฐวิสาหกิจ").forEach(typeName -> {
-				TypeHospital typehos = new TypeHospital();
-				typehos.setTypeName(typeName);
-				typeHospitalRepository.save(typehos);
 
-			});
-			Stream.of("โรงพยาบาล","คลินิค").forEach(affiliationName -> {
-				Affiliation affi = new Affiliation();
-				affi.setAffiliationName(affiliationName);
-				affiliationRepository.save(affi);
-			});
-			Stream.of("รพ.นครราชสีมา").forEach(hospitalName -> {
-				Province pro = new Province();
-				Affiliation aff = new Affiliation();
-				TypeHospital ty = new TypeHospital();
-				Hospital hospital = new Hospital();
-				hospital.setHospitalName(hospitalName);
-				hospital.setBranceFive(12345L);
-				hospital.setBranceNine(123456789L);
-				hospital.setHospitalAddress("hospitalAddress1");
-				hospital.setHospitalPhone("044000000");
-				hospital.setHospitalPostcode(30000L);
 
-				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
-				hospital.setAffiliationName(aff);
-				pro = provinceRepository.findByProvinceName("นครราชสีมา");
-				hospital.setProvinceName(pro);
-				ty = typeHospitalRepository.findByTypeName("เอกชน");
-				hospital.setTypeName(ty);
-				hospitalRepository.save(hospital);
-			});
 			Stream.of("Weerapat", "Nantika", "Nuntawut","Porramate").forEach(memberName -> {
 				Member member = new Member();
 				member.setMemberName(memberName);
@@ -338,6 +339,7 @@ public class BackendApplication  {
 			rightRegistrationRepository.findAll().forEach(System.out::println);
 			provinceRepository.findAll().forEach(System.out::println);
 			memberRepository.findAll().forEach(System.out::println);
+			hospitalRepository.findAll().forEach(System.out::println);
 		};
 		};
 

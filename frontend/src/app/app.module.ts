@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
-
+import { GDCardComponent } from './gd-card/gd-card.component';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -80,7 +80,8 @@ import { EditMidicineComponent } from './edit-midicine/edit-midicine.component';
     TreatmentHistoryComponent,
     HospitalRegisterComponent,
     AddMidicineComponent,
-    EditMidicineComponent
+    EditMidicineComponent,
+    GDCardComponent,
   ],
   imports: [
     BrowserModule,

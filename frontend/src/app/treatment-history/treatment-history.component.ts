@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-treatment-history',
@@ -28,7 +29,8 @@ export class TreatmentHistoryComponent implements OnInit {
     };
     pipe = new DatePipe('en-US');
 
-    constructor(private goldcardService: GoldcardService, private httpClient: HttpClient){
+    constructor(private goldcardService: GoldcardService, private httpClient: HttpClient,private route: ActivatedRoute,
+   private router: Router ){
 
   }
   treatment(){
@@ -38,6 +40,7 @@ export class TreatmentHistoryComponent implements OnInit {
           data => {
                         console.log('บันทึกประวัติเรียบร้อย', data);
                         alert('บันทึกประวัติเรียบร้อย');
+                        this.router.navigate(['/reload/TreatmentHistory']);
                     },
           error => {
                         console.log('Error', error);
