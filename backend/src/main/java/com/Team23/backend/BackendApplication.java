@@ -39,25 +39,66 @@ public class BackendApplication  {
 	}
 
 	@Bean
-	ApplicationRunner init(RightsTypeRepository       rightsTypeRepository,             RightRegistrationRepository  rightRegistrationRepository,
-						   ProvinceRepository         provinceRepository,               HospitalRepository           hospitalRepository,
-						   DiseaseRepository          diseaseRepository,                DocumentRepositoty           documentRepositoty,
-						   EligibleDiseasesRepositoty eligibleDiseasesRepositoty ,      OfficerRepositoty            officerRepositoty,
-						   GoldcardRepository         goldcardRepository,               TypesOfDrugsRepository       typesOfDrugsRepository,
-						   DrugRegistrationRepository drugRegistrationRepository,       TypesOfDosageFormsRepository typesOfDosageFormsRepository,
-						   DrugRepository             drugRepository,					AffiliationRepository		affiliationRepository,
-						   TypeHospitalRepository	  typeHospitalRepository
+	ApplicationRunner init(RightsTypeRepository       rightsTypeRepository
+			, RightRegistrationRepository  rightRegistrationRepository
+			, ProvinceRepository         provinceRepository
+			, HospitalRepository           hospitalRepository
+			, DiseaseRepository          diseaseRepository
+			, DocumentRepositoty           documentRepositoty
+			, EligibleDiseasesRepositoty eligibleDiseasesRepositoty
+			, OfficerRepository            officerRepository
+			, GoldcardRepository         goldcardRepository
+			, TypesOfDrugsRepository       typesOfDrugsRepository
+			, DrugRegistrationRepository drugRegistrationRepository
+			, TypesOfDosageFormsRepository typesOfDosageFormsRepository
+			, DrugRepository             drugRepository
+			, AffiliationRepository		affiliationRepository
+			, TypeHospitalRepository	  typeHospitalRepository
+			, MemberRepository memberRepository
 
-						   ) throws Exception {
+	) throws Exception {
 
 		return args -> {
 
-			Officer officerid1 = new Officer("Kanathip Poungtham", "user1","0");
-			Officer officerid2 = new Officer("Pichakorn Lohanut", "user2","0");
-			Officer officerid3 = new Officer("Pantamit Sombaddee", "user3","0");
-			officerRepositoty.save(officerid1);
-			officerRepositoty.save(officerid2);
-			officerRepositoty.save(officerid3);
+			Stream.of("OAT", "BEEM", "JANJOW","ANG").forEach(officerName -> {
+				Officer officer = new Officer();
+				officer.setOfficerName(officerName);
+
+				officerRepository.save(officer);
+
+				if(officerName == "OAT"){
+					officer.setCallNumber("0883120905");
+					officer.setUserName("OAT1");
+					officer.setPassWord("admin");
+					officerRepository.save(officer);
+				}
+				else if(officerName == "BEEM"){
+					officer.setCallNumber("0883146847");
+					officer.setUserName("BEEM1");
+					officer.setPassWord("admin");
+					officerRepository.save(officer);
+				}
+				else if(officerName == "ANG"){
+					officer.setCallNumber("0880303038");
+					officer.setUserName("ANG1");
+					officer.setPassWord("admin");
+					officerRepository.save(officer);
+				}
+				else if(officerName == "JANJOW"){
+					officer.setCallNumber("0981546782");
+					officer.setUserName("JANJOW1");
+					officer.setPassWord("admin");
+					officerRepository.save(officer);
+				}
+				officerRepository.save(officer);
+
+			});
+			Officer officerid1 = new Officer("Kanathip Poungtham", "user1","0","0888888888");
+			Officer officerid2 = new Officer("Pichakorn Lohanut", "user2","0","0812345678");
+			Officer officerid3 = new Officer("Pantamit Sombaddee", "user3","0","0912345687");
+			officerRepository.save(officerid1);
+			officerRepository.save(officerid2);
+			officerRepository.save(officerid3);
 			DocumentWork doc1 = new DocumentWork("10001","รับรอง-เพิ่ม-โรค-ปอด#1","https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
 			DocumentWork doc2 = new DocumentWork("10002","รับรอง-เพิ่ม-โรค-หัวใจ#1","https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
 			DocumentWork doc3 = new DocumentWork("10003","รับรอง-เพิ่ม-โรค-ประสาท#1","https://www.honestdocs.co/psychosis-and-neurosis-difference");
@@ -278,17 +319,16 @@ public class BackendApplication  {
 
 				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
 				hospital.setAffiliationName(aff);
-
 				pro = provinceRepository.findByProvinceName("นครราชสีมา");
 				hospital.setProvinceName(pro);
-
 				ty = typeHospitalRepository.findByTypeName("เอกชน");
 				hospital.setTypeName(ty);
-
-
 				hospitalRepository.save(hospital);
-
-
+			});
+			Stream.of("Weerapat", "Nantika", "Nuntawut","Porramate").forEach(memberName -> {
+				Member member = new Member();
+				member.setMemberName(memberName);
+				memberRepository.save(member);
 			});
 
 			goldcardRepository.findAll().forEach(System.out::println);
@@ -297,8 +337,10 @@ public class BackendApplication  {
 			rightsTypeRepository.findAll().forEach(System.out::println);
 			rightRegistrationRepository.findAll().forEach(System.out::println);
 			provinceRepository.findAll().forEach(System.out::println);
+			memberRepository.findAll().forEach(System.out::println);
+		};
 		};
 
 	}
-}
+
 

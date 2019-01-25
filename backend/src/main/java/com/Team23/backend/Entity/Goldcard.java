@@ -30,4 +30,20 @@ public class Goldcard {
     private @NonNull Long goldcardId;
 
     private @NonNull String goldcardName;
+    private @NonNull String detail;
+
+    //--------------------------------------Hospital
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Hospital.class)
+    @JoinColumn(name= "hospialName", insertable = true)
+    private Hospital hospital;
+
+    //--------------------------------------Officer
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Officer.class)
+    @JoinColumn(name= "officerName", insertable = true)
+    private Officer officer;
+
+    //-----------------------------------------Member
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Member.class)
+    @JoinColumn(name= "memberName", insertable = true)
+    private Member member;
 }
