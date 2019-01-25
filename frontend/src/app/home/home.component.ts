@@ -8,11 +8,23 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+selectedIndex: number;
+transform: number;
   constructor(private alertService: AlertService,
   private route: ActivatedRoute,
-   private router: Router ) { }
+   private router: Router ) {
+
+     this.selectedIndex = 0;
+    this.transform = 100;
+    }
   username:String;
+
+sliderArray = [
+  {img: '../../assets/1.jpg', alt: '', text: 'Suranaree University of Technology'},
+  {img: '../../assets/2.jpg', alt: '', text: 'Suranaree University of Technology'},
+  {img: '../../assets/3.jpg', alt: '', text: 'Suranaree University of Technology'}
+
+  ];
   ngOnInit() {
 
 
@@ -38,4 +50,23 @@ export class HomeComponent implements OnInit {
       clear() {
           this.alertService.clear();
       }
+
+
+  selected(x) {
+    this.downSelected(x);
+    this.selectedIndex = x;
+
+   }
+
+   keySelected(x) {
+     this.downSelected(x);
+     this.selectedIndex = x;
+   }
+   downSelected(i) {
+    this.transform =  100 - (i) * 50;
+      this.selectedIndex = this.selectedIndex + 1;
+      if(this.selectedIndex > 4) {
+        this.selectedIndex = 0;
+      }
+   }
 }
