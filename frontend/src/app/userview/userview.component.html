@@ -1,26 +1,30 @@
 <div class="card">
 
 <h3>
-  Username : {{members.username}}
+  Username : {{username}}
 </h3>
   <mat-list>
-    <mat-list-item><b>Firstname </b> : {{members.firstname}}</mat-list-item>
+    <mat-list-item><b>Firstname </b><a> : {{members.rightRegistration.firstname}}</a>
+    </mat-list-item>
+
     <mat-divider></mat-divider>
-    <mat-list-item><b>Surname </b> : {{members.surname}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>Birthday </b> : {{members.birthday}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>วันที่ขอรับสิทธิ์ </b> : {{members.dateregis | date:'fullDate'}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>เบอร์โทร </b> : {{members.tel}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>บัตรประจำตัวประชาชน </b> : {{members.personalcard}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>สิทธิ์ </b> : {{members.rightsType.rightsTypeName}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>โรงพยาบาล </b> : {{members.hospital.hospitalName}}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item><b>จังหวัด </b> : {{members.province.provinceName}}</mat-list-item>
+
+    <mat-list-item><b>Surname </b><a> : {{members.rightRegistration.surname}}</a>
+    </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>Birthday </b><a> : {{members.rightRegistration.birthday}}</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>วันที่ขอรับสิทธิ์ </b><a> : {{members.rightRegistration.dateregis | date:'fullDate'}}</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>เบอร์โทร </b><a> : {{members.rightRegistration.tel}}</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>บัตรประจำตัวประชาชน </b><a> : {{members.rightRegistration.personalcard}}</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>สิทธิ์ </b><a> : {{members.rightRegistration.rightsType.rightsTypeName}}</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>โรงพยาบาล </b><a> : {{members.rightRegistration.hospital.hospitalName}}</a></mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item><b>จังหวัด </b><a> : {{members.rightRegistration.province.provinceName}}</a></mat-list-item>
   </mat-list>
   <br>
   <button mat-raised-button color="primary" (click)="onLogout()" *ngIf="isLoggedIn" style="margin-left:85%">Logout</button>

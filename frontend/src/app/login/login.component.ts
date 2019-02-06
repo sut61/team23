@@ -21,8 +21,9 @@ export class LoginComponent implements OnInit {
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
-
+  waitaccepts: Array<any>;
   members: Array<any>;
+  officers: Array<any>;
   isLoggedIn$: Observable<boolean>;
   constructor(
     private fb: FormBuilder,         // {3}
@@ -36,10 +37,18 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.goldcardService.getRightRegistration().subscribe(data =>{
-              this.members = data;
-              console.log(this.members);
+    this.goldcardService.getAccepted().subscribe(data =>{
+                      this.members = data;
+                      console.log(this.members);
+    });
+    this.goldcardService.getAcceptToUser().subscribe(data =>{
+                          this.waitaccepts = data;
+                          console.log(this.waitaccepts);
         });
+    this.goldcardService.getOfficer().subscribe(data =>{
+                          this.officers = data;
+                          console.log(this.officers);
+    });
 
     this.isLoggedIn$ = this.authService.isLoggedIn;
 
@@ -67,20 +76,24 @@ export class LoginComponent implements OnInit {
   login2(user: User){
        this.alertService.clear();
        for(var item of this.members){
+          for(var i of this.officers){
+                if(user.userName == i.userName && user.password == i.passWord){
+                      status = 'admin';
+                      this.router.navigate(['/home']);
+                      this.authService.loginadmin(i.userName);
+                      localStorage.setItem('currentUser',i.userName);
+                      break;
+                }
+          }
                 if(user.userName === '' &&  user.password ===  ''){
                   status = 'non';
                   break;
                 }
-                else if(user.userName == item.username &&  user.password ==  item.password){
+                else if(user.userName == item.rightRegistration.username &&  user.password ==  item.rightRegistration.password){
                   status = 'user';
                   this.router.navigate(['/userview']);
                   break;
                 }
-                else if(user.userName == "admin" && user.password == "admin"){
-                  status = 'admin';
-                  this.router.navigate(['/home']);
-                  break;
-               }
                 else{
                   status = 'error';
                 }
@@ -89,18 +102,21 @@ export class LoginComponent implements OnInit {
                   alert('กรุณากรอก Username และ password');
           }
               else if(status == 'user'){
-                  this.authService.login(item.username);
-                  localStorage.setItem('currentUser',item.username);
+                  this.authService.login(item.rightRegistration.username);
+                  localStorage.setItem('currentUser',item.rightRegistration.username);
                   this.loggedIn.next(true);
               }
               else if(status == 'admin'){
-                   this.authService.loginadmin("admin");
-                   localStorage.setItem('currentUser',"admin");
+                   this.authService.loginadmin(i.userName);
+                   localStorage.setItem('currentUser',i.userName);
                    this.loggedIn.next(true);
               }
-              else if((status == 'error')){
+              else if(status == 'error'){
                   this.alertService.error('Incorrect username or password.');
-                }
+              }
+              else if(status = 'wait'){
+                  this.alertService.error('รอเจ้าหน้าที่ยืนยันในการมีสิทธิ์บัตรทอง');
+              }
     }
 }
 

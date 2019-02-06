@@ -1,7 +1,7 @@
 
 <mat-toolbar color="primary"
  *ngIf="isLoggedIn$ | async as isLoggedIn"
-             style="height:40px;padding:5px" >
+             style="height:40px;padding:5px">
 
 
   <!-- -->
@@ -24,11 +24,12 @@
   <span class="example-spacer"></span>
   <span>
     <button mat-icon-button [matMenuTriggerFor]="menu2">
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon >more_vert</mat-icon>
     </button>
 
     <mat-menu #menu2="matMenu">
-      <button mat-menu-item routerLink="goldCardRegister" *ngIf="isLoggedIn" >Register(GoldCard)</button>
+        <button mat-menu-item routerLink="goldCardRegister" *ngIf="isLoggedIn" >Register(GoldCard)</button>
+        <button mat-menu-item  routerLink="AcceptToUser">ยืนยันสิทธิ์</button>
     </mat-menu>
 
     </span>

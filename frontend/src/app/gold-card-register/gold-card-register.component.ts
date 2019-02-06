@@ -41,6 +41,7 @@ export class GoldCardRegisterComponent implements OnInit {
       personalcard:  '',
       birthday:  '',
       dateregis:  '',
+      ids: '',
     };
     select: any = {
           rightstypename: '',
@@ -54,12 +55,14 @@ export class GoldCardRegisterComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   lock: FormGroup;
   myControl = new FormControl();
-
+  ids : number;
+  temp : number;
   constructor(private alertService:AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
        this.lock = fb.group({
           hideRequiredMarker: false,
           floatLabel: 'never',
        });
+
   }
 
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
@@ -68,22 +71,41 @@ export class GoldCardRegisterComponent implements OnInit {
       return this.loggedIn.asObservable(); // {2}
     }
 
-  regis(){
-              this.alertService.clear();
 
-  // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}
+
+  regis(){
+        this.alertService.clear();
+          // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}
               this.httpClient.post('http://localhost:8080/Rightregistration/'+ this.input.username+ '/' + this.input.password+'/'+this.input.firstname+'/'+this.input.surname+'/'+this.input.tel+'/'+this.input.personalcard+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(this.input.birthday,'dd:MM:yyyy')+'/'+this.select.provincename+'/'+this.select.rightstypename+'/'+this.select.hospitalname,this.input)
                 .subscribe(
                     data => {
                         console.log('PUT Request is successful', data);
-                        this.alertService.success('ก็มา Login ดิครับ');
+                        this.accept();
+
                     },
                     error => {
                         console.log('Error', error);
-                        this.alertService.error('Error Username อาจจะมีผู้ใช้งานแล้ว\nหรือ กรอกข้อมูลผิดพลาด');
 
+                        this.alertService.error('Error Username อาจจะมีผู้ใช้งานแล้ว\nหรือ กรอกข้อมูลผิดพลาด');
                     }
                 );
+
+  }
+
+
+  accept(){
+              this.alertService.clear();
+             //     AcceptToUser/{acceptdate}/{codeaccept}/{username}/{comment}/{statusname}/{officername}
+                         this.httpClient.post('http://localhost:8080/AcceptToUser/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.input.username+'/null/Fail/null',this.input)
+                               .subscribe(
+                                   data => {
+                                        this.alertService.success('รอการยืนยันสิทธิจากเจ้าหน้าที่์');
+                                   },
+                                   error => {
+                                       console.log('Error', error);
+                                       this.alertService.error('Error มีปัญหา');
+                                   }
+                               );
 
   }
   login(){
@@ -92,7 +114,6 @@ export class GoldCardRegisterComponent implements OnInit {
   passwordFormControl = new FormControl('', [
             Validators.required,
   ]);
-  isLoggedIn$: Observable<boolean>;                  // {1}
 
   ngOnInit() {
       this.goldcardService.getRightsType().subscribe(data =>{
@@ -110,8 +131,7 @@ export class GoldCardRegisterComponent implements OnInit {
       this.goldcardService.getRightRegistration().subscribe(data =>{
                   this.rightregistrations = data;
                   console.log(this.rightregistrations);
-            });
+      });
+
   }
-
-
 }

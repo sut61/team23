@@ -12,7 +12,7 @@ import { ReloadpageComponent } from './reloadpage/reloadpage.component';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
 import { AddMidicineComponent } from './add-midicine/add-midicine.component';
 import { GDCardComponent } from './gd-card/gd-card.component';
-
+import { AcceptToUserComponent } from './accept-to-user/accept-to-user.component';
 
 const routes: Routes = [
     { path: '', redirectTo:'/login' , pathMatch: 'full'},
@@ -27,6 +27,7 @@ const routes: Routes = [
     { path: 'addMidicine', component: AddMidicineComponent, canActivate: [AuthGuard]},
     { path: 'hospitalRegister', component: HospitalRegisterComponent, canActivate: [AuthGuard]},
     { path: 'GDCard', component: GDCardComponent, canActivate: [AuthGuard]},
+    { path: 'AcceptToUser', component: AcceptToUserComponent, canActivate: [AuthGuard]},
 
 ];
 

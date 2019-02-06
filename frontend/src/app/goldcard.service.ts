@@ -51,7 +51,15 @@ getOfficer(): Observable<any> {
   getMember(): Observable<any> {
     return this.http.get('//localhost:8080/Member');
   }
- 
+  getAcceptToUser(): Observable<any> {
+    return this.http.get('//localhost:8080/AcceptToUser');
+  }
+ getStatus(): Observable<any> {
+      return this.http.get('//localhost:8080/Status');
+  }
+  getAccepted(): Observable<any> {
+      return this.http.get('//localhost:8080/Accepted');
+    }
 
 
 }
