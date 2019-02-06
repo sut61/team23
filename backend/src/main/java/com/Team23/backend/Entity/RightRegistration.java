@@ -1,43 +1,46 @@
 package com.Team23.backend.Entity;
 
-import javax.persistence.Entity;
+import lombok.Data;
+import lombok.NonNull;
+
 import javax.persistence.*;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import lombok.*;
+import javax.validation.constraints.*;
+import java.util.Date;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
-
 import java.util.*;
+import lombok.*;
+import javax.validation.constraints.Pattern;
 
-@Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
-@Data  // lombox จะสร้าง method getter setter ให้เอง
-@ToString
-@Getter
-@Setter
 @NoArgsConstructor
-@EqualsAndHashCode
+@Data
+@Entity
 @Table(name="RightRegistration") //ชื่อตาราง
 public class RightRegistration {
     @Id  //  Annotations  @Id  บอกว่าเป็น  Primary  key
     @SequenceGenerator(name="reg_seq",sequenceName="reg_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="reg_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="REG_ID",unique = true, nullable = false)
-    private @NonNull Long regId;
+    private Long regId;
 
+    @NotNull(message="username must not be null to be valid")
     @Column(name="username",unique = true)
-    private @NonNull String username;
-    private @NonNull String password;
-    private @NonNull String firstname;
-    private @NonNull String surname;
-    private @NonNull String tel;
-    private @NonNull Long personalcard;
-    private @NonNull LocalDate dateregis;
-    private @NonNull LocalDate birthday;
+    @Size(min=3,max=20)
+    private  String username;
+    @NotNull(message="password must not be null to be valid")
+    private  String password;
+    @NotNull(message="firstname must not be null to be valid")
+    private  String firstname;
+    @NotNull(message="surname must not be null to be valid")
+    private  String surname;
+    @NotNull(message="tel must not be null to be valid")
+    @Pattern(regexp = "[0]\\d{9}")
+    private  String tel;
+    @NotNull(message="personalcard must not be null to be valid")
+    @Column(name="personalcard",unique = true)
+    private  Long personalcard;
+    private  LocalDate dateregis;
+    private  LocalDate birthday;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name= "PROVINCE_ID", insertable = true)

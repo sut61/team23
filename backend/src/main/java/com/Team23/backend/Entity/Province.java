@@ -28,8 +28,6 @@ public class Province {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="province_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="PROVINCE_ID",unique = true, nullable = false)
     private @NonNull Long provinceId;
-
     private @NonNull String provinceName;
-
 
 }
