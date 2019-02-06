@@ -1,0 +1,60 @@
+.formcenter{
+  width : 210px;
+  margin-left: 25%;
+  text-align : center;
+}
+.formtab{
+  margin-left : 30px;
+  width : 210px;
+}
+.center{
+  margin-left: 38.5%;
+  text-align : center;
+}
+
+.buttoncenter{
+  text-align : center;
+}
+.right{
+  margin-left : 12%;
+}
+.table{
+    background: rgba(255, 255, 255,0.1);
+}
+.mat-column-name{
+max-width:15%;
+}
+.mat-column-username{
+max-width:8%;
+}
+.mat-column-dateregis{
+  max-width:9%;
+}
+.mat-column-tel{
+  max-width:9%;
+}
+.mat-column-birthday{
+  max-width:8%;
+}
+.mat-column-personalcard{
+  max-width:13%;
+}
+.mat-column-rightstypename{
+  max-width:8%;
+}
+.mat-column-provincename{
+  max-width:11%;
+}
+.mat-column-hospitalname{
+  max-width:12%;
+}
+.mat-column-status{
+  max-width:5%;
+}
+.mat-column-codeaccept{
+  max-width:5%;
+}
+.mat-bottom-sheet-container{
+  padding:0px;
+  margin:0px;
+}
