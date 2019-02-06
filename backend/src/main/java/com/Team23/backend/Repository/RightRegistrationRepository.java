@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface RightRegistrationRepository extends JpaRepository <RightRegistration ,Long>{
     RightRegistration findByUsername(String username);
     RightRegistration findByPassword(String password);
+    RightRegistration findByRegId(long rightRegistrationId);
 }

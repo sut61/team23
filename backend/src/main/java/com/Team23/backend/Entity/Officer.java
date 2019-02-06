@@ -24,8 +24,8 @@ public class Officer {
         private @NonNull String officerName;
         private @NonNull String callNumber;
 
-        @JsonIgnore private @NonNull String userName;
-        @JsonIgnore private @NonNull String passWord;
+        private @NonNull String userName;
+        private @NonNull String passWord;
         public Officer(String Name, String userName, String passWord ,String callNumber){
             this.officerName = Name;
             this.userName = userName;

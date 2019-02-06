@@ -55,12 +55,14 @@ public class BackendApplication  {
 			, AffiliationRepository		affiliationRepository
 			, TypeHospitalRepository	  typeHospitalRepository
 			, MemberRepository memberRepository
+			, StatusRepository statusRepository
+			, AcceptToUserRepository acceptToUserRepository
 
 	) throws Exception {
 
 		return args -> {
 
-			Stream.of("OAT", "BEEM", "JANJOW","ANG").forEach(officerName -> {
+			Stream.of("OAT", "BEEM", "JANJOW","ANG","admin").forEach(officerName -> {
 				Officer officer = new Officer();
 				officer.setOfficerName(officerName);
 
@@ -87,6 +89,12 @@ public class BackendApplication  {
 				else if(officerName == "JANJOW"){
 					officer.setCallNumber("0981546782");
 					officer.setUserName("JANJOW1");
+					officer.setPassWord("admin");
+					officerRepository.save(officer);
+				}
+				else if(officerName == "admin"){
+					officer.setCallNumber("0999999999");
+					officer.setUserName("admin");
 					officer.setPassWord("admin");
 					officerRepository.save(officer);
 				}
@@ -148,18 +156,24 @@ public class BackendApplication  {
 				rightsTypeRepository.save(rightstype);
 			});
 
-			Stream.of("เอกชน","รัฐวิสาหกิจ").forEach(typeName -> {
+			Stream.of("Pass","Fail").forEach(statusName -> {
+				Status st = new Status();
+				st.setStatusName(statusName);
+				statusRepository.save(st);
+			});
+
+			Stream.of("เอกชน","รัฐวิสาหกิจ","ไม่มีในฐานข้อมูล").forEach(typeName -> {
 				TypeHospital typehos = new TypeHospital();
 				typehos.setTypeName(typeName);
 				typeHospitalRepository.save(typehos);
 
 			});
-			Stream.of("โรงพยาบาล","คลินิค").forEach(affiliationName -> {
+			Stream.of("โรงพยาบาล","คลินิค","ไม่มีในฐานข้อมูล").forEach(affiliationName -> {
 				Affiliation affi = new Affiliation();
 				affi.setAffiliationName(affiliationName);
 				affiliationRepository.save(affi);
 			});
-			Stream.of("นครราชสีมา","กรุงเทพ").forEach(provinceName -> {
+			Stream.of("กระบี่","กรุงเทพมหานคร","กาญจนบุรี","กาฬสินธุ์","กำแพงเพชร","ขอนแก่น","จันทบุรี","ฉะเชิงเทรา" ,"ชลบุรี","ชัยนาท","ชัยภูมิ","ชุมพร","เชียงราย","เชียงใหม่","ตรัง","ตราด","ตาก","นครนายก","นครปฐม","นครพนม","นครราชสีมา" ,"นครศรีธรรมราช","นครสวรรค์","นนทบุรี","นราธิวาส","น่าน","บุรีรัมย์","บึงกาฬ","ปทุมธานี","ประจวบคีรีขันธ์","ปราจีนบุรี","ปัตตานี" ,"พะเยา","พังงา","พัทลุง","พิจิตร","พิษณุโลก","เพชรบุรี","เพชรบูรณ์","แพร่","ภูเก็ต","มหาสารคาม","มุกดาหาร","แม่ฮ่องสอน" ,"ยโสธร","ยะลา","ร้อยเอ็ด","ระนอง","ระยอง","ราชบุรี","ลพบุรี","ลำปาง","ลำพูน","เลย","ศรีสะเกษ","สกลนคร","สงขลา" ,"สตูล","สมุทรปราการ","สมุทรสงคราม","สมุทรสาคร","สระแก้ว","สระบุรี","สิงห์บุรี","สุโขทัย","สุพรรณบุรี","สุราษฎร์ธานี" ,"สุรินทร์","หนองคาย","หนองบัวลำภู","อยุธยา","อ่างทอง","อำนาจเจริญ","อุดรธานี","อุตรดิตถ์","อุทัยธานี","อุบลราชธานี","ไม่มีในฐานข้อมูล").forEach(provinceName -> {
 				Province province = new Province();
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);
@@ -170,18 +184,20 @@ public class BackendApplication  {
 				TypeHospital ty = new TypeHospital();
 				Hospital hospital = new Hospital();
 				hospital.setHospitalName(hospitalName);
-				hospital.setBranceFive(12345L);
-				hospital.setBranceNine(123456789L);
-				hospital.setHospitalAddress("hospitalAddress1");
-				hospital.setHospitalPhone("044000000");
-				hospital.setHospitalPostcode(30000L);
 
-				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
-				hospital.setAffiliationName(aff);
-				pro = provinceRepository.findByProvinceName("นครราชสีมา");
-				hospital.setProvinceName(pro);
-				ty = typeHospitalRepository.findByTypeName("เอกชน");
-				hospital.setTypeName(ty);
+					hospital.setBranceFive(12345L);
+					hospital.setBranceNine(123456789L);
+					hospital.setHospitalAddress("hospitalAddress1");
+					hospital.setHospitalPhone("044000000");
+					hospital.setHospitalPostcode(30000L);
+
+					aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+					hospital.setAffiliationName(aff);
+					pro = provinceRepository.findByProvinceName("นครราชสีมา");
+					hospital.setProvinceName(pro);
+					ty = typeHospitalRepository.findByTypeName("เอกชน");
+					hospital.setTypeName(ty);
+
 				hospitalRepository.save(hospital);
 			});
 			Stream.of("ยาสามัญ","ยาสามัญประจำบ้าน","ยาอันตราย","ยาควบคุมพิเศษ","ผลิตภัณฑ์เสริมอาหาร").forEach(typesOfDrugsName -> {
@@ -189,14 +205,12 @@ public class BackendApplication  {
 			typesOfDrugs.setTypesOfDrugsName(typesOfDrugsName);
 				typesOfDrugsRepository.save(typesOfDrugs);
 				});
-				typesOfDrugsRepository.findAll().forEach(System.out::println);
 
 			Stream.of("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล","ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด").forEach(drugRegistrationName -> {
 			DrugRegistration drugRegistration = new DrugRegistration();
 			drugRegistration.setDrugRegistrationName(drugRegistrationName);
 			drugRegistrationRepository.save(drugRegistration);
 			});
-			drugRegistrationRepository.findAll().forEach(System.out::println);
 
 
 		    Stream.of("เม็ดสี่เหลี่ยม","เม็ดสามเหลี่ยม","เม็ดวงกลม","เม็ดวงรี","เม็ดแคปซูล","น้ำ").forEach(typesOfDosageFormsName -> {
@@ -204,7 +218,6 @@ public class BackendApplication  {
 			typesOfDosageForms.setTypesOfDosageFormsName(typesOfDosageFormsName);
 			typesOfDosageFormsRepository.save(typesOfDosageForms);
 			});
-			typesOfDosageFormsRepository.findAll().forEach(System.out::println);
 
 			Stream.of("Graph", "Sun").forEach(userName -> {
 
@@ -214,7 +227,6 @@ public class BackendApplication  {
 				Province provinceid = new Province();
 
 				rightRegistration.setUsername(userName);
-				rightRegistrationRepository.save(rightRegistration);
 
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 
@@ -232,12 +244,12 @@ public class BackendApplication  {
 					rightRegistration.setPassword("Pass" + userName);
 					rightRegistration.setFirstname("First" + userName);
 					rightRegistration.setSurname("Sur" + userName);
-					rightRegistration.setTel("0639085430");
+					rightRegistration.setTel("0123456789");
 					rightRegistration.setPersonalcard(1309902591596L);
-					rightRegistration.setDateregis(gdate2);
+				    rightRegistration.setDateregis(gdate2);
 					rightRegistration.setBirthday(bdate2);
 
-					provinceid = provinceRepository.findByProvinceName("กรุงเทพ");
+					provinceid = provinceRepository.findByProvinceName("กรุงเทพมหานคร");
 					rightRegistration.setProvince(provinceid);
 
 					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
@@ -252,7 +264,7 @@ public class BackendApplication  {
 					rightRegistration.setPassword("Pass" + userName);
 					rightRegistration.setFirstname("First" + userName);
 					rightRegistration.setSurname("Sur" + userName);
-					rightRegistration.setTel("0902737190");
+					rightRegistration.setTel("0123456789");
 					rightRegistration.setPersonalcard(1309902582554L);
 					rightRegistration.setDateregis(gdate3);
 					rightRegistration.setBirthday(bdate3);
@@ -332,14 +344,58 @@ public class BackendApplication  {
 				memberRepository.save(member);
 			});
 
-			goldcardRepository.findAll().forEach(System.out::println);
-			drugRepository.findAll().forEach(System.out::println);
-			diseaseRepository.findAll().forEach(System.out::println);
-			rightsTypeRepository.findAll().forEach(System.out::println);
-			rightRegistrationRepository.findAll().forEach(System.out::println);
-			provinceRepository.findAll().forEach(System.out::println);
-			memberRepository.findAll().forEach(System.out::println);
-			hospitalRepository.findAll().forEach(System.out::println);
+//Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2
+
+			Stream.of("P1", "F2").forEach(acceptToUser -> {
+
+				AcceptToUser acceptToUserId = new AcceptToUser();
+				Officer officerId = new Officer();
+				RightRegistration rightRegistrationId = new RightRegistration();
+				Status statusid = new Status();
+
+				acceptToUserId.setCodeAccept(acceptToUser);
+
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+				String Date1 = "25:01:2019";
+				String Date2 = "15:01:2019";
+				LocalDate adate1 = LocalDate.parse(Date1, formatter);
+				LocalDate adate2 = LocalDate.parse(Date2, formatter);
+
+				if (acceptToUser == "P1") {
+					acceptToUserId.setAccId(1L);
+					acceptToUserId.setComment("ครบถ้วน");
+					acceptToUserId.setDateAccept(adate1);
+
+					statusid = statusRepository.findByStatusName("Pass");
+					acceptToUserId.setStatus(statusid);
+
+					rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+					acceptToUserId.setRightRegistration(rightRegistrationId);
+
+					officerId = officerRepository.findByOfficerName("Pichakorn Lohanut");
+					acceptToUserId.setOfficer(officerId);
+
+
+				} else if (acceptToUser == "F2") {
+					acceptToUserId.setAccId(2L);
+					acceptToUserId.setComment("เอกสารไม่ตรงกับข้อมูล");
+					acceptToUserId.setDateAccept(adate2);
+
+					statusid = statusRepository.findByStatusName("Fail");
+					acceptToUserId.setStatus(statusid);
+
+					rightRegistrationId = rightRegistrationRepository.findByRegId(2L);
+					acceptToUserId.setRightRegistration(rightRegistrationId);
+
+					officerId = officerRepository.findByOfficerName("Kanathip Poungtham");
+					acceptToUserId.setOfficer(officerId);
+
+				}
+					acceptToUserRepository.save(acceptToUserId);
+			});
+
+
 		};
 		};
 
