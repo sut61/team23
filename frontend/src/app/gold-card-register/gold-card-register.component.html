@@ -1,4 +1,4 @@
-
+{{input.ids}}
 <div class="card">
   <alert></alert>
 <h4 class = "center">วันที่ขอรับสิทธิ์ : {{CurrentDate | date:'fullDate' }}</h4>
@@ -8,7 +8,8 @@
   <br>
 
   <mat-form-field class="form">
-    <input matInput  placeholder="Username"  [(ngModel)]="input.username" autocomplete="off">
+    <mat-label>Username</mat-label>
+    <input matInput  placeholder="3-20 ตัวอักษร"  [(ngModel)]="input.username" autocomplete="off">
   </mat-form-field>
 
   <mat-form-field class="formtab">
@@ -26,14 +27,15 @@
   </mat-form-field>
   <br>
 
-  <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel" class="form">
+  <mat-form-field appearance="legacy" class="form">
     <mat-label>บัตรประชาชน</mat-label>
-    <input matInput placeholder="" [(ngModel)]="input.personalcard" autocomplete="off">
+    <input matInput placeholder="เลข 13 หลัก" [(ngModel)]="input.personalcard" autocomplete="off">
   </mat-form-field>
 
   <mat-form-field class="formtab">
-    <input matInput [matDatepicker]="picker" placeholder="เลือกวันเกิด" [(ngModel)]="input.birthday" autocomplete="off">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-label>เลือกวันเกิด</mat-label>
+    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" [(ngModel)]="input.birthday" autocomplete="off">
+    <mat-datepicker-toggle matSuffix [for]="picker" autocomplete="off"></mat-datepicker-toggle>
     <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
   </mat-form-field>
 
@@ -69,9 +71,9 @@
 
   <br>
 
-  <mat-form-field appearance="legacy" [floatLabel]="lock.value.floatLabel" class="formcenter">
+  <mat-form-field appearance="legacy" class="formcenter">
     <mat-label>โทรศัพท์*</mat-label>
-    <input matInput placeholder="" [(ngModel)]="input.tel" autocomplete="off">
+    <input matInput placeholder="0 + ตัวเลข9หลัก" [(ngModel)]="input.tel" autocomplete="off">
 
   </mat-form-field>
 

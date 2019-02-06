@@ -81,6 +81,7 @@ $frontend-theme: mat-light-theme($frontend-primary, $frontend-accent, $frontend-
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 
+/*
 @include angular-material-theme($frontend-theme);
 
 .alternate-theme {
@@ -101,3 +102,4 @@ $frontend-theme: mat-light-theme($frontend-primary, $frontend-accent, $frontend-
   $candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
   $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 }
+*/

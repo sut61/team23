@@ -13,7 +13,7 @@ export class UserviewComponent implements OnInit {
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
   isLoggedIn$: Observable<boolean>;
   username : string;
-  rightregistrations : Array<any>;
+  accs : Array<any>;
   firstname : string;
   members : Array<any>;
 
@@ -27,12 +27,13 @@ export class UserviewComponent implements OnInit {
   ngOnInit() {
       this.isLoggedIn$ = this.authService.isLoggedIn;
       this.username = localStorage.getItem('currentUser');
-      this.goldcardService.getRightRegistration().subscribe(data =>{
-          this.rightregistrations = data;
-          console.log(this.rightregistrations);
-          for(let i of this.rightregistrations){
-               if(i.username == this.username)
+      this.goldcardService.getAccepted().subscribe(data =>{
+          this.accs = data;
+          for(let i of this.accs){
+               if(i.rightRegistration.username == this.username){
                      this.members = i;
+                     console.log(i);
+               }
           }
       });
   }
