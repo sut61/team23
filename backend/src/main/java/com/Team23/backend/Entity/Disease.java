@@ -31,10 +31,10 @@ public class Disease {
     @Column(name="DISEASE_ID",unique = true, nullable = false)
     private @NonNull Long diseaseId;
 
-//    @Pattern(regexp = "(โรค).+")
-//    @Size(min = 5, max = 40)
-//    @Column(name="diseaseName",unique = true)
-//    @NotNull(message="Package Id must not be null to be valid")
+    @Pattern(regexp = "(โรค).+")
+    @Size(min = 5, max = 40)
+    @Column(name="diseaseName",unique = true)
+    @NotNull(message="Package Id must not be null to be valid")
     private String diseaseName;
 
     private @NonNull String symptom;

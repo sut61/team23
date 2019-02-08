@@ -303,12 +303,6 @@ public class BackendApplication  {
 				}
 			});
 
-			Stream.of("กรดไหลย้อน (เกิร์ด)", "โรคเบาหวาน", "โรคความดันโลหิตสูง", "ไขมันในเลือดสูง", "โรคหลอดเลือดหัวใจ", "ถุงลมโป่งพอง", "ธาลัสซีเมีย", "กรวยไตอักเสบ", "ไข้เลือดออก", "ปอดอักเสบ (ปอดบวม)").forEach(diseaseName -> {
-				Disease disease = new Disease();
-				disease.setDiseaseName(diseaseName);
-				diseaseRepository.save(disease);
-			});
-
 			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)").forEach(drugName -> {
 				Drug               grug               = new Drug();
 				TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
