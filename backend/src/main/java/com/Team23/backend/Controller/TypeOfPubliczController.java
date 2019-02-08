@@ -1,7 +1,7 @@
 package com.Team23.backend.Controller;
 
-import com.Team23.backend.Repository.*;
-import com.Team23.backend.Entity.*;
+import com.Team23.backend.Entity.TypeOfPublicz;
+import com.Team23.backend.Repository.TypeOfPubliczRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class TypeOfPubliczController {
     @Autowired final TypeOfPubliczRepository typeOfPubliczRepository;
 
-    public  TypeOfPubliczController(TypeOfPubliczRepository typeOfPubliczRepository){
+    public TypeOfPubliczController(TypeOfPubliczRepository typeOfPubliczRepository){
         this.typeOfPubliczRepository = typeOfPubliczRepository;
     }
     @GetMapping("/TypeOfPublicz")

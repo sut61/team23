@@ -63,12 +63,73 @@ public class BackendApplication  {
 			,TypeTrainingRepository typeTrainingRepository
 			,LecturerRepository lecturerRepository
 			, TrainingRepository trainingRepository
+			, PubliczRepository publiczRepository
+			, TypeOfPubliczRepository typeOfPubliczRepository
 
 	) throws Exception {
 
 		return args -> {
 
+			Stream.of("Post1111","Post1112").forEach(publiczHead -> {
 
+				Publicz publicz = new Publicz();
+				Hospital hospital = new Hospital();
+				TypeOfPublicz typeOfPublicz = new TypeOfPublicz();
+				Officer officer = new Officer();
+
+				publicz.setPubliczHead(publiczHead);
+				publiczRepository.save(publicz);
+
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+				String DateA = "25:05:1998";
+				String DateB = "25:05:1990";
+
+				LocalDate datea = LocalDate.parse(DateA, formatter);
+				LocalDate dateb = LocalDate.parse(DateB, formatter);
+
+				if (publiczHead == "Post1111") {
+
+					publicz.setPublicizeDetail("Suranaree University of Technology");
+					publicz.setDate_reg(datea);
+					publicz.setEmail("oat@hotmail.com");
+					publicz.setCall("0883120905");
+
+					officer = officerRepository.findByOfficerName("OAT");
+					publicz.setOfficer(officer);
+
+					typeOfPublicz = typeOfPubliczRepository.findByTypePubName("กิจกรรม");
+					publicz.setTypeOfPublicz(typeOfPublicz);
+
+					hospital = hospitalRepository.findByHospitalName("รพ.กรุงเทพ");
+					publicz.setHospital(hospital);
+
+					publiczRepository.save(publicz);
+				}
+				if (publiczHead == "Post1112") {
+
+					publicz.setPublicizeDetail("Suranaree University of Technology 2");
+					publicz.setDate_reg(datea);
+					publicz.setEmail("beem@hotmail.com");
+					publicz.setCall("0923120905");
+
+					officer = officerRepository.findByOfficerName("BEEM");
+					publicz.setOfficer(officer);
+
+					typeOfPublicz = typeOfPubliczRepository.findByTypePubName("ประชาสัมพันธ์");
+					publicz.setTypeOfPublicz(typeOfPublicz);
+
+					hospital = hospitalRepository.findByHospitalName("รพ.กรุงเทพ");
+					publicz.setHospital(hospital);
+
+					publiczRepository.save(publicz);
+				}
+			});
+			Stream.of("ประชาสัมพันธ์", "กิจกรรม").forEach(typePubName -> {
+				TypeOfPublicz typeOfPublicz = new TypeOfPublicz();
+				typeOfPublicz.setTypePubName(typePubName);
+				typeOfPubliczRepository.save(typeOfPublicz);
+			});
 			Stream.of("OATTT", "BEEMM", "JANJOW","ANGGG","admin","Kanathip Poungtham", "Pichakorn Lohanut","Pantamit Sombaddee").forEach(officerName -> {
 				Officer officer = new Officer();
 				officer.setOfficerName(officerName);

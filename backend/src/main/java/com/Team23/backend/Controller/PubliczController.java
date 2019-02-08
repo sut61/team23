@@ -1,31 +1,28 @@
 package com.Team23.backend.Controller;
 
-import com.Team23.backend.Repository.*;
 import com.Team23.backend.Entity.*;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.Team23.backend.Repository.HospitalRepository;
+import com.Team23.backend.Repository.OfficerRepository;
+import com.Team23.backend.Repository.PubliczRepository;
+import com.Team23.backend.Repository.TypeOfPubliczRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JsonParseException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.stream.Collectors;
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.time.format.DateTimeFormatter;
-import java.time.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class PubliczController {
-    @Autowired private  final  PubliczRepository publiczRepository;
-    @Autowired private  HospitalRepository hospitalRepository;
-    @Autowired private  OfficerRepository officerRepository;
-    @Autowired private  TypeOfPubliczRepository typeOfPubliczRepository;
+    @Autowired private  final PubliczRepository publiczRepository;
+    @Autowired private HospitalRepository hospitalRepository;
+    @Autowired private OfficerRepository officerRepository;
+    @Autowired private TypeOfPubliczRepository typeOfPubliczRepository;
 
-    public PubliczController(PubliczRepository publiczRepository ,HospitalRepository hospitalRepository ,OfficerRepository officerRepository ,TypeOfPubliczRepository typeOfPubliczRepository){
+    public PubliczController(PubliczRepository publiczRepository , HospitalRepository hospitalRepository , OfficerRepository officerRepository , TypeOfPubliczRepository typeOfPubliczRepository){
         this.publiczRepository = publiczRepository;
         this.hospitalRepository = hospitalRepository;
         this.officerRepository = officerRepository;
@@ -38,13 +35,13 @@ public class PubliczController {
     }
 
     @PostMapping("/Publicz/{publiczHead}/{PublicizeDetail}/{date_reg}/{officerName}/{hospialName}/{TypeOfPublicz}/{email}/{call}")
-    public Publicz newPubz(@PathVariable String publiczHead ,@PathVariable String PublicizeDetail ,@PathVariable String date_reg ,@PathVariable String officerName
-            ,@PathVariable String hospialName ,@PathVariable String TypeOfPublicz ,@PathVariable String email ,@PathVariable String call
+    public Publicz newPubz(@PathVariable String publiczHead , @PathVariable String PublicizeDetail , @PathVariable String date_reg , @PathVariable String officerName
+            , @PathVariable String hospialName , @PathVariable String TypeOfPublicz , @PathVariable String email , @PathVariable String call
     ){
         Publicz newPub = new Publicz();
         Hospital hospital = new Hospital();
         Officer officer = new Officer();
-        TypeOfPublicz typeOfPublicz = new TypeOfPublicz();
+        com.Team23.backend.Entity.TypeOfPublicz typeOfPublicz = new TypeOfPublicz();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate Kdate = LocalDate.parse(date_reg,formatter);
