@@ -14,12 +14,14 @@ import { AddMidicineComponent } from './add-midicine/add-midicine.component';
 import { GDCardComponent } from './gd-card/gd-card.component';
 import { AcceptToUserComponent } from './accept-to-user/accept-to-user.component';
 import { DiseaseComponent } from './disease/disease.component';
+import { CardComponent } from './card/card.component';
 
 const routes: Routes = [
     { path: '', redirectTo:'/login' , pathMatch: 'full'},
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent},
     { path: 'EligibleDiseases', component: EligibleDiseasesComponent, canActivate: [AuthGuard]},
+    { path: 'Card', component: CardComponent, canActivate: [AuthGuard]},
     { path: 'TreatmentHistory', component: TreatmentHistoryComponent, canActivate: [AuthGuard]},
     { path: 'reload/:page', component: ReloadpageComponent, canActivate: [AuthGuard]},
     { path: 'userview', component: UserviewComponent, canActivate: [AuthGuard]},

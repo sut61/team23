@@ -66,5 +66,10 @@ getOfficer(): Observable<any> {
  getPeopleDisease(): Observable<any> {
     return this.http.get('//localhost:8080/PeopleDisease');
   }
-
+  getPassAcceptToUser(): Observable<any> {
+    return this.http.get('//localhost:8080/PassAcceptToUser');
+  }
+  getExpenses(): Observable<any> {
+    return this.http.get('//localhost:8080/Expenses');
+  }
 }

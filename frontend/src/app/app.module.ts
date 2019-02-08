@@ -66,6 +66,7 @@ import { AddMidicineComponent } from './add-midicine/add-midicine.component';
 import { EditMidicineComponent } from './edit-midicine/edit-midicine.component';
 import { AcceptToUserComponent,Sheet,Sheetq } from './accept-to-user/accept-to-user.component';
 import { DiseaseComponent,Success } from './disease/disease.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { DiseaseComponent,Success } from './disease/disease.component';
     Sheetq,
     Success,
     DiseaseComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

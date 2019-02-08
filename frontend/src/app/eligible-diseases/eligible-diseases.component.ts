@@ -28,7 +28,8 @@ DiseaseSelect: '',
 DocumentSelect: '',
 UsernameSelect:'',
 DeleteSelect:'',
-PasswordSelect:''
+PasswordSelect:'',
+CodeSelect:''
 
 
 };
@@ -66,7 +67,7 @@ this.httpClient.post("http://localhost:8080/checkdoc/"+this.ed.DocumentSelect,th
       data => {
         console.log("User  success");
 
-  this.httpClient.post("http://localhost:8080/EligibleDiseases/add/"+this.ed.DiseaseSelect+','+this.ed.DocumentSelect+','+this.ed.UsernameSelect,this.ed).subscribe(
+  this.httpClient.post("http://localhost:8080/EligibleDiseases/add/"+this.ed.DiseaseSelect+','+this.ed.DocumentSelect+','+this.ed.UsernameSelect+','+this.ed.CodeSelect,this.ed).subscribe(
       data => {
         console.log("add  success");
          alert("เพิ่มแล้วเรียบร้อย");

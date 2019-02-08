@@ -1,0 +1,169 @@
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+<mat-card>
+  <mat-card-content>
+    {{CurrentDate | date:'fullDate' }}
+    <div style="background-color: #ffc000; height: 130px;" align="center">
+
+
+      <br>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3  align="center"> ออกบัตร </h3>
+            </mat-panel-title>
+            <mat-panel-description>
+
+              <h3  align="center" style="color: #3fc380"><mat-icon>add_circle</mat-icon>  ออกบัตร  </h3>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div style="background-color: #3fc380">
+            <br>
+
+
+            <mat-card style="width:400px">
+              <mat-card-content>
+                <h3 style="background-color: #3fc380; color:white">&nbsp;&nbsp;ออกบัตร</h3>
+                <mat-form-field hintLabel="" style="width :100%">
+                  <input matInput placeholder="Card code" [(ngModel)]="input.Cardcode" name="Cardcode">
+                </mat-form-field>
+                <mat-form-field hintLabel="" style="width :100%">
+                  <input matInput placeholder="Comment" [(ngModel)]="input.Comment" name="Comment">
+                </mat-form-field>
+                <mat-form-field hintLabel="" style="width :100%">
+                  <input matInput placeholder="AcceptId" [(ngModel)]="input.AcceptId" name="AcceptId">
+                </mat-form-field>
+
+                <mat-form-field style="width :100%">
+                  <mat-select placeholder="คาใช้จ่าย" [(ngModel)]="input.Expenses" name="Expenses">
+                    <mat-option *ngFor="let Expenses of Expensess" [value]="Expenses.idExpenses">
+                      {{Expenses.expensesName}}  [ {{Expenses.number}} บาท  ]
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                วันออกบัตร  {{CurrentDate | date:'fullDate' }}
+                <br><br><br>
+                <button type="submit" mat-stroked-button (click)="Add()" color="warn">พิมพ์</button>
+
+              </mat-card-content>
+            </mat-card>
+            <br>
+            <div style="background-color: white">
+              <mat-form-field >
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ค้นหา">
+              </mat-form-field>
+            </div>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSourceAccepted" class="mat-elevation-z8">
+
+
+                <ng-container matColumnDef="AcceptId">
+                  <th mat-header-cell *matHeaderCellDef> <h2>AcceptId </h2></th>
+                  <td mat-cell *matCellDef="let element"> {{element.accId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="rightRegistration">
+                  <th mat-header-cell *matHeaderCellDef>  <h2>  ชื่อ  -  สกุล </h2></th>
+                  <td mat-cell *matCellDef="let element">{{element.rightRegistration.firstname}}&nbsp;&nbsp;&nbsp;{{element.rightRegistration.surname}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="codeAccept" >
+                  <th mat-header-cell *matHeaderCellDef ><h2> เลขประจำตัวประชาชน</h2> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.rightRegistration.personalcard}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="officer">
+                  <th mat-header-cell *matHeaderCellDef><h2>วันเกิด </h2></th>
+                  <td mat-cell *matCellDef="let element"> {{element.rightRegistration.birthday}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="comment">
+                  <th mat-header-cell *matHeaderCellDef><h2>comment</h2> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> <h2>status</h2> </th>
+                  <td mat-cell *matCellDef="let element"> {{element.status.statusName}} </td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+          </div>
+
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h3  align="center">    แจ้งหาย </h3>
+            </mat-panel-title>
+            <mat-panel-description>
+              <h3  align="center" style="color: #cf000f"><mat-icon>block</mat-icon>  แจ้งหาย       </h3>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div style="background-color: #d64541">
+            <br/>
+            <mat-card style="width:400px">
+              <mat-card-content>
+
+              </mat-card-content>
+              <img src="../../assets/1.jpg"  >
+
+
+
+
+            </mat-card>
+            <br/>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <br>
+
+
+      <div align="center">
+
+
+
+
+
+
+
+
+        <br>
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </mat-card-content>
+</mat-card>
