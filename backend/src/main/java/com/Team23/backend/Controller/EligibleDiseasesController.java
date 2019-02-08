@@ -63,9 +63,9 @@ public class EligibleDiseasesController {
         return documentWork;
     }
 
-    @PostMapping("/EligibleDiseases/add/{Diseases},{NumberDocument},{username}")
+    @PostMapping("/EligibleDiseases/add/{Diseases},{NumberDocument},{username},{Code}")
     public  EligibleDiseases newEligibleDiseases(EligibleDiseases eligibleDiseases,@PathVariable String Diseases, @PathVariable String NumberDocument
-    ,@PathVariable String username){
+    ,@PathVariable String username,@PathVariable String Code){
 
         Officer officers = officerRepositoty.findByUserName(username);
         Disease disease = DiseaseRepo.findByDiseaseName(Diseases);
@@ -76,7 +76,7 @@ public class EligibleDiseasesController {
         eligibleDiseases.setDisease(disease);
         eligibleDiseases.setDocumentWork(documentWork);
         eligibleDiseases.setOfficer(officers);
-
+        eligibleDiseases.setEligibleDiseasesCode(Code);
         return EDR.save(eligibleDiseases);
     }
 

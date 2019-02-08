@@ -59,6 +59,7 @@ public class BackendApplication  {
 			, AcceptToUserRepository acceptToUserRepository
 			, TypeDiseaseRepository typeDiseaseRepository
 			, PeopleDiseaseRepository	peopleDiseaseRepository
+			, ExpensesRepository expensesRepository
 
 	) throws Exception {
 
@@ -422,6 +423,7 @@ public class BackendApplication  {
 				peopleDiseaseRepository.save(peopleDisease);
 			});
 
+
 			Stream.of("โรคเบาหวาน", "โรคความดันโลหิตสูง").forEach(diseaseName -> {
 				Disease disease = new Disease();
 				TypeDisease typeDiseaseid = new TypeDisease();
@@ -448,8 +450,34 @@ public class BackendApplication  {
 					diseaseRepository.save(disease);
 				}
 			});
-			System.out.println("Spring Boot Pass");
 
+			Stream.of("บัตรทอง", "บัตรทองพรีเมียม", "บัตรข้าราชการ").forEach(ExpensesName -> {
+				Expenses expenses = new Expenses();
+				expenses.setExpensesName(ExpensesName);
+				expensesRepository.save(expenses);
+
+
+				if(ExpensesName == "บัตรทอง"){
+
+					expenses.setNumber(100);
+					expensesRepository.save(expenses);
+				}
+				else if(ExpensesName == "บัตรทองพรีเมียม"){
+					expenses.setNumber(150);
+					expensesRepository.save(expenses);
+				}
+				else if(ExpensesName == "บัตรข้าราชการ"){
+					expenses.setNumber(200);
+					expensesRepository.save(expenses);
+				}
+				expensesRepository.save(expenses);
+
+			});
+
+			System.out.println("Spring Boot Pass");
+			String colorwhite = "\u001b[37m";
+			String Success = "\u001b[32m";
+			System.out.println(Success+"Mvnw Spring-boot:Run ::  Success !!"+colorwhite);
 		};
 		};
 
