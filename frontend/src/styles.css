@@ -236,3 +236,6 @@ animation: slide-out-right 10s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite
 	-webkit-animation-direction: alternate;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,45 @@
+.disease {
+  text-align : center;
+  border-radius: 5px;
+    margin: 2em auto;
+    padding-bottom : 35px;
+    background: rgba(255, 255, 255,0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.footerdisease {
+  background-color : #f1f1f1;
+    padding: 5px;
+    border-bottom: 6px solid white ;
+    font-family: 'Bai Jamjuree', sans-serif;
+    border-radius: 20px
+}
+.diseasecenter {
+  background-color : #f1f1f1;
+    text-align: center;
+   border: 6px solid rgb(0, 171, 235);
+
+}
+.form{
+  width : 350px;
+}
+table {
+    width: 90%;
+     border-radius: 10px;
+    mergins: 5px;
+  }
+.mat-column-diseaseName {
+  max-width:5%;
+}
+.mat-column-typeDiseaseName {
+  max-width:5%;
+}
+
+.mat-column-populationRate {
+  max-width:5%;
+}
+
+.mat-column-remedy {
+  max-width:5%;
+}
+
