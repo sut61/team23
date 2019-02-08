@@ -13,6 +13,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
 import { GDCardComponent } from './gd-card/gd-card.component';
+import { PubliczComponent } from './publicz/publicz.component';
 
 import {
   MatAutocompleteModule,
@@ -92,6 +93,7 @@ import { CardComponent } from './card/card.component';
     Success,
     DiseaseComponent,
     CardComponent,
+    PubliczComponent,
   ],
   imports: [
     BrowserModule,
