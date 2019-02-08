@@ -133,23 +133,6 @@ public class BackendApplication  {
 			documentRepositoty.save(doc13);	documentRepositoty.save(doc14);	documentRepositoty.save(doc15);	documentRepositoty.save(doc16);
 			documentRepositoty.save(doc17);	documentRepositoty.save(doc18);	documentRepositoty.save(doc19);	documentRepositoty.save(doc20);
 
-			Disease dis1 = new Disease("ปอด");			diseaseRepository.save(dis1);
-			Disease dis2 = new Disease("หัวใจ");			diseaseRepository.save(dis2);
-			Disease dis3 = new Disease("ประสาท");			diseaseRepository.save(dis3);
-			Disease dis4 = new Disease("มะเร็งตับอ่อน");		diseaseRepository.save(dis4);
-			Disease dis5 = new Disease("โรคถุงลมปอดโป่งพอง");	diseaseRepository.save(dis5);
-			Disease dis6 = new Disease("กระดูกพรุน");		diseaseRepository.save(dis6);
-			Disease dis7 = new Disease("ข้อเสื่อม");			diseaseRepository.save(dis7);
-			Disease dis8 = new Disease("กล้ามเนื้ออ่อนแรง");		diseaseRepository.save(dis8);
-			Disease dis9 = new Disease("ต้อกระจก");			diseaseRepository.save(dis9);
-			Disease dis10 = new Disease("อาหารเป็นพิษ");		diseaseRepository.save(dis10);
-
-			EligibleDiseases elig2 = new EligibleDiseases(dis1,doc1,officerid1);	eligibleDiseasesRepositoty.save(elig2);
-			EligibleDiseases elig3 = new EligibleDiseases(dis2,doc2,officerid1);	eligibleDiseasesRepositoty.save(elig3);
-			EligibleDiseases elig4 = new EligibleDiseases(dis3,doc3,officerid2);	eligibleDiseasesRepositoty.save(elig4);
-			EligibleDiseases elig1 = new EligibleDiseases(dis4,doc4,officerid3);	eligibleDiseasesRepositoty.save(elig1);
-
-
 			Stream.of("บัตรทอง","รับราชการ").forEach(rightsTypeName -> {
 				RightsType rightstype = new RightsType();
 				rightstype.setRightsTypeName(rightsTypeName);
@@ -394,7 +377,7 @@ public class BackendApplication  {
 				}
 					acceptToUserRepository.save(acceptToUserId);
 			});
-
+			System.out.println("Spring Boot Pass");
 
 		};
 		};
