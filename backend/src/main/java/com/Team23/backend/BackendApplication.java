@@ -239,6 +239,18 @@ public class BackendApplication  {
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);
 			});
+			Stream.of("อบรม", "อบรมเชิงปฏิบัติ", "สัมนา").forEach(typeTrainingName -> {
+				TypeTraining tt = new TypeTraining();
+				tt.setTypeTrainingName(typeTrainingName);
+				typeTrainingRepository.save(tt);
+
+			});
+			Stream.of("Profressor A", "Profressor B", "Profressor C").forEach(lecturerName -> {
+				Lecturer ll = new Lecturer();
+				ll.setLecturerName(lecturerName);
+				lecturerRepository.save(ll);
+
+			});
 			Stream.of("RatchasrimaHospital").forEach(hospitalName -> {
 				Province pro = new Province();
 				Affiliation aff = new Affiliation();
