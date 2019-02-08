@@ -21,15 +21,15 @@ public class EligibleDiseases {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="No_ED")
     @Column(name = "No")
     private  @NonNull  Long IDEligibleDiseases;
-    @Column(name = "EligibleDiseasesCode", unique = true)
-    private  @NotNull @Pattern(regexp = "El.+") @Size(min = 5 , max = 25) String EligibleDiseasesCode;
+    @Column( unique = true)
+    private @NotNull @Pattern(regexp = "El.+") @Size(min = 5 , max = 25) String EligibleDiseasesCode;
     @ManyToOne Disease disease;
     @ManyToOne Officer officer;
     @ManyToOne DocumentWork documentWork;
     public EligibleDiseases( Disease diseaser,DocumentWork documentWork, Officer officer,String EligibleDiseasesCode){
-        this.documentWork = documentWork;
-        this.disease = diseaser;
-        this.EligibleDiseasesCode = EligibleDiseasesCode;
-        this.officer = officer;
+        this.documentWork           = documentWork;
+        this.disease                = diseaser;
+        this.EligibleDiseasesCode   = EligibleDiseasesCode;
+        this.officer                = officer;
     }
 }

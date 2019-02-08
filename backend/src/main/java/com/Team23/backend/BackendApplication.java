@@ -65,27 +65,28 @@ public class BackendApplication  {
 
 		return args -> {
 
-			Stream.of("OAT", "BEEM", "JANJOW","ANG","admin").forEach(officerName -> {
+
+			Stream.of("OATTT", "BEEMM", "JANJOW","ANGGG","admin","Kanathip Poungtham", "Pichakorn Lohanut","Pantamit Sombaddee").forEach(officerName -> {
 				Officer officer = new Officer();
 				officer.setOfficerName(officerName);
 
-				officerRepository.save(officer);
 
-				if(officerName == "OAT"){
+
+				if(officerName == "OATTT"){
 					officer.setCallNumber("0883120905");
-					officer.setUserName("OAT1");
+					officer.setUserName("OAT1234");
 					officer.setPassWord("admin");
 					officerRepository.save(officer);
 				}
-				else if(officerName == "BEEM"){
+				else if(officerName == "BEEMM"){
 					officer.setCallNumber("0883146847");
-					officer.setUserName("BEEM1");
+					officer.setUserName("BEEM1234");
 					officer.setPassWord("admin");
 					officerRepository.save(officer);
 				}
-				else if(officerName == "ANG"){
+				else if(officerName == "ANGGG"){
 					officer.setCallNumber("0880303038");
-					officer.setUserName("ANG1");
+					officer.setUserName("ANG1234");
 					officer.setPassWord("admin");
 					officerRepository.save(officer);
 				}
@@ -100,31 +101,26 @@ public class BackendApplication  {
 					officer.setUserName("admin");
 					officer.setPassWord("admin");
 					officerRepository.save(officer);
-				}
-				officerRepository.save(officer);
-
-			});
-			Stream.of("Kanathip Poungtham", "Pichakorn Lohanut","Pantamit Sombaddee").forEach(officerName -> {
-				Officer officer = new Officer();
-
-				officer.setOfficerName(officerName);
-				if(officerName == "Kanathip Poungtham"){
+				}else if(officerName == "Kanathip Poungtham"){
 					officer.setCallNumber("0888888888");
 					officer.setUserName("user1");
-					officer.setPassWord("0");
+					officer.setPassWord("0000");
 					officerRepository.save(officer);
 				} else if(officerName == "Pichakorn Lohanut"){
 					officer.setCallNumber("0812345678");
 					officer.setUserName("user2");
-					officer.setPassWord("0");
+					officer.setPassWord("0000");
 					officerRepository.save(officer);
 				}else if(officerName == "Pantamit Sombaddee"){
 					officer.setCallNumber("0912345687");
 					officer.setUserName("user3");
-					officer.setPassWord("0");
+					officer.setPassWord("0000");
 					officerRepository.save(officer);
 				}
+				officerRepository.save(officer);
+
 			});
+
 			Stream.of("10001", "10002","10003","10004", "10005","10006","10007", "10008","10009","100010").forEach(numberDocument -> {
 				DocumentWork documentWork = new DocumentWork();
 
@@ -132,42 +128,82 @@ public class BackendApplication  {
 				if(numberDocument == "10001"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ปอด#1");
 					documentWork.setUrl("https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "08:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				} else if(numberDocument == "10002"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-หัวใจ#1");
 					documentWork.setUrl("https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "08:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}else if(numberDocument == "10003"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ประสาท#1");
 					documentWork.setUrl("https://www.honestdocs.co/psychosis-and-neurosis-difference");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "09:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				} else if(numberDocument == "10004"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-มะเร็งตับอ่อน#1");
 					documentWork.setUrl("https://www.honestdocs.co/what-is-pancreatic-cancer");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "10:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}else if(numberDocument == "10005"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-โรคถุงลมปอดโป่งพอง#1");
 					documentWork.setUrl("https://www.honestdocs.co/emphysema-diagnose");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "11:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}else if(numberDocument == "10006"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-กระดูกพรุน#1");
 					documentWork.setUrl("https://www.honestdocs.co/pneumonia");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "12:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}else if(numberDocument == "10007"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ข้อเสื่อม#1");
 					documentWork.setUrl("https://www.honestdocs.co/drugs");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "13:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				} else if(numberDocument == "10008"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-กล้ามเนื้ออ่อนแรง#1");
 					documentWork.setUrl("https://www.honestdocs.co/what-is-myasthenia-gravis");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "08:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}else if(numberDocument == "10009"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ต้อกระจก#1");
 					documentWork.setUrl("https://www.honestdocs.co/cataracts");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "14:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}else if(numberDocument == "100010"){
 					documentWork.setTitle("รับรอง-เพิ่ม-โรค-อาหารเป็นพิษ#1");
 					documentWork.setUrl("https://www.honestdocs.co/food-poisoning");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+					String Date1 = "15:02:2019";
+					LocalDate adate1 = LocalDate.parse(Date1, formatter);
+					documentWork.setDate(adate1);
 					documentRepositoty.save(documentWork);
 				}
 			});
@@ -450,29 +486,40 @@ public class BackendApplication  {
 					diseaseRepository.save(disease);
 				}
 			});
-
 			Stream.of("บัตรทอง", "บัตรทองพรีเมียม", "บัตรข้าราชการ").forEach(ExpensesName -> {
 				Expenses expenses = new Expenses();
 				expenses.setExpensesName(ExpensesName);
-				expensesRepository.save(expenses);
 
-
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+				String Date0 = "08:02:2019";
+				String Date1 = "09:02:2019";
+				String Date2 = "10:02:2019";
+				LocalDate date0 = LocalDate.parse(Date0, formatter);
+				LocalDate date1 = LocalDate.parse(Date1, formatter);
+				LocalDate date2 = LocalDate.parse(Date2, formatter);
 				if(ExpensesName == "บัตรทอง"){
 
-					expenses.setNumber(100);
+					expenses.setNumber("100");
+					expenses.setComment("this is comment1");
+					expenses.setDate(date0);
 					expensesRepository.save(expenses);
 				}
 				else if(ExpensesName == "บัตรทองพรีเมียม"){
-					expenses.setNumber(150);
+					expenses.setNumber("150");
+					expenses.setComment("this is comment2");
+					expenses.setDate(date1);
 					expensesRepository.save(expenses);
 				}
 				else if(ExpensesName == "บัตรข้าราชการ"){
-					expenses.setNumber(200);
+					expenses.setNumber("200");
+					expenses.setComment("this is comment3");
+					expenses.setDate(date2);
 					expensesRepository.save(expenses);
 				}
 				expensesRepository.save(expenses);
 
 			});
+
 
 			System.out.println("Spring Boot Pass");
 			String colorwhite = "\u001b[37m";

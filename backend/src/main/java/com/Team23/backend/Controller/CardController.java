@@ -51,7 +51,7 @@ public class CardController {
 
         return acceptToUser.getStatus().getStatusName().equals("Pass");
     }
-    @RequestMapping(value ="/delete/{IdCard}")
+    @RequestMapping(value ="/deleteCard/{IdCard}")
     public  void  deleteCard(Card card, @PathVariable Long IdCard){
 
         cardRepository.deleteById(IdCard);
