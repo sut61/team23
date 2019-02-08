@@ -72,4 +72,7 @@ getOfficer(): Observable<any> {
   getExpenses(): Observable<any> {
     return this.http.get('//localhost:8080/Expenses');
   }
+  getTypeOfPublicz(): Observable<any> {
+    return this.http.get('//localhost:8080/TypeOfPublicz');
+  }
 }
