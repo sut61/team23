@@ -59,7 +59,10 @@ public class BackendApplication  {
 			, AcceptToUserRepository acceptToUserRepository
 			, TypeDiseaseRepository typeDiseaseRepository
 			, PeopleDiseaseRepository	peopleDiseaseRepository
-			, ExpensesRepository expensesRepository
+			, ExpensesRepository expensesRepository 
+			,TypeTrainingRepository typeTrainingRepository
+			,LecturerRepository lecturerRepository
+			, TrainingRepository trainingRepository
 
 	) throws Exception {
 
@@ -236,27 +239,47 @@ public class BackendApplication  {
 				province.setProvinceName(provinceName);
 				provinceRepository.save(province);
 			});
-			Stream.of("รพ.นครราชสีมา").forEach(hospitalName -> {
+			Stream.of("RatchasrimaHospital").forEach(hospitalName -> {
 				Province pro = new Province();
 				Affiliation aff = new Affiliation();
 				TypeHospital ty = new TypeHospital();
 				Hospital hospital = new Hospital();
 				hospital.setHospitalName(hospitalName);
+				hospital.setBranceFive(12345L);
+				hospital.setBranceNine(123456789L);
+				hospital.setHospitalAddress("hospitalAddress1");
+				hospital.setHospitalPhone("044000000");
+				hospital.setHospitalPostcode(30000L);
 
-					hospital.setBranceFive(12345L);
-					hospital.setBranceNine(123456789L);
-					hospital.setHospitalAddress("hospitalAddress1");
-					hospital.setHospitalPhone("044000000");
-					hospital.setHospitalPostcode(30000L);
-
-					aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
-					hospital.setAffiliationName(aff);
-					pro = provinceRepository.findByProvinceName("นครราชสีมา");
-					hospital.setProvinceName(pro);
-					ty = typeHospitalRepository.findByTypeName("เอกชน");
-					hospital.setTypeName(ty);
-
+				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+				hospital.setAffiliationName(aff);
+				pro = provinceRepository.findByProvinceName("นครราชสีมา");
+				hospital.setProvinceName(pro);
+				ty = typeHospitalRepository.findByTypeName("เอกชน");
+				hospital.setTypeName(ty);
 				hospitalRepository.save(hospital);
+			});
+
+
+			Stream.of("การอบรมการจ่ายยาที่เกี่ยวกับบัตรสุขภาพ").forEach(topicTraining -> {
+				Training ta = new Training();
+				ta.setTopicTraining(topicTraining);
+				ta.setImportantTopicTraining("importantTopicTraining");
+				ta.setObjectiveTraining("objectiveTraining");
+				ta.setAttendess(1000L);
+				ta.setExpenditure(10000L);
+				
+				Hospital hh = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+				ta.setHospitalName(hh);
+
+				Lecturer lll = lecturerRepository.findByLecturerName("Profressor A");
+				ta.setLecturerName(lll);
+
+				TypeTraining ty = typeTrainingRepository.findByTypeTrainingName("อบรมเชิงปฏิบัติ");
+				ta.setTypeTrainingName(ty);
+
+				trainingRepository.save(ta);
+
 			});
 			Stream.of("ยาสามัญ","ยาสามัญประจำบ้าน","ยาอันตราย","ยาควบคุมพิเศษ","ผลิตภัณฑ์เสริมอาหาร").forEach(typesOfDrugsName -> {
 		    TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
@@ -313,7 +336,7 @@ public class BackendApplication  {
 					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
 					rightRegistration.setRightsType(rightsTypeid);
 
-					hospitalid = hospitalRepository.findByHospitalName("รพ.นครราชสีมา");
+					hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
 					rightRegistration.setHospital(hospitalid);
 
 					rightRegistrationRepository.save(rightRegistration);
@@ -333,7 +356,7 @@ public class BackendApplication  {
 					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
 					rightRegistration.setRightsType(rightsTypeid);
 
-					hospitalid = hospitalRepository.findByHospitalName("รพ.นครราชสีมา");
+					hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
 					rightRegistration.setHospital(hospitalid);
 
 					rightRegistrationRepository.save(rightRegistration);
