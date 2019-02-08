@@ -20,12 +20,12 @@ public class EligibleDiseases {
     @SequenceGenerator(name="No_ED",sequenceName="No_ED")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="No_ED")
     @Column(name = "No")
-    private  @NonNull  Long IDEligibleDiseases;
+    private  @NotNull  Long IDEligibleDiseases;
     @Column( unique = true)
-    private @NotNull @Pattern(regexp = "El.+") @Size(min = 5 , max = 25) String EligibleDiseasesCode;
-    @ManyToOne Disease disease;
-    @ManyToOne Officer officer;
-    @ManyToOne DocumentWork documentWork;
+    private     @NotNull    @Pattern(regexp = "El.+") @Size(min = 5 , max = 25)            String           EligibleDiseasesCode;
+    private     @NotNull    @ManyToOne                                                     Disease          disease;
+    private     @NotNull    @ManyToOne                                                     Officer          officer;
+    private     @NotNull    @ManyToOne                                                     DocumentWork     documentWork;
     public EligibleDiseases( Disease diseaser,DocumentWork documentWork, Officer officer,String EligibleDiseasesCode){
         this.documentWork           = documentWork;
         this.disease                = diseaser;

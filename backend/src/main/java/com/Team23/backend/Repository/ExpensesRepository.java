@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource
 public interface ExpensesRepository extends  JpaRepository<Expenses ,Long>{
     Expenses findByIdExpenses(Long IdExpenses);
+
 }
