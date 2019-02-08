@@ -1,0 +1,93 @@
+<div class="disease">
+  <alert></alert>
+  <mat-card>
+    <h1>เพิ่มโรคในไทย</h1>
+  </mat-card>
+  <br>
+  <mat-form-field class="form">
+    <input matInput  placeholder="ชื่อโรค" [(ngModel)]="input.diseaseName" autocomplete="off">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="form">
+    <mat-select placeholder="ประเภทโรค" [(ngModel)]="select.typeDiseaseName">
+      <mat-option *ngFor="let typedisease of typedisease" [value]="typedisease.typeDiseaseName">
+        {{typedisease.typeDiseaseName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="form">
+    <mat-select placeholder="Rate ประชากรที่เป็นโรค(ต่อปี)" [(ngModel)]="select.populationRate">
+      <mat-option *ngFor="let peopledisease of peopledisease" [value]="peopledisease.populationRate">
+        {{peopledisease.populationRate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="form">
+    <input matInput  placeholder="อาการตอนเป็นโรค" [(ngModel)]="input.symptom" autocomplete="off">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="form">
+    <input matInput  placeholder="สาเหตุการเกิดโรค" [(ngModel)]="input.cause" autocomplete="off">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="form">
+    <input matInput  placeholder="วิธีรักษา" [(ngModel)]="input.remedy" autocomplete="off">
+  </mat-form-field>
+  <br>
+  <div>
+    <button mat-raised-button (click)="diseases()" color="primary" >ยืนยัน</button>
+  </div>
+</div>
+<div class="footerdisease">
+  <mat-card class="diseasecenter" ><h2>ค้นหาด้วยชื่อโรค  <mat-icon matSuffix>search</mat-icon></h2>
+    <br>
+    <mat-form-field >
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+    </mat-form-field>
+
+  </mat-card>
+
+
+
+  <table mat-table [dataSource]="dataSourceDisease" class="mat-elevation-z8">
+
+    <!-- five diseaseName -->
+    <ng-container matColumnDef="diseaseName">
+      <th mat-header-cell *matHeaderCellDef> ชื่อโรค </th>
+      <td mat-cell *matCellDef="let element"> {{element.diseaseName}} </td>
+    </ng-container>
+
+    <!-- typeDiseaseName -->
+    <ng-container matColumnDef="typeDiseaseName">
+      <th mat-header-cell *matHeaderCellDef> ประเภทของโรค </th>
+      <td mat-cell *matCellDef="let element"> {{element.typedisease.typeDiseaseName}} </td>
+    </ng-container>
+
+    <!--  populationRate -->
+    <ng-container matColumnDef="populationRate">
+      <th mat-header-cell *matHeaderCellDef> Rate ประชากรที่เป็นโรค (ต่อปี) </th>
+      <td mat-cell *matCellDef="let element"> {{element.peopledisease.populationRate}} </td>
+    </ng-container>
+
+    <!--  symptom -->
+    <ng-container matColumnDef="symptom">
+      <th mat-header-cell *matHeaderCellDef>อาการตอนเป็นโรค </th>
+      <td mat-cell *matCellDef="let element"> {{element.symptom}} </td>
+    </ng-container>
+
+    <!--  remedy -->
+    <ng-container matColumnDef="remedy">
+      <th mat-header-cell *matHeaderCellDef>วิธีการรักษา </th>
+      <td mat-cell *matCellDef="let element"> {{element.remedy}} </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <br>
+</div>
+

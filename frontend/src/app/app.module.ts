@@ -65,6 +65,7 @@ import { TreatmentHistoryComponent } from './treatment-history/treatment-history
 import { AddMidicineComponent } from './add-midicine/add-midicine.component';
 import { EditMidicineComponent } from './edit-midicine/edit-midicine.component';
 import { AcceptToUserComponent,Sheet,Sheetq } from './accept-to-user/accept-to-user.component';
+import { DiseaseComponent,Success } from './disease/disease.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,8 @@ import { AcceptToUserComponent,Sheet,Sheetq } from './accept-to-user/accept-to-u
     AcceptToUserComponent,
     Sheet,
     Sheetq,
+    Success,
+    DiseaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,7 +140,7 @@ import { AcceptToUserComponent,Sheet,Sheetq } from './accept-to-user/accept-to-u
     MatDialogModule
   ],
   providers: [AuthService, AuthGuard,Opensheet,GoldcardService,AlertService],
-  entryComponents: [SheetComponent,Opensheet,EditMidicineComponent,Sheet,Sheetq],
+  entryComponents: [SheetComponent,Opensheet,EditMidicineComponent,Sheet,Sheetq,Success],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

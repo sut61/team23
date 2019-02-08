@@ -60,6 +60,11 @@ getOfficer(): Observable<any> {
   getAccepted(): Observable<any> {
       return this.http.get('//localhost:8080/Accepted');
     }
-
+ getTypeDisease(): Observable<any> {
+    return this.http.get('//localhost:8080/TypeDisease');
+  }
+ getPeopleDisease(): Observable<any> {
+    return this.http.get('//localhost:8080/PeopleDisease');
+  }
 
 }
