@@ -31,7 +31,7 @@
   <!-- ================================  -->
   <mat-form-field class="formcenter">
     <mat-select placeholder="ประเภท" [(ngModel)]="select.typeofpub">
-      <mat-option *ngFor="let Tpubz of TypeOfPublicz" [value]="Tpubz.typePubName">
+      <mat-option *ngFor="let Tpubz of typeofpub" [value]="Tpubz.typePubName">
         {{Tpubz.typePubName}}
       </mat-option>
     </mat-select>
