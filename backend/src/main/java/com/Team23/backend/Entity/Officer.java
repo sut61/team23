@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Data
@@ -19,17 +22,15 @@ public class Officer {
         @SequenceGenerator(name="No_Off",sequenceName="No_Off")
         @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="No_Off")
         @Column(name = "No")
-        private @NonNull Long idOfficer;
-        //private @NonNull String Name;
-        private @NonNull String officerName;
-        private @NonNull String callNumber;
-
-        private @NonNull String userName;
-        private @NonNull String passWord;
+        private @NotNull                                Long   idOfficer;
+        private @NotNull                                String officerName;
+        private @NotNull    @Size(min = 5 , max = 40)   String userName;
+        private @NotNull    @Size(min = 4 , max = 20)   String passWord;
+        private @NotNull    @Pattern(regexp = "\\d+")   String callNumber;
         public Officer(String Name, String userName, String passWord ,String callNumber){
-            this.officerName = Name;
-            this.userName = userName;
-            this.passWord = passWord;
-            this.callNumber = callNumber;
+            this.officerName     = Name;
+            this.userName        = userName;
+            this.passWord        = passWord;
+            this.callNumber      = callNumber;
         }
 }

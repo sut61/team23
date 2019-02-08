@@ -19,18 +19,18 @@ public class Card {
     @SequenceGenerator(name="No_Card",sequenceName="No_Card")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="No_Card")
     @Column(name = "No")
-    private  @NotNull Long Idcard;
-    private  @NotNull String cardcord;
-    private  @NotNull LocalDate date;
-    private  @NotNull @ManyToOne
-    AcceptToUser acceptToUser;
-    private  @NotNull @ManyToOne Expenses expenses;
-    private  @NonNull String comment;
+    private  @NotNull              Long         Idcard;
+    private  @NotNull              String       cardcord;
+    private  @NotNull              LocalDate    date;
+    private  @NonNull              String       comment;
+    private  @NotNull @ManyToOne   AcceptToUser acceptToUser;
+    private  @NotNull @ManyToOne   Expenses     expenses;
+
     public Card(String cardcord, LocalDate date, AcceptToUser acceptToUser, Expenses expenses, String comment){
-        this.acceptToUser = acceptToUser;
-        this.cardcord = cardcord;
-        this.date = date;
-        this.expenses = expenses;
-        this.comment = comment;
+        this.acceptToUser    = acceptToUser;
+        this.cardcord        = cardcord;
+        this.date            = date;
+        this.expenses        = expenses;
+        this.comment         = comment;
     }
 }
