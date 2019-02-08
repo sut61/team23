@@ -57,6 +57,8 @@ public class BackendApplication  {
 			, MemberRepository memberRepository
 			, StatusRepository statusRepository
 			, AcceptToUserRepository acceptToUserRepository
+			, TypeDiseaseRepository typeDiseaseRepository
+			, PeopleDiseaseRepository	peopleDiseaseRepository
 
 	) throws Exception {
 
@@ -101,37 +103,73 @@ public class BackendApplication  {
 				officerRepository.save(officer);
 
 			});
-			Officer officerid1 = new Officer("Kanathip Poungtham", "user1","0","0888888888");
-			Officer officerid2 = new Officer("Pichakorn Lohanut", "user2","0","0812345678");
-			Officer officerid3 = new Officer("Pantamit Sombaddee", "user3","0","0912345687");
-			officerRepository.save(officerid1);
-			officerRepository.save(officerid2);
-			officerRepository.save(officerid3);
-			DocumentWork doc1 = new DocumentWork("10001","รับรอง-เพิ่ม-โรค-ปอด#1","https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
-			DocumentWork doc2 = new DocumentWork("10002","รับรอง-เพิ่ม-โรค-หัวใจ#1","https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
-			DocumentWork doc3 = new DocumentWork("10003","รับรอง-เพิ่ม-โรค-ประสาท#1","https://www.honestdocs.co/psychosis-and-neurosis-difference");
-			DocumentWork doc4 = new DocumentWork("10004","รับรอง-เพิ่ม-โรค-มะเร็งตับอ่อน#1","https://www.honestdocs.co/what-is-pancreatic-cancer");
-			DocumentWork doc5 = new DocumentWork("10005","รับรอง-เพิ่ม-โรค-โรคถุงลมปอดโป่งพอง#1","https://www.honestdocs.co/emphysema-diagnose");
-			DocumentWork doc6 = new DocumentWork("10006","รับรอง-เพิ่ม-โรค-กระดูกพรุน#1","https://www.honestdocs.co/pneumonia");
-			DocumentWork doc7 = new DocumentWork("10007","รับรอง-เพิ่ม-โรค-ข้อเสื่อม#1","https://www.honestdocs.co/drugs");
-			DocumentWork doc8 = new DocumentWork("10008","รับรอง-เพิ่ม-โรค-กล้ามเนื้ออ่อนแรง#1","https://www.honestdocs.co/what-is-myasthenia-gravis");
-			DocumentWork doc9 = new DocumentWork("10009","รับรอง-เพิ่ม-โรค-ต้อกระจก#1","https://www.honestdocs.co/cataracts");
-			DocumentWork doc10 = new DocumentWork("10010","รับรอง-เพิ่ม-โรค-อาหารเป็นพิษ#1","https://www.honestdocs.co/food-poisoning");
-			DocumentWork doc11 = new DocumentWork("10011","รับรอง-เพิ่ม-โรค-กรดไหลย้อน#1","https://www.bumrungrad.com/th/digestive-diseases-gi-center-treatment-bangkok-thailand/conditions/gerd-gastroesophageal-reflux-disease");
-			DocumentWork doc12 = new DocumentWork("10012","รับรอง-เพิ่ม-โรค-โรคเบาหวาน#1","https://www.honestdocs.co/diabetes-symptoms-diagnosis-management-treatment");
-			DocumentWork doc13 = new DocumentWork("10013","รับรอง-เพิ่ม-โรค-โรคความดันโลหิตสูง#1","https://www.honestdocs.co/high-blood-pressure-in-adult-males");
-			DocumentWork doc14 = new DocumentWork("10014","รับรอง-เพิ่ม-โรค-ไขมันในเลือดสูง#1","http://www.thaihealth.or.th/blog/myblog/topic/961/");
-			DocumentWork doc15 = new DocumentWork("10015","รับรอง-เพิ่ม-โรค-โรคหลอดเลือดหัวใจตีบ#1","https://www.bangkokhospital.com/hearthospital/th/heart-health-info/heart-disease-and-treatment/72/full_detail/disease");
-			DocumentWork doc16 = new DocumentWork("10016","รับรอง-เพิ่ม-โรค-ถุงลมโป่งพอง#1","https://www.honestdocs.co/copd/emphysema");
-			DocumentWork doc17 = new DocumentWork("10017","รับรอง-เพิ่ม-โรค-ธาลัสซีเมีย#1","https://www.honestdocs.co/hematologic-lymphatic/thalassemia-disease");
-			DocumentWork doc18 = new DocumentWork("10018","รับรอง-เพิ่ม-โรค-กรวยไตอักเสบ#1","https://www.honestdocs.co/what-is-pyelonephritis");
-			DocumentWork doc19 = new DocumentWork("10019","รับรอง-เพิ่ม-โรค-ไข้เลือดออก#1","https://www.honestdocs.co/dengue-symptoms-and-prevention");
-			DocumentWork doc20 = new DocumentWork("10020","รับรอง-เพิ่ม-โรค-ปอดบวม#1","https://www.honestdocs.co/pneumonia");
-			documentRepositoty.save(doc1);	documentRepositoty.save(doc2);	documentRepositoty.save(doc3);	documentRepositoty.save(doc4);
-			documentRepositoty.save(doc5);	documentRepositoty.save(doc6);	documentRepositoty.save(doc7);	documentRepositoty.save(doc8);
-			documentRepositoty.save(doc9);	documentRepositoty.save(doc10);	documentRepositoty.save(doc11);	documentRepositoty.save(doc12);
-			documentRepositoty.save(doc13);	documentRepositoty.save(doc14);	documentRepositoty.save(doc15);	documentRepositoty.save(doc16);
-			documentRepositoty.save(doc17);	documentRepositoty.save(doc18);	documentRepositoty.save(doc19);	documentRepositoty.save(doc20);
+			Stream.of("Kanathip Poungtham", "Pichakorn Lohanut","Pantamit Sombaddee").forEach(officerName -> {
+				Officer officer = new Officer();
+
+				officer.setOfficerName(officerName);
+				if(officerName == "Kanathip Poungtham"){
+					officer.setCallNumber("0888888888");
+					officer.setUserName("user1");
+					officer.setPassWord("0");
+					officerRepository.save(officer);
+				} else if(officerName == "Pichakorn Lohanut"){
+					officer.setCallNumber("0812345678");
+					officer.setUserName("user2");
+					officer.setPassWord("0");
+					officerRepository.save(officer);
+				}else if(officerName == "Pantamit Sombaddee"){
+					officer.setCallNumber("0912345687");
+					officer.setUserName("user3");
+					officer.setPassWord("0");
+					officerRepository.save(officer);
+				}
+			});
+			Stream.of("10001", "10002","10003","10004", "10005","10006","10007", "10008","10009","100010").forEach(numberDocument -> {
+				DocumentWork documentWork = new DocumentWork();
+
+				documentWork.setNumberDocument(numberDocument);
+				if(numberDocument == "10001"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ปอด#1");
+					documentWork.setUrl("https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
+					documentRepositoty.save(documentWork);
+				} else if(numberDocument == "10002"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-หัวใจ#1");
+					documentWork.setUrl("https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
+					documentRepositoty.save(documentWork);
+				}else if(numberDocument == "10003"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ประสาท#1");
+					documentWork.setUrl("https://www.honestdocs.co/psychosis-and-neurosis-difference");
+					documentRepositoty.save(documentWork);
+				} else if(numberDocument == "10004"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-มะเร็งตับอ่อน#1");
+					documentWork.setUrl("https://www.honestdocs.co/what-is-pancreatic-cancer");
+					documentRepositoty.save(documentWork);
+				}else if(numberDocument == "10005"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-โรคถุงลมปอดโป่งพอง#1");
+					documentWork.setUrl("https://www.honestdocs.co/emphysema-diagnose");
+					documentRepositoty.save(documentWork);
+				}else if(numberDocument == "10006"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-กระดูกพรุน#1");
+					documentWork.setUrl("https://www.honestdocs.co/pneumonia");
+					documentRepositoty.save(documentWork);
+				}else if(numberDocument == "10007"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ข้อเสื่อม#1");
+					documentWork.setUrl("https://www.honestdocs.co/drugs");
+					documentRepositoty.save(documentWork);
+				} else if(numberDocument == "10008"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-กล้ามเนื้ออ่อนแรง#1");
+					documentWork.setUrl("https://www.honestdocs.co/what-is-myasthenia-gravis");
+					documentRepositoty.save(documentWork);
+				}else if(numberDocument == "10009"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ต้อกระจก#1");
+					documentWork.setUrl("https://www.honestdocs.co/cataracts");
+					documentRepositoty.save(documentWork);
+				}else if(numberDocument == "100010"){
+					documentWork.setTitle("รับรอง-เพิ่ม-โรค-อาหารเป็นพิษ#1");
+					documentWork.setUrl("https://www.honestdocs.co/food-poisoning");
+					documentRepositoty.save(documentWork);
+				}
+			});
 
 			Stream.of("บัตรทอง","รับราชการ").forEach(rightsTypeName -> {
 				RightsType rightstype = new RightsType();
@@ -376,6 +414,45 @@ public class BackendApplication  {
 
 				}
 					acceptToUserRepository.save(acceptToUserId);
+			});
+
+			Stream.of("โรคติดต่อหรือโรคติดเชื้อ", "โรคไม่ติดต่อหรือไม่ติดเชื้อ").forEach(typeDiseaseName -> {
+				TypeDisease typeDisease = new TypeDisease();
+				typeDisease.setTypeDiseaseName(typeDiseaseName);
+				typeDiseaseRepository.save(typeDisease);
+			});
+
+			Stream.of("200-300 คน", "300-400 คน", "400-500 คน", "500-600 คน", "600-700 คน", "700-800 คน", "800-900 คน", "900-1000 คน").forEach(populationRate -> {
+				PeopleDisease peopleDisease = new PeopleDisease();
+				peopleDisease.setPopulationRate(populationRate);
+				peopleDiseaseRepository.save(peopleDisease);
+			});
+
+			Stream.of("โรคเบาหวาน", "โรคความดันโลหิตสูง").forEach(diseaseName -> {
+				Disease disease = new Disease();
+				TypeDisease typeDiseaseid = new TypeDisease();
+				PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+				disease.setDiseaseName(diseaseName);
+				if(diseaseName == "โรคเบาหวาน"){
+					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+					disease.setTypedisease(typeDiseaseid);
+					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+					disease.setPeopledisease(peopleDiseaseid);
+					disease.setSymptom("หิวน้ำบ่อย");
+					disease.setCause("อ้วนหรือน้ำหนักเกินมาตรฐาน");
+					disease.setRemedy("ลดน้ำตาล");
+					diseaseRepository.save(disease);
+				} else if(diseaseName == "โรคความดันโลหิตสูง"){
+					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+					disease.setTypedisease(typeDiseaseid);
+					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
+					disease.setPeopledisease(peopleDiseaseid);
+					disease.setSymptom("เหนื่อยง่าย");
+					disease.setCause("นอนน้อย พักผ่อนไม่เพียงพอ ");
+					disease.setRemedy("คงน้ำหนักร่างกายให้เหมาะสม");
+					diseaseRepository.save(disease);
+				}
 			});
 			System.out.println("Spring Boot Pass");
 
