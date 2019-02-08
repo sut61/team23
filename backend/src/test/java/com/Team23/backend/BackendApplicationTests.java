@@ -35,13 +35,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 @DataJpaTest
 public class BackendApplicationTests {
 
-	@Autowired
-	private DocumentRepositoty documentRepositoty;
-	private DiseaseRepository diseaseRepository;
-	private OfficerRepository officerRepository;
-	private EligibleDiseasesRepositoty eligibleDiseasesRepositoty;
-	@Autowired
-	private TestEntityManager entityManager;
+	@Autowired private DocumentRepositoty documentRepositoty;
+	@Autowired private DiseaseRepository diseaseRepository;
+	@Autowired private OfficerRepository officerRepository;
+	@Autowired private EligibleDiseasesRepositoty eligibleDiseasesRepositoty;
+	@Autowired private CardRepository cardRepository;
+	@Autowired private ExpensesRepository expensesRepository;
+	@Autowired private AcceptToUserRepository acceptToUserRepository;
+	@Autowired private TestEntityManager entityManager;
 
 	private Validator validator;
 
@@ -54,10 +55,11 @@ public class BackendApplicationTests {
 	/////////////    EligibleDiseases    /////////////
 	@Test
 	public void test_EligibleDiseases_All_Pass() {
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"El0123456789");
 
-
-		EligibleDiseases eligibleDiseases = new EligibleDiseases();
-		eligibleDiseases.setEligibleDiseasesCode("El0123456789");
 
 		try {
 			entityManager.persist(eligibleDiseases);
@@ -80,20 +82,17 @@ public class BackendApplicationTests {
 	@Test
 	public void test_EligibleDiseases_Unique() {
 //(expected=javax.persistence.PersistenceException.class)
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases1 = new EligibleDiseases(disease,documentWork,officer,"El0123456789");
 
-		EligibleDiseases eligibleDiseases1 = new EligibleDiseases();
-
-
-		eligibleDiseases1.setEligibleDiseasesCode("El012345");
 		entityManager.persist(eligibleDiseases1);
 		entityManager.flush();
 
-
-
 		try {
-			EligibleDiseases eligibleDiseases2 = new EligibleDiseases();
-			eligibleDiseases2.setEligibleDiseasesCode("El012345");
-			entityManager.persist(eligibleDiseases2);
+			EligibleDiseases eligibleDiseases2 = new EligibleDiseases(disease,documentWork,officer,"El0123456789");
+					entityManager.persist(eligibleDiseases2);
 			entityManager.flush();
 			fail("Should not pass to this line");
 
@@ -105,22 +104,16 @@ public class BackendApplicationTests {
 
 			System.out.println(color1+e);
 			System.out.println("-----------------------------------------------------" +
-					"--------------------------------------------- test EligibleDiseases Unique Passed !! " +
+					"--------------------------------------------- test EligibleDiseases Unique it Passed !! " +
 					"--------------------------------------------------------------------------------------------------"+colorwhite);
 		}
 	}
 	@Test
-	public void test_EligibleDiseases_CannotBe_Null() {
-//		Disease disease = new Disease("1");
-//		Officer officer = new Officer("1","1","1","1");
-//		DocumentWork documentWork = new DocumentWork("1","1","1");
-//		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"1");
-//			eligibleDiseases.setEligibleDiseasesCode(null);
-//			eligibleDiseases.setDocumentWork(documentWork);
-//			eligibleDiseases.setOfficer(officer);
-//			eligibleDiseases.setDisease(disease);
-		EligibleDiseases eligibleDiseases = new EligibleDiseases();
-		eligibleDiseases.setEligibleDiseasesCode(null);
+	public void test_EligibleDiseases_Disease_Null() {
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(null,documentWork,officer,"El0123456789");
 		try {
 			entityManager.persist(eligibleDiseases);
 			entityManager.flush();
@@ -134,18 +127,19 @@ public class BackendApplicationTests {
 			String colorwhite = "\u001b[37m";
 			System.out.println(color1+e.getConstraintViolations());
 			System.out.println("--------------------------------------------------" +
-					"------------------------------------------------ test EligibleDiseases Null Size Passed !! " +
+					"------------------------------------------------ test EligibleDiseases Disease Null it Passed !! " +
 					"--------------------------------------------------------------------------------------------------"+colorwhite);
 
 
 		}
 	}
 	@Test
-	public void test_EligibleDiseases_Pattern() {
+	public void test_EligibleDiseases_Document_Null() {
 
-
-		EligibleDiseases eligibleDiseases = new EligibleDiseases();
-		eligibleDiseases.setEligibleDiseasesCode("Pattern Must not pass !!");
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,null,officer,"El0123456789");
 
 		try {
 			entityManager.persist(eligibleDiseases);
@@ -162,18 +156,20 @@ public class BackendApplicationTests {
 			System.out.println(color1+e.getConstraintViolations());
 
 			System.out.println("--------------------------------------------------" +
-					"------------------------------------------------ test EligibleDiseases Pattern Passed !! " +
+					"------------------------------------------------ test EligibleDiseases Document Null it Passed !! " +
 					"--------------------------------------------------------------------------------------------------"+colorwhite);
 
 
 		}
 	}
 	@Test
-	public void test_EligibleDiseases_Min_Size() {
+	public void test_EligibleDiseases_Officer_Null() {
 
 
-		EligibleDiseases eligibleDiseases = new EligibleDiseases();
-		eligibleDiseases.setEligibleDiseasesCode("El3");
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,null,"El0123456789");
 
 
 		try {
@@ -185,21 +181,22 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			String color1 = "\u001b[32m";
+			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
 			System.out.println(color1+e.getConstraintViolations());
 			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test EligibleDiseases Min Size Passed !! " +
+					"--------------------------------------------- test EligibleDiseases Officer Null it Passed !! " +
 					"--------------------------------------------------------------------------------------------------"+colorwhite);
 		}
 
 	}
 	@Test
-	public void test_EligibleDiseases_Max_Size() {
+	public void test_EligibleDiseases_Code_Max_Size() {
 
-
-		EligibleDiseases eligibleDiseases = new EligibleDiseases();
-		eligibleDiseases.setEligibleDiseasesCode("Elig123456789012345678901234567890");
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"El01234567892222222222222222222222222222222222222222222");
 
 
 		try {
@@ -215,7 +212,34 @@ public class BackendApplicationTests {
 			String colorwhite = "\u001b[37m";
 			System.out.println(color1+e.getConstraintViolations());
 			System.out.println(color1+"--------------------------------------------------------" +
-					"------------------------------------------ test EligibleDiseases Max Size Passed !! " +
+					"------------------------------------------ test EligibleDiseases Code Max Size Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+		}
+
+	}
+	@Test
+	public void test_EligibleDiseases_Code_Min_Size() {
+
+		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
+		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"El1");
+
+
+		try {
+			entityManager.persist(eligibleDiseases);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[32m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e.getConstraintViolations());
+			System.out.println(color1+"--------------------------------------------------------" +
+					"------------------------------------------ test EligibleDiseases Code Min Size Passed !! " +
 					"--------------------------------------------------------------------------------------------------"+colorwhite);
 		}
 
@@ -574,5 +598,290 @@ public class BackendApplicationTests {
 
 		}
 	}
+	@Test
+	public void test_Expenses_Comment_Max_Size() {
+		Expenses expenses = new Expenses("Expenses","220","this is comment Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+
+
+		try {
+			entityManager.persist(expenses);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[34m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+"--------------------------------------------------" +
+					"------------------------------------------------ test Expenses Comment Max Size is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+
+		}
+	}
+	@Test
+	public void test_Expenses_Comment_Min_Size() {
+		Expenses expenses = new Expenses("Expenses","220","min");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+
+
+		try {
+			entityManager.persist(expenses);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[32m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+"--------------------------------------------------" +
+					"------------------------------------------------ test Expenses Comment Min Size is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+
+		}
+	}
+	@Test
+	public void test_Expenses_Date_Null() {
+		Expenses expenses = new Expenses("Expenses","220","comment");
+		expenses.setDate(null);
+
+
+		try {
+			entityManager.persist(expenses);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+"--------------------------------------------------" +
+					"------------------------------------------------ test Expenses Date Null is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+
+		}
+	}
+	@Test
+	public void test_Expenses_Name_Null() {
+		Expenses expenses = new Expenses(null,"220","comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+
+
+		try {
+			entityManager.persist(expenses);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+"--------------------------------------------------" +
+					"------------------------------------------------ test Expenses Name Null is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+
+		}
+	}
+
+	/////////////    Card    /////////////
+	@Test
+	public void test_Card_All_Pass() {
+		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
+
+		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+		expensesRepository.save(expenses);
+		Card card = new Card("card12345",acceptToUser,expenses,"commenttt");
+		card.setDate(date);
+
+
+		try {
+			entityManager.persist(card);
+			entityManager.flush();
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+"--------------------------------------------------" +
+					"------------------------------------------------ test Card All Pass is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e+colorwhite);
+			fail(" Should Fail");
+
+		}
+	}
+	@Test
+	public void test_Card_Cardcord_Pattern() {
+		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
+		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+		expensesRepository.save(expenses);
+		Card card = new Card("This is not Card pattern",acceptToUser,expenses,"commenttt");
+		card.setDate(date);
+
+
+		try {
+			entityManager.persist(card);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e+"--------------------------------------------------" +
+					"------------------------------------------------ test Card Cardcord Pattern is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+		}
+	}
+	@Test
+	public void test_Card_Date_Null() {
+		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
+		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+		expensesRepository.save(expenses);
+		Card card = new Card("card code",acceptToUser,expenses,"commenttt");
+		card.setDate(null);
+
+
+		try {
+			entityManager.persist(card);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e+"--------------------------------------------------" +
+					"------------------------------------------------ test Card Date Null is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+		}
+	}
+	@Test
+	public void test_Card_Comment_Min_Size() {
+		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
+		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+		expensesRepository.save(expenses);
+		Card card = new Card("card code",acceptToUser,expenses,"min");
+		card.setDate(date);
+
+
+		try {
+			entityManager.persist(card);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[32m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e+"--------------------------------------------------" +
+					"------------------------------------------------ test Card Comment min size is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+		}
+	}
+	@Test
+	public void test_Card_Comment_Max_Size() {
+		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
+		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+		expensesRepository.save(expenses);
+		Card card = new Card("card code",acceptToUser,expenses,"Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		card.setDate(date);
+
+
+		try {
+			entityManager.persist(card);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[34m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e+"--------------------------------------------------" +
+					"------------------------------------------------ test Card Comment max size is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+		}
+	}
+	@Test
+	public void test_Card_Expensese_Null() {
+		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
+		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "08:02:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		expenses.setDate(date);
+		expensesRepository.save(expenses);
+		Card card = new Card("card code",acceptToUser,null,"This is comment true");
+		card.setDate(date);
+
+
+		try {
+			entityManager.persist(card);
+			entityManager.flush();
+			fail(" Should Fail");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			String color1 = "\u001b[33m";
+			String colorwhite = "\u001b[37m";
+			System.out.println(color1+e+"--------------------------------------------------" +
+					"------------------------------------------------ test Card Expenses Null is Passed !! " +
+					"--------------------------------------------------------------------------------------------------"+colorwhite);
+		}
+	}
+
+
+
 }
 
