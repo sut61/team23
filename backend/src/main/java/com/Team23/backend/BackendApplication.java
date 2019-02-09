@@ -67,6 +67,7 @@ public class BackendApplication  {
 			, TypeOfPubliczRepository typeOfPubliczRepository
 			, MedicalInstrumentRepository medicalInstrumentRepository
 			, UseabilityRepository useabilityRepository
+			, MedicalSuppliesRepository medicalSuppliesRepository
 	) throws Exception {
 
 		return args -> {
@@ -662,6 +663,71 @@ public class BackendApplication  {
 				}
 				expensesRepository.save(expenses);
 
+			});
+
+
+			Stream.of("Cogblunt","HotSale","sterile").forEach(medicalSuppliesName ->{
+
+				MedicalSupplies      medicalSupplies   = new MedicalSupplies();
+				MedicalInstrument    medicalInstrument = new MedicalInstrument();
+				Useability           useability        = new Useability();
+
+				if(medicalSuppliesName == "Cogblunt"){
+					medicalSupplies.setCodeNumber("C12345");
+					medicalSupplies.setModelNumber("Mono");
+					medicalSupplies.setMedicalsuppliesName("Cogblunt");
+					medicalSupplies.setBrandName("HIPREETY");
+					medicalSupplies.setProperties("Medical Adhesive");
+
+					medicalInstrument = medicalInstrumentRepository.findByMedicalInstrumentName("วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม");
+					medicalSupplies.setMedicalInstrument(medicalInstrument);
+
+					useability = useabilityRepository.findByuseabilityName("ใช้เฉพาะทาง");
+					medicalSupplies.setUseability(useability);
+
+					medicalSuppliesRepository.save(medicalSupplies);
+					System.out.println(medicalInstrument);
+					System.out.println(useability);
+					
+				}
+				else if(medicalSuppliesName == "HotSale"){
+					medicalSupplies.setCodeNumber("C12346");
+					medicalSupplies.setModelNumber("SU001");
+					medicalSupplies.setMedicalsuppliesName("HotSale");
+					medicalSupplies.setBrandName("suerful");
+					medicalSupplies.setProperties("Suture Material");
+
+					medicalInstrument = medicalInstrumentRepository.findByMedicalInstrumentName("อุปกรณ์การแพทย์");
+					medicalSupplies.setMedicalInstrument(medicalInstrument);
+
+					useability = useabilityRepository.findByuseabilityName("ใช้ทั่วไป");
+					medicalSupplies.setUseability(useability);
+
+					medicalSuppliesRepository.save(medicalSupplies);
+
+					System.out.println(medicalInstrument);
+					System.out.println(useability);
+
+				}
+				else if(medicalSuppliesName == "sterile"){
+					medicalSupplies.setCodeNumber("C12347");
+					medicalSupplies.setModelNumber("Base");
+					medicalSupplies.setMedicalsuppliesName("sterile");
+					medicalSupplies.setBrandName("KLF");
+					medicalSupplies.setProperties("vaginal speculum");
+
+					medicalInstrument = medicalInstrumentRepository.findByMedicalInstrumentName("วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม");
+					medicalSupplies.setMedicalInstrument(medicalInstrument);
+
+					
+					useability = useabilityRepository.findByuseabilityName("ใช้เฉพาะทาง");
+					medicalSupplies.setUseability(useability);
+
+					medicalSuppliesRepository.save(medicalSupplies);
+
+					System.out.println(medicalInstrument);
+					System.out.println(useability);
+				}
 			});
 
 
