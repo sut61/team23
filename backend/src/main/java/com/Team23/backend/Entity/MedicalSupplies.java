@@ -23,18 +23,20 @@ public class MedicalSupplies {
     private Long medicalsuppliesId;
 
     @Column(unique = true)
+    @Pattern(regexp="C\\d{5}",message="codeNumber @Pattern(regexp=C\\d{5}")
     private String codeNumber;
 
+    @Size(min=1,max=5 ,message="medicalsuppliesName should not have alphabet at less 1 alphabet and than 5 alphabet")
     @Column(unique = true)
     private String modelNumber;
 
-    @Pattern(regexp="[a-zA-Z]*|[ก-์]" ,message="medicalsuppliesName No have special character")
+    @Pattern(regexp="[a-zA-Z]*|[ก-์]*" ,message="medicalsuppliesName No have special character")
     @Size(min=2,max=30,message="medicalsuppliesName should not have alphabet at less 2 alphabet and than 30 alphabet")
     @NotNull(message="medicalsuppliesName must not be null to be valid")
     @Column(unique = true)
     private String medicalsuppliesName;
 
-    @Size(min=2,max=30,message="medicalsuppliesName should not have alphabet at less 2 alphabet and than 30 alphabet")
+    @Size(min=2,max=10,message="medicalsuppliesName should not have alphabet at less 2 alphabet and than 10 alphabet")
     private String brandName;
 
     @Size(min=2,max=30,message="medicalsuppliesName should not have alphabet at less 2 alphabet and than 30 alphabet")
@@ -49,11 +51,16 @@ public class MedicalSupplies {
     @JoinColumn(name="useabilityId")
     private Useability useability;
 
-    public MedicalSupplies(){}
+
     public Long findById(long medicalsuppliesId){
         return this.medicalsuppliesId=medicalsuppliesId;
     }
     public String deleteByMedicalsuppliesName(String medicalsuppliesName){
         return this.medicalsuppliesName=medicalsuppliesName;
     }
+
+    public String findBycodeNumber(String codeNumber){
+        return this.codeNumber=codeNumber;
+    }
+    
 }
