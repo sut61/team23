@@ -2569,5 +2569,486 @@ public class BackendApplicationTests {
 			System.out.println("\n\n------------------------------------------------------------------Code Unique End Exception--------------------------------------------------------------------\n\n");
 		}
 	}
+	//1.33
+	@Test
+	public void Publicz_True_All() {
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suranaree");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			//fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Publicz_True_All at Publicz ------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//2.34
+	@Test
+	public void Publicz_PubliczHead_isShortSize() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suran");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isShortSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	3.35
+	@Test
+	public void Publicz_PubliczHead_isLongSize() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("SuranareeUniversity Thailand");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isLongSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	4.36
+	@Test
+	public void Publicz_PublicizeDetail_FristBlank() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suranaree");
+		publicz.setPublicizeDetail(" SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PublicizeDetail_FristBlank at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//5.37
+	@Test
+	public void Publicz_PubliczHead_isNull() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead(null);
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isNull at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	6.38
+	@Test
+	public void Publicz_PubliczHead_Unique() {
+
+		Publicz   publicz1    = new Publicz();
+
+		publicz1.setPubliczHead("WEERAPAT");
+		publicz1.setPublicizeDetail("SuranareeUniversity");
+		publicz1.setCall("0883120905");
+		publicz1.setEmail("oat@hotmail.com");
+
+		entityManager.persist(publicz1);
+		entityManager.flush();
+
+		Publicz   publicz2    = new Publicz();
+
+		publicz2.setPubliczHead("WEERAPAT");
+		publicz2.setPublicizeDetail("SuranareeUniversity");
+		publicz2.setCall("0883120905");
+		publicz2.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_Unique at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(e);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//7.39
+	@Test
+	public void Publicz_Email_isTrue() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suranaree");
+		publicz.setPublicizeDetail(" SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_Email_isTrue at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	8.40
+	@Test
+	public void Publicz_Email_isNotTrue() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suranaree");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("0883120905");
+		publicz.setEmail("oat@hotmail.co");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_Email_isNotTrue at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//9.41
+	@Test
+	public void Publicz_PhoneNotTrue_pattern() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Surdfhssdfg");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("3283120905");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue_pattern at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	10.42
+	@Test
+	public void Publicz_PhoneNotTrue_sSize() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suranaree");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("08831209");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue_sSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	11.43
+	@Test
+	public void Publicz_PhoneNotTrue__lSize() {
+
+		Publicz   publicz    = new Publicz();
+
+		publicz.setPubliczHead("Suranaree");
+		publicz.setPublicizeDetail("SuranareeUniversity");
+		publicz.setCall("0832564");
+		publicz.setEmail("oat@hotmail.com");
+
+		try {
+			entityManager.persist(publicz);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue__lSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	12.44
+	@Test
+	public void Merber_MemberName_NotTrue_isNull() {
+
+		Member   member = new Member();
+
+		member.setMemberName(null);
+
+		try {
+			entityManager.persist(member);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Merber_MemberName_NotTrue_isNull at Member -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	13.45
+	@Test
+	public void Member_True_All() {
+
+		Member   member    = new Member();
+
+		member.setMemberName("Suranaree");
+
+		try {
+			entityManager.persist(member);
+			entityManager.flush();
+
+			//fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at Member ------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	14.46
+	@Test
+	public void Member_MemberName_Unique() {
+
+		Member   member1    = new Member();
+
+		member1.setMemberName("WEERAPAT11");
+
+		entityManager.persist(member1);
+		entityManager.flush();
+
+		Member   member2    = new Member();
+
+		member2.setMemberName("WEERAPAT11");
+
+		try {
+			entityManager.persist(member2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at Member -----------------------------------------------------------------------\n\n");
+			System.out.println(e);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	15.47
+	@Test
+	public void TypeOfPublicz_TypePubName_Unique() {
+
+		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+
+		typeOfPublicz1.setTypePubName("TypeA");
+
+		entityManager.persist(typeOfPublicz1);
+		entityManager.flush();
+
+		TypeOfPublicz   typeOfPublicz2    = new TypeOfPublicz();
+
+		typeOfPublicz2.setTypePubName("TypeA");
+
+		try {
+			entityManager.persist(typeOfPublicz2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(e);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	16.48
+	@Test
+	public void TypeOfPublicz_True_All() {
+
+		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+
+		typeOfPublicz1.setTypePubName("TypeA");
+
+		try {
+			entityManager.persist(typeOfPublicz1);
+			entityManager.flush();
+
+			//fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at TypeOfPublicz ------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	17.49
+	@Test
+	public void TypeOfPublicz_TypePubName_NotTrue_isNull() {
+
+		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+
+		typeOfPublicz1.setTypePubName(null);
+
+		try {
+			entityManager.persist(typeOfPublicz1);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Merber_MemberName_NotTrue_isNull at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	18.50
+	@Test
+	public void TypeOfPublicz_TypePubName_NotTrue_isLsize() {
+
+		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+
+		typeOfPublicz1.setTypePubName("123456789012345678901234567890");
+
+		try {
+			entityManager.persist(typeOfPublicz1);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue__lSize at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//	19.51
+	@Test
+	public void TypeOfPublicz_TypePubName_NotTrue_isSsize() {
+
+		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+
+		typeOfPublicz1.setTypePubName("1");
+
+		try {
+			entityManager.persist(typeOfPublicz1);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have TypeOfPublicz_TypePubName_NotTrue_isSSize at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
 }
 
