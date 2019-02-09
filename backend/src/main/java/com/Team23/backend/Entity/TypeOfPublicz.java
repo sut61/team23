@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
 @Data  // lombox จะสร้าง method getter setter ให้เอง
@@ -23,7 +24,6 @@ public class TypeOfPublicz {
     //private @NonNull String typePubName;
     @NotNull(message = "typePubName must not be null")
     @Column(name="typePubName",unique = true)
+    @Size(min = 2 ,max = 20)
     private  String typePubName;
-//    ----------------------------
-
 }
