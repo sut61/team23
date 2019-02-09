@@ -1,103 +1,158 @@
+
 <div class="cardaccept">
   <alert></alert>
-<div style="margin-left:30px;margin-bottom:0px;margin-top:0px">
-  <a>เลือกยืนยันผู้มาขอสิทธิ์ที่ตาราง</a>
-  <mat-form-field style="margin-left:30px;width:300px;margin-bottom:0px;margin-top:0px">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ค้นหาโดยใช้ Code" style="width:300px">
-  </mat-form-field>&nbsp;&nbsp;
-  <a class="right"> วันที่ยืนยัน : <b>{{CurrentDate | date:'fullDate' }}</b></a>
-</div>
-<div>
-  <mat-table [dataSource]="dataSource" style="border-radius:30px" class="table">
+  <div style="margin-left:30px;margin-bottom:0px;margin-top:0px">
+    <a>เลือกยืนยันผู้มาขอสิทธิ์ที่ตาราง</a>
+    <mat-form-field style="margin-left:30px;width:300px;margin-bottom:0px;margin-top:0px">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ค้นหาโดยใช้ Code" style="width:300px">
+    </mat-form-field>&nbsp;&nbsp;
+    <a class="right"> วันที่ยืนยัน : <b>{{CurrentDate | date:'fullDate' }}</b></a>
+  </div>
+  <div>
+    <mat-table [dataSource]="dataSource" style="border-radius:30px" class="table">
 
-    <ng-container matColumnDef="codeaccept">
-      <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.codeAccept}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="codeaccept">
+        <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.codeAccept}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="dateregis">
-      <mat-header-cell *matHeaderCellDef> DateRegis </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rightRegistration.dateregis}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="dateregis">
+        <mat-header-cell *matHeaderCellDef> DateRegis </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rightRegistration.dateregis}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="username" >
-    <mat-header-cell *matHeaderCellDef >Username</mat-header-cell>
-    <mat-cell *matCellDef="let element" > {{element.rightRegistration.username}} </mat-cell>
-  </ng-container>
+      <ng-container matColumnDef="username" >
+        <mat-header-cell *matHeaderCellDef >Username</mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.rightRegistration.username}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="name" >
-      <mat-header-cell *matHeaderCellDef > Name </mat-header-cell>
-      <mat-cell *matCellDef="let element" > {{element.rightRegistration.firstname}}&nbsp;&nbsp;&nbsp;&nbsp;{{element.rightRegistration.surname}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="name" >
+        <mat-header-cell *matHeaderCellDef > Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.rightRegistration.firstname}}&nbsp;&nbsp;&nbsp;&nbsp;{{element.rightRegistration.surname}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="tel">
-      <mat-header-cell *matHeaderCellDef > Phone </mat-header-cell>
-      <mat-cell *matCellDef="let element" > {{element.rightRegistration.tel}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="tel">
+        <mat-header-cell *matHeaderCellDef > Phone </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.rightRegistration.tel}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="personalcard">
-      <mat-header-cell *matHeaderCellDef > PersonalCard </mat-header-cell>
-      <mat-cell *matCellDef="let element" > {{element.rightRegistration.personalcard}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="personalcard">
+        <mat-header-cell *matHeaderCellDef > PersonalCard </mat-header-cell>
+        <mat-cell *matCellDef="let element" > {{element.rightRegistration.personalcard}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="provincename">
-      <mat-header-cell *matHeaderCellDef> Province </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rightRegistration.province.provinceName}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="provincename">
+        <mat-header-cell *matHeaderCellDef> Province </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rightRegistration.province.provinceName}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="hospitalname">
-      <mat-header-cell *matHeaderCellDef> Hospital </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rightRegistration.hospital.hospitalName}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="hospitalname">
+        <mat-header-cell *matHeaderCellDef> Hospital </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rightRegistration.hospital.hospitalName}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="rightstypename">
-      <mat-header-cell *matHeaderCellDef> RightType </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.rightRegistration.rightsType.rightsTypeName}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="rightstypename">
+        <mat-header-cell *matHeaderCellDef> RightType </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rightRegistration.rightsType.rightsTypeName}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status.statusName}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef> Select </mat-header-cell>
+        <mat-cell *matCellDef="let row" ><button  mat-raised-button color="primary" (click)="showuser(row)" >Select</button></mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns" style="margin:0px"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="showuser(row)"></mat-row>
 
-  </mat-table>
-  <mat-paginator [pageSizeOptions]="[3]" showFirstLastButtons class="table"></mat-paginator>
-</div>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status.statusName}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns" style="margin:0px"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[3]" showFirstLastButtons class="table"></mat-paginator>
+  </div>
 
   <mat-grid-list cols="10" rowHeight="3:1" style="margin-bottom:10px">
     <mat-grid-tile>Username : </mat-grid-tile>
-    <mat-grid-tile><b>{{table.username}}</b></mat-grid-tile>
+    <mat-grid-tile><b class="left">{{table.username}}</b></mat-grid-tile>
 
     <mat-grid-tile >Name : </mat-grid-tile>
-    <mat-grid-tile [colspan]="2"><b>{{table.firstname}}&nbsp;&nbsp;&nbsp;{{table.surname}}</b></mat-grid-tile>
+    <mat-grid-tile [colspan]="2"><b class="left">{{table.firstname}}&nbsp;&nbsp;&nbsp;{{table.surname}}</b></mat-grid-tile>
 
     <mat-grid-tile>Personal : </mat-grid-tile>
-    <mat-grid-tile [colspan]="2"><b>{{table.personalcard}}</b></mat-grid-tile>
+    <mat-grid-tile [colspan]="2"><b class="left">{{table.personalcard}}</b></mat-grid-tile>
 
     <mat-grid-tile>วันที่ยืนยัน : </mat-grid-tile>
-    <mat-grid-tile><b>{{table.dateaccept}}</b></mat-grid-tile>
+    <mat-grid-tile><b class="left">{{table.dateaccept}}</b></mat-grid-tile>
 
     <mat-grid-tile>DateRegis : </mat-grid-tile>
-    <mat-grid-tile><b>{{table.dateregis}}</b></mat-grid-tile>
+    <mat-grid-tile><b class="left">{{table.dateregis}}</b></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2">หมายเลขเอกสาร : </mat-grid-tile>
+    <mat-grid-tile ><b class="left">{{table.documentCode}}</b></mat-grid-tile>
+
+    <mat-grid-tile >Comment : </mat-grid-tile>
+    <mat-grid-tile [colspan]="4"><b class="left">{{table.comment}}</b></mat-grid-tile>
+
 
   </mat-grid-list>
 
 
-  <mat-grid-list cols="10" rowHeight="50px">
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <a>หมายเหตุ : </a>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="9" [rowspan]="2">
-                <textarea  placeholder="3-150 ข้อความ" style="width:1000px;height:60px;margin-bottom:25px;text-indent:10px" [(ngModel)]="comment" value="{{table.comment}}"></textarea>
-    </mat-grid-tile>
-  </mat-grid-list>
 
-<div class="buttoncenter">
-<button mat-raised-button color="primary" (click)="Accept()">ยืนยันสิทธิ์</button>
-  &nbsp;&nbsp;
-<button mat-raised-button color="warn" (click)="NotAccept()">ไม่ผ่าน</button>
-</div>
+  <form [formGroup]="accForm" (ngSubmit)="onFormSubmit()">
+
+    <mat-grid-list cols="10" rowHeight="60px">
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <a>หมายเลขเอกสาร ( E | C | N ) : </a>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field>
+          <input matInput placeholder="เช่น E1 , N2 , C30" [(ngModel)]="documentCode"  autocomplete="off" formControlName="documentCode_no">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <a style="font-size:15px;color:red" *ngIf="accForm.controls['documentCode_no'].hasError('pattern')">ขึ้นต้น E หรือ C หรือ N ตามด้วย เลขสูงสุด 8หลัก</a>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="3" [rowspan]="1">
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="10" rowHeight="60px">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <a>หมายเหตุ : </a>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="3" [rowspan]="1">
+        <mat-form-field class="form">
+          <input matInput  placeholder="3-30 ข้อความ" [(ngModel)]="comment"  autocomplete="off" formControlName="comment_no">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <a style="font-size:15px;color:red" *ngIf="accForm.controls['comment_no'].hasError('pattern')">3-30 ข้อความ</a>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="5" [rowspan]="1">
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <a>ยืนยันสิทธิ์ : </a>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+
+        <mat-radio-group [(ngModel)]="labelPosition" formControlName="acc_no">
+          <mat-radio-button class="example-margin" value="pass" >ผ่าน</mat-radio-button>
+          &nbsp;&nbsp;
+          <mat-radio-button class="example-margin" value="fail">ไม่ผ่าน</mat-radio-button>
+        </mat-radio-group>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+
+
+
+    <div class="buttoncenter">
+      <button mat-raised-button color="primary">ยืนยัน</button>
+    </div>
+  </form>
 </div>

@@ -38,18 +38,23 @@ public class RightRegistration {
     private  String tel;
     @NotNull(message="personalcard must not be null to be valid")
     @Column(name="personalcard",unique = true)
-    private  Long personalcard;
+    private Long personalcard;
+    @NotNull(message="dateregis must not be null to be valid")
     private  LocalDate dateregis;
+    @NotNull(message="birthday must not be null to be valid")
     private  LocalDate birthday;
 
+    @NotNull(message="province must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name= "PROVINCE_ID", insertable = true)
     private Province province;
 
+    @NotNull(message="rightsType must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = RightsType.class)
     @JoinColumn(name= "RIGHTSTYPE_ID", insertable = true)
     private RightsType rightsType;
 
+    @NotNull(message="hospital must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Hospital.class)
     @JoinColumn(name= "HOSPITAL_ID", insertable = true)
     private Hospital hospital;

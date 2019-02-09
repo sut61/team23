@@ -57,7 +57,7 @@ public class AcceptToUserController {
 
     @PostMapping("/AcceptToUser/{acceptdate}/{username}/{comment}/{statusname}/{officername}")
     public AcceptToUser newUser(@PathVariable String acceptdate, @PathVariable String username
-                                ,@PathVariable String comment, @PathVariable String statusname, @PathVariable String officername
+            ,@PathVariable String comment, @PathVariable String statusname, @PathVariable String officername
     ) {
         AcceptToUser accepttouserid = new AcceptToUser();
         RightRegistration rightRegistrationid = new RightRegistration();
@@ -75,6 +75,8 @@ public class AcceptToUserController {
         accepttouserid.setAccId(rightRegistrationid.getRegId());
         accepttouserid.setCodeAccept("F"+rightRegistrationid.getRegId());
 
+        accepttouserid.setDocumentCode("N" + rightRegistrationid.getRegId());
+
         statusid = statusRepository.findByStatusName(statusname);
         accepttouserid.setStatus(statusid);
 
@@ -84,9 +86,9 @@ public class AcceptToUserController {
         return acceptToUserRepository.save(accepttouserid);
     }
 
-    @PutMapping("/UpdateAccept/{id}/{acceptdate}/{codeAccept}/{username}/{comment}/{statusname}/{officername}")
+    @PutMapping("/UpdateAccept/{id}/{acceptdate}/{codeAccept}/{username}/{comment}/{statusname}/{officername}/{documentCode}")
     AcceptToUser putAccept(AcceptToUser accept, @PathVariable Long id,@PathVariable String acceptdate, @PathVariable String codeAccept
-            , @PathVariable String comment ,@PathVariable String username,@PathVariable String statusname,@PathVariable String officername
+            , @PathVariable String comment ,@PathVariable String username,@PathVariable String statusname,@PathVariable String officername,@PathVariable String documentCode
     ) {
         return acceptToUserRepository.findById(id)
                 .map(acc -> {
@@ -107,6 +109,7 @@ public class AcceptToUserController {
                             acc.setCodeAccept(codeAccept);
                             acc.setComment(comment);
                             acc.setRightRegistration(rightRegistrationid);
+                            acc.setDocumentCode(documentCode);
                             acc.setOfficer(officerid);
 
                             return acceptToUserRepository.save(acc);

@@ -42,8 +42,8 @@ public class RightRegistrationController {
 
     @PostMapping("/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}")
     public RightRegistration newnameMember(@PathVariable String username,@PathVariable String password, @PathVariable String firstname,@PathVariable String surname,@PathVariable String tel,
-                                @PathVariable Long personal,@PathVariable String dateregis,@PathVariable String birthdate,
-                                @PathVariable String provincename,@PathVariable String rightstypename,@PathVariable String hospitalname
+                                           @PathVariable Long personal,@PathVariable String dateregis,@PathVariable String birthdate,
+                                           @PathVariable String provincename,@PathVariable String rightstypename,@PathVariable String hospitalname
     ){
 
         RightRegistration newMember = new RightRegistration();

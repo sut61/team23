@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { AlertService } from '../alert.service';
+import { Gc } from './gc';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
 isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -53,17 +54,56 @@ export class GoldCardRegisterComponent implements OnInit {
   CurrentDate = new Date();
   pipe = new DatePipe('en-US');
   matcher = new MyErrorStateMatcher();
-  lock: FormGroup;
+
   myControl = new FormControl();
   ids : number;
   temp : number;
-  constructor(private alertService:AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
-       this.lock = fb.group({
-          hideRequiredMarker: false,
-          floatLabel: 'never',
-       });
+
+
+  constructor(private formbuilder: FormBuilder,private alertService:AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
+
 
   }
+
+  isValidFormSubmitted = null;
+  telPattern = "[0]\\d{9}";
+  personalPattern = "\\d{13}";
+    myForm = this.formbuilder.group({
+    username_no : ['', [Validators.required, Validators.pattern('\\w{3,20}')]],
+    password_no: ['', [Validators.required, Validators.pattern('')]],
+    firstname_no: ['', [Validators.required, Validators.pattern('')]],
+    surname_no : ['', [Validators.required, Validators.pattern('')]],
+    birthday_no : ['', [Validators.required, Validators.pattern('')]],
+    hospital_no : ['', [Validators.required, Validators.pattern('')]],
+    province_no: ['', [Validators.required, Validators.pattern('')]],
+    rightstype_no : ['', [Validators.required, Validators.pattern('')]],
+      personal_no : ['', [Validators.required, Validators.pattern(this.personalPattern)]],
+      tel_no: ['', [Validators.required, Validators.pattern(this.telPattern)]],
+    });
+
+    onFormSubmit(){
+        this.isValidFormSubmitted = false;
+        if (this.myForm.invalid) {
+                  this.alertService.error('กรุณา กรอกข้อมูล ให้ครบ');
+                  if(this.myForm.controls['username_no'].hasError('pattern')){
+                                  this.alertService.error('กรุณา กรอก username (3-20 ตัวอักษร) ให้ถูกต้อง');
+                  }
+                  else if(this.myForm.controls['personal_no'].hasError('pattern')){
+                                  this.alertService.error('กรุณา กรอกบัตรประจำตัวประชาชน เลข 13 หลัก ให้ถูกต้อง');
+                  }
+                  else if(this.myForm.controls['tel_no'].hasError('pattern')){
+                                   this.alertService.error('กรุณา กรอกหมายเลขโทรศัพท์ 0+เลข9หลัก ให้ถูกต้อง');
+                  }
+
+                  return;
+        }
+        else if (this.myForm.valid){
+                this.regis(this.myForm.value);
+                this.isValidFormSubmitted = true;
+        }
+
+         this.isValidFormSubmitted = true;
+    }
 
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
@@ -71,32 +111,26 @@ export class GoldCardRegisterComponent implements OnInit {
       return this.loggedIn.asObservable(); // {2}
     }
 
-
-
-  regis(){
-        this.alertService.clear();
+  regis(gc : Gc){
           // http://localhost:8080/Rightregistration/{username}/{password}/{firstname}/{surname}/{tel}/{personal}/{dateregis}/{birthdate}/{provincename}/{rightstypename}/{hospitalname}
-              this.httpClient.post('http://localhost:8080/Rightregistration/'+ this.input.username+ '/' + this.input.password+'/'+this.input.firstname+'/'+this.input.surname+'/'+this.input.tel+'/'+this.input.personalcard+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(this.input.birthday,'dd:MM:yyyy')+'/'+this.select.provincename+'/'+this.select.rightstypename+'/'+this.select.hospitalname,this.input)
+              this.httpClient.post('http://localhost:8080/Rightregistration/'+ gc.username_no+'/' + gc.password_no+'/'+gc.firstname_no+'/'+gc.surname_no+'/'+gc.tel_no+'/'+gc.personal_no+'/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.pipe.transform(gc.birthday_no,'dd:MM:yyyy')+'/'+gc.province_no+'/'+gc.rightstype_no+'/'+gc.hospital_no,gc)
                 .subscribe(
                     data => {
                         console.log('PUT Request is successful', data);
-                        this.accept();
-
+                        this.accept(gc);
                     },
                     error => {
                         console.log('Error', error);
-
-                        this.alertService.error('Error Username อาจจะมีผู้ใช้งานแล้ว\nหรือ กรอกข้อมูลผิดพลาด');
+                        this.alertService.error('Error Username หรือ บัตรประจำตัวประชาชน มีผู้ใช้งานแล้ว');
                     }
                 );
 
   }
 
 
-  accept(){
-              this.alertService.clear();
+  accept(gc : Gc){
              //     AcceptToUser/{acceptdate}/{codeaccept}/{username}/{comment}/{statusname}/{officername}
-                         this.httpClient.post('http://localhost:8080/AcceptToUser/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+this.input.username+'/null/Fail/null',this.input)
+                         this.httpClient.post('http://localhost:8080/AcceptToUser/'+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+'/'+gc.username_no+'/null/Fail/null',this.input)
                                .subscribe(
                                    data => {
                                         this.alertService.success('รอการยืนยันสิทธิจากเจ้าหน้าที่์');

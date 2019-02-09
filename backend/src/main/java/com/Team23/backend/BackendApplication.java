@@ -374,7 +374,7 @@ public class BackendApplication  {
 			typesOfDosageFormsRepository.save(typesOfDosageForms);
 			});
 
-			Stream.of("Graph", "Sun").forEach(userName -> {
+			Stream.of("Graph", "Sun","Bas").forEach(userName -> {
 
 				RightRegistration rightRegistration = new RightRegistration();
 				Hospital hospitalid = new Hospital();
@@ -401,7 +401,7 @@ public class BackendApplication  {
 					rightRegistration.setSurname("Sur" + userName);
 					rightRegistration.setTel("0123456789");
 					rightRegistration.setPersonalcard(1309902591596L);
-				    rightRegistration.setDateregis(gdate2);
+					rightRegistration.setDateregis(gdate2);
 					rightRegistration.setBirthday(bdate2);
 
 					provinceid = provinceRepository.findByProvinceName("กรุงเทพมหานคร");
@@ -421,6 +421,26 @@ public class BackendApplication  {
 					rightRegistration.setSurname("Sur" + userName);
 					rightRegistration.setTel("0123456789");
 					rightRegistration.setPersonalcard(1309902582554L);
+					rightRegistration.setDateregis(gdate3);
+					rightRegistration.setBirthday(bdate3);
+
+					provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+					rightRegistration.setProvince(provinceid);
+
+					rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+					rightRegistration.setRightsType(rightsTypeid);
+
+					hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+					rightRegistration.setHospital(hospitalid);
+
+					rightRegistrationRepository.save(rightRegistration);
+				}else if (userName == "Bas") {
+
+					rightRegistration.setPassword("Pass" + userName);
+					rightRegistration.setFirstname("First" + userName);
+					rightRegistration.setSurname("Sur" + userName);
+					rightRegistration.setTel("0123456789");
+					rightRegistration.setPersonalcard(1309902555555L);
 					rightRegistration.setDateregis(gdate3);
 					rightRegistration.setBirthday(bdate3);
 
@@ -508,7 +528,7 @@ public class BackendApplication  {
 
 //Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2
 
-			Stream.of("P1", "F2").forEach(acceptToUser -> {
+			Stream.of("P1", "F2","F3").forEach(acceptToUser -> {
 
 				AcceptToUser acceptToUserId = new AcceptToUser();
 				Officer officerId = new Officer();
@@ -528,7 +548,7 @@ public class BackendApplication  {
 					acceptToUserId.setAccId(1L);
 					acceptToUserId.setComment("ครบถ้วน");
 					acceptToUserId.setDateAccept(adate1);
-
+					acceptToUserId.setDocumentCode("N1");
 					statusid = statusRepository.findByStatusName("Pass");
 					acceptToUserId.setStatus(statusid);
 
@@ -543,7 +563,7 @@ public class BackendApplication  {
 					acceptToUserId.setAccId(2L);
 					acceptToUserId.setComment("เอกสารไม่ตรงกับข้อมูล");
 					acceptToUserId.setDateAccept(adate2);
-
+					acceptToUserId.setDocumentCode("N2");
 					statusid = statusRepository.findByStatusName("Fail");
 					acceptToUserId.setStatus(statusid);
 
@@ -553,8 +573,22 @@ public class BackendApplication  {
 					officerId = officerRepository.findByOfficerName("Kanathip Poungtham");
 					acceptToUserId.setOfficer(officerId);
 
+				}else if (acceptToUser == "F3") {
+					acceptToUserId.setAccId(3L);
+					acceptToUserId.setComment("เอกสารไม่ตรงกับข้อมูล");
+					acceptToUserId.setDateAccept(adate2);
+					acceptToUserId.setDocumentCode("C3");
+					statusid = statusRepository.findByStatusName("Fail");
+					acceptToUserId.setStatus(statusid);
+
+					rightRegistrationId = rightRegistrationRepository.findByRegId(3L);
+					acceptToUserId.setRightRegistration(rightRegistrationId);
+
+					officerId = officerRepository.findByOfficerName("Pantamit Sombaddee");
+					acceptToUserId.setOfficer(officerId);
+
 				}
-					acceptToUserRepository.save(acceptToUserId);
+				acceptToUserRepository.save(acceptToUserId);
 			});
 
 			Stream.of("โรคติดต่อหรือโรคติดเชื้อ", "โรคไม่ติดต่อหรือไม่ติดเชื้อ").forEach(typeDiseaseName -> {
