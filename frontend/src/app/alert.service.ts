@@ -33,18 +33,22 @@ export class AlertService {
 
     // convenience methods
     success(message: string) {
+        this.clear();
         this.alert(new Alert({ message, type: AlertType.Success }));
     }
 
     error(message: string) {
+        this.clear();
         this.alert(new Alert({ message, type: AlertType.Error }));
     }
 
     info(message: string) {
+        this.clear();
         this.alert(new Alert({ message, type: AlertType.Info }));
     }
 
     warn(message: string) {
+        this.clear();
         this.alert(new Alert({ message, type: AlertType.Warning }));
     }
 

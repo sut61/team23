@@ -43,6 +43,11 @@ public class BackendApplicationTests {
 	@Autowired private ExpensesRepository expensesRepository;
 	@Autowired private AcceptToUserRepository acceptToUserRepository;
 	@Autowired private TestEntityManager entityManager;
+	@Autowired private ProvinceRepository provinceRepository;
+	@Autowired private HospitalRepository hospitalRepository;
+	@Autowired private RightsTypeRepository rightsTypeRepository;
+	@Autowired private RightRegistrationRepository rightRegistrationRepository;
+	@Autowired private StatusRepository statusRepository;
 
 	private Validator validator;
 
@@ -881,6 +886,920 @@ public class BackendApplicationTests {
 		}
 	}
 
+	//RightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistration
+	@Test
+	public void anyTrue() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername("User");
+		rr.setPassword("Pass");
+		rr.setFirstname("First");
+		rr.setSurname("Sur");
+		rr.setTel("0123456789");
+		rr.setPersonalcard(1234567890123L);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(gdate2);
+		rr.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("รพ.นครราชสีมา");
+		rr.setHospital(hospitalid);
+
+		try {
+			entityManager.persist(rr);
+			entityManager.flush();
+
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Success anyTrue -----------------------------------------------------------------------\n\n");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have anyTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+	}
+	@Test
+	public void anyFieldCannotBeNull() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername(null);
+		rr.setPassword(null);
+		rr.setFirstname(null);
+		rr.setSurname(null);
+		rr.setTel(null);
+		rr.setPersonalcard(null);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(null);
+		rr.setBirthday(null);
+
+		provinceid = provinceRepository.findByProvinceName(null);
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName(null);
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName(null);
+		rr.setHospital(hospitalid);
+		try {
+			entityManager.persist(rr);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 11);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have anyFieldCannotBeNull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void userMoreTwenty() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername("123456789012345678901");
+		rr.setPassword("Pass");
+		rr.setFirstname("First");
+		rr.setSurname("Sur");
+		rr.setTel("0123456789");
+		rr.setPersonalcard(1234567890123L);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(gdate2);
+		rr.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr.setHospital(hospitalid);
+		try {
+			entityManager.persist(rr);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have userMoreTwenty -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void userLessThree() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername("12");
+		rr.setPassword("Pass");
+		rr.setFirstname("First");
+		rr.setSurname("Sur");
+		rr.setTel("0123456789");
+		rr.setPersonalcard(1234567890123L);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(gdate2);
+		rr.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr.setHospital(hospitalid);
+		try {
+			entityManager.persist(rr);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have userLessThree -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void firstTelNotZero() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername("User");
+		rr.setPassword("Pass");
+		rr.setFirstname("First");
+		rr.setSurname("Sur");
+		rr.setTel("11234567890");
+		rr.setPersonalcard(1234567890123L);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(gdate2);
+		rr.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr.setHospital(hospitalid);
+
+		try {
+			entityManager.persist(rr);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have firstTelNotZero -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void userUnique() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername("test");
+		rr.setPassword("Pass");
+		rr.setFirstname("First");
+		rr.setSurname("Sur");
+		rr.setTel("0123456789");
+		rr.setPersonalcard(1234567890123L);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(gdate2);
+		rr.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr.setHospital(hospitalid);
+
+		entityManager.persist(rr);
+		entityManager.flush();
+
+		RightRegistration rr2 = new RightRegistration();
+
+		rr2.setUsername("test");
+		rr2.setPassword("Pass");
+		rr2.setFirstname("First");
+		rr2.setSurname("Sur");
+		rr2.setTel("0123456789");
+		rr2.setPersonalcard(1234567890124L);
+		rr2.setDateregis(gdate2);
+		rr2.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr2.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr2.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr2.setHospital(hospitalid);
+
+		try {
+			entityManager.persist(rr2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have userUnique -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+	}
+	@Test
+	public void personalUnique() {
+
+		RightRegistration rr = new RightRegistration();
+		Hospital hospitalid = new Hospital();
+		RightsType rightsTypeid = new RightsType();
+		Province provinceid = new Province();
+
+		rr.setUsername("test");
+		rr.setPassword("Pass");
+		rr.setFirstname("First");
+		rr.setSurname("Sur");
+		rr.setTel("0123456789");
+		rr.setPersonalcard(1234567890123L);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+
+		String sDate2 = "25:05:1998";
+		String biDate2 = "25:05:1990";
+		LocalDate gdate2 = LocalDate.parse(sDate2, formatter);
+		LocalDate bdate2 = LocalDate.parse(biDate2, formatter);
+		rr.setDateregis(gdate2);
+		rr.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr.setHospital(hospitalid);
+
+		entityManager.persist(rr);
+		entityManager.flush();
+
+		RightRegistration rr2 = new RightRegistration();
+
+		rr2.setUsername("test2");
+		rr2.setPassword("Pass");
+		rr2.setFirstname("First");
+		rr2.setSurname("Sur");
+		rr2.setTel("0123456789");
+		rr2.setPersonalcard(1234567890123L);
+		rr2.setDateregis(gdate2);
+		rr2.setBirthday(bdate2);
+
+		provinceid = provinceRepository.findByProvinceName("นครราชสีมา");
+		rr2.setProvince(provinceid);
+
+		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
+		rr2.setRightsType(rightsTypeid);
+
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+		rr2.setHospital(hospitalid);
+
+		try {
+			entityManager.persist(rr2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have personalUnique -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	//RightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsType
+	@Test
+	public void rightsTypeAnyFieldTrue() {
+		RightsType rightstypeid = new RightsType();
+		rightstypeid.setRightsTypeName("รับราชการ");
+		try {
+			entityManager.persist(rightstypeid);
+			entityManager.flush();
+
+			System.out.println("\n\n---------------------------------------------------------------------------------- ๅ Success rightsTypeAnyFieldTrue -----------------------------------------------------------------------\n\n");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have rightsTypeAnyFieldTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	@Test
+	public void rightsTypeAnyFieldNotNull() {
+		RightsType rightstypeid = new RightsType();
+		rightstypeid.setRightsTypeName(null);
+		try {
+			entityManager.persist(rightstypeid);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have rightsTypeAnyFieldNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	//ProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvince
+	@Test
+	public void provinceAnyFieldTrue() {
+		Province provinceid = new Province();
+		provinceid.setProvinceName("ต่างประเทศ");
+		try {
+			entityManager.persist(provinceid);
+			entityManager.flush();
+
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Success provinceAnyFieldTrue -----------------------------------------------------------------------\n\n");
+
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have provinceAnyFieldTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+	@Test
+	public void provinceAnyFieldNotNull() {
+		Province provinceid = new Province();
+		provinceid.setProvinceName(null);
+		try {
+			entityManager.persist(provinceid);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have provinceAnyFieldNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+
+	//AccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUser
+	@Test
+	public void AcceptAnyTure() {
+
+		AcceptToUser acc = new AcceptToUser();
+
+		acc.setCodeAccept("P10");
+		acc.setComment("ครบ");
+		acc.setAccId(1L);
+
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N3");
+		try {
+			entityManager.persist(acc);
+//			entityManager.flush();
+
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Success AcceptAnyTure -----------------------------------------------------------------------\n\n");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have AcceptAnyTure -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+
+	@Test
+	public void anyFieldNotNull() {
+
+		AcceptToUser acc = new AcceptToUser();
+
+		acc.setAccId(1L);
+		acc.setCodeAccept(null);
+		acc.setComment(null);
+
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(null);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(null);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(null);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(null);
+
+		try {
+			entityManager.persist(acc);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 5);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have AcceptCodeNull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void codeAcceptUnique() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setCodeAccept("F6");
+		acc.setComment("มีผู้ใช้แล้ว");
+		acc.setAccId(6L);
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N3");
+
+		entityManager.persist(acc);
+		entityManager.flush();
+
+		AcceptToUser acc2 = new AcceptToUser();
+		acc2.setCodeAccept("F6");
+		acc2.setComment("มีผู้ใช้แล้ว");
+		acc2.setAccId(7L);
+		RightRegistration rightRegistrationId2 = new RightRegistration();
+		rightRegistrationId2 = rightRegistrationRepository.findByRegId(2L);
+		acc2.setRightRegistration(rightRegistrationId2);
+
+		String Date2 = "25:02:2019";
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate2 = LocalDate.parse(Date2, formatter2);
+		acc2.setDateAccept(adate2);
+
+		Status statusid2 = new Status();
+		statusid2 = statusRepository.findByStatusName("Fail");
+		acc2.setStatus(statusid2);
+
+		Officer officerid2 = new Officer();
+		officerid2 = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid2);
+
+		acc2.setDocumentCode("N4");
+
+		try {
+			entityManager.persist(acc2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have codeAcceptUnique -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+
+	@Test
+	public void documentCodeUnique() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setAccId(8L);
+		acc.setCodeAccept("F8");
+		acc.setComment("ข้อมูลถูกต้อง");
+
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N8");
+
+		entityManager.persist(acc);
+		entityManager.flush();
+
+		AcceptToUser acc2 = new AcceptToUser();
+		acc2.setAccId(9L);
+		acc2.setCodeAccept("F9");
+		acc2.setComment("ข้อมูลถูกต้อง");
+
+		RightRegistration rightRegistrationId2 = new RightRegistration();
+		rightRegistrationId2 = rightRegistrationRepository.findByRegId(2L);
+		acc2.setRightRegistration(rightRegistrationId2);
+
+		acc2.setDateAccept(adate1);
+		acc2.setStatus(statusid);
+		acc2.setOfficer(officerid);
+
+		acc2.setDocumentCode("N8");
+		try {
+			entityManager.persist(acc2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have documentCodeUnique -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+
+	@Test
+	public void acceptIDUnique() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setAccId(10L);
+		acc.setCodeAccept("F10");
+		acc.setComment("ข้อมูลถูกต้อง");
+
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N10");
+
+		entityManager.persist(acc);
+		entityManager.flush();
+
+		AcceptToUser acc2 = new AcceptToUser();
+		acc2.setAccId(10L);
+		acc2.setCodeAccept("F11");
+		acc2.setComment("ข้อมูลถูกต้อง");
+
+		RightRegistration rightRegistrationId2 = new RightRegistration();
+		rightRegistrationId2 = rightRegistrationRepository.findByRegId(2L);
+		acc2.setRightRegistration(rightRegistrationId2);
+
+		acc2.setDateAccept(adate1);
+		acc2.setStatus(statusid);
+		acc2.setOfficer(officerid);
+
+		acc2.setDocumentCode("N11");
+		try {
+			entityManager.persist(acc2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have acceptIDUnique -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+
+	@Test
+	public void AcceptCodeNotTrue() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setAccId(3L);
+		acc.setCodeAccept("B1");
+		acc.setComment("ข้อมูลถูกต้อง");
+
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N3");
+		try {
+			entityManager.persist(acc);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have AcceptCodeNotTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void CommentNotShort() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setAccId(4L);
+		acc.setCodeAccept("F1");
+		acc.setComment("ไ");
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N3");
+		try {
+			entityManager.persist(acc);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have CommentNotShort -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+	@Test
+	public void CommentNotLong() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setAccId(5L);
+		acc.setCodeAccept("F1");
+		acc.setComment("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Fail");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("N3");
+		try {
+			entityManager.persist(acc);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have CommentNotLong -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+
+	@Test
+	public void documentCodeNotTrue() {
+
+		AcceptToUser acc = new AcceptToUser();
+		acc.setAccId(12L);
+		acc.setCodeAccept("P12");
+		acc.setComment("ข้อมูลถูกต้อง");
+
+		RightRegistration rightRegistrationId = new RightRegistration();
+		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
+		acc.setRightRegistration(rightRegistrationId);
+
+		String Date1 = "25:01:2019";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		LocalDate adate1 = LocalDate.parse(Date1, formatter);
+		acc.setDateAccept(adate1);
+
+		Status statusid = new Status();
+		statusid = statusRepository.findByStatusName("Pass");
+		acc.setStatus(statusid);
+
+		Officer officerid = new Officer();
+		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		acc.setOfficer(officerid);
+
+		acc.setDocumentCode("A12");
+		try {
+			entityManager.persist(acc);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have documentCodeNotTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+
+	}
+
+
+	//StatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatus
+	@Test
+	public void statusAnyfieldNotnull() {
+		Status statusid= new Status();
+		statusid.setStatusName(null);
+		try {
+			entityManager.persist(statusid);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have statusAnyfieldNotnull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+
+		}
+	}
 
 
 }

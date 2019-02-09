@@ -75,4 +75,6 @@ getOfficer(): Observable<any> {
   getTypeOfPublicz(): Observable<any> {
     return this.http.get('//localhost:8080/TypeOfPublicz');
   }
+
+
 }

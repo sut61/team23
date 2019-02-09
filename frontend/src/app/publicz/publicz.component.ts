@@ -83,8 +83,8 @@ this.alertService.clear();
       console.log(this.hospitals);
     });
     this.goldcardService.getTypeOfPublicz().subscribe(data =>{
-      this.TypeOfPublicz = data;
-      console.log(this.TypeOfPublicz);
+      this.typeofpub = data;
+      console.log(this.typeofpub);
       });
   }
 

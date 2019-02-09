@@ -16,7 +16,7 @@
   text-align : center;
 }
 .right{
-  margin-left : 12%;
+  margin-left : 30%;
 }
 .table{
     background: rgba(255, 255, 255,0.1);
@@ -25,10 +25,10 @@
 max-width:15%;
 }
 .mat-column-username{
-max-width:8%;
+  flex: 0 0 8%;
 }
 .mat-column-dateregis{
-  max-width:9%;
+  flex: 0 0 8.6%;
 }
 .mat-column-tel{
   max-width:9%;
@@ -52,9 +52,18 @@ max-width:8%;
   max-width:5%;
 }
 .mat-column-codeaccept{
-  max-width:5%;
+  flex: 0 0 3.5%;
 }
 .mat-bottom-sheet-container{
   padding:0px;
   margin:0px;
+}
+.mat-column-select{
+  flex: 0 0 7%;
+}
+.form{
+  width : 410px;
+}
+.left{
+  text-left:0px
 }
