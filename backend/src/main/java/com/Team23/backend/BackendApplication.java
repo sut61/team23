@@ -65,7 +65,8 @@ public class BackendApplication  {
 			, TrainingRepository trainingRepository
 			, PubliczRepository publiczRepository
 			, TypeOfPubliczRepository typeOfPubliczRepository
-
+			, MedicalInstrumentRepository medicalInstrumentRepository
+			, UseabilityRepository useabilityRepository
 	) throws Exception {
 
 		return args -> {
@@ -478,6 +479,19 @@ public class BackendApplication  {
 
 
 			});
+			Stream.of("อุปกรณ์การแพทย์","บริภัณฑ์การแพทย์","วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม","เครื่องมือแพทย์เฉพาะทาง").forEach(medicalInstrumentName ->{
+				MedicalInstrument medicalInstrument = new MedicalInstrument();
+				medicalInstrument.setMedicalInstrumentName(medicalInstrumentName);
+				medicalInstrumentRepository.save(medicalInstrument);
+			});
+			medicalInstrumentRepository.findAll().forEach(System.out::println);
+
+		    Stream.of("ใช้ทั่วไป","ใช้เฉพาะทาง").forEach(ueabilityName ->{
+				Useability ueability = new Useability();
+				ueability.setUseabilityName(ueabilityName);
+				useabilityRepository.save(ueability);
+			});
+			useabilityRepository.findAll().forEach(System.out::println);
 
 			Stream.of("Graph", "Sun").forEach(goldcardName -> {
 				Goldcard goldcard = new Goldcard();

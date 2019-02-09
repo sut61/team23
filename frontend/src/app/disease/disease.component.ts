@@ -96,6 +96,8 @@ export class DiseaseComponent implements OnInit {
     this.dataSourceDisease.filter = filterValue.trim().toLowerCase();
   }
 }
+
+
 @Component({
   selector: 'success',
   templateUrl: 'success.html',
