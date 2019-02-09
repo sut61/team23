@@ -32,19 +32,27 @@ public class Disease {
     private @NonNull Long diseaseId;
 
     @Pattern(regexp = "(โรค).+")
-    @Size(min = 5, max = 40)
+    @Size(min = 5, max = 30)
     @Column(name="diseaseName",unique = true)
-    @NotNull(message="Package Id must not be null to be valid")
+    @NotNull(message="DiseaseName must not be null to be valid")
     private String diseaseName;
 
-    private @NonNull String symptom;
-    private @NonNull String cause;
-    private @NonNull String remedy;
+    @Size(min = 5, max = 40)
+    @NotNull(message="Symptom must not be null to be valid")
+    private String symptom;
 
+    @NotNull(message="Cause must not be null to be valid")
+    private String cause;
+
+    @NotNull(message="Remedy must not be null to be valid")
+    private String remedy;
+
+    @NotNull(message="TypeDisease must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = TypeDisease.class)
     @JoinColumn(name= "typedisease", insertable = true)
     private TypeDisease typedisease;
 
+    @NotNull(message="PeopleDisease must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PeopleDisease.class)
     @JoinColumn(name= "peopledisease", insertable = true)
     private PeopleDisease peopledisease;

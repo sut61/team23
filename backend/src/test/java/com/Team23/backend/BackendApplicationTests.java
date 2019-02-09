@@ -48,6 +48,12 @@ public class BackendApplicationTests {
 	@Autowired private RightsTypeRepository rightsTypeRepository;
 	@Autowired private RightRegistrationRepository rightRegistrationRepository;
 	@Autowired private StatusRepository statusRepository;
+	@Autowired private PeopleDiseaseRepository 	peopleDiseaseRepository;
+	@Autowired private TypeDiseaseRepository  typeDiseaseRepository;
+	@Autowired private TreatmenthistoryRepository treatmenthistoryRepository;
+	@Autowired private DrugRepository             drugRepository;
+	@Autowired private GoldcardRepository         goldcardRepository;
+
 
 	private Validator validator;
 
@@ -1801,6 +1807,767 @@ public class BackendApplicationTests {
 		}
 	}
 
+	//Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease//
+	// ทดสอบหข้อมูลปกติ
+	@Test
+	public void testDiseaseNameTrue() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
 
+		dis.setDiseaseName("โรคมะเร็ง");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ผมร่วง");
+		dis.setCause("ดมควันบุหรี่");
+		dis.setRemedy("กินยา");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			System.out.println("\n\n------------------------------------------------------------------Disease Success --------------------------------------------------------------------\n\n");
+			System.out.println("Success");
+			System.out.println("\n\n------------------------------------------------------------------Disease Success --------------------------------------------------------------------\n\n");
+
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testDiseaseCannotBeNull() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName(null);
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ผมร่วง");
+		dis.setCause("ดมควันบุหรี่");
+		dis.setRemedy("กินยา");
+
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName Null  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName Null  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบ Size ความยาวไม่ถึง
+	@Test
+	public void testDiseaseSizeShot() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรคก");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ไม่รู้จะใส่อะไร");
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy("ไม่รู้จะใส่อะไร");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบ Size ความยาวไม่ถึง
+	@Test
+	public void testDiseaseSizeShotSymptom() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรคกระดูก");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("สวย");
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy("ไม่รู้จะใส่อะไร");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Symptom DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Symptom DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบ Size ความยาวเกิน
+	@Test
+	public void testDiseaseSizeLong() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรค1234567890123456789012345678901234567890");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("700-800 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ไม่รู้จะใส่อะไร");
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy("ไม่รู้จะใส่อะไร");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeLong  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeLong  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบ Pattern ไม่ตรง
+	@Test
+	public void testDiseaseNamePatternCannot() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("มะเร็งปากมดลูก");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ปวดท้อง");
+		dis.setCause("ติดเชื้อที่มดลูก");
+		dis.setRemedy("กินยาพักผ่อน");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName Pattern  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName Pattern  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+	@Test
+	//(expected=javax.persistence.PersistenceException.class)
+	public void testUniqueNameDisease() {
+		Disease dis1 = new Disease();
+		TypeDisease typeDiseaseid1 = new TypeDisease();
+		PeopleDisease peopleDiseaseid1 = new PeopleDisease();
+
+		dis1.setDiseaseName("โรคเบาเค็ม");
+		typeDiseaseid1 = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis1.setTypedisease(typeDiseaseid1);
+		peopleDiseaseid1 = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+		dis1.setPeopledisease(peopleDiseaseid1);
+		dis1.setSymptom("ไม่รู้จะใส่อะไร");
+		dis1.setCause("กินเค็มเยอะ");
+		dis1.setRemedy("กินยาพักผ่อน");
+		entityManager.persist(dis1);
+		entityManager.flush();
+		try{
+			Disease dis2 = new Disease();
+			TypeDisease typeDiseaseid2 = new TypeDisease();
+			PeopleDisease peopleDiseaseid2 = new PeopleDisease();
+
+			dis2.setDiseaseName("โรคเบาเค็ม");
+			typeDiseaseid2 = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+			dis2.setTypedisease(typeDiseaseid2);
+			peopleDiseaseid2 = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+			dis2.setPeopledisease(peopleDiseaseid2);
+			dis2.setSymptom("ไม่รู้จะใส่อะไร");
+			dis2.setCause("ไม่รู้จะใส่อะไร");
+			dis2.setRemedy("นอนพักเยอะๆ");
+			entityManager.persist(dis2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e){
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName Unique  --------------------------------------------------------------------\n\n");
+			System.out.println(e);
+
+			System.out.println("\n\n------------------------------------------------------------------DiseaseName Unique  --------------------------------------------------------------------\n\n");
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testSymptomCannotBeNull() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรคเรื้อน");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("600-700 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom(null);
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy("ไม่รู้จะใส่อะไร");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Symptom Null  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Symptom Null  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testCauseCannotBeNull() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรคไข้เลือดออก");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ไม่รู้จะใส่อะไร");
+		dis.setCause(null);
+		dis.setRemedy("ไม่รู้จะใส่อะไร");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Cause Null  --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Cause Null  --------------------------------------------------------------------\n\n");
+
+		}
+	}
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testRemedyCannotBeNull() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรควัณโรค");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ไม่รู้จะใส่อะไร");
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy(null);
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Remedy Null --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Remedy Null --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testTypeDiseaseNameCannotBeNull() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรคอาหารเป็นพิษ");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName(null);
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ไม่รู้จะใส่อะไร");
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy("กินอาหารครบ5หมู้");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------TypeDiseaseName Null --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------TypeDiseaseName Null --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testPopulationRateCannotBeNull() {
+		Disease dis = new Disease();
+		TypeDisease typeDiseaseid = new TypeDisease();
+		PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+		dis.setDiseaseName("โรคอาหารเป็นพิษ");
+		typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคติดต่อหรือโรคติดเชื้อ");
+		dis.setTypedisease(typeDiseaseid);
+		peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate(null);
+		dis.setPeopledisease(peopleDiseaseid);
+		dis.setSymptom("ไม่รู้จะใส่อะไร");
+		dis.setCause("ไม่รู้จะใส่อะไร");
+		dis.setRemedy("กินอาหารครบ5หมู้");
+		try {
+			entityManager.persist(dis);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------PopulationRate Null --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------PopulationRate Null --------------------------------------------------------------------\n\n");
+
+		}
+	}
+	//PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease//
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testPeopleCannotBeNull() {
+		PeopleDisease pp = new PeopleDisease();
+
+		pp.setPopulationRate(null);
+		try {
+			entityManager.persist(pp);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------People Name Null --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------People Name Null --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	//TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease//
+	@Test
+	public void testTypeDiseaseCannotBeNull() {
+		TypeDisease td = new TypeDisease();
+
+		td.setTypeDiseaseName(null);
+		try {
+			entityManager.persist(td);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------TypeDisease Name Null --------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------TypeDisease Name Null --------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	//Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory//
+	// ทดสอบหข้อมูลปกติ
+	@Test
+	public void testCodeTrueTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("12345678TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Graph");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "10:02:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Code Success Exception--------------------------------------------------------------------\n\n");
+			System.out.println("Success");
+			System.out.println("\n\n------------------------------------------------------------------Code Success Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+	// ทดสอบ Pattern ไม่ตรง
+	@Test
+	public void testPatternCodeCannotTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("1234567AA");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("------------------------------------------------------------------Pattern Code Have Exception--------------------------------------------------------------------");
+			System.out.println(e.getMessage());
+			System.out.println("------------------------------------------------------------------Pattern Code End Exception--------------------------------------------------------------------");
+
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testCodeCannotBeNullTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode(null);
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Code Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Code Null End Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบ Size ความยาวไม่ถึง
+	@Test
+	public void testSizeCodeCannotTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("123456TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Code SizeShot Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Code SizeShot End Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testTreatDateCannotBeNullTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("123456789TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(null);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Date Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Date Null End Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testDrugCannotBeNullTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("123456789TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(null);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Drug Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Drug Null End Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testDiseaseCannotNullTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("123456789TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(null);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Disease Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Disease Null End Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	// ทดสอบห้ามเป็น not null
+	@Test
+	public void testGoldcardCannotBeNullTH() {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("123456789TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(null);
+		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date1 = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date1);
+
+		try {
+			entityManager.persist(th);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n------------------------------------------------------------------Goldcard Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println("\n\n------------------------------------------------------------------Goldcard Null End Exception--------------------------------------------------------------------\n\n");
+
+		}
+	}
+
+	@Test
+	//(expected=javax.persistence.PersistenceException.class)
+	public void testUniqueTreatmenthistoryCodeTH () {
+		Treatmenthistory th = new Treatmenthistory();
+		Goldcard goldcardid = new Goldcard();
+		Drug drugid = new Drug();
+		Disease diseaseid = new Disease();
+
+		th.setCode("123456789TH");
+		goldcardid = goldcardRepository.findByGoldcardName("Sun");
+		th.setGoldcards(goldcardid);
+		drugid = drugRepository.findByDrugName("Enalapril (อีนาลาพริล)");
+		th.setDrugs(drugid);
+		diseaseid = diseaseRepository.findByDiseaseName("โรคความดันโลหิตสูง");
+		th.setDiseases(diseaseid);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+		String Date1 = "15:05:2019";
+		LocalDate date = LocalDate.parse(Date1, formatter);
+		th.setTreatDate(date);
+
+		entityManager.persist(th);
+		entityManager.flush();
+		try{
+			Treatmenthistory th1 = new Treatmenthistory();
+			Goldcard goldcardid1 = new Goldcard();
+			Drug drugid1 = new Drug();
+			Disease diseaseid1 = new Disease();
+
+			th1.setCode("123456789TH");
+			goldcardid1 = goldcardRepository.findByGoldcardName("Sun");
+			th1.setGoldcards(goldcardid1);
+			drugid1 = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+			th1.setDrugs(drugid1);
+			diseaseid1 = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+			th1.setDiseases(diseaseid1);
+			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+			String Date = "15:05:2019";
+			LocalDate date1 = LocalDate.parse(Date, formatter1);
+			th1.setTreatDate(date1);
+
+			entityManager.persist(th1);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e){
+			System.out.println("\n\n------------------------------------------------------------------Code Unique Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(e);
+			System.out.println("\n\n------------------------------------------------------------------Code Unique End Exception--------------------------------------------------------------------\n\n");
+		}
+	}
 }
 

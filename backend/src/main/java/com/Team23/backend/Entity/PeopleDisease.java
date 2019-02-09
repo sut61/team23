@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
+import javax.validation.constraints.*;
 
 import java.util.*;
 
@@ -29,5 +30,6 @@ public class PeopleDisease {
     @Column(name="PEOPLEDISEASE_ID",unique = true, nullable = false)
     private @NonNull Long peopleDiseaseId;
 
-    private @NonNull String populationRate;
+    @NotNull(message="PopulationRate must not be null to be valid")
+    private String populationRate;
 }

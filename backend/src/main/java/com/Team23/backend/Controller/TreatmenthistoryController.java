@@ -38,10 +38,11 @@ public class TreatmenthistoryController {
         return treatmenthistoryRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/Treatmenthistory/{goldcardName}/{diseaseName}/{drugName}/{treatDate}")
+    @PostMapping("/Treatmenthistory/{goldcardName}/{diseaseName}/{drugName}/{code}/{treatDate}")
     public Treatmenthistory newTreatmenthistory(@PathVariable String goldcardName,
                                                 @PathVariable String diseaseName,
                                                 @PathVariable String drugName,
+                                                @PathVariable String code,
                                                 @PathVariable String treatDate
     ){
         Treatmenthistory newTreat = new Treatmenthistory();
@@ -49,6 +50,7 @@ public class TreatmenthistoryController {
         Drug drugid = new Drug();
         Disease diseaseid = new Disease();
 
+        newTreat.setCode(code);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
         LocalDate tdate = LocalDate.parse(treatDate,formatter);
         newTreat.setTreatDate(tdate);
