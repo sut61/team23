@@ -8,6 +8,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
@@ -29,7 +31,9 @@ public class Member {
     @Column(name="MEMBER_ID",unique = true, nullable = false)
     private @NonNull Long MemberId;
 
-    private @NonNull String memberName;
+    @NotNull(message = "memberName is null")
+    @Column(name = "memberName",unique = true)
+    private String memberName;
 
 
 }
