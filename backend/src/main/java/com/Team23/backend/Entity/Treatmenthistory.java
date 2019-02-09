@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
+import javax.validation.constraints.*;
 
 import java.util.*;
 
@@ -28,16 +29,27 @@ public class Treatmenthistory {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="treatmenthistory_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="TREATMENTHISTORY_ID",unique = true, nullable = false)
     private @NonNull Long treatId;
-    private @NonNull LocalDate treatDate;
 
+    @NotNull(message="Code must not be null to be valid")
+    @Pattern(regexp = "\\d{6,9}TH")
+    @Size(min = 9, max = 11)
+    @Column(name="code",unique = true)
+    private String code;
+
+    @NotNull(message="TreatDate must not be null to be valid")
+    private LocalDate treatDate;
+
+    @NotNull(message="Goldcards must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Goldcard.class)
     @JoinColumn(name= "goldcard", insertable = true)
     private Goldcard goldcards;
 
+    @NotNull(message="Drugs must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Drug.class)
     @JoinColumn(name= "drug", insertable = true)
     private Drug drugs;
 
+    @NotNull(message="Disease must not be null to be valid")
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
     @JoinColumn(name= "disease", insertable = true)
     private Disease diseases;
