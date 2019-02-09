@@ -12,6 +12,7 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 import { DataSource } from '@angular/cdk/collections';
 import { AlertService } from '../alert.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+import { Dis } from './dis';
 
 export interface DiseaseElement {
 diseaseName: string;
@@ -46,14 +47,47 @@ export class DiseaseComponent implements OnInit {
     };
     pipe = new DatePipe('en-US');
 
-    constructor(private alertService:AlertService, private goldcardService: GoldcardService , private bottomSheet: MatBottomSheet, private httpClient: HttpClient,private route: ActivatedRoute,
+    constructor(private formbuilder:FormBuilder,private alertService:AlertService, private goldcardService: GoldcardService , private bottomSheet: MatBottomSheet, private httpClient: HttpClient,private route: ActivatedRoute,
    private router: Router ){
 
   }
+  isValidFormSubmitted = null;
+  NamePattern = "(โรค).+";
+  Symptom = ".{5,40}";
+    myForm = this.formbuilder.group({
+    diseaseName_no : ['', [Validators.required, Validators.pattern(this.NamePattern)]],
+    symptom_no: ['', [Validators.required, Validators.pattern(this.Symptom)]],
+    cause_no: ['', [Validators.required, Validators.pattern('')]],
+    remedy_no : ['', [Validators.required, Validators.pattern('')]],
+    typeDisease_no : ['', [Validators.required, Validators.pattern('')]],
+    populationRate_no : ['', [Validators.required, Validators.pattern('')]],
+    });
 
-  diseases(){
+    onFormSubmit(){
+        this.isValidFormSubmitted = false;
+        if (this.myForm.invalid) {
+                  this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน');
+                  if(this.myForm.controls['diseaseName_no'].hasError('pattern')){
+                                  this.alertService.error('กรุณากรอก โรค นำหน้า');
+                  }else if(this.myForm.controls['symptom_no'].hasError('pattern')){
+                                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                  }
+
+
+                  return;
+        }
+        else if (this.myForm.valid){
+                this.diseases(this.myForm.value);
+                this.isValidFormSubmitted = true;
+        }
+
+         this.isValidFormSubmitted = true;
+    }
+
+
+  diseases(dis : Dis){
        // http://localhost:8080//Disease/{diseaseName}/{typeDiseaseName}/{populationRate}/{symptom}/{cause}/{remedy}
-      this.httpClient.post('http://localhost:8080/Disease/'+this.input.diseaseName+'/'+this.select.typeDiseaseName+'/'+this.select.populationRate+'/'+ this.input.symptom+'/'+this.input.cause+'/'+ this.input.remedy,this.input)
+      this.httpClient.post('http://localhost:8080/Disease/'+dis.diseaseName_no+'/'+dis.typeDisease_no+'/'+dis.populationRate_no+'/'+ dis.symptom_no+'/'+dis.cause_no+'/'+ dis.remedy_no,dis)
       .subscribe(
           data => {
                         console.log('บันทึกโรคเรียบร้อย', data);
@@ -63,7 +97,7 @@ export class DiseaseComponent implements OnInit {
                     },
           error => {
                         console.log('Error', error);
-                        this.alertService.error('กรุณากรอกข้อมูลให้ครบถ้วน');
+                        this.alertService.error('ชื่อโรคนี้มีในระบบแล้ว');
                   }
                 );
   }
