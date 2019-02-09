@@ -16,6 +16,7 @@ import { AcceptToUserComponent } from './accept-to-user/accept-to-user.component
 import { DiseaseComponent } from './disease/disease.component';
 import { CardComponent } from './card/card.component';
 import { PubliczComponent } from './publicz/publicz.component';
+import { MedicalSuppliesComponent } from './medical-supplies/medical-supplies.component';
 
 const routes: Routes = [
     { path: '', redirectTo:'/login' , pathMatch: 'full'},
@@ -29,6 +30,7 @@ const routes: Routes = [
 //    { path: '**', redirectTo:'/Error'},
     { path: 'goldCardRegister', component: GoldCardRegisterComponent, canActivate: [AuthGuard]},
     { path: 'addMidicine', component: AddMidicineComponent, canActivate: [AuthGuard]},
+    { path: 'medicalSupplies', component: MedicalSuppliesComponent, canActivate: [AuthGuard]},
     { path: 'hospitalRegister', component: HospitalRegisterComponent, canActivate: [AuthGuard]},
     { path: 'GDCard', component: GDCardComponent, canActivate: [AuthGuard]},
     { path: 'AcceptToUser', component: AcceptToUserComponent, canActivate: [AuthGuard]},

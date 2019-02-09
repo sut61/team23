@@ -1,0 +1,35 @@
+/*--------Input 1-------*/
+.example-form {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  .example-full-width {
+    width: 100%;
+  }
+/*----------------------*/
+/*Structure*/
+table{
+    width: 100%;
+    border-radius: 10px;
+    margin:5px;
+}
+.background-image{
+  background-image:url(../add-midicine/800px_COLOURBOX14939503.jpg);
+}
+.button-background{
+background-color:#5DADE2 ;
+margin-left: auto;
+margin-right: auto;
+min-width: 150px;
+max-width: 500px;
+width: 50%;
+}
+.botton-edit-background{
+background-color: #F4D03F;
+}
+.botton-delete-background{
+  background-color:#E74C3C;
+}
