@@ -4,12 +4,13 @@
     <h1>เพิ่มโรคในไทย</h1>
   </mat-card>
   <br>
+  <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()">
   <mat-form-field class="form">
-    <input matInput  placeholder="ชื่อโรค" [(ngModel)]="input.diseaseName" autocomplete="off">
+    <input matInput  placeholder="ชื่อโรค" [(ngModel)]="input.diseaseName" autocomplete="off"  formControlName="diseaseName_no">
   </mat-form-field>
   <br>
   <mat-form-field class="form">
-    <mat-select placeholder="ประเภทโรค" [(ngModel)]="select.typeDiseaseName">
+    <mat-select placeholder="ประเภทโรค" [(ngModel)]="select.typeDiseaseName" formControlName="typeDisease_no">
       <mat-option *ngFor="let typedisease of typedisease" [value]="typedisease.typeDiseaseName">
         {{typedisease.typeDiseaseName}}
       </mat-option>
@@ -17,7 +18,7 @@
   </mat-form-field>
   <br>
   <mat-form-field class="form">
-    <mat-select placeholder="Rate ประชากรที่เป็นโรค(ต่อปี)" [(ngModel)]="select.populationRate">
+    <mat-select placeholder="Rate ประชากรที่เป็นโรค(ต่อปี)" [(ngModel)]="select.populationRate" formControlName="populationRate_no">
       <mat-option *ngFor="let peopledisease of peopledisease" [value]="peopledisease.populationRate">
         {{peopledisease.populationRate}}
       </mat-option>
@@ -25,20 +26,21 @@
   </mat-form-field>
   <br>
   <mat-form-field class="form">
-    <input matInput  placeholder="อาการตอนเป็นโรค" [(ngModel)]="input.symptom" autocomplete="off">
+    <input matInput  placeholder="อาการตอนเป็นโรค" [(ngModel)]="input.symptom" autocomplete="off" formControlName="symptom_no">
   </mat-form-field>
   <br>
   <mat-form-field class="form">
-    <input matInput  placeholder="สาเหตุการเกิดโรค" [(ngModel)]="input.cause" autocomplete="off">
+    <input matInput  placeholder="สาเหตุการเกิดโรค" [(ngModel)]="input.cause" autocomplete="off" formControlName="cause_no">
   </mat-form-field>
   <br>
   <mat-form-field class="form">
-    <input matInput  placeholder="วิธีรักษา" [(ngModel)]="input.remedy" autocomplete="off">
+    <input matInput  placeholder="วิธีรักษา" [(ngModel)]="input.remedy" autocomplete="off" formControlName="remedy_no">
   </mat-form-field>
   <br>
   <div>
     <button mat-raised-button (click)="diseases()" color="primary" >ยืนยัน</button>
   </div>
+  </form>
 </div>
 <div class="footerdisease">
   <mat-card class="diseasecenter" ><h2>ค้นหาด้วยชื่อโรค  <mat-icon matSuffix>search</mat-icon></h2>
