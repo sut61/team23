@@ -41,6 +41,10 @@ public class CardController {
     public Collection<Expenses> Expenses() {
         return expensesRepository.findAll().stream().collect(Collectors.toList());
     }
+    @GetMapping("/Card")
+    public Collection<Card> Card() {
+        return cardRepository.findAll().stream().collect(Collectors.toList());
+    }
 
 
     @GetMapping("/PassAcceptToUser")
