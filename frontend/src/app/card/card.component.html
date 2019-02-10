@@ -40,15 +40,24 @@
             <mat-card style="width:400px">
               <mat-card-content>
                 <h3 style="background-color: #3fc380; color:white">&nbsp;&nbsp;ออกบัตร</h3>
-                <mat-form-field hintLabel="" style="width :100%">
-                  <input matInput placeholder="Card code" [(ngModel)]="input.Cardcode" name="Cardcode">
-                </mat-form-field>
-                <mat-form-field hintLabel="" style="width :100%">
-                  <input matInput placeholder="Comment" [(ngModel)]="input.Comment" name="Comment">
-                </mat-form-field>
-                <mat-form-field hintLabel="" style="width :100%">
-                  <input matInput placeholder="AcceptId" [(ngModel)]="input.AcceptId" name="AcceptId">
-                </mat-form-field>
+
+
+                <form [formGroup]="cardForm" (ngSubmit)="Check()">
+
+                  <mat-form-field hintLabel="Card code" style="width :100%">
+                    <input matInput placeholder="Card code" [(ngModel)]="input.Cardcode"  autocomplete="off" formControlName="Cardcode_check">
+                  </mat-form-field>
+                    <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Cardcode_check'].hasError('pattern')">ขึ้นต้นด้วยคำว่า card</a>
+
+                  <mat-form-field hintLabel="Comment" style="width :100%">
+                    <input matInput placeholder="Comment" [(ngModel)]="input.Comment"  autocomplete="off" formControlName="Comment_check">
+                  </mat-form-field>
+                  <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Comment_check'].hasError('pattern')">ความยาว 5 - 25 ตัวอักษร</a>
+                  <mat-form-field hintLabel="AcceptId" style="width :100%">
+                    <input matInput placeholder="AcceptId" [(ngModel)]="input.AcceptId" autocomplete="off" formControlName="AcceptId_check">
+                  </mat-form-field>
+                  <a style="font-size:15px;color:red" *ngIf="cardForm.controls['AcceptId_check'].hasError('pattern')">ตัวเลข</a>
+                </form>
 
                 <mat-form-field style="width :100%">
                   <mat-select placeholder="คาใช้จ่าย" [(ngModel)]="input.Expenses" name="Expenses">
@@ -60,7 +69,7 @@
 
                 วันออกบัตร  {{CurrentDate | date:'fullDate' }}
                 <br><br><br>
-                <button type="submit" mat-stroked-button (click)="Add()" color="warn">ยืนยัน</button>
+                <button type="submit" mat-stroked-button (click)="Check()" color="warn">ยืนยัน</button>
 
               </mat-card-content>
             </mat-card>
@@ -168,6 +177,7 @@
                   <td>{{card.date}}</td>
                 </tr>
               </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
             </div>
             <br/>
           </div>
