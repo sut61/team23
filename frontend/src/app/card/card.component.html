@@ -60,7 +60,7 @@
 
                 วันออกบัตร  {{CurrentDate | date:'fullDate' }}
                 <br><br><br>
-                <button type="submit" mat-stroked-button (click)="Add()" color="warn">พิมพ์</button>
+                <button type="submit" mat-stroked-button (click)="Add()" color="warn">ยืนยัน</button>
 
               </mat-card-content>
             </mat-card>
@@ -132,11 +132,43 @@
 
               </mat-card-content>
               <img src="../../assets/1.jpg"  >
+              <h3 style="background-color: #cf000f; color:white">&nbsp;&nbsp;แจ้งหาย</h3>
 
 
+              <mat-form-field style="width :100%">
+                <mat-select placeholder="แจ้งหาย" [(ngModel)]="input.DeleteSelect">
+                  <mat-option *ngFor="let card of card" [value]="card.idcard">
+                    {{card.idcard}} : {{card.acceptToUser.rightRegistration.firstname}}  {{card.acceptToUser.rightRegistration.surname}} : {{card.acceptToUser.rightRegistration.personalcard}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
+              <button mat-raised-button (click)="Delete()" color="warn">ลบ</button>
 
             </mat-card>
+            <br>
+            <div align="center">
+              <table class="mat-elevation-z8">
+                <tr>
+                  <th>No</th>
+                  <th>ชื่อ</th>
+                  <th>เลขประจำตัวประชาชน</th>
+                  <th>วันเกิด</th>
+                  <th>comment</th>
+                  <th>วันที่ออกบัตร</th>
+
+                </tr>
+
+                <tr *ngFor="let card of card">
+                  <td>{{card.idcard}}</td>
+                  <td>{{card.acceptToUser.rightRegistration.firstname}}  {{card.acceptToUser.rightRegistration.surname}}</td>
+                  <td>{{card.acceptToUser.rightRegistration.personalcard}} </td>
+                  <td>{{card.acceptToUser.rightRegistration.birthday}}</td>
+                  <td>{{card.comment}}</td>
+                  <td>{{card.date}}</td>
+                </tr>
+              </table>
+            </div>
             <br/>
           </div>
         </mat-expansion-panel>
