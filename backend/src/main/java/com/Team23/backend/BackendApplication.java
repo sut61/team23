@@ -334,7 +334,26 @@ public class BackendApplication  {
 				hospital.setTypeName(ty);
 				hospitalRepository.save(hospital);
 			});
+			Stream.of("BangkokHospitalRatchasrima").forEach(hospitalName -> {
+				Province pro = new Province();
+				Affiliation aff = new Affiliation();
+				TypeHospital ty = new TypeHospital();
+				Hospital hospital = new Hospital();
+				hospital.setHospitalName(hospitalName);
+				hospital.setBranceFive(12341L);
+				hospital.setBranceNine(123456289L);
+				hospital.setHospitalAddress("hospitalAddress5");
+				hospital.setHospitalPhone("044000500");
+				hospital.setHospitalPostcode(30007L);
 
+				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+				hospital.setAffiliationName(aff);
+				pro = provinceRepository.findByProvinceName("นครราชสีมา");
+				hospital.setProvinceName(pro);
+				ty = typeHospitalRepository.findByTypeName("เอกชน");
+				hospital.setTypeName(ty);
+				hospitalRepository.save(hospital);
+			});
 
 			Stream.of("การอบรมการจ่ายยาที่เกี่ยวกับบัตรสุขภาพ").forEach(topicTraining -> {
 				Training ta = new Training();

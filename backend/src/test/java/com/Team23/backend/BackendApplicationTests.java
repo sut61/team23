@@ -54,6 +54,9 @@ public class BackendApplicationTests {
 	@Autowired private DrugRepository              drugRepository;
 	@Autowired private GoldcardRepository          goldcardRepository;
 	@Autowired private MedicalSuppliesRepository   medicalSuppliesRepository;
+	@Autowired private TrainingRepository		   trainingRepository;
+	@Autowired private LecturerRepository          lecturerRepository;
+	@Autowired private TypeTrainingRepository      typeTrainingRepository;
 
 	private Validator validator;
 
@@ -3405,6 +3408,103 @@ public void testpropertieslong(){
 }
 
 
+	/////////////    Training    /////////////
+	@Test
+	public void traningaddtrue(){
+		Training ta = new Training();
+		ta.setTopicTraining("Topic 2");
+		ta.setObjectiveTraining("Objective2");
+		ta.setImportantTopicTraining("important2");
+		ta.setAttendess(120L);
+		ta.setExpenditure(15000l);
+		System.out.println("\n\n\n\n");
+
+		System.out.println("-----------------------------------------Training Pattern passed -----------------------------------");
+		System.out.println("\n\n\n\n");
+
+
+	}
+
+	@Test
+	public void topictrainingisnull(){
+		Training ta = new Training();
+		ta.setTopicTraining(null);
+		ta.setObjectiveTraining("Objective3");
+		ta.setImportantTopicTraining("important3");
+		ta.setAttendess(123L);
+		ta.setExpenditure(15003l);
+		try{
+			entityManager.persist(ta);
+			entityManager.flush();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------Training Topic is Null-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");	
+
+	}
+}
+	@Test
+	public void topictrainingmorethansixty(){
+		Training ta = new Training();
+		ta.setTopicTraining("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		ta.setObjectiveTraining("Objectives");
+		ta.setImportantTopicTraining("importants");
+		ta.setAttendess(125L);
+		ta.setExpenditure(15005l);
+		try{
+			entityManager.persist(ta);
+			entityManager.flush();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------Training Topic more than sixty-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");	
+
+	}
+
+
+
+
+}
+@Test
+	public void topictraininglessthanfive(){
+		Training ta = new Training();
+		ta.setTopicTraining("a");
+		ta.setObjectiveTraining("Objectives");
+		ta.setImportantTopicTraining("importants");
+		ta.setAttendess(126L);
+		ta.setExpenditure(15006l);
+		try{
+			entityManager.persist(ta);
+			entityManager.flush();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------Training Topic less than five-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");	
+
+	}
+
+
+
+
+}
 
 
 }
