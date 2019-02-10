@@ -17,6 +17,7 @@ import { DiseaseComponent } from './disease/disease.component';
 import { CardComponent } from './card/card.component';
 import { PubliczComponent } from './publicz/publicz.component';
 import { MedicalSuppliesComponent } from './medical-supplies/medical-supplies.component';
+import { AddTrainingComponent } from './add-training/add-training.component';
 
 const routes: Routes = [
     { path: '', redirectTo:'/login' , pathMatch: 'full'},
@@ -36,6 +37,7 @@ const routes: Routes = [
     { path: 'AcceptToUser', component: AcceptToUserComponent, canActivate: [AuthGuard]},
     { path: 'Disease', component: DiseaseComponent, canActivate: [AuthGuard]},
     { path: 'PubZ', component: PubliczComponent, canActivate: [AuthGuard]},
+    { path: 'addTraining', component: AddTrainingComponent, canActivate: [AuthGuard]},
 
 ];
 

@@ -70,6 +70,7 @@ import { DiseaseComponent,Success } from './disease/disease.component';
 import { CardComponent } from './card/card.component';
 import { MedicalSuppliesComponent } from './medical-supplies/medical-supplies.component';
 import { EditMedicalSuppliesComponent } from './edit-medical-supplies/edit-medical-supplies.component';
+import { AddTrainingComponent } from './add-training/add-training.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { EditMedicalSuppliesComponent } from './edit-medical-supplies/edit-medic
     PubliczComponent,
     MedicalSuppliesComponent,
     EditMedicalSuppliesComponent,
+    AddTrainingComponent,
   ],
   imports: [
     BrowserModule,

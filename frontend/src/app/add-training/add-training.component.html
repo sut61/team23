@@ -1,0 +1,129 @@
+<div class="card">
+<mat-form-field>
+  <textarea matInput placeholder="กรอกหัวข้อ" [(ngModel)]="input.topicTraining"></textarea>
+  <mat-icon matSuffix>tab</mat-icon>
+</mat-form-field>
+<br><br>
+<mat-form-field>
+  <textarea matInput placeholder="วัตถุประสงค์" [(ngModel)]="input.objectiveTraining"></textarea>
+  <mat-icon matSuffix>assignment</mat-icon>
+</mat-form-field>
+
+<br><br>
+<mat-form-field>
+  <textarea matInput placeholder="กรอกประเด็นสำคัญ" [(ngModel)]="input.importantTopicTraining"></textarea>
+  <mat-icon matSuffix>list</mat-icon>
+</mat-form-field>
+<br><br>
+<mat-form-field>
+  <textarea matInput placeholder=" จำนวนผู้เข้าร่วม " [(ngModel)]="input.attendess"></textarea>
+  <mat-icon matSuffix>people</mat-icon>
+</mat-form-field>
+<br><br>
+<mat-form-field>
+  <textarea matInput placeholder="งบประมาณที่ใช้" [(ngModel)]="input.expenditure"></textarea>
+  <mat-icon matSuffix>money</mat-icon> 
+</mat-form-field>
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+<button mat-raised-button (click)="trainingadd()" > บันทึก </button>
+<br><br>
+<mat-form-field class = "dropboxstylehospitala">
+  <mat-select placeholder="ประเภท" [(ngModel)]="select.lecturerName">
+    <mat-option *ngFor="let typetraining of typetrainings" [value]="typetraining.typeTrainingName">
+      {{typetraining.typeTrainingName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br><br>
+<mat-form-field class = "dropboxstylehospitala">
+  <mat-select placeholder="ผู้อบรม" [(ngModel)]="select.typeTrainingName">
+    <mat-option *ngFor="let lecturer of lecturers" [value]="lecturer.lecturerName">
+      {{lecturer.lecturerName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br><br>
+
+<mat-form-field class = "dropboxstylehospitala">
+  <mat-select placeholder="สถานที่" [(ngModel)]="select.hospitalName">
+    <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
+      {{hospital.hospitalName}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br><br>
+
+<br><br>
+
+
+
+  
+
+
+
+
+</div>
+
+<div class="footerhospital">
+
+  <mat-card class="searchstylehospital"><h2>เครื่องมือค้นหา  <mat-icon matSuffix>search</mat-icon></h2>
+  </mat-card>
+  <!--<app-hospital-table></app-hospital-table>-->
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="dataSourceTraining" class="mat-elevation-z8">
+  
+    <!-- topicTraining -->
+    <ng-container matColumnDef="topicTraining">
+      <th mat-header-cell *matHeaderCellDef> หัวข้อ </th>
+      <td mat-cell *matCellDef="let element"> {{element.topicTraining}} </td>
+    </ng-container>
+  
+    <!-- objectiveTraining -->
+    <ng-container matColumnDef="objectiveTraining">
+      <th mat-header-cell *matHeaderCellDef> วัตถุประสงค์ </th>
+      <td mat-cell *matCellDef="let element"> {{element.objectiveTraining}} </td>
+    </ng-container>
+  
+    <!--  importantTopicTraining -->
+    <ng-container matColumnDef="importantTopicTraining">
+      <th mat-header-cell *matHeaderCellDef> ประเด็นสำคัญ </th>
+      <td mat-cell *matCellDef="let element"> {{element.importantTopicTraining}} </td>
+    </ng-container>
+
+     <!--  typeTrainingName -->
+     <ng-container matColumnDef="typeTrainingName">
+      <th mat-header-cell *matHeaderCellDef>ประเภท </th>
+      <td mat-cell *matCellDef="let element"> {{element.typeTrainingName.typeTrainingName}} </td>
+    </ng-container>
+  
+    <!-- lecturerName -->
+    <ng-container matColumnDef="lecturerName">
+      <th mat-header-cell *matHeaderCellDef> ผู้อบรม </th>
+      <td mat-cell *matCellDef="let element"> {{element.lecturerName.lecturerName}} </td>
+    </ng-container>
+    
+    <!-- hospitalName -->
+    <ng-container matColumnDef="hospitalName">
+      <th mat-header-cell *matHeaderCellDef> สถานที่ </th>
+      <td mat-cell *matCellDef="let element"> {{element.hospitalName.hospitalName}} </td>
+    </ng-container>
+
+     <!-- attendess -->
+    <ng-container matColumnDef="attendess">
+      <th mat-header-cell *matHeaderCellDef> จำนวนผู้เข้าร่วม </th>
+      <td mat-cell *matCellDef="let element"> {{element.attendess}} </td>
+    </ng-container>
+
+     <!-- expenditure -->
+    <ng-container matColumnDef="expenditure">
+      <th mat-header-cell *matHeaderCellDef> งบประมาณที่ใช้ </th> 
+      <td mat-cell *matCellDef="let element"> {{element.expenditure}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

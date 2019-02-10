@@ -239,3 +239,19 @@ animation: slide-out-right 10s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.trainingstyle{
+  background-color: #f1f1f1;
+  padding : 30px;
+  text-align: left;
+  text-shadow: 2px 2px 5px rgb(0, 171, 235);
+  font-family: 'Bai Jamjuree', sans-serif;
+  border-left: 6px solid rgb(0, 171, 235);
+  border-right: 6px solid rgb(0, 171, 235);
+  border-top: 6px solid white;
+  font-size: 30px;
+  top: 50%;
+  left: 50%;
+ border-radius: 20px
+  
+}
