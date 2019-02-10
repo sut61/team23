@@ -79,7 +79,7 @@ getOfficer(): Observable<any> {
     return this.http.get('//localhost:8080/listtraining');
   }
   getLecturer(): Observable<any> {
-    return this.http.get('//localhost:8080/listlucturer');
+    return this.http.get('//localhost:8080/listlecturer');
   }
   getTypeTraining(): Observable<any> {
     return this.http.get('//localhost:8080/listtypetraining');
