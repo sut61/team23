@@ -4,10 +4,12 @@ import { HttpClient} from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AlertService } from '../alert.service';
 import { AuthService } from '../auth/auth.service';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {DatePipe} from '@angular/common';
+
 
 export interface CardElement {
 AcceptId: number;
@@ -59,7 +61,7 @@ dataSourceAccepted = new MatTableDataSource<CardElement>(this.Cardshow);
 
 CurrentDate = new Date();
 pipe = new DatePipe('en-US');
-constructor(private alertService : AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
+constructor(private formbuilder: FormBuilder,private alertService : AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
     this.lock = fb.group({
        hideRequiredMarker: false,
        floatLabel: 'never',
@@ -91,7 +93,9 @@ this.goldcardService.getExpenses().subscribe(data => {
 console.log(this.Expensess);
     });
   }
-Add(){
+Add(){if (this.input.Cardcode === '' || this.input.Comment === '' || this.input.AcceptId === '' || this.input.Expenses === '') {
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    } else {
       this.httpClient.post("http://localhost:8080/Card/add/"+this.input.Cardcode+","+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+","+this.input.Comment+
       ","+this.input.AcceptId+","+ this.input.Expenses, this.input)
       .subscribe(
@@ -102,17 +106,18 @@ alert("บันทึกแล้วเรียบร้อย");
 
           },
           error => {
+              alert("AcceptId ไม่ตรงกับฐานข้อมูล");
               console.log('Error', error);
           }
       );
     }
-
+}
 Delete(){
       this.httpClient.post("http://localhost:8080/deleteCard/"+ this.input.DeleteSelect, this.input)
       .subscribe(
           data => {
               console.log('Delete Request is successful', data);
-alert("แจ้งหายเรียบร้อย");
+              alert("แจ้งหายเรียบร้อย");
         this.router.navigate(['/reload/Card']);
 
           },
@@ -121,6 +126,62 @@ alert("แจ้งหายเรียบร้อย");
           }
       );
     }
+
+isValidFormSubmitted = null;
+
+          cardForm = this.formbuilder.group({
+          Comment_check : ['', [Validators.required, Validators.pattern('.{5,25}')]],
+          Cardcode_check: ['', [Validators.required, Validators.pattern('card.+')]],
+          AcceptId_check : ['', [Validators.required, Validators.pattern('\\d+')]],
+          });
+
+
+Check(){
+          this.isValidFormSubmitted = false;
+          if (this.cardForm.invalid) {
+                        this.alertService.error('กรุณา กรอกข้อมูล ให้ครบ');
+                        if(this.cardForm.controls['Cardcode_check'].hasError('pattern')){
+                                          alert("กรุณา กรอก Card code ขึ้นต้นด้วยคำว่า card ให้ถูกต้อง");
+
+                        }
+                        else if(this.cardForm.controls['Comment_check'].hasError('pattern')){
+
+                                          alert("กรุณา กรอก comment ความยาว 5 - 25 ตัวอักษร ให้ถูกต้อง");
+                        }else if(this.cardForm.controls['AcceptId_check'].hasError('pattern')){
+                                          alert("กรุณา กรอก AcceptId เป็นตัวเลข ให้ถูกต้อง");
+
+                        }
+                        return;
+          }
+           else if (this.cardForm.valid){
+
+                       this.Add();
+
+                        this.isValidFormSubmitted = true;
+           }
+
+            this.isValidFormSubmitted = true;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   applyFilter(filterValue: string) {
     this.newMethod(filterValue);
