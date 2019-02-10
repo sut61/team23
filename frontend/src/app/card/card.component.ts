@@ -33,7 +33,7 @@ rightregistrations: Array<any>;
 PassAcceptToUser: Array<any>;
 Cardshow : Array<any>;
 Expensess : Array<any>;
-
+card : Array<any>;
 
 input: any = {
 AcceptId: '',
@@ -42,6 +42,7 @@ Comment: '',
 date: '',
 Expenses: '',
 status: '',
+DeleteSelect: '',
 };
 
 select: any = {
@@ -67,11 +68,14 @@ constructor(private alertService : AlertService,private authService: AuthService
   ngOnInit() {
 
 
-  this.goldcardService.getRightRegistration().subscribe(data =>{
+  this.goldcardService.getCard().subscribe(data =>{
+                  this.card = data;
+                  console.log(this.card);
+            });
+this.goldcardService.getRightRegistration().subscribe(data =>{
                   this.rightregistrations = data;
                   console.log(this.rightregistrations);
             });
-
 
 
    this.goldcardService.getPassAcceptToUser().subscribe(data => {
@@ -103,7 +107,20 @@ alert("บันทึกแล้วเรียบร้อย");
       );
     }
 
+Delete(){
+      this.httpClient.post("http://localhost:8080/deleteCard/"+ this.input.DeleteSelect, this.input)
+      .subscribe(
+          data => {
+              console.log('Delete Request is successful', data);
+alert("แจ้งหายเรียบร้อย");
+        this.router.navigate(['/reload/Card']);
 
+          },
+          error => {
+              console.log('Error', error);
+          }
+      );
+    }
 
   applyFilter(filterValue: string) {
     this.newMethod(filterValue);

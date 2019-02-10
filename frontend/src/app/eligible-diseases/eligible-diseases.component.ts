@@ -112,6 +112,7 @@ Delete(){
       .subscribe(
           data => {
               console.log('Delete Request is successful', data);
+alert("ลบแล้วเรียบร้อย");
         this.router.navigate(['/reload/EligibleDiseases']);
 
           },

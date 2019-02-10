@@ -84,5 +84,7 @@ getOfficer(): Observable<any> {
   getTypeTraining(): Observable<any> {
     return this.http.get('//localhost:8080/listtypetraining');
   }
-
+ getCard(): Observable<any> {
+    return this.http.get('//localhost:8080/Card');
+  }
 }
