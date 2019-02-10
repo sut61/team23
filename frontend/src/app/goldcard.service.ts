@@ -75,6 +75,14 @@ getOfficer(): Observable<any> {
   getTypeOfPublicz(): Observable<any> {
     return this.http.get('//localhost:8080/TypeOfPublicz');
   }
-
+  getTraining(): Observable<any> {
+    return this.http.get('//localhost:8080/listtraining');
+  }
+  getLecturer(): Observable<any> {
+    return this.http.get('//localhost:8080/listlucturer');
+  }
+  getTypeTraining(): Observable<any> {
+    return this.http.get('//localhost:8080/listtypetraining');
+  }
 
 }
