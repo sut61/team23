@@ -61,7 +61,14 @@ dataSourceAccepted = new MatTableDataSource<CardElement>(this.Cardshow);
 
 CurrentDate = new Date();
 pipe = new DatePipe('en-US');
-constructor(private formbuilder: FormBuilder,private alertService : AlertService,private authService: AuthService,fb: FormBuilder,private goldcardService: GoldcardService, private httpClient: HttpClient,private router: Router){
+constructor(private formbuilder: FormBuilder,
+            private alertService : AlertService,
+            private authService: AuthService,
+            fb: FormBuilder,
+            private goldcardService: GoldcardService,
+            private httpClient: HttpClient,
+            private router: Router){
+
     this.lock = fb.group({
        hideRequiredMarker: false,
        floatLabel: 'never',
@@ -93,7 +100,8 @@ this.goldcardService.getExpenses().subscribe(data => {
 console.log(this.Expensess);
     });
   }
-Add(){if (this.input.Cardcode === '' || this.input.Comment === '' || this.input.AcceptId === '' || this.input.Expenses === '') {
+Add(){
+      if (this.input.Cardcode === '' || this.input.Comment === '' || this.input.Expenses === '' || this.input.AcceptId === '') {
       alert('กรุณากรอกข้อมูลให้ครบถ้วน');
     } else {
       this.httpClient.post("http://localhost:8080/Card/add/"+this.input.Cardcode+","+this.pipe.transform(this.CurrentDate,'dd:MM:yyyy')+","+this.input.Comment+
@@ -113,6 +121,9 @@ alert("บันทึกแล้วเรียบร้อย");
     }
 }
 Delete(){
+if (this.input.DeleteSelect === '') {
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    } else {
       this.httpClient.post("http://localhost:8080/deleteCard/"+ this.input.DeleteSelect, this.input)
       .subscribe(
           data => {
@@ -125,7 +136,7 @@ Delete(){
               console.log('Error', error);
           }
       );
-    }
+    }}
 
 isValidFormSubmitted = null;
 
@@ -137,9 +148,13 @@ isValidFormSubmitted = null;
 
 
 Check(){
+
+if (this.input.Cardcode === '' || this.input.Comment === '' || this.input.Expenses === '' || this.input.AcceptId === '') {
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    } else {
           this.isValidFormSubmitted = false;
           if (this.cardForm.invalid) {
-                        this.alertService.error('กรุณา กรอกข้อมูล ให้ครบ');
+
                         if(this.cardForm.controls['Cardcode_check'].hasError('pattern')){
                                           alert("กรุณา กรอก Card code ขึ้นต้นด้วยคำว่า card ให้ถูกต้อง");
 
@@ -155,6 +170,8 @@ Check(){
           }
            else if (this.cardForm.valid){
 
+
+
                        this.Add();
 
                         this.isValidFormSubmitted = true;
@@ -164,7 +181,7 @@ Check(){
    }
 
 
-
+}
 
 
 

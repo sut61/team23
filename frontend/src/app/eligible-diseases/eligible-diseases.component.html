@@ -44,10 +44,6 @@
           <mat-card-content>
             <h3 style="background-color: #ffc000">&nbsp;&nbsp;โรค</h3>
 
-
-
-
-
             <mat-form-field style="width :100%">
               <mat-select placeholder="โรค" [(ngModel)]="ed.DiseaseSelect" name="diseaseName">
                 <mat-option *ngFor="let Disease of diseases" [value]="Disease.diseaseName">
@@ -55,30 +51,39 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <br>
 
-            <mat-form-field hintLabel="ตัวเลขเท่านั้น" style="width :100%">
-              <input matInput placeholder="เลขเอกสารอ้างอิง" [(ngModel)]="ed.DocumentSelect" name="Document">
-            </mat-form-field>
-            <br>
-            <mat-form-field hintLabel="ขึ้นต้นด้วย El และมีความยาว 5-25 เท่านั้น" style="width :100%">
-              <input matInput placeholder="Comment/Code" [(ngModel)]="ed.CodeSelect" name="Code">
-            </mat-form-field>
-            <br><br>
-            <h3 style="background-color: #ffc000">ผู้ยืนยัน</h3>
-
-
-            <form #checkdataUser="ngForm" (ngSubmit)="CheckdataUser(checkdataUser.value)" class="flex-item">
+            <form #checkdataUser="ngForm" [formGroup]="EligibleForm" (ngSubmit)="Check(checkdataUser.value)" class="flex-item">
 
               <mat-form-field hintLabel="" style="width :100%">
-                <input matInput placeholder="Username" [(ngModel)]="checkdataUser.username"  [(ngModel)]="ed.UsernameSelect" name="username">
+                <input matInput placeholder="เลขเอกสารอ้างอิง" [(ngModel)]="ed.DocumentSelect"  autocomplete="off" formControlName="Document_check">
               </mat-form-field>
-              <mat-form-field style="width :100%">
-                <input matInput type="password" placeholder="Password" [(ngModel)]="checkdataUser.password" name="password">
+              <a style="font-size:15px;color:red" *ngIf="EligibleForm.controls['Document_check'].hasError('pattern')">กรุณา กรอก Document เป็นตัวเลข ให้ถูกต้อง</a>
+
+              <mat-form-field hintLabel="" style="width :100%">
+                <input matInput placeholder="Code Eligible Disease" [(ngModel)]="ed.CodeSelect"  autocomplete="off" formControlName="Code_check">
               </mat-form-field>
+              <a style="font-size:15px;color:red" *ngIf="EligibleForm.controls['Code_check'].hasError('pattern')">กรุณา กรอก Code ขึ้นต้นด้วย El และ ความยาว 5 - 25 ตัวอักษร ให้ถูกต้อง</a>
+
+              <br><br>
+              <h3 style="background-color: #ffc000">ผู้ยืนยัน</h3>
+
+              <mat-form-field hintLabel="" style="width :100%">
+                <input matInput placeholder="Username" [(ngModel)]="checkdataUser.username" [(ngModel)]="ed.UsernameSelect"  autocomplete="off" formControlName="User_check" name="username">
+              </mat-form-field>
+              <a style="font-size:15px;color:red" *ngIf="EligibleForm.controls['User_check'].hasError('pattern')">กรุณา กรอก Username ความยาว 5 - 40 ตัวอักษร ให้ถูกต้อง</a>
+
+              <mat-form-field hintLabel="" style="width :100%">
+                <input matInput type="password" placeholder="Password" [(ngModel)]="checkdataUser.password" [(ngModel)]="ed.PasswordSelect"   autocomplete="off" formControlName="Password_check" name="password">
+              </mat-form-field>
+              <a style="font-size:15px;color:red" *ngIf="EligibleForm.controls['Password_check'].hasError('pattern')">กรุณา กรอก Password ความยาว 4 - 20 ตัวอักษร ให้ถูกต้อง</a>
 
             </form>
-            <button type="submit" mat-stroked-button (click)="CheckdataUser(checkdataUser.value)" color="warn">เพิ่ม</button>
+
+
+
+
+
+            <button type="submit" mat-stroked-button (click)="Check(checkdataUser.value)" color="warn">เพิ่ม</button>
 
           </mat-card-content>
         </mat-card>

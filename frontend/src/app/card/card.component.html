@@ -53,10 +53,12 @@
                     <input matInput placeholder="Comment" [(ngModel)]="input.Comment"  autocomplete="off" formControlName="Comment_check">
                   </mat-form-field>
                   <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Comment_check'].hasError('pattern')">ความยาว 5 - 25 ตัวอักษร</a>
+
                   <mat-form-field hintLabel="AcceptId" style="width :100%">
                     <input matInput placeholder="AcceptId" [(ngModel)]="input.AcceptId" autocomplete="off" formControlName="AcceptId_check">
                   </mat-form-field>
                   <a style="font-size:15px;color:red" *ngIf="cardForm.controls['AcceptId_check'].hasError('pattern')">ตัวเลข</a>
+
                 </form>
 
                 <mat-form-field style="width :100%">
