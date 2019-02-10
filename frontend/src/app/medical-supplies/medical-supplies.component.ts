@@ -134,11 +134,11 @@ constructor(private medicalsuppliesService:MedicalsuppliesService, private httpC
        
       console.log('Post Request is seccessful',data);
      
-      window.location.reload();
+      // window.location.reload();
     },
     error=>{
       console.log('Rrror',error);
-      this.alertService.error('ไม่สามารถบันทึกได้ โปรดกรุณาตรวสอบข้อมูลอีกครั้ง');
+      this.alertService.error('ไม่สามารถบันทึกได้ เนื่องเกิดจากมีข้อมูลอยู่แล้วหรือใส่ข้อมูลไม่ครบ โปรดกรุณาตรวสอบข้อมูลอีกครั้ง');
     }
     );
   }
@@ -149,6 +149,7 @@ constructor(private medicalsuppliesService:MedicalsuppliesService, private httpC
       data =>{
       alert('ลบเรียบร้อย');
       console.log('Delete Request is seccessful',data);
+
       window.location.reload();
     },
     error=>{
