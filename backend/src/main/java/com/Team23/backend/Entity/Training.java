@@ -12,6 +12,8 @@ import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
 import java.util.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 @Entity // บอกว่าเป็น class entity class ที่เก็บขอมูล
 @Data // lombox จะสร้าง method getter setter ให้เอง
@@ -27,14 +29,26 @@ public class Training {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "training_seq")
     // Annotations Generate id เอง ตอน insert
     @Column(name = "Training_ID", unique = true, nullable = false)
-    private @NonNull Long trainingId;
+    private  Long trainingId;
 
-    private @NonNull String topicTraining;
-    private @NonNull String objectiveTraining;
-    private @NonNull String importantTopicTraining;
-    private @NonNull Long attendess;
-    private @NonNull Long expenditure;
+    @NotNull
+    @Size(min=5,max=60)
+    private  String topicTraining;
 
+    @NotNull
+    
+    private  String objectiveTraining;
+
+    @NotNull
+    private  String importantTopicTraining;
+
+    @NotNull
+    private  Long attendess;
+
+    @NotNull
+    private  Long expenditure;
+
+    
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Lecturer.class)
     @JoinColumn(name = "training_lecturer", insertable = true)
     private Lecturer lecturerName;
