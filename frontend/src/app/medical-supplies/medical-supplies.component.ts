@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { AlertService } from '../alert.service';
 import { MedicalsuppliesService } from '../medicalsupplies.service';
 import { EditMedicalSuppliesComponent } from '../edit-medical-supplies/edit-medical-supplies.component';
+import { Validators, FormBuilder } from '@angular/forms';
+import { Medical } from './medical';
 export interface MedicalSupplies{
 medicalsuppliesId:number;
 codeNumber:String;
@@ -43,14 +45,10 @@ export class MedicalSuppliesComponent implements OnInit {
   private newMethod(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     
-  }
-  
-
-
+  } 
 MedicalSupplies: Array<any>;
 MedicalInstrument:Array<any>
 Useability:Array<any>;
-
 view: any={
   codeNumber:null,
   modelNumber:null,
@@ -61,11 +59,66 @@ view: any={
   useability:null
 }
 
+isValidFormSubmitted = null;
+   codeNumber = "(C).+";
+   modelNumber = ".{1,5}";
+   medicalSupplies=".{2,30}";
+   brandName=".{2,10}";
+   properties=".{2,30}";
+    myForm = this.formbuilder.group({
+    codeNumber_no : ['', [Validators.required, Validators.pattern(this.codeNumber)]],
+    modelNumber_no: ['', [Validators.required, Validators.pattern(this.modelNumber)]],
+    medicalSupplies_no: ['', [Validators.required, Validators.pattern(this.medicalSupplies)]],
+    brandName_no : ['', [Validators.required, Validators.pattern(this.brandName)]],
+    properties_no : ['', [Validators.required, Validators.pattern(this.properties)]],
+    medicalInstrument_no: ['', [Validators.required, Validators.pattern('')]],
+    useability_no: ['', [Validators.required, Validators.pattern('')]],
+
+    
+    });
+
+    onFormSubmit(){
+      this.isValidFormSubmitted = false;
+      if (this.myForm.invalid) {
+                this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน');
+                if(this.myForm.controls['codeNumber_no'].hasError('pattern')){
+                                this.alertService.error('กรุณากรอก C นำหน้า');
+                }else if(this.myForm.controls['modelNumber_no'].hasError('pattern')){
+                                this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                }
+                else if(this.myForm.controls['medicalSupplies_no'].hasError('pattern')){
+                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                }
+                else if(this.myForm.controls['brandName_no'].hasError('pattern')){
+                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                }
+                else if(this.myForm.controls['properties_no'].hasError('pattern')){
+                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                }
+                else if(this.myForm.controls['medicalInstrument_no'].hasError('pattern')){
+                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                }
+                else if(this.myForm.controls['useability_no'].hasError('pattern')){
+                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                }
+
+
+
+
+                return;
+      }
+      else if (this.myForm.valid){
+              this.onSave(this.myForm.value);
+              this.isValidFormSubmitted = true;
+      }
+
+       this.isValidFormSubmitted = true;
+  }
+
+
  
 
-
-
-constructor(private medicalsuppliesService:MedicalsuppliesService, private httpClient:HttpClient ,private dialog: MatDialog,private alertService:AlertService ) { }
+constructor(private formbuilder:FormBuilder,private medicalsuppliesService:MedicalsuppliesService, private httpClient:HttpClient ,private dialog: MatDialog,private alertService:AlertService ) { }
 
   ngOnInit() {
     this.medicalsuppliesService.getMedicalSupplies().subscribe(medicalSupplies => {
@@ -74,7 +127,7 @@ constructor(private medicalsuppliesService:MedicalsuppliesService, private httpC
       this.dataSource.data=medicalSupplies;   
       
     });
-    
+      
     this.medicalsuppliesService.getMedicalInstrument().subscribe(medicalInstrument => {
       this.MedicalInstrument = medicalInstrument;
       console.log(this.MedicalInstrument);
@@ -85,34 +138,12 @@ constructor(private medicalsuppliesService:MedicalsuppliesService, private httpC
     });
 
   }
-  onSave(){
-    if (this.view.codeNumber== null) {
-      this.alertService.error('กรุณากรอกรหัสเวชภัณฑ์');
-    }
-  
-    else if (this.view.modelNumber == null) {
-      this.alertService.error('กรุณากรอกหมายเลขรุ่น');
-    }
-    else if( this.view.medicalSupplies == null){
-      this.alertService.error('กรุณากรอกชื่อเวชภัณฑ์');
-    }
-    else if ( this.view.brandName == null) {
-      this.alertService.error('กรุณากรอกชื่อแบรนด์');
-    }
-    else if(this.view.medicalInstrument == null) {
-      this.alertService.error('กรุณาเลือกอุปกรณ์การแพทย์');
-    }
-    else if(this.view.useability == null) {
-      this.alertService.error('กรุณาเลือกการใช้งาน');
-    }
-    else{
 
-      this.onSaveFunction()
-      this.alertService.success('บันทึกเรียบร้อย');
-    }
-  }
+
+
+
   
-  onSaveFunction(){
+  onSave(medical:Medical){
     console.log(this.view.codeNumber);
     console.log(this.view.modelNumber);
     console.log(this.view.medicalSupplies);
@@ -121,13 +152,13 @@ constructor(private medicalsuppliesService:MedicalsuppliesService, private httpC
     console.log(this.view.medicalInstrument);
     console.log(this.view.useability);
 
-    this.httpClient.post('http://localhost:8080/MedicalSupplies/'+ this.view.codeNumber +  
-    '/'+ this.view.modelNumber + 
-    '/'+ this.view.medicalSupplies +
-    '/'+ this.view.brandName + 
-    '/'+ this.view.properties + 
-    '/'+ this.view.medicalInstrument +
-    '/'+ this.view.useability,this.view)
+    this.httpClient.post('http://localhost:8080/MedicalSupplies/'+ medical.codeNumber_no +  
+    '/'+ medical.modelNumber_no + 
+    '/'+ medical.medicalSupplies_no +
+    '/'+ medical.brandName_no + 
+    '/'+ medical.properties_no + 
+    '/'+ medical.medicalInstrument_no +
+    '/'+ medical.useability_no,medical)
     .subscribe
     (
       data =>{
@@ -143,7 +174,7 @@ constructor(private medicalsuppliesService:MedicalsuppliesService, private httpC
     );
   }
   onDelete(medicalsuppliesId){
-    this.httpClient.delete('http://localhost:8080/MedicalSupplies/'+ medicalsuppliesId )
+  this.httpClient.delete('http://localhost:8080/MedicalSupplies/'+ medicalsuppliesId )
     .subscribe
     (
       data =>{

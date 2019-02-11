@@ -4,51 +4,67 @@
 </mat-card>
 <mat-card class="background-image-matcart">
 
+  <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()" class="example-form">
+    <!-----------------------------------รหัสเวชภัณฑ์----------------------------------------------->
 
-<!-----------------------------------รหัสเวชภัณฑ์----------------------------------------------->
-<form class="example-form">
+
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-      <input matInput [(ngModel)]="view.codeNumber" name="codeNumber" placeholder="รหัสเวชภัณฑ์">
-
+      <input matInput [(ngModel)]="view.codeNumber" name="codeNumber" placeholder="รหัสเวชภัณฑ์" autocomplete="off"
+        formControlName="codeNumber_no">
     </mat-form-field>
-  </form>
-<!---------------------------------------------------------------------------------->
-  <!-----------------------------------หมายเลขรุ่น----------------------------------------------->
-  <form class="example-form">
-      <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-        <input matInput type="text" [(ngModel)]="view.modelNumber" name="modelNumber" placeholder="หมายเลขรุ่น">
-        <!-- <mat-hint align="end" >{{view.modelNumber.length || 0}}/10</mat-hint> -->
 
-      </mat-form-field>
-      
 
-    </form>
-  <!---------------------------------------------------------------------------------->
-<!-----------------------------------ชื่อเวชภัณฑ์----------------------------------------------->
-  <form class="example-form">
+    <!---------------------------------------------------------------------------------->
+    <!-----------------------------------หมายเลขรุ่น----------------------------------------------->
+
+
+    <mat-form-field class="example-full-width" hintLabel="Min 1 and Max 5 characters">
+      <input matInput type="text" [(ngModel)]="view.modelNumber" name="modelNumber" placeholder="หมายเลขรุ่น"
+        autocomplete="off" formControlName="modelNumber_no">
+      <!-- <mat-hint align="end">{{view.modelNumber.length || 0}}/10</mat-hint> -->
+    </mat-form-field>
+
+
+
+    <!---------------------------------------------------------------------------------->
+    <!-----------------------------------ชื่อเวชภัณฑ์----------------------------------------------->
+
+
+
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-      <input matInput [(ngModel)]="view.medicalSupplies" name="medicalSupplies" placeholder="ชื่อเวชภัณฑ์">
+      <input matInput [(ngModel)]="view.medicalSupplies" name="medicalSupplies" placeholder="ชื่อเวชภัณฑ์"
+        autocomplete="off" formControlName="medicalSupplies_no">
     </mat-form-field>
-  </form>
-  <!---------------------------------------------------------------------------------->
-<!-----------------------------------ชื่อแบรนด์----------------------------------------------->
-<form class="example-form">
-    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-      
-      <input matInput [(ngModel)]="view.brandName" name="brandName" placeholder="ชื่อแบรนด์">
-    </mat-form-field>
-  </form>
-  <!---------------------------------------------------------------------------------->
 
-<!-----------------------------------คุณสมบัติ----------------------------------------------->
-<form class="example-form">
-    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-      <input matInput [(ngModel)]="view.properties" name="properties" placeholder="คุณสมบัติ">
-    </mat-form-field>
-  </form>
-  <!---------------------------------------------------------------------------------->
 
-  <!--
+
+    <!---------------------------------------------------------------------------------->
+    <!-----------------------------------ชื่อแบรนด์----------------------------------------------->
+
+
+    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
+      <input matInput [(ngModel)]="view.brandName" name="brandName" placeholder="ชื่อแบรนด์" autocomplete="off"
+        formControlName="brandName_no">
+    </mat-form-field>
+
+
+
+    <!---------------------------------------------------------------------------------->
+
+    <!-----------------------------------คุณสมบัติ----------------------------------------------->
+
+
+
+    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
+      <input matInput [(ngModel)]="view.properties" name="properties" placeholder="คุณสมบัติ" autocomplete="off"
+        formControlName="properties_no">
+    </mat-form-field>
+
+
+
+    <!---------------------------------------------------------------------------------->
+
+    <!--
 <mat-select [(ngModel)]="view.position" name="position" placeholder="ตำแหน่ง">
   <mat-option *ngFor="let position(นำค่าที่ได้มาใส่ position) of Position(ดึงมาจาก tyscrip)" [value]="(ชื่อจาก Position มาใส่ position)position.position(ชื่อจาก database)">
       {{position.position}}
@@ -56,117 +72,130 @@
 </mat-select>
 ถ้าใช้ ngmodelไม่ได้ให้ import { FormsModule} from '@angular/forms';
 -->
-  <!---------------------------------อุปกรณ์การแพทย์----------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.medicalInstrument" name="medicalInstrument" placeholder="อุปกรณ์การแพทย์" >
-        <mat-option >None</mat-option>
-        <mat-option *ngFor="let medicalInstrument of MedicalInstrument " [value]="medicalInstrument.medicalInstrumentName" >{{medicalInstrument.medicalInstrumentName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <!-------------------------------------------------------------------------->
+    <!---------------------------------อุปกรณ์การแพทย์----------------------------------------------->
+    <div class="example-form">
+
+
+      <mat-form-field class="example-form">
+        <mat-select [(ngModel)]="view.medicalInstrument" name="medicalInstrument" placeholder="อุปกรณ์การแพทย์"
+          formControlName="medicalInstrument_no">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let medicalInstrument of MedicalInstrument "
+            [value]="medicalInstrument.medicalInstrumentName">{{medicalInstrument.medicalInstrumentName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <!-------------------------------------------------------------------------->
 
 
 
-  <!--------------------------------การใช้งาน--------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.useability" name="useability" placeholder="การใช้งาน">
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let useability of Useability " [value]="useability.useabilityName">{{useability.useabilityName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <!------------------------------------------------------------------------------->
-  <div  class="button-background">
-    <button (click)="onSave()"  class="button-background"  mat-raised-button>ADD</button>
-  </div>
+    <!--------------------------------การใช้งาน--------------------------------------------->
+    <div class="example-form">
+      <mat-form-field class="example-form">
+        <mat-select [(ngModel)]="view.useability" name="useability" placeholder="การใช้งาน"
+          formControlName="useability_no">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let useability of Useability " [value]="useability.useabilityName">
+            {{useability.useabilityName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!------------------------------------------------------------------------------->
+
+
+    <div class="button-background">
+      <button (click)="onSave()" class="button-background" mat-raised-button>ADD</button>
+    </div>
+
+
+  </form>
 </mat-card>
 
 <mat-card class=background-image>
   <h1>Medical Supplies Table</h1>
 </mat-card>
 <mat-card>
-    <mat-card ><h2 class="example-form-search">ค้นหาด้วยชื่อเวชภัณฑ์  <mat-icon matSuffix>search</mat-icon></h2>
-     <br>
-     <mat-form-field class="search">
-       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
-     </mat-form-field>
-   </mat-card>
+  <mat-card>
+    <h2 class="example-form-search">ค้นหาด้วยชื่อเวชภัณฑ์ <mat-icon matSuffix>search</mat-icon>
+    </h2>
+    <br>
+    <mat-form-field class="search">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+    </mat-form-field>
+  </mat-card>
 
-<mat-card>
+  <mat-card>
 
-    
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" 
       -->
-  <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Action </th>   
-        <td mat-cell *matCellDef="let row"> 
-         <button mat-raised-button class="botton-edit-background"   (click)="onEdit(row.medicalsuppliesId)" >Edit</button> 
-         <button mat-raised-button class="botton-delete-background" (click)="onDelete(row.medicalsuppliesId)">delete</button> 
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-raised-button class="botton-edit-background" (click)="onEdit(row.medicalsuppliesId)">Edit</button>
+          <button mat-raised-button class="botton-delete-background"
+            (click)="onDelete(row.medicalsuppliesId)">delete</button>
         </td>
-  </ng-container>  
-  <!-- Position Column -->
-  <ng-container matColumnDef="medicalsuppliesId">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element" > {{element.medicalsuppliesId}} </td>
-  </ng-container>
-  <!-- Name Column -->
-  <ng-container matColumnDef="codeNumber">
-      <th mat-header-cell *matHeaderCellDef> รหัสเวชภัณฑ์ </th>
-      <td mat-cell *matCellDef="let element"> {{element.codeNumber}} </td>
-    </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="medicalsuppliesName">
-      <th mat-header-cell *matHeaderCellDef> ชื่อเวชภัณฑ์ </th>
-      <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesName}} </td>
-    </ng-container>
-
-  
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="brandName">
-      <th mat-header-cell *matHeaderCellDef> ชื่อแบรนด์ </th>
-      <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
-    </ng-container>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="medicalsuppliesId">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesId}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="codeNumber">
+        <th mat-header-cell *matHeaderCellDef> รหัสเวชภัณฑ์ </th>
+        <td mat-cell *matCellDef="let element"> {{element.codeNumber}} </td>
+      </ng-container>
 
       <!-- Name Column -->
-  <ng-container matColumnDef="modelNumber">
-      <th mat-header-cell *matHeaderCellDef> หมายเลขรุ่น </th>
-      <td mat-cell *matCellDef="let element"> {{element.modelNumber}} </td>
-    </ng-container>
+      <ng-container matColumnDef="medicalsuppliesName">
+        <th mat-header-cell *matHeaderCellDef> ชื่อเวชภัณฑ์ </th>
+        <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesName}} </td>
+      </ng-container>
+
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="brandName">
+        <th mat-header-cell *matHeaderCellDef> ชื่อแบรนด์ </th>
+        <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="modelNumber">
+        <th mat-header-cell *matHeaderCellDef> หมายเลขรุ่น </th>
+        <td mat-cell *matCellDef="let element"> {{element.modelNumber}} </td>
+      </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="properties">
-          <th mat-header-cell *matHeaderCellDef> คุณสมบัติ </th>
-          <td mat-cell *matCellDef="let element"> {{element.properties}} </td>
-        </ng-container>
+        <th mat-header-cell *matHeaderCellDef> คุณสมบัติ </th>
+        <td mat-cell *matCellDef="let element"> {{element.properties}} </td>
+      </ng-container>
 
 
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="medicalInstrument">
-    <th mat-header-cell *matHeaderCellDef> อุปกรณ์การแพทย์ </th>
-    <td mat-cell *matCellDef="let element"> {{element.medicalInstrument.medicalInstrumentName}} </td>
-  </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="medicalInstrument">
+        <th mat-header-cell *matHeaderCellDef> อุปกรณ์การแพทย์ </th>
+        <td mat-cell *matCellDef="let element"> {{element.medicalInstrument.medicalInstrumentName}} </td>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="useability">
-    <th mat-header-cell *matHeaderCellDef> การใช้งาน </th>
-    <td mat-cell *matCellDef="let element"> {{element.useability.useabilityName}} </td>
-  </ng-container>
-
- 
-  
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="useability">
+        <th mat-header-cell *matHeaderCellDef> การใช้งาน </th>
+        <td mat-cell *matCellDef="let element"> {{element.useability.useabilityName}} </td>
+      </ng-container>
 
 
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
