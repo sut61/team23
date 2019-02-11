@@ -62,7 +62,7 @@ import { AlertService } from './alert.service';
 import { UserviewComponent } from './userview/userview.component';
 import { EligibleDiseasesComponent } from './eligible-diseases/eligible-diseases.component';
 import { ReloadpageComponent } from './reloadpage/reloadpage.component';
-import { TreatmentHistoryComponent } from './treatment-history/treatment-history.component';
+import { TreatmentHistoryComponent,Thpass } from './treatment-history/treatment-history.component';
 import { AddMidicineComponent } from './add-midicine/add-midicine.component';
 import { EditMidicineComponent } from './edit-midicine/edit-midicine.component';
 import { AcceptToUserComponent,Sheet,Sheetq } from './accept-to-user/accept-to-user.component';
@@ -94,6 +94,7 @@ import { AddTrainingComponent } from './add-training/add-training.component';
     Sheet,
     Sheetq,
     Success,
+    Thpass,
     DiseaseComponent,
     CardComponent,
     PubliczComponent,
@@ -150,7 +151,7 @@ import { AddTrainingComponent } from './add-training/add-training.component';
     MatDialogModule
   ],
   providers: [AuthService, AuthGuard,Opensheet,GoldcardService,AlertService],
-  entryComponents: [SheetComponent,Opensheet,EditMidicineComponent,Sheet,Sheetq,Success,EditMedicalSuppliesComponent],
+  entryComponents: [SheetComponent,Opensheet,EditMidicineComponent,Sheet,Sheetq,Thpass,Success,EditMedicalSuppliesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

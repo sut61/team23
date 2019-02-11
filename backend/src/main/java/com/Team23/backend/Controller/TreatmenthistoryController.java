@@ -38,7 +38,7 @@ public class TreatmenthistoryController {
         return treatmenthistoryRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/Treatmenthistory/{goldcardName}/{diseaseName}/{drugName}/{code}/{treatDate}")
+    @PostMapping("/Treatmenthistory/{code}/{goldcardName}/{diseaseName}/{drugName}/{treatDate}")
     public Treatmenthistory newTreatmenthistory(@PathVariable String goldcardName,
                                                 @PathVariable String diseaseName,
                                                 @PathVariable String drugName,

@@ -8,6 +8,10 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 import { HttpClient} from '@angular/common/http';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AlertService } from '../alert.service';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+
+import { Th } from './th';
 
 @Component({
   selector: 'app-treatment-history',
@@ -20,6 +24,7 @@ export class TreatmentHistoryComponent implements OnInit {
   goldcards : Array<any>;
   treatmenthistorys : Array<any>;
   input: any = {
+      code: '',
       treatDate: '',
     };
   select: any = {
@@ -29,22 +34,50 @@ export class TreatmentHistoryComponent implements OnInit {
     };
     pipe = new DatePipe('en-US');
 
-    constructor(private goldcardService: GoldcardService, private httpClient: HttpClient,private route: ActivatedRoute,
+    constructor(private formbuilder:FormBuilder,private bottomSheet: MatBottomSheet,private alertService:AlertService,private goldcardService: GoldcardService, private httpClient: HttpClient,private route: ActivatedRoute,
    private router: Router ){
 
   }
-  treatment(){
-       // http://localhost:8080/Treatmenthistory/{goldcardName}/{diseaseName}/{drugName}/{treatDate}
-      this.httpClient.post('http://localhost:8080/Treatmenthistory/'+this.select.goldcardName+'/'+this.select.diseaseName+'/'+this.select.drugName+'/'+this.pipe.transform(this.input.treatDate,'dd:MM:yyyy'),this.input)
+  isValidFormSubmitted = null;
+  codePattern = "\\d{7,9}TH";
+    myForm = this.formbuilder.group({
+    code_no : ['', [Validators.required, Validators.pattern(this.codePattern)]],
+    goldcardName_no: ['', [Validators.required, Validators.pattern('')]],
+    diseaseName_no: ['', [Validators.required, Validators.pattern('')]],
+    drugName_no : ['', [Validators.required, Validators.pattern('')]],
+    treatDate_no : ['', [Validators.required, Validators.pattern('')]],
+    });
+
+    onFormSubmit(){
+        this.isValidFormSubmitted = false;
+        if (this.myForm.invalid) {
+                  this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน');
+                  if(this.myForm.controls['code_no'].hasError('pattern')){
+                                  this.alertService.error('กรุณากรอกตัวเลข 7-9 ตัว + TH');
+                  }
+
+
+                  return;
+        }
+        else if (this.myForm.valid){
+                this.treatment(this.myForm.value);
+                this.isValidFormSubmitted = true;
+        }
+
+         this.isValidFormSubmitted = true;
+    }
+  treatment(th : Th){
+       // http://localhost:8080/Treatmenthistory/{goldcardName}/{diseaseName}/{drugName}/{code}/{treatDate}
+      this.httpClient.post('http://localhost:8080/Treatmenthistory/'+th.code_no+'/'+th.goldcardName_no+'/'+th.diseaseName_no+'/'+th.drugName_no+'/'+this.pipe.transform(th.treatDate_no,'dd:MM:yyyy'),th)
       .subscribe(
           data => {
                         console.log('บันทึกประวัติเรียบร้อย', data);
-                        alert('บันทึกประวัติเรียบร้อย');
+                        this.bottomSheet.open(Thpass);
                         this.router.navigate(['/reload/TreatmentHistory']);
                     },
           error => {
                         console.log('Error', error);
-                        alert('กรอกข้อมูลให้ครบถ้วน');
+                        this.alertService.error('ในระบบมี code นี้อยู่แล้วกรุณาเปลี่ยน code ');
                     }
                 );
   }
@@ -68,4 +101,16 @@ export class TreatmentHistoryComponent implements OnInit {
             console.log(this.treatmenthistorys);
 });
 }
+}
+@Component({
+  selector: 'thpass',
+  templateUrl: 'thpass.html',
+})
+export class Thpass {
+  constructor(private bottomSheetRef: MatBottomSheetRef<Thpass>) {}
+
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
 }
