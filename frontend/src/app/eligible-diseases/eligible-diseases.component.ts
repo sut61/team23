@@ -24,16 +24,22 @@ diseases: Array<any>;
 documents: Array<any>;
 eligibleDiseases: Array<any>
 
+
 ed: any = {
 DiseaseSelect: '',
 DocumentSelect: '',
 UsernameSelect:'',
 DeleteSelect:'',
 PasswordSelect:'',
-CodeSelect:''
-
+CodeSelect:'',
 
 };
+output: any = {
+Delete : '',
+code:'',
+userpass:''
+};
+
 constructor(private formbuilder: FormBuilder,
            private service: GoldcardService ,
            private httpClient: HttpClient,
@@ -89,6 +95,7 @@ this.httpClient.post("http://localhost:8080/checkdoc/"+this.ed.DocumentSelect,th
 
       error => {
         console.log("Error", error);
+this.output.userpass = "username หรือ password ผิด"
         alert("username หรือ password ผิด");
       }
          );
@@ -188,6 +195,9 @@ this.httpClient.post("http://localhost:8080/checkdoc/"+this.ed.DocumentSelect,th
 
       },
       error => {
+this.output.code="*Code Eligible dieses ซ้ำซ้อน";
+alert("Code Eligible dieses ซ้ำซ้อน");
+
         console.log("Error", error);
 
       }
@@ -198,6 +208,7 @@ this.httpClient.post("http://localhost:8080/checkdoc/"+this.ed.DocumentSelect,th
 
       error => {
         console.log("Error", error);
+this.output.userpass = "username หรือ password ผิด"
         alert("username หรือ password ผิด");
       }
          );

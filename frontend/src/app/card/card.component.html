@@ -47,17 +47,17 @@
                   <mat-form-field hintLabel="Card code" style="width :100%">
                     <input matInput placeholder="Card code" [(ngModel)]="input.Cardcode"  autocomplete="off" formControlName="Cardcode_check">
                   </mat-form-field>
-                    <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Cardcode_check'].hasError('pattern')">ขึ้นต้นด้วยคำว่า card</a>
+                    <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Cardcode_check'].hasError('pattern')">Card code จะต้องขึ้นต้นด้วยคำว่า card</a>
 
                   <mat-form-field hintLabel="Comment" style="width :100%">
                     <input matInput placeholder="Comment" [(ngModel)]="input.Comment"  autocomplete="off" formControlName="Comment_check">
                   </mat-form-field>
-                  <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Comment_check'].hasError('pattern')">ความยาว 5 - 25 ตัวอักษร</a>
+                  <a style="font-size:15px;color:red" *ngIf="cardForm.controls['Comment_check'].hasError('pattern')">Comment ต้องมีความยาว 5 - 25 ตัวอักษร</a>
 
                   <mat-form-field hintLabel="AcceptId" style="width :100%">
                     <input matInput placeholder="AcceptId" [(ngModel)]="input.AcceptId" autocomplete="off" formControlName="AcceptId_check">
                   </mat-form-field>
-                  <a style="font-size:15px;color:red" *ngIf="cardForm.controls['AcceptId_check'].hasError('pattern')">ตัวเลข</a>
+                  <a style="font-size:15px;color:red" *ngIf="cardForm.controls['AcceptId_check'].hasError('pattern')">AccepID ต้องเป็นตัวเลข</a>
 
                 </form>
 
@@ -68,7 +68,8 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-
+                <a style="font-size:10px;color:red" *ngIf="!input.Cardcode ||!input.Comment ||!input.AcceptId">*กรุณากรอกข้อมูลให้ครบถ้วน</a>
+                <br>
                 วันออกบัตร  {{CurrentDate | date:'fullDate' }}
                 <br><br><br>
                 <button type="submit" mat-stroked-button (click)="Check()" color="warn">ยืนยัน</button>
@@ -143,6 +144,7 @@
 
               </mat-card-content>
               <img src="../../assets/1.jpg"  >
+              <a style="font-size:10px;color:green">{{this.output.Delete}}</a>
               <h3 style="background-color: #cf000f; color:white">&nbsp;&nbsp;แจ้งหาย</h3>
 
 
@@ -153,7 +155,8 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-
+              <a style="font-size:10px;color:red">*กรุณากรอกข้อมูลให้ครบถ้วน</a>
+              <br>
               <button mat-raised-button (click)="Delete()" color="warn">ลบ</button>
 
             </mat-card>
