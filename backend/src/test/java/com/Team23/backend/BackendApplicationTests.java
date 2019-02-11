@@ -3497,8 +3497,7 @@ public void testpropertieslong(){
 			System.out.println("---------------------------------------------------Training Topic less than five-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
 			System.out.println("-----------------------------------------------------------------------------------------------------------");
-			System.out.println("\n\n\n\n\n\n\n");	
-
+			System.out.println("\n\n\n\n\n\n\n");
 	}
 
 
@@ -3507,5 +3506,121 @@ public void testpropertieslong(){
 }
 
 
+//--------------------------------------------------------------------Hospital Test-------------------------------------------------------------
+@Test 
+public void hospitalAllPass(){
+
+				Hospital ho = new Hospital();
+				ho.setHospitalName("St.Marry Hospital");
+				ho.setBranceFive(52341L);
+				ho.setBranceNine(523456289L);
+				ho.setHospitalAddress("hospitalAddress66");
+				ho.setHospitalPhone("0440005061");
+				ho.setHospitalPostcode(30607L);
+		System.out.println("\n\n\n\n");
+		System.out.println("-----------------------------------------Hospital Pattern passed -----------------------------------");
+		
+		System.out.println("\n\n\n\n");
+}
+
+@Test
+public void hospitalphonenotzeroinfirst(){
+				Hospital ho = new Hospital();
+				ho.setHospitalName("St.Marry HospitalA");
+				ho.setBranceFive(52342L);
+				ho.setBranceNine(523456287L);
+				ho.setHospitalAddress("hospitalAddress67");
+				ho.setHospitalPhone("1144000506");
+				ho.setHospitalPostcode(31107L);
+				try{
+					entityManager.persist(ho);
+					entityManager.flush();
+				}catch(javax.validation.ConstraintViolationException e){
+					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+					assertEquals(violation.isEmpty(),false);
+					assertEquals(violation.size(),1);
+			
+					System.out.println("\n\n\n\n\n");
+					System.out.println("---------------------------------------------------Hospital First digit phone number is not ZERO-------------------------------------------");
+					System.out.println(e.getConstraintViolations());
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
+					System.out.println("\n\n\n\n\n\n\n");
+			}
+}
+
+@Test
+public void hospitalNameIsNull(){
+				Hospital ho = new Hospital();
+				ho.setHospitalName(null);
+				ho.setBranceFive(82342L);
+				ho.setBranceNine(823456287L);
+				ho.setHospitalAddress("hospitalAddress87");
+				ho.setHospitalPhone("0440008506");
+				ho.setHospitalPostcode(31187L);
+				try{
+					entityManager.persist(ho);
+					entityManager.flush();
+				}catch(javax.validation.ConstraintViolationException e){
+					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+					assertEquals(violation.isEmpty(),false);
+					assertEquals(violation.size(),1);
+			
+					System.out.println("\n\n\n\n\n");
+					System.out.println("---------------------------------------------------Hospital Name is Null-------------------------------------------");
+					System.out.println(e.getConstraintViolations());
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
+					System.out.println("\n\n\n\n\n\n\n");
+			}
+}
+
+@Test
+public void hospitalNameIslessThanThree(){
+				Hospital ho = new Hospital();
+				ho.setHospitalName("H");
+				ho.setBranceFive(82442L);
+				ho.setBranceNine(823444287L);
+				ho.setHospitalAddress("hospitalAddress44");
+				ho.setHospitalPhone("0444485006");
+				ho.setHospitalPostcode(31447L);
+				try{
+					entityManager.persist(ho);
+					entityManager.flush();
+				}catch(javax.validation.ConstraintViolationException e){
+					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+					assertEquals(violation.isEmpty(),false);
+					assertEquals(violation.size(),1);
+			
+					System.out.println("\n\n\n\n\n");
+					System.out.println("---------------------------------------------------Hospital Name less than Three-------------------------------------------");
+					System.out.println(e.getConstraintViolations());
+					System.out.println("-----------------------------------------------------------------------------------------------------------");
+					System.out.println("\n\n\n\n\n\n\n");
+			}
+}
+
+@Test
+public void hospitalbranceisNULL(){
+				Hospital ho = new Hospital();
+				ho.setHospitalName("Rama 9 Hospital");
+				ho.setBranceFive(null);
+				ho.setBranceNine(null);
+				ho.setHospitalAddress("hospitalAddress111");
+				ho.setHospitalPhone("0444481106");
+				ho.setHospitalPostcode(31417L);
+				try{
+					entityManager.persist(ho);
+					entityManager.flush();
+				}catch(javax.validation.ConstraintViolationException e){
+					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+					assertEquals(violation.isEmpty(),false);
+					assertEquals(violation.size(),2);
+			
+					System.out.println("\n\n\n\n\n");
+					System.out.println("---------------------------------------------------Hospital brance is NULL -------------------------------------------");
+					System.out.println(e.getConstraintViolations());
+					System.out.println("------------------------------------------(branceNine and branceFive)--------------------------------------------------");
+					System.out.println("\n\n\n\n\n\n\n");
+			}
+}
 }
 

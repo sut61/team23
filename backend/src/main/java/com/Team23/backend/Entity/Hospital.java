@@ -7,11 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
 import java.util.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 @Entity // บอกว่าเป็น class entity class ที่เก็บขอมูล
 @Data // lombox จะสร้าง method getter setter ให้เอง
@@ -27,14 +29,23 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospital_seq")
     // Annotations Generate id เอง ตอน insert
     @Column(name = "Hospital_ID", unique = true, nullable = false)
-    private @NonNull Long hospitalId;
+    private  Long hospitalId;
+    @NotNull
+    @Size(min=3,max=72)
+    private  String hospitalName;
 
-    private @NonNull String hospitalName;
-    private @NonNull Long branceNine;
-    private @NonNull Long branceFive;
-    private @NonNull String hospitalAddress;
-    private @NonNull Long hospitalPostcode;
-    private @NonNull String hospitalPhone;
+    @NotNull
+    private  Long branceNine;
+    @NotNull
+    private  Long branceFive;
+    @NotNull
+    private  String hospitalAddress;
+    @NotNull
+    private  Long hospitalPostcode;
+
+    @NotNull
+    @Pattern(regexp = "[0]\\d{9}")
+    private  String hospitalPhone;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Affiliation.class)
     @JoinColumn(name = "hospital_affiliation", insertable = true)

@@ -323,7 +323,7 @@ public class BackendApplication  {
 				hospital.setBranceFive(12345L);
 				hospital.setBranceNine(123456789L);
 				hospital.setHospitalAddress("hospitalAddress1");
-				hospital.setHospitalPhone("044000000");
+				hospital.setHospitalPhone("0440000000");
 				hospital.setHospitalPostcode(30000L);
 
 				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
@@ -343,7 +343,7 @@ public class BackendApplication  {
 				hospital.setBranceFive(12341L);
 				hospital.setBranceNine(123456289L);
 				hospital.setHospitalAddress("hospitalAddress5");
-				hospital.setHospitalPhone("044000500");
+				hospital.setHospitalPhone("0440005000");
 				hospital.setHospitalPostcode(30007L);
 
 				aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
