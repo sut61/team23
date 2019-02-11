@@ -31,7 +31,7 @@ public class Treatmenthistory {
     private @NonNull Long treatId;
 
     @NotNull(message="Code must not be null to be valid")
-    @Pattern(regexp = "\\d{6,9}TH")
+    @Pattern(regexp = "\\d{7,9}TH")
     @Size(min = 9, max = 11)
     @Column(name="code",unique = true)
     private String code;

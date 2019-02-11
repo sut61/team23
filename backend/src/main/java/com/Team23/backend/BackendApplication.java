@@ -477,6 +477,47 @@ public class BackendApplication  {
 				}
 			});
 
+			Stream.of("โรคติดต่อหรือโรคติดเชื้อ", "โรคไม่ติดต่อหรือไม่ติดเชื้อ").forEach(typeDiseaseName -> {
+				TypeDisease typeDisease = new TypeDisease();
+				typeDisease.setTypeDiseaseName(typeDiseaseName);
+				typeDiseaseRepository.save(typeDisease);
+			});
+
+			Stream.of("200-300 คน", "300-400 คน", "400-500 คน", "500-600 คน", "600-700 คน", "700-800 คน", "800-900 คน", "900-1000 คน").forEach(populationRate -> {
+				PeopleDisease peopleDisease = new PeopleDisease();
+				peopleDisease.setPopulationRate(populationRate);
+				peopleDiseaseRepository.save(peopleDisease);
+			});
+
+
+			Stream.of("โรคเบาหวาน", "โรคความดันโลหิตสูง").forEach(diseaseName -> {
+				Disease disease = new Disease();
+				TypeDisease typeDiseaseid = new TypeDisease();
+				PeopleDisease peopleDiseaseid = new PeopleDisease();
+
+				disease.setDiseaseName(diseaseName);
+				if(diseaseName == "โรคเบาหวาน"){
+					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+					disease.setTypedisease(typeDiseaseid);
+					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
+					disease.setPeopledisease(peopleDiseaseid);
+					disease.setSymptom("หิวน้ำบ่อย");
+					disease.setCause("อ้วนหรือน้ำหนักเกินมาตรฐาน");
+					disease.setRemedy("ลดน้ำตาล");
+					diseaseRepository.save(disease);
+				} else if(diseaseName == "โรคความดันโลหิตสูง"){
+					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
+					disease.setTypedisease(typeDiseaseid);
+					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
+					disease.setPeopledisease(peopleDiseaseid);
+					disease.setSymptom("เหนื่อยง่าย");
+					disease.setCause("นอนน้อย พักผ่อนไม่เพียงพอ ");
+					disease.setRemedy("คงน้ำหนักร่างกายให้เหมาะสม");
+					diseaseRepository.save(disease);
+				}
+			});
+
+
 			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)").forEach(drugName -> {
 				Drug               grug               = new Drug();
 				TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
@@ -611,45 +652,7 @@ public class BackendApplication  {
 				acceptToUserRepository.save(acceptToUserId);
 			});
 
-			Stream.of("โรคติดต่อหรือโรคติดเชื้อ", "โรคไม่ติดต่อหรือไม่ติดเชื้อ").forEach(typeDiseaseName -> {
-				TypeDisease typeDisease = new TypeDisease();
-				typeDisease.setTypeDiseaseName(typeDiseaseName);
-				typeDiseaseRepository.save(typeDisease);
-			});
 
-			Stream.of("200-300 คน", "300-400 คน", "400-500 คน", "500-600 คน", "600-700 คน", "700-800 คน", "800-900 คน", "900-1000 คน").forEach(populationRate -> {
-				PeopleDisease peopleDisease = new PeopleDisease();
-				peopleDisease.setPopulationRate(populationRate);
-				peopleDiseaseRepository.save(peopleDisease);
-			});
-
-
-			Stream.of("โรคเบาหวาน", "โรคความดันโลหิตสูง").forEach(diseaseName -> {
-				Disease disease = new Disease();
-				TypeDisease typeDiseaseid = new TypeDisease();
-				PeopleDisease peopleDiseaseid = new PeopleDisease();
-
-				disease.setDiseaseName(diseaseName);
-				if(diseaseName == "โรคเบาหวาน"){
-					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
-					disease.setTypedisease(typeDiseaseid);
-					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
-					disease.setPeopledisease(peopleDiseaseid);
-					disease.setSymptom("หิวน้ำบ่อย");
-					disease.setCause("อ้วนหรือน้ำหนักเกินมาตรฐาน");
-					disease.setRemedy("ลดน้ำตาล");
-					diseaseRepository.save(disease);
-				} else if(diseaseName == "โรคความดันโลหิตสูง"){
-					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
-					disease.setTypedisease(typeDiseaseid);
-					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
-					disease.setPeopledisease(peopleDiseaseid);
-					disease.setSymptom("เหนื่อยง่าย");
-					disease.setCause("นอนน้อย พักผ่อนไม่เพียงพอ ");
-					disease.setRemedy("คงน้ำหนักร่างกายให้เหมาะสม");
-					diseaseRepository.save(disease);
-				}
-			});
 			Stream.of("บัตรทอง", "บัตรทองพรีเมียม", "บัตรข้าราชการ").forEach(ExpensesName -> {
 				Expenses expenses = new Expenses();
 				expenses.setExpensesName(ExpensesName);
