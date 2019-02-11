@@ -10,6 +10,13 @@ import { DataSource } from '@angular/cdk/collections';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {DatePipe} from '@angular/common';
 
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
 
 export interface CardElement {
 AcceptId: number;
@@ -46,6 +53,10 @@ Expenses: '',
 status: '',
 DeleteSelect: '',
 };
+output: any = {
+Delete : '',
+};
+
 
 select: any = {
 provinceName: '',
@@ -120,16 +131,27 @@ alert("บันทึกแล้วเรียบร้อย");
       );
     }
 }
+reload(){
+wait(3000);
+ this.router.navigate(['/reload/Card']);
+}
 Delete(){
 if (this.input.DeleteSelect === '') {
       alert('กรุณากรอกข้อมูลให้ครบถ้วน');
     } else {
+ this.output.Delete ="ลบแล้วเรียบร้อย"
       this.httpClient.post("http://localhost:8080/deleteCard/"+ this.input.DeleteSelect, this.input)
       .subscribe(
           data => {
               console.log('Delete Request is successful', data);
-              alert("แจ้งหายเรียบร้อย");
-        this.router.navigate(['/reload/Card']);
+
+            console.log(this.output.Delete);
+
+             alert("แจ้งหายเรียบร้อย");
+
+
+
+                this.reload();
 
           },
           error => {
@@ -137,6 +159,9 @@ if (this.input.DeleteSelect === '') {
           }
       );
     }}
+
+
+
 
 isValidFormSubmitted = null;
 

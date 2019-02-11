@@ -64,7 +64,9 @@
               </mat-form-field>
               <a style="font-size:15px;color:red" *ngIf="EligibleForm.controls['Code_check'].hasError('pattern')">กรุณา กรอก Code ขึ้นต้นด้วย El และ ความยาว 5 - 25 ตัวอักษร ให้ถูกต้อง</a>
 
-              <br><br>
+              <br>
+             <a style="font-size:10px;color:red" >{{this.output.code}}</a>
+              <br>
               <h3 style="background-color: #ffc000">ผู้ยืนยัน</h3>
 
               <mat-form-field hintLabel="" style="width :100%">
@@ -78,9 +80,9 @@
               <a style="font-size:15px;color:red" *ngIf="EligibleForm.controls['Password_check'].hasError('pattern')">กรุณา กรอก Password ความยาว 4 - 20 ตัวอักษร ให้ถูกต้อง</a>
 
             </form>
-
-
-
+            <a style="font-size:10px;color:red" >{{this.output.userpass}}</a>
+            <a style="font-size:10px;color:red" *ngIf="!ed.PasswordSelect ||!ed.UsernameSelect ||!ed.CodeSelect ||!ed.DocumentSelect ||!ed.DiseaseSelect">*กรุณากรอกข้อมูลให้ครบถ้วน</a>
+<br>
 
 
             <button type="submit" mat-stroked-button (click)="Check(checkdataUser.value)" color="warn">เพิ่ม</button>
