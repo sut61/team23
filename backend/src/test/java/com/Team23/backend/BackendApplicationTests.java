@@ -57,6 +57,8 @@ public class BackendApplicationTests {
 	@Autowired private TrainingRepository		   trainingRepository;
 	@Autowired private LecturerRepository          lecturerRepository;
 	@Autowired private TypeTrainingRepository      typeTrainingRepository;
+	@Autowired private AffiliationRepository       affiliationRepository;
+	@Autowired private TypeHospitalRepository      typeHospitalRepository;
 
 	private Validator validator;
 
@@ -3622,5 +3624,58 @@ public void hospitalbranceisNULL(){
 					System.out.println("\n\n\n\n\n\n\n");
 			}
 }
+@Test
+public void branceNineUnique(){
+	Province pro = new Province();
+	Affiliation aff = new Affiliation();
+	TypeHospital ty = new TypeHospital();
+
+	Hospital hoo = new Hospital();
+	hoo.setHospitalName("PoaloHospital");
+	hoo.setBranceFive(55555L);
+	hoo.setBranceNine(555555555L);
+	hoo.setHospitalAddress("hospitalAddress1");
+	hoo.setHospitalPhone("0440000000");
+	hoo.setHospitalPostcode(30000L);
+
+	aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+	hoo.setAffiliationName(aff);
+	pro = provinceRepository.findByProvinceName("นครราชสีมา");
+	hoo.setProvinceName(pro);
+	ty = typeHospitalRepository.findByTypeName("เอกชน");
+	hoo.setTypeName(ty);
+
+		entityManager.persist(hoo);
+		entityManager.flush();
+
+		Hospital hoo2 = new Hospital();
+		hoo2.setHospitalName("PoaloHospitalTwo");
+		hoo2.setBranceFive(99999L);
+		hoo2.setBranceNine(555555555L);
+		hoo2.setHospitalAddress("hospitalAddress1Two");
+		hoo2.setHospitalPhone("0440000002");
+		hoo2.setHospitalPostcode(30002L);
+
+	aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+	hoo2.setAffiliationName(aff);
+	pro = provinceRepository.findByProvinceName("นครราชสีมา");
+	hoo2.setProvinceName(pro);
+	ty = typeHospitalRepository.findByTypeName("เอกชน");
+	hoo2.setTypeName(ty);
+
+		try {
+			entityManager.persist(hoo2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+			
+			System.out.println("\n\n\n\n\n");
+					System.out.println("---------------------------------------------------Have ฺBranceNine of Hospital Unique -------------------------------------------");
+					System.out.println(e.getMessage());
+					System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
+					System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
 }
 
