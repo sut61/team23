@@ -35,6 +35,7 @@ public class Hospital {
     private  String hospitalName;
 
     @NotNull
+    @Column(name="branceNine",unique = true)
     private  Long branceNine;
     @NotNull
     private  Long branceFive;
@@ -90,4 +91,11 @@ public class Hospital {
     public void setAffiliationName(Affiliation affiliationName) {
         this.affiliationName = affiliationName;
     }
+    /**
+     * @param provinceName the provinceName to set
+     */
+    public void setProvinceName(Province provinceName) {
+        this.provinceName = provinceName;
+    }
+    
 }
