@@ -70,12 +70,12 @@ hospitalregis(){
     .subscribe(
       data => {
         console.log("add  success", data);
-        alert("ลงทะเบียนเรียบร้อย");
-this.router.navigate(['/reload/hospitalRegister']);
+        this.alertService.success('เพิ่มเรียบร้อย');
       },
       error => {
           console.log('Error', error);
-          alert("ไม่สามารถลงทะเบีบยโรงพยาบาลได้");      }
+          this.alertService.error('Error มีปัญหา');    
+        }
    );
   }
 

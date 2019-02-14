@@ -1,40 +1,47 @@
 <div class="treatment">
+  <alert></alert>
   <em class="font1"><font size="5">ประวัติการรักษาโรค</font></em>
   <br>
-  <mat-form-field>
-    <mat-select placeholder="ชื่อคนไข้" [(ngModel)]="select.goldcardName">
-      <mat-option *ngFor="let goldcard of goldcards" [value]="goldcard.goldcardName">
-        {{goldcard.goldcardName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-select placeholder="โรค" [(ngModel)]="select.diseaseName">
-      <mat-option *ngFor="let disease of diseases" [value]="disease.diseaseName">
-        {{disease.diseaseName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-select placeholder="ยา" [(ngModel)]="select.drugName">
-      <mat-option *ngFor="let drug of drugs" [value]="drug.drugName">
-        {{drug.drugName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="วันที่รักษา" [(ngModel)]="input.treatDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <br>
-  <!--<button mat-button color="primary">ยืนยัน</button>-->
+  <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field class="form">
+      <input matInput  placeholder="code" [(ngModel)]="input.code" autocomplete="off" formControlName="code_no">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="ชื่อคนไข้" [(ngModel)]="select.goldcardName" formControlName="goldcardName_no">
+        <mat-option *ngFor="let goldcard of goldcards" [value]="goldcard.goldcardName">
+          {{goldcard.goldcardName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="โรค" [(ngModel)]="select.diseaseName" formControlName="diseaseName_no">
+        <mat-option *ngFor="let disease of diseases" [value]="disease.diseaseName">
+          {{disease.diseaseName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select placeholder="ยา" [(ngModel)]="select.drugName" formControlName="drugName_no">
+        <mat-option *ngFor="let drug of drugs" [value]="drug.drugName">
+          {{drug.drugName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="วันที่รักษา" [(ngModel)]="input.treatDate" formControlName="treatDate_no">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <!--<button mat-button color="primary">ยืนยัน</button>-->
 
-  <div>
-    <button mat-raised-button (click)="treatment()" color="primary" >ยืนยัน</button>
-  </div>
+    <div>
+      <button mat-raised-button (click)="treatment()" color="primary" >ยืนยัน</button>
+    </div>
+  </form>
 </div>
 

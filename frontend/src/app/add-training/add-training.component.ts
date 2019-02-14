@@ -75,7 +75,8 @@ trainingadd(){
     },
     error => {
         console.log('Error', error);
-        this.alertService.error('Error มีปัญหา');    }
+        this.alertService.error('Error มีปัญหา');    
+      }
  );
 }
 
