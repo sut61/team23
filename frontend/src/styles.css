@@ -13,6 +13,8 @@
 body {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
+  background-image: url(https://acrobatant.com/wp-content/uploads/2014/12/shutterstock_146147567-1.jpg);
+  background-size: 100%;
 }
 
 .basic-container {
@@ -53,11 +55,6 @@ border-radius: 5px;
   color: #000;
 }
 
-body{
-  background-image: url(https://acrobatant.com/wp-content/uploads/2014/12/shutterstock_146147567-1.jpg);
-  background-size: 100%;
-}
-
 .version-info {
   font-size: 8pt;
   float: right;
@@ -66,9 +63,7 @@ body{
 .hidden {
   visibility: hidden;
 }
-.nonhidden{
 
-}
 .popupsuccess{
   padding : 5px;
   color:white;
@@ -100,7 +95,6 @@ background-color: orange;
 
 
 /*Hospital SubSystem style */
-@import url('https://fonts.googleapis.com/css?family=Bai+Jamjuree');
 .headerhospital {
   background-color: #f1f1f1;
   padding : 30px;
@@ -114,8 +108,6 @@ background-color: orange;
   top: 50%;
   left: 50%;
  border-radius: 20px
-
-
 
 }
 

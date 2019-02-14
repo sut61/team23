@@ -926,7 +926,7 @@ public class BackendApplicationTests {
 		rightsTypeid = rightsTypeRepository.findByRightsTypeName("บัตรทอง");
 		rr.setRightsType(rightsTypeid);
 
-		hospitalid = hospitalRepository.findByHospitalName("รพ.นครราชสีมา");
+		hospitalid = hospitalRepository.findByHospitalName("RatchasrimaHospital");
 		rr.setHospital(hospitalid);
 
 		try {
