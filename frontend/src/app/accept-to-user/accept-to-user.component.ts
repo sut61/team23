@@ -200,8 +200,8 @@ export class Sheet {
 }
 
 @Component({
-  selector: 'Sheetq',
-  templateUrl: 'Sheetq.html',
+  selector: 'sheetq',
+  templateUrl: 'sheetq.html',
 })
 export class Sheetq {
   constructor(private bottomSheetRef: MatBottomSheetRef<Sheet>) {}
