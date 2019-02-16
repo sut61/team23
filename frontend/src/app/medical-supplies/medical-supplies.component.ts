@@ -144,13 +144,13 @@ constructor(private formbuilder:FormBuilder,private medicalsuppliesService:Medic
 
   
   onSave(medical:Medical){
-    console.log(this.view.codeNumber);
-    console.log(this.view.modelNumber);
-    console.log(this.view.medicalSupplies);
-    console.log(this.view.brandName);
-    console.log(this.view.properties);
-    console.log(this.view.medicalInstrument);
-    console.log(this.view.useability);
+    console.log(medical.codeNumber_no);
+    console.log(medical.modelNumber_no );
+    console.log(medical.medicalSupplies_no);
+    console.log(medical.brandName_no);
+    console.log(medical.properties_no);
+    console.log(medical.medicalInstrument_no);
+    console.log(medical.useability_no);
 
     this.httpClient.post('http://localhost:8080/MedicalSupplies/'+ medical.codeNumber_no +  
     '/'+ medical.modelNumber_no + 

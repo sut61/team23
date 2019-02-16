@@ -2979,7 +2979,8 @@ public class BackendApplicationTests {
 		}
 		catch(javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-			assertEquals(violations.isEmpty(), false);
+			-
+			+6assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at TypeOfPublicz ------------------------------------------------------------------\n\n");
 			System.out.println(violations);
