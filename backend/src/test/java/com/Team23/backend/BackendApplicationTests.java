@@ -2605,7 +2605,7 @@ public class BackendApplicationTests {
 
 		Publicz   publicz    = new Publicz();
 
-		publicz.setPubliczHead("Suran");
+		publicz.setPubliczHead("Sura");
 		publicz.setPublicizeDetail("SuranareeUniversity");
 		publicz.setCall("0883120905");
 		publicz.setEmail("oat@hotmail.com");
@@ -2979,8 +2979,7 @@ public class BackendApplicationTests {
 		}
 		catch(javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-			-
-			+6assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at TypeOfPublicz ------------------------------------------------------------------\n\n");
 			System.out.println(violations);
