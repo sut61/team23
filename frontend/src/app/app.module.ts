@@ -14,7 +14,7 @@ import { AuthService } from './auth/auth.service';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
 import { GDCardComponent } from './gd-card/gd-card.component';
 import { PubliczComponent } from './publicz/publicz.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -143,6 +143,7 @@ import { AddTrainingComponent } from './add-training/add-training.component';
         MatTooltipModule,
         MatTreeModule,
         ReactiveFormsModule,
+        MatFormFieldModule,
         HttpClientModule,
             MatNativeDateModule,
             FormsModule

@@ -84,22 +84,22 @@ isValidFormSubmitted = null;
                 if(this.myForm.controls['codeNumber_no'].hasError('pattern')){
                                 this.alertService.error('กรุณากรอก C นำหน้า');
                 }else if(this.myForm.controls['modelNumber_no'].hasError('pattern')){
-                                this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                                this.alertService.error('กรุณากรอกข้อมูล (1-5) ตัว');
                 }
                 else if(this.myForm.controls['medicalSupplies_no'].hasError('pattern')){
-                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                  this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
                 }
                 else if(this.myForm.controls['brandName_no'].hasError('pattern')){
-                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                  this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
                 }
                 else if(this.myForm.controls['properties_no'].hasError('pattern')){
-                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                  this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
                 }
                 else if(this.myForm.controls['medicalInstrument_no'].hasError('pattern')){
-                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                  this.alertService.error('กรุณาเลือกอุปกรณ์การแพทย์');
                 }
                 else if(this.myForm.controls['useability_no'].hasError('pattern')){
-                  this.alertService.error('กรุณากรอกข้อมูล (5-40) ตัว');
+                  this.alertService.error('กรุณาเลือกการใช้งาน');
                 }
 
 
