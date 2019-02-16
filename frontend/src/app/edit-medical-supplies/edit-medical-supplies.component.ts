@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogConfig, MatDialogRef } from "@angular/material";
 import { Router } from '@angular/router';
 import { MedicalsuppliesService } from '../medicalsupplies.service';
+import { AlertService } from '../alert.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { EditMedical } from './editMidical';
 
 @Component({
   selector: 'app-edit-medical-supplies',
@@ -23,7 +26,72 @@ view: any={
   useability:null
 }
 medicalsuppliesId=this.medicalsuppliesService.getIdMedicalSupplies();
-  constructor(private medicalsuppliesService:MedicalsuppliesService, private httpClient:HttpClient ,private dialog: MatDialog,private router: Router ,
+
+isValidFormSubmitted = null;
+codeNumber = "(C).+";
+modelNumber = ".{1,5}";
+medicalSupplies = ".{2,30}";
+brandName = ".{2,10}";
+properties = ".{2,30}";
+myForm = this.formbuilder.group({
+  codeNumber_no: ['', [Validators.required, Validators.pattern(this.codeNumber)]],
+  modelNumber_no: ['', [Validators.required, Validators.pattern(this.modelNumber)]],
+  medicalSupplies_no: ['', [Validators.required, Validators.pattern(this.medicalSupplies)]],
+  brandName_no: ['', [Validators.required, Validators.pattern(this.brandName)]],
+  properties_no: ['', [Validators.required, Validators.pattern(this.properties)]],
+  medicalInstrument_no: ['', [Validators.required, Validators.pattern('')]],
+  useability_no: ['', [Validators.required, Validators.pattern('')]],
+
+
+});
+
+onFormSubmit() {
+  this.isValidFormSubmitted = false;
+  if (this.myForm.invalid) {
+    this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน');
+    if (this.myForm.controls['codeNumber_no'].hasError('pattern')) {
+      this.alertService.error('กรุณากรอก C นำหน้า');
+    }
+    else if (this.myForm.controls['modelNumber_no'].hasError('pattern')) {
+      this.alertService.error('กรุณากรอกข้อมูล (1-5) ตัว');
+    }
+    else if (this.myForm.controls['medicalSupplies_no'].hasError('pattern')) {
+      this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
+    }
+    else if (this.myForm.controls['brandName_no'].hasError('pattern')) {
+      this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
+    }
+    else if (this.myForm.controls['properties_no'].hasError('pattern')) {
+      this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
+    }
+    else if (this.myForm.controls['medicalInstrument_no'].hasError('pattern')) {
+      this.alertService.error('กรุณาเลือกอุปกรณ์การแพทย์');
+    }
+    else if (this.myForm.controls['useability_no'].hasError('pattern')) {
+      this.alertService.error('กรุณาเลือกการใช้งาน');
+    }
+
+
+
+
+    return;
+  }
+  else if (this.myForm.valid) {
+    this.onUpdate(this.myForm.value);
+    this.isValidFormSubmitted = true;
+    this.alertService.success("บันทึกข้อมูลเวชภัณฑ์ สำเร็จ");
+  }
+
+  this.isValidFormSubmitted = true;
+}
+
+
+  constructor(private medicalsuppliesService:MedicalsuppliesService, 
+    private httpClient:HttpClient ,
+    private dialog: MatDialog,
+    private formbuilder: FormBuilder,
+    private router: Router ,
+    private alertService: AlertService,
               public dialogRef: MatDialogRef<EditMedicalSuppliesComponent>) { }
 
   ngOnInit() {
@@ -41,7 +109,7 @@ medicalsuppliesId=this.medicalsuppliesService.getIdMedicalSupplies();
     });
 
   }
-onUpdate(){
+onUpdate(edit:EditMedical){
     console.log(this.medicalsuppliesId);
     console.log(this.view.codeNumber);
     console.log(this.view.modelNumber);

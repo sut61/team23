@@ -25,6 +25,7 @@ export class EditMidicineComponent implements OnInit {
   }
   drugId=this.midicineService.getIdMidicine();
 
+  
   constructor(private midicineService:MidicineService,
               private httpClient: HttpClient,
               private goldcardService:GoldcardService,private route: ActivatedRoute,

@@ -46,12 +46,12 @@
     <!-----------------------------------ชื่อแบรนด์----------------------------------------------->
 
 
-    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
+    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 10 characters">
       <input matInput [(ngModel)]="view.brandName" name="brandName" placeholder="ชื่อแบรนด์" autocomplete="off"
-        formControlName="brandName_no"  #input maxlength="30" >
-        <mat-hint align= "end">{{ view.brandName?.length || 0}}/30</mat-hint>
+        formControlName="brandName_no"  #input maxlength="10" >
+        <mat-hint align= "end">{{ view.brandName?.length || 0}}/10</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['brandName_no'].hasError('pattern')">กรุณากรอกชื่อแบรนด์ (2-30) ตัว</a>
+    <a style="font-size:15px;color:red" *ngIf="myForm.controls['brandName_no'].hasError('pattern')">กรุณากรอกชื่อแบรนด์ (2-10) ตัว</a>
 
 
     <!---------------------------------------------------------------------------------->
