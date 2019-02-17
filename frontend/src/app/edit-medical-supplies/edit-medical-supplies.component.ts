@@ -7,6 +7,7 @@ import { AlertService } from '../alert.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { EditMedical } from './editMidical';
 
+
 @Component({
   selector: 'app-edit-medical-supplies',
   templateUrl: './edit-medical-supplies.component.html',
@@ -25,11 +26,11 @@ view: any={
   medicalInstrument:null,
   useability:null
 }
-medicalsuppliesId=this.medicalsuppliesService.getIdMedicalSupplies();
+
 
 isValidFormSubmitted = null;
 codeNumber = "(C).+";
-modelNumber = ".{1,5}";
+modelNumber = ".{2,5}";
 medicalSupplies = ".{2,30}";
 brandName = ".{2,10}";
 properties = ".{2,30}";
@@ -80,13 +81,14 @@ onFormSubmit() {
     this.onUpdate(this.myForm.value);
     this.isValidFormSubmitted = true;
     this.alertService.success("บันทึกข้อมูลเวชภัณฑ์ สำเร็จ");
+    
   }
 
   this.isValidFormSubmitted = true;
 }
 
 
-  constructor(private medicalsuppliesService:MedicalsuppliesService, 
+  constructor(public medicalsuppliesServices:MedicalsuppliesService, 
     private httpClient:HttpClient ,
     private dialog: MatDialog,
     private formbuilder: FormBuilder,
@@ -95,42 +97,43 @@ onFormSubmit() {
               public dialogRef: MatDialogRef<EditMedicalSuppliesComponent>) { }
 
   ngOnInit() {
-    this.medicalsuppliesService.getMedicalSupplies().subscribe(medicalSupplies => {
+    this.medicalsuppliesServices.getMedicalSupplies().subscribe(medicalSupplies => {
       this.MedicalSupplies = medicalSupplies;
       console.log(this.MedicalSupplies);
     });
-    this.medicalsuppliesService.getMedicalInstrument().subscribe(medicalInstrument => {
+    this.medicalsuppliesServices.getMedicalInstrument().subscribe(medicalInstrument => {
       this.MedicalInstrument = medicalInstrument;
       console.log(this.MedicalInstrument);
     });
-    this.medicalsuppliesService.getUseability().subscribe(useability => {
+    this.medicalsuppliesServices.getUseability().subscribe(useability => {
       this.Useability = useability;
       console.log(this.Useability);
     });
 
   }
-onUpdate(edit:EditMedical){
-    console.log(this.medicalsuppliesId);
-    console.log(this.view.codeNumber);
-    console.log(this.view.modelNumber);
-    console.log(this.view.medicalSupplies);
-    console.log(this.view.brandName);
-    console.log(this.view.properties);
-    console.log(this.view.medicalInstrument);
-    console.log(this.view.useability);
+onUpdate(editMidical:EditMedical){
+    this.medicalsuppliesServices.getIdMedicalSupplies();
+    console.log(this.medicalsuppliesServices.getIdMedicalSupplies());
+    console.log(editMidical.codeNumber_no);
+    console.log(editMidical.modelNumber_no);
+    console.log(editMidical.medicalSupplies_no);
+    console.log(editMidical.brandName_no);
+    console.log(editMidical.properties_no);
+    console.log(editMidical.medicalInstrument_no);
+    console.log(editMidical.useability_no);
     
-    this.httpClient.put('http://localhost:8080/MedicalSupplies/' +this.medicalsuppliesId+'/'+ this.view.codeNumber +  
-    '/'+ this.view.modelNumber + 
-    '/'+ this.view.medicalSupplies +
-    '/'+ this.view.brandName + 
-    '/'+ this.view.properties + 
-    '/'+ this.view.medicalInstrument +
-    '/'+ this.view.useability,this.view)
+    this.httpClient.put('http://localhost:8080/MedicalSupplies/' +this.medicalsuppliesServices.getIdMedicalSupplies() +'/'+ editMidical.codeNumber_no +  
+    '/'+ editMidical.modelNumber_no + 
+    '/'+ editMidical.medicalSupplies_no +
+    '/'+ editMidical.brandName_no + 
+    '/'+ editMidical.properties_no + 
+    '/'+ editMidical.medicalInstrument_no +
+    '/'+ editMidical.useability_no,editMidical)
     .subscribe
     (
       data =>{
       alert('บันทึกเรียบร้อย');
-      console.log('Post Request is seccessful',data);
+      console.log('Put Request is seccessful',data);
       window.location.reload();
     },
     error=>{

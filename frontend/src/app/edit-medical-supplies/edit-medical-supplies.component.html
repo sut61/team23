@@ -9,22 +9,18 @@
 
 
     <mat-form-field class="example-full-width" hintLabel="Example C12345">
-      <input matInput [(ngModel)]="view.codeNumber" name="codeNumber" placeholder="รหัสเวชภัณฑ์" autocomplete="off"
-        formControlName="codeNumber_no" #input maxlength="6">
+      <input matInput [(ngModel)]="view.codeNumber" name="codeNumber" placeholder="รหัสเวชภัณฑ์" autocomplete="off" formControlName= "codeNumber_no" #input maxlength="6">
       <mat-hint align="end">{{ view.codeNumber?.length || 0}}/6</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red"
-      *ngIf="myForm.controls['codeNumber_no'].hasError('pattern')">รหัสเวชภัณฑ์ต้องขึ้นต้นด้วย C และมีตัวเลขทั้งหมด 5
-      ตัว</a>
+    <a style="font-size:15px;color:red" *ngIf="myForm.controls['codeNumber_no'].hasError('pattern')">รหัสเวชภัณฑ์ต้องขึ้นต้นด้วย C และมีตัวเลขทั้งหมด 5 ตัว</a>
 
 
     <!---------------------------------------------------------------------------------->
     <!-----------------------------------หมายเลขรุ่น----------------------------------------------->
 
 
-    <mat-form-field class="example-full-width" hintLabel="Min 1 and Max 5 characters">
-      <input matInput type="text" [(ngModel)]="view.modelNumber" name="modelNumber" placeholder="หมายเลขรุ่น"
-        autocomplete="off" formControlName="modelNumber_no" #input maxlength="5">
+    <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 5 characters">
+      <input matInput type="text" [(ngModel)]="view.modelNumber" name="modelNumber" placeholder="หมายเลขรุ่น"  autocomplete="off" formControlName= "modelNumber_no" #input maxlength="5">
       <mat-hint align="end">{{ view.modelNumber?.length || 0}}/5</mat-hint>
     </mat-form-field>
 
@@ -38,8 +34,7 @@
 
 
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-      <input matInput [(ngModel)]="view.medicalSupplies" name="medicalSupplies" placeholder="ชื่อเวชภัณฑ์"
-        autocomplete="off" formControlName="medicalSupplies_no" #input maxlength="30">
+      <input matInput [(ngModel)]="view.medicalSupplies" name="medicalSupplies" placeholder="ชื่อเวชภัณฑ์" autocomplete="off" formControlName= "medicalSupplies_no" #input maxlength="30">
       <mat-hint align="end">{{ view.medicalSupplies?.length || 0}}/30</mat-hint>
     </mat-form-field>
     <a style="font-size:15px;color:red"
@@ -51,12 +46,10 @@
 
 
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 10 characters">
-      <input matInput [(ngModel)]="view.brandName" name="brandName" placeholder="ชื่อแบรนด์" autocomplete="off"
-        formControlName="brandName_no" #input maxlength="10">
+      <input matInput [(ngModel)]="view.brandName" name="brandName" placeholder="ชื่อแบรนด์" autocomplete="off" formControlName="brandName_no" #input maxlength="10">
       <mat-hint align="end">{{ view.brandName?.length || 0}}/10</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['brandName_no'].hasError('pattern')">กรุณากรอกชื่อแบรนด์
-      (2-10) ตัว</a>
+    <a style="font-size:15px;color:red" *ngIf="myForm.controls['brandName_no'].hasError('pattern')">กรุณากรอกชื่อแบรนด์(2-10) ตัว</a>
 
 
     <!---------------------------------------------------------------------------------->
@@ -66,8 +59,7 @@
 
 
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
-      <input matInput [(ngModel)]="view.properties" name="properties" placeholder="คุณสมบัติ" autocomplete="off"
-        formControlName="properties_no" #input maxlength="30">
+      <input matInput [(ngModel)]="view.properties" name="properties" placeholder="คุณสมบัติ" autocomplete="off" formControlName="properties_no" #input maxlength="30">
       <mat-hint align="end">{{ view.properties?.length || 0}}/30</mat-hint>
     </mat-form-field>
     <a style="font-size:15px;color:red" *ngIf="myForm.controls['properties_no'].hasError('pattern')">กรุณากรอกคุณสมบัติ
@@ -90,8 +82,7 @@
 
 
       <mat-form-field class="example-form">
-        <mat-select [(ngModel)]="view.medicalInstrument" name="medicalInstrument" placeholder="อุปกรณ์การแพทย์"
-          formControlName="medicalInstrument_no">
+        <mat-select [(ngModel)]="view.medicalInstrument" name="medicalInstrument" placeholder="อุปกรณ์การแพทย์" formControlName="medicalInstrument_no">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let medicalInstrument of MedicalInstrument "
             [value]="medicalInstrument.medicalInstrumentName">{{medicalInstrument.medicalInstrumentName}}</mat-option>
@@ -107,8 +98,7 @@
     <!--------------------------------การใช้งาน--------------------------------------------->
     <div class="example-form">
       <mat-form-field class="example-form">
-        <mat-select [(ngModel)]="view.useability" name="useability" placeholder="การใช้งาน"
-          formControlName="useability_no">
+        <mat-select [(ngModel)]="view.useability" name="useability" placeholder="การใช้งาน" formControlName="useability_no">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let useability of Useability " [value]="useability.useabilityName">
             {{useability.useabilityName}}</mat-option>
