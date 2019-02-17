@@ -2605,7 +2605,7 @@ public class BackendApplicationTests {
 
 		Publicz   publicz    = new Publicz();
 
-		publicz.setPubliczHead("Suran");
+		publicz.setPubliczHead("Sura");
 		publicz.setPublicizeDetail("SuranareeUniversity");
 		publicz.setCall("0883120905");
 		publicz.setEmail("oat@hotmail.com");

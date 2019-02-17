@@ -29,6 +29,7 @@ public class Member {
     @SequenceGenerator(name="Member_seq",sequenceName="Member_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Member_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="MEMBER_ID",unique = true, nullable = false)
+    @NotNull(message = "MemberID is Null")
     private @NonNull Long MemberId;
 
     @NotNull(message = "memberName is null")
