@@ -1,52 +1,57 @@
-
 <div class="card">
-  <H3 class="center"><u>ประชาสัมพันธ์</u></H3>
+  <H1 class="center"><u>ประชาสัมพันธ์</u></H1>
   <alert></alert>
   <hr/>
-  <mat-form-field hintLabel="" style="width :100%">
-    <input matInput placeholder="หัวเรื่อง" [(ngModel)]="input.publiczHead">
-  </mat-form-field>
-  <mat-form-field class="example-full-width" style="width :100%">
-    <textarea matInput placeholder="รายละเอียดของเรื่อง" [(ngModel)]="input.PublicizeDetail"></textarea>
-  </mat-form-field>
 
-  <!-- =======================================================================================ช่องทางการติดต่อ -->
+  <form [formGroup]="pubForm" (ngSubmit)="onFormSubmit()">
 
-  <mat-form-field class="formcenter">
-    <mat-select placeholder="ชื่อเจ้าหน้าที่" [(ngModel)]="select.officerName">
-      <mat-option *ngFor="let officer of officers" [value]="officer.officerName">
-        {{officer.officerName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="formcenter">
-    <mat-select placeholder="สถานที่" [(ngModel)]="select.hospitalname">
-      <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
-        {{hospital.hospitalName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <!-- ================================  -->
-  <mat-form-field class="formcenter">
-    <mat-select placeholder="ประเภท" [(ngModel)]="select.typeofpub">
-      <mat-option *ngFor="let Tpubz of typeofpub" [value]="Tpubz.typePubName">
-        {{Tpubz.typePubName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <h3 class="center" style="background-color: #ffc000">ช่องทางการติดต่อ</h3>
-  <mat-form-field hintLabel="" style="width :100%">
-    <input matInput placeholder="e-mail" [(ngModel)]="input.email">
-  </mat-form-field>
-  <mat-form-field hintLabel="" style="width :100%">
-    <input matInput placeholder="เบอร์โทร" [(ngModel)]="input.call">
-  </mat-form-field>
-  <br/>
-  <div class="formcenter">
-    <button mat-flat-button color="accent" (click)="save()">บันทึก</button>
-  </div>
+    <mat-form-field hintLabel="" style="width :100%">
+      <input matInput placeholder="หัวเรื่อง" autocomplete="off"  formControlName="publiczHead_no">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" style="width :100%">
+      <textarea matInput placeholder="รายละเอียดของเรื่อง"  autocomplete="off"  formControlName="PublicizeDetail_no"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="formcenter">
+      <mat-select placeholder="ชื่อเจ้าหน้าที่" [(ngModel)]="select.officerName" formControlName="officerName_no">
+        <mat-option *ngFor="let officer of officers" [value]="officer.officerName">
+          {{officer.officerName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="formcenter">
+      <mat-select placeholder="สถานที่" [(ngModel)]="select.hospitalname" formControlName="hospitalName_no">
+        <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
+          {{hospital.hospitalName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <!-- ================================  -->
+    <mat-form-field class="formcenter">
+      <mat-select placeholder="ประเภท" [(ngModel)]="select.typeofpub" formControlName="typePubName_no">
+        <mat-option *ngFor="let Tpubz of typeofpub" [value]="Tpubz.typePubName">
+          {{Tpubz.typePubName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <!-- =======================================================================================ช่องทางการติดต่อ -->
+
+    <h3 class="center" style="background-color: #ffc000">ช่องทางการติดต่อ</h3>
+    <mat-form-field hintLabel="" style="width :100%">
+      <input matInput placeholder="e-mail"  autocomplete="off"  formControlName="email_no">
+    </mat-form-field>
+    <mat-form-field hintLabel="" style="width :100%">
+      <input matInput placeholder="เบอร์โทร"  autocomplete="off"  formControlName="call_no">
+    </mat-form-field>
+    <br/>
+    <div>
+      <button mat-raised-button  color="primary" >บันทึก</button>
+    </div>
+
+  </form>
 </div>
-
+<br/>
