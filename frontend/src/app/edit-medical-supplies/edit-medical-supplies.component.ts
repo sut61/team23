@@ -52,23 +52,25 @@ onFormSubmit() {
     this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน');
     if (this.myForm.controls['codeNumber_no'].hasError('pattern')) {
       this.alertService.error('กรุณากรอก C นำหน้า');
+    }else if (this.view.codeNumber == null) {
+      this.alertService.error('กรุณากรอกรหัสเวชภัณฑ์');
     }
-    else if (this.myForm.controls['modelNumber_no'].hasError('pattern')) {
-      this.alertService.error('กรุณากรอกข้อมูล (1-5) ตัว');
+    else if (this.view.modelNumber == null) {
+      this.alertService.error('กรุณากรอกหมายเลขรุ่น');
     }
-    else if (this.myForm.controls['medicalSupplies_no'].hasError('pattern')) {
-      this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
+    else if (this.view.medicalSupplies == null) {
+      this.alertService.error('กรุณากรอกชื่อเวชภัณฑ์');
     }
-    else if (this.myForm.controls['brandName_no'].hasError('pattern')) {
-      this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
+    else if (this.view.brandName == null) {
+      this.alertService.error('กรุณากรอกชื่อแบรนด์');
     }
-    else if (this.myForm.controls['properties_no'].hasError('pattern')) {
-      this.alertService.error('กรุณากรอกข้อมูล (2-30) ตัว');
+    else if (this.view.properties == null) {
+      this.alertService.error('กรุณากรอกคุณสมบัติ');
     }
-    else if (this.myForm.controls['medicalInstrument_no'].hasError('pattern')) {
+    else if (this.view.medicalInstrument == null) {
       this.alertService.error('กรุณาเลือกอุปกรณ์การแพทย์');
     }
-    else if (this.myForm.controls['useability_no'].hasError('pattern')) {
+    else if (this.view.useability == null) {
       this.alertService.error('กรุณาเลือกการใช้งาน');
     }
 
@@ -81,11 +83,11 @@ onFormSubmit() {
     this.onUpdate(this.myForm.value);
     this.isValidFormSubmitted = true;
     this.alertService.success("บันทึกข้อมูลเวชภัณฑ์ สำเร็จ");
-    
   }
 
   this.isValidFormSubmitted = true;
 }
+
 
 
   constructor(public medicalsuppliesServices:MedicalsuppliesService, 

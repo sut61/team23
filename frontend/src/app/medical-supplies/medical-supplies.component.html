@@ -1,7 +1,8 @@
-<alert></alert>
+
 <mat-card class=background-image>
   <h1 class="example-form">Medical Supplies</h1>
 </mat-card>
+<alert></alert>
 <mat-card class="background-image-matcart">
 
   <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()" class="example-form">
@@ -89,8 +90,8 @@
     <div class="example-form">
 
 
-      <mat-form-field class="example-form">
-        <mat-select [(ngModel)]="view.medicalInstrument" name="medicalInstrument" placeholder="อุปกรณ์การแพทย์"
+      <mat-form-field class="example-form" hintLabel="กรุณาเลือกอุปกรณ์การแพทย์">
+        <mat-select [(ngModel)]="view.medicalInstrument" name="medicalInstrument" placeholder="อุปกรณ์การแพทย์" 
           formControlName="medicalInstrument_no">
           <mat-option>None</mat-option>
           <mat-option *ngFor="let medicalInstrument of MedicalInstrument "
@@ -106,7 +107,7 @@
 
     <!--------------------------------การใช้งาน--------------------------------------------->
     <div class="example-form">
-      <mat-form-field class="example-form">
+      <mat-form-field class="example-form" hintLabel="กรุณาเลือกการใช้งาน">
         <mat-select [(ngModel)]="view.useability" name="useability" placeholder="การใช้งาน"
           formControlName="useability_no">
           <mat-option>None</mat-option>

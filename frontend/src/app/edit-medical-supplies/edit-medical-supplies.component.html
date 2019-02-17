@@ -1,8 +1,10 @@
+
 <mat-card class=background-image>
   <h1 class="example-form">Edit Medical Supplies</h1>
 </mat-card>
-<mat-card class="background-image-matcart">
+<alert></alert>
 
+<mat-card class="background-image-matcart">
 
   <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()" class="example-form">
     <!-----------------------------------รหัสเวชภัณฑ์----------------------------------------------->
@@ -108,13 +110,13 @@
         *ngIf="myForm.controls['useability_no'].hasError('pattern')">กรุณาเลือกการใช้งาน</a>
     </div>
     <!------------------------------------------------------------------------------->
-  </form>
+ 
 
 
-  <div class="button-background">
-    <button (click)=onUpdate() class="button-background" mat-raised-button>Update</button>
+    <button class="button-background" mat-raised-button>Update</button>
     <button (click)=onCancel() class="button-background" mat-raised-button>Cancel</button>
-  </div>
+ 
+  </form>
 
 
 </mat-card>
