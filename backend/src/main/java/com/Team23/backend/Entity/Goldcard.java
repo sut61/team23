@@ -43,7 +43,11 @@ public class Goldcard {
     private Officer officer;
 
     //-----------------------------------------Member
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Member.class)
-    @JoinColumn(name= "memberName", insertable = true)
-    private Member member;
+//    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Member.class)
+//    @JoinColumn(name= "memberName", insertable = true)
+//    private Member member;
+    //---------------------------------------RightRegistration
+    @ManyToOne(fetch = FetchType.EAGER , targetEntity = RightRegistration.class)
+    @JoinColumn(name = "username" ,insertable = true)
+    private  RightRegistration rightRegistration;
 }

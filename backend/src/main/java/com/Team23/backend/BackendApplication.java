@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @SpringBootApplication
 
-public class BackendApplication  {
+public class BackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -39,269 +39,206 @@ public class BackendApplication  {
 	}
 
 	@Bean
-	ApplicationRunner init(RightsTypeRepository       rightsTypeRepository
-			, RightRegistrationRepository  rightRegistrationRepository
-			, ProvinceRepository         provinceRepository
-			, HospitalRepository           hospitalRepository
-			, DiseaseRepository          diseaseRepository
-			, DocumentRepositoty           documentRepositoty
-			, EligibleDiseasesRepositoty eligibleDiseasesRepositoty
-			, OfficerRepository            officerRepository
-			, GoldcardRepository         goldcardRepository
-			, TypesOfDrugsRepository       typesOfDrugsRepository
-			, DrugRegistrationRepository drugRegistrationRepository
-			, TypesOfDosageFormsRepository typesOfDosageFormsRepository
-			, DrugRepository             drugRepository
-			, AffiliationRepository		affiliationRepository
-			, TypeHospitalRepository	  typeHospitalRepository
-			, MemberRepository memberRepository
-			, StatusRepository statusRepository
-			, AcceptToUserRepository acceptToUserRepository
-			, TypeDiseaseRepository typeDiseaseRepository
-			, PeopleDiseaseRepository	peopleDiseaseRepository
-			, ExpensesRepository expensesRepository 
-			,TypeTrainingRepository typeTrainingRepository
-			,LecturerRepository lecturerRepository
-			, TrainingRepository trainingRepository
-			, PubliczRepository publiczRepository
-			, TypeOfPubliczRepository typeOfPubliczRepository
-			, MedicalInstrumentRepository medicalInstrumentRepository
-			, UseabilityRepository useabilityRepository
-			, MedicalSuppliesRepository medicalSuppliesRepository
-	) throws Exception {
+	ApplicationRunner init(RightsTypeRepository rightsTypeRepository,
+			RightRegistrationRepository rightRegistrationRepository, ProvinceRepository provinceRepository,
+			HospitalRepository hospitalRepository, DiseaseRepository diseaseRepository,
+			DocumentRepositoty documentRepositoty, EligibleDiseasesRepositoty eligibleDiseasesRepositoty,
+			OfficerRepository officerRepository, GoldcardRepository goldcardRepository,
+			TypesOfDrugsRepository typesOfDrugsRepository, DrugRegistrationRepository drugRegistrationRepository,
+			TypesOfDosageFormsRepository typesOfDosageFormsRepository, DrugRepository drugRepository,
+			AffiliationRepository affiliationRepository, TypeHospitalRepository typeHospitalRepository,
+			MemberRepository memberRepository, StatusRepository statusRepository,
+			AcceptToUserRepository acceptToUserRepository, TypeDiseaseRepository typeDiseaseRepository,
+			PeopleDiseaseRepository peopleDiseaseRepository, ExpensesRepository expensesRepository,
+			TypeTrainingRepository typeTrainingRepository, LecturerRepository lecturerRepository,
+			TrainingRepository trainingRepository, PubliczRepository publiczRepository,
+			TypeOfPubliczRepository typeOfPubliczRepository, MedicalInstrumentRepository medicalInstrumentRepository,
+			UseabilityRepository useabilityRepository, MedicalSuppliesRepository medicalSuppliesRepository)
+			throws Exception {
 
 		return args -> {
 
-			Stream.of("Post1111","Post1112").forEach(publiczHead -> {
-
-				Publicz publicz = new Publicz();
-				Hospital hospital = new Hospital();
-				TypeOfPublicz typeOfPublicz = new TypeOfPublicz();
-				Officer officer = new Officer();
-
-				publicz.setPubliczHead(publiczHead);
-				publiczRepository.save(publicz);
-
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-
-				String DateA = "25:05:1998";
-				String DateB = "25:05:1990";
-
-				LocalDate datea = LocalDate.parse(DateA, formatter);
-				LocalDate dateb = LocalDate.parse(DateB, formatter);
-
-				if (publiczHead == "Post1111") {
-
-					publicz.setPublicizeDetail("Suranaree University of Technology");
-					publicz.setDate_reg(datea);
-					publicz.setEmail("oat@hotmail.com");
-					publicz.setCall("0883120905");
-
-					officer = officerRepository.findByOfficerName("OAT");
-					publicz.setOfficer(officer);
-
-					typeOfPublicz = typeOfPubliczRepository.findByTypePubName("กิจกรรม");
-					publicz.setTypeOfPublicz(typeOfPublicz);
-
-					hospital = hospitalRepository.findByHospitalName("รพ.กรุงเทพ");
-					publicz.setHospital(hospital);
-
-					publiczRepository.save(publicz);
-				}
-				if (publiczHead == "Post1112") {
-
-					publicz.setPublicizeDetail("Suranaree University of Technology 2");
-					publicz.setDate_reg(datea);
-					publicz.setEmail("beem@hotmail.com");
-					publicz.setCall("0923120905");
-
-					officer = officerRepository.findByOfficerName("BEEM");
-					publicz.setOfficer(officer);
-
-					typeOfPublicz = typeOfPubliczRepository.findByTypePubName("ประชาสัมพันธ์");
-					publicz.setTypeOfPublicz(typeOfPublicz);
-
-					hospital = hospitalRepository.findByHospitalName("รพ.กรุงเทพ");
-					publicz.setHospital(hospital);
-
-					publiczRepository.save(publicz);
-				}
-			});
 			Stream.of("ประชาสัมพันธ์", "กิจกรรม").forEach(typePubName -> {
 				TypeOfPublicz typeOfPublicz = new TypeOfPublicz();
 				typeOfPublicz.setTypePubName(typePubName);
 				typeOfPubliczRepository.save(typeOfPublicz);
 			});
-			Stream.of("OATTT", "BEEMM", "JANJOW","ANGGG","admin","Kanathip Poungtham", "Pichakorn Lohanut","Pantamit Sombaddee").forEach(officerName -> {
-				Officer officer = new Officer();
-				officer.setOfficerName(officerName);
+			Stream.of("OATTT", "BEEMM", "JANJOW", "ANGGG", "admin", "Kanathip Poungtham", "Pichakorn Lohanut",
+					"Pantamit Sombaddee").forEach(officerName -> {
+						Officer officer = new Officer();
+						officer.setOfficerName(officerName);
 
+						if (officerName == "OATTT") {
+							officer.setCallNumber("0883120905");
+							officer.setUserName("OAT1234");
+							officer.setPassWord("admin");
+							officerRepository.save(officer);
+						} else if (officerName == "BEEMM") {
+							officer.setCallNumber("0883146847");
+							officer.setUserName("BEEM1234");
+							officer.setPassWord("admin");
+							officerRepository.save(officer);
+						} else if (officerName == "ANGGG") {
+							officer.setCallNumber("0880303038");
+							officer.setUserName("ANG1234");
+							officer.setPassWord("admin");
+							officerRepository.save(officer);
+						} else if (officerName == "JANJOW") {
+							officer.setCallNumber("0981546782");
+							officer.setUserName("JANJOW1");
+							officer.setPassWord("admin");
+							officerRepository.save(officer);
+						} else if (officerName == "admin") {
+							officer.setCallNumber("0999999999");
+							officer.setUserName("admin");
+							officer.setPassWord("admin");
+							officerRepository.save(officer);
+						} else if (officerName == "Kanathip Poungtham") {
+							officer.setCallNumber("0888888888");
+							officer.setUserName("user1");
+							officer.setPassWord("0000");
+							officerRepository.save(officer);
+						} else if (officerName == "Pichakorn Lohanut") {
+							officer.setCallNumber("0812345678");
+							officer.setUserName("user2");
+							officer.setPassWord("0000");
+							officerRepository.save(officer);
+						} else if (officerName == "Pantamit Sombaddee") {
+							officer.setCallNumber("0912345687");
+							officer.setUserName("user3");
+							officer.setPassWord("0000");
+							officerRepository.save(officer);
+						}
+						officerRepository.save(officer);
 
+					});
 
-				if(officerName == "OATTT"){
-					officer.setCallNumber("0883120905");
-					officer.setUserName("OAT1234");
-					officer.setPassWord("admin");
-					officerRepository.save(officer);
-				}
-				else if(officerName == "BEEMM"){
-					officer.setCallNumber("0883146847");
-					officer.setUserName("BEEM1234");
-					officer.setPassWord("admin");
-					officerRepository.save(officer);
-				}
-				else if(officerName == "ANGGG"){
-					officer.setCallNumber("0880303038");
-					officer.setUserName("ANG1234");
-					officer.setPassWord("admin");
-					officerRepository.save(officer);
-				}
-				else if(officerName == "JANJOW"){
-					officer.setCallNumber("0981546782");
-					officer.setUserName("JANJOW1");
-					officer.setPassWord("admin");
-					officerRepository.save(officer);
-				}
-				else if(officerName == "admin"){
-					officer.setCallNumber("0999999999");
-					officer.setUserName("admin");
-					officer.setPassWord("admin");
-					officerRepository.save(officer);
-				}else if(officerName == "Kanathip Poungtham"){
-					officer.setCallNumber("0888888888");
-					officer.setUserName("user1");
-					officer.setPassWord("0000");
-					officerRepository.save(officer);
-				} else if(officerName == "Pichakorn Lohanut"){
-					officer.setCallNumber("0812345678");
-					officer.setUserName("user2");
-					officer.setPassWord("0000");
-					officerRepository.save(officer);
-				}else if(officerName == "Pantamit Sombaddee"){
-					officer.setCallNumber("0912345687");
-					officer.setUserName("user3");
-					officer.setPassWord("0000");
-					officerRepository.save(officer);
-				}
-				officerRepository.save(officer);
+			Stream.of("10001", "10002", "10003", "10004", "10005", "10006", "10007", "10008", "10009", "100010")
+					.forEach(numberDocument -> {
+						DocumentWork documentWork = new DocumentWork();
 
-			});
+						documentWork.setNumberDocument(numberDocument);
+						if (numberDocument == "10001") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-ปอด#1");
+							documentWork
+									.setUrl("https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "08:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10002") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-หัวใจ#1");
+							documentWork.setUrl("https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "08:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10003") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-ประสาท#1");
+							documentWork.setUrl("https://www.honestdocs.co/psychosis-and-neurosis-difference");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "09:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10004") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-มะเร็งตับอ่อน#1");
+							documentWork.setUrl("https://www.honestdocs.co/what-is-pancreatic-cancer");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "10:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10005") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-โรคถุงลมปอดโป่งพอง#1");
+							documentWork.setUrl("https://www.honestdocs.co/emphysema-diagnose");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "11:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10006") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-กระดูกพรุน#1");
+							documentWork.setUrl("https://www.honestdocs.co/pneumonia");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "12:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10007") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-ข้อเสื่อม#1");
+							documentWork.setUrl("https://www.honestdocs.co/drugs");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "13:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10008") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-กล้ามเนื้ออ่อนแรง#1");
+							documentWork.setUrl("https://www.honestdocs.co/what-is-myasthenia-gravis");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "08:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "10009") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-ต้อกระจก#1");
+							documentWork.setUrl("https://www.honestdocs.co/cataracts");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "14:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						} else if (numberDocument == "100010") {
+							documentWork.setTitle("รับรอง-เพิ่ม-โรค-อาหารเป็นพิษ#1");
+							documentWork.setUrl("https://www.honestdocs.co/food-poisoning");
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
+							String Date1 = "15:02:2019";
+							LocalDate adate1 = LocalDate.parse(Date1, formatter);
+							documentWork.setDate(adate1);
+							documentRepositoty.save(documentWork);
+						}
+					});
 
-			Stream.of("10001", "10002","10003","10004", "10005","10006","10007", "10008","10009","100010").forEach(numberDocument -> {
-				DocumentWork documentWork = new DocumentWork();
-
-				documentWork.setNumberDocument(numberDocument);
-				if(numberDocument == "10001"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ปอด#1");
-					documentWork.setUrl("https://www.bangkokhospital.com/index.php/th/diseases-treatment/chest_05");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "08:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				} else if(numberDocument == "10002"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-หัวใจ#1");
-					documentWork.setUrl("https://www.honestdocs.co/signs-to-watch-out-for-heart-disease");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "08:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}else if(numberDocument == "10003"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ประสาท#1");
-					documentWork.setUrl("https://www.honestdocs.co/psychosis-and-neurosis-difference");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "09:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				} else if(numberDocument == "10004"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-มะเร็งตับอ่อน#1");
-					documentWork.setUrl("https://www.honestdocs.co/what-is-pancreatic-cancer");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "10:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}else if(numberDocument == "10005"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-โรคถุงลมปอดโป่งพอง#1");
-					documentWork.setUrl("https://www.honestdocs.co/emphysema-diagnose");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "11:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}else if(numberDocument == "10006"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-กระดูกพรุน#1");
-					documentWork.setUrl("https://www.honestdocs.co/pneumonia");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "12:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}else if(numberDocument == "10007"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ข้อเสื่อม#1");
-					documentWork.setUrl("https://www.honestdocs.co/drugs");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "13:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				} else if(numberDocument == "10008"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-กล้ามเนื้ออ่อนแรง#1");
-					documentWork.setUrl("https://www.honestdocs.co/what-is-myasthenia-gravis");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "08:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}else if(numberDocument == "10009"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-ต้อกระจก#1");
-					documentWork.setUrl("https://www.honestdocs.co/cataracts");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "14:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}else if(numberDocument == "100010"){
-					documentWork.setTitle("รับรอง-เพิ่ม-โรค-อาหารเป็นพิษ#1");
-					documentWork.setUrl("https://www.honestdocs.co/food-poisoning");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
-					String Date1 = "15:02:2019";
-					LocalDate adate1 = LocalDate.parse(Date1, formatter);
-					documentWork.setDate(adate1);
-					documentRepositoty.save(documentWork);
-				}
-			});
-
-			Stream.of("บัตรทอง","รับราชการ").forEach(rightsTypeName -> {
+			Stream.of("บัตรทอง", "รับราชการ").forEach(rightsTypeName -> {
 				RightsType rightstype = new RightsType();
 				rightstype.setRightsTypeName(rightsTypeName);
 				rightsTypeRepository.save(rightstype);
 			});
 
-			Stream.of("Pass","Fail").forEach(statusName -> {
+			Stream.of("Pass", "Fail").forEach(statusName -> {
 				Status st = new Status();
 				st.setStatusName(statusName);
 				statusRepository.save(st);
 			});
 
-			Stream.of("เอกชน","รัฐวิสาหกิจ","ไม่มีในฐานข้อมูล").forEach(typeName -> {
+			Stream.of("เอกชน", "รัฐวิสาหกิจ", "ไม่มีในฐานข้อมูล").forEach(typeName -> {
 				TypeHospital typehos = new TypeHospital();
 				typehos.setTypeName(typeName);
 				typeHospitalRepository.save(typehos);
 
 			});
-			Stream.of("โรงพยาบาล","คลินิค","ไม่มีในฐานข้อมูล").forEach(affiliationName -> {
+			Stream.of("โรงพยาบาล", "คลินิค", "ไม่มีในฐานข้อมูล").forEach(affiliationName -> {
 				Affiliation affi = new Affiliation();
 				affi.setAffiliationName(affiliationName);
 				affiliationRepository.save(affi);
 			});
-			Stream.of("กระบี่","กรุงเทพมหานคร","กาญจนบุรี","กาฬสินธุ์","กำแพงเพชร","ขอนแก่น","จันทบุรี","ฉะเชิงเทรา" ,"ชลบุรี","ชัยนาท","ชัยภูมิ","ชุมพร","เชียงราย","เชียงใหม่","ตรัง","ตราด","ตาก","นครนายก","นครปฐม","นครพนม","นครราชสีมา" ,"นครศรีธรรมราช","นครสวรรค์","นนทบุรี","นราธิวาส","น่าน","บุรีรัมย์","บึงกาฬ","ปทุมธานี","ประจวบคีรีขันธ์","ปราจีนบุรี","ปัตตานี" ,"พะเยา","พังงา","พัทลุง","พิจิตร","พิษณุโลก","เพชรบุรี","เพชรบูรณ์","แพร่","ภูเก็ต","มหาสารคาม","มุกดาหาร","แม่ฮ่องสอน" ,"ยโสธร","ยะลา","ร้อยเอ็ด","ระนอง","ระยอง","ราชบุรี","ลพบุรี","ลำปาง","ลำพูน","เลย","ศรีสะเกษ","สกลนคร","สงขลา" ,"สตูล","สมุทรปราการ","สมุทรสงคราม","สมุทรสาคร","สระแก้ว","สระบุรี","สิงห์บุรี","สุโขทัย","สุพรรณบุรี","สุราษฎร์ธานี" ,"สุรินทร์","หนองคาย","หนองบัวลำภู","อยุธยา","อ่างทอง","อำนาจเจริญ","อุดรธานี","อุตรดิตถ์","อุทัยธานี","อุบลราชธานี","ไม่มีในฐานข้อมูล").forEach(provinceName -> {
-				Province province = new Province();
-				province.setProvinceName(provinceName);
-				provinceRepository.save(province);
-			});
+			Stream.of("กระบี่", "กรุงเทพมหานคร", "กาญจนบุรี", "กาฬสินธุ์", "กำแพงเพชร", "ขอนแก่น", "จันทบุรี",
+					"ฉะเชิงเทรา", "ชลบุรี", "ชัยนาท", "ชัยภูมิ", "ชุมพร", "เชียงราย", "เชียงใหม่", "ตรัง", "ตราด",
+					"ตาก", "นครนายก", "นครปฐม", "นครพนม", "นครราชสีมา", "นครศรีธรรมราช", "นครสวรรค์", "นนทบุรี",
+					"นราธิวาส", "น่าน", "บุรีรัมย์", "บึงกาฬ", "ปทุมธานี", "ประจวบคีรีขันธ์", "ปราจีนบุรี", "ปัตตานี",
+					"พะเยา", "พังงา", "พัทลุง", "พิจิตร", "พิษณุโลก", "เพชรบุรี", "เพชรบูรณ์", "แพร่", "ภูเก็ต",
+					"มหาสารคาม", "มุกดาหาร", "แม่ฮ่องสอน", "ยโสธร", "ยะลา", "ร้อยเอ็ด", "ระนอง", "ระยอง", "ราชบุรี",
+					"ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล", "สมุทรปราการ",
+					"สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี",
+					"สุราษฎร์ธานี", "สุรินทร์", "หนองคาย", "หนองบัวลำภู", "อยุธยา", "อ่างทอง", "อำนาจเจริญ", "อุดรธานี",
+					"อุตรดิตถ์", "อุทัยธานี", "อุบลราชธานี", "ไม่มีในฐานข้อมูล").forEach(provinceName -> {
+						Province province = new Province();
+						province.setProvinceName(provinceName);
+						provinceRepository.save(province);
+					});
 			Stream.of("อบรม", "อบรมเชิงปฏิบัติ", "สัมนา").forEach(typeTrainingName -> {
 				TypeTraining tt = new TypeTraining();
 				tt.setTypeTrainingName(typeTrainingName);
@@ -362,7 +299,7 @@ public class BackendApplication  {
 				ta.setObjectiveTraining("objectiveTraining");
 				ta.setAttendess(1000L);
 				ta.setExpenditure(10000L);
-				
+
 				Hospital hh = hospitalRepository.findByHospitalName("RatchasrimaHospital");
 				ta.setHospitalName(hh);
 
@@ -375,26 +312,28 @@ public class BackendApplication  {
 				trainingRepository.save(ta);
 
 			});
-			Stream.of("ยาสามัญ","ยาสามัญประจำบ้าน","ยาอันตราย","ยาควบคุมพิเศษ","ผลิตภัณฑ์เสริมอาหาร").forEach(typesOfDrugsName -> {
-		    TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
-			typesOfDrugs.setTypesOfDrugsName(typesOfDrugsName);
-				typesOfDrugsRepository.save(typesOfDrugs);
-				});
+			Stream.of("ยาสามัญ", "ยาสามัญประจำบ้าน", "ยาอันตราย", "ยาควบคุมพิเศษ", "ผลิตภัณฑ์เสริมอาหาร")
+					.forEach(typesOfDrugsName -> {
+						TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+						typesOfDrugs.setTypesOfDrugsName(typesOfDrugsName);
+						typesOfDrugsRepository.save(typesOfDrugs);
+					});
 
-			Stream.of("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล","ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด").forEach(drugRegistrationName -> {
-			DrugRegistration drugRegistration = new DrugRegistration();
-			drugRegistration.setDrugRegistrationName(drugRegistrationName);
-			drugRegistrationRepository.save(drugRegistration);
-			});
+			Stream.of("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล", "ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด")
+					.forEach(drugRegistrationName -> {
+						DrugRegistration drugRegistration = new DrugRegistration();
+						drugRegistration.setDrugRegistrationName(drugRegistrationName);
+						drugRegistrationRepository.save(drugRegistration);
+					});
 
+			Stream.of("เม็ดสี่เหลี่ยม", "เม็ดสามเหลี่ยม", "เม็ดวงกลม", "เม็ดวงรี", "เม็ดแคปซูล", "น้ำ")
+					.forEach(typesOfDosageFormsName -> {
+						TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+						typesOfDosageForms.setTypesOfDosageFormsName(typesOfDosageFormsName);
+						typesOfDosageFormsRepository.save(typesOfDosageForms);
+					});
 
-		    Stream.of("เม็ดสี่เหลี่ยม","เม็ดสามเหลี่ยม","เม็ดวงกลม","เม็ดวงรี","เม็ดแคปซูล","น้ำ").forEach(typesOfDosageFormsName -> {
-			TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-			typesOfDosageForms.setTypesOfDosageFormsName(typesOfDosageFormsName);
-			typesOfDosageFormsRepository.save(typesOfDosageForms);
-			});
-
-			Stream.of("Graph", "Sun","Bas").forEach(userName -> {
+			Stream.of("Graph", "Sun", "Bas").forEach(userName -> {
 
 				RightRegistration rightRegistration = new RightRegistration();
 				Hospital hospitalid = new Hospital();
@@ -454,7 +393,7 @@ public class BackendApplication  {
 					rightRegistration.setHospital(hospitalid);
 
 					rightRegistrationRepository.save(rightRegistration);
-				}else if (userName == "Bas") {
+				} else if (userName == "Bas") {
 
 					rightRegistration.setPassword("Pass" + userName);
 					rightRegistration.setFirstname("First" + userName);
@@ -483,12 +422,12 @@ public class BackendApplication  {
 				typeDiseaseRepository.save(typeDisease);
 			});
 
-			Stream.of("200-300 คน", "300-400 คน", "400-500 คน", "500-600 คน", "600-700 คน", "700-800 คน", "800-900 คน", "900-1000 คน").forEach(populationRate -> {
-				PeopleDisease peopleDisease = new PeopleDisease();
-				peopleDisease.setPopulationRate(populationRate);
-				peopleDiseaseRepository.save(peopleDisease);
-			});
-
+			Stream.of("200-300 คน", "300-400 คน", "400-500 คน", "500-600 คน", "600-700 คน", "700-800 คน", "800-900 คน",
+					"900-1000 คน").forEach(populationRate -> {
+						PeopleDisease peopleDisease = new PeopleDisease();
+						peopleDisease.setPopulationRate(populationRate);
+						peopleDiseaseRepository.save(peopleDisease);
+					});
 
 			Stream.of("โรคเบาหวาน", "โรคความดันโลหิตสูง").forEach(diseaseName -> {
 				Disease disease = new Disease();
@@ -496,7 +435,7 @@ public class BackendApplication  {
 				PeopleDisease peopleDiseaseid = new PeopleDisease();
 
 				disease.setDiseaseName(diseaseName);
-				if(diseaseName == "โรคเบาหวาน"){
+				if (diseaseName == "โรคเบาหวาน") {
 					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
 					disease.setTypedisease(typeDiseaseid);
 					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("300-400 คน");
@@ -505,7 +444,7 @@ public class BackendApplication  {
 					disease.setCause("อ้วนหรือน้ำหนักเกินมาตรฐาน");
 					disease.setRemedy("ลดน้ำตาล");
 					diseaseRepository.save(disease);
-				} else if(diseaseName == "โรคความดันโลหิตสูง"){
+				} else if (diseaseName == "โรคความดันโลหิตสูง") {
 					typeDiseaseid = typeDiseaseRepository.findByTypeDiseaseName("โรคไม่ติดต่อหรือไม่ติดเชื้อ");
 					disease.setTypedisease(typeDiseaseid);
 					peopleDiseaseid = peopleDiseaseRepository.findByPopulationRate("500-600 คน");
@@ -517,22 +456,22 @@ public class BackendApplication  {
 				}
 			});
 
-
 			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)").forEach(drugName -> {
-				Drug               grug               = new Drug();
-				TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-				DrugRegistration   drugRegistration   = new DrugRegistration();
+				Drug grug = new Drug();
+				TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+				DrugRegistration drugRegistration = new DrugRegistration();
 				TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-				Disease            disease            = new Disease();
-				
-				if(drugName=="Ampicillin (แอมพิซิลลิน)"){
+				Disease disease = new Disease();
+
+				if (drugName == "Ampicillin (แอมพิซิลลิน)") {
 					grug.setDrugName("Ampicillin (แอมพิซิลลิน)");
 					typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
 					grug.setTypesOfDrugs(typesOfDrugs);
 
-					drugRegistration =drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+					drugRegistration = drugRegistrationRepository
+							.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
 					grug.setDrugRegistration(drugRegistration);
-					
+
 					typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
 					grug.setTypesOfDosageForms(typesOfDosageForms);
 
@@ -541,15 +480,16 @@ public class BackendApplication  {
 
 					drugRepository.save(grug);
 
-				}else if(drugName=="Enalapril (อีนาลาพริล)"){
+				} else if (drugName == "Enalapril (อีนาลาพริล)") {
 
 					grug.setDrugName("Enalapril (อีนาลาพริล)");
 					typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาควบคุมพิเศษ");
 					grug.setTypesOfDrugs(typesOfDrugs);
 
-					drugRegistration =drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+					drugRegistration = drugRegistrationRepository
+							.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
 					grug.setDrugRegistration(drugRegistration);
-					
+
 					typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
 					grug.setTypesOfDosageForms(typesOfDosageForms);
 
@@ -558,16 +498,16 @@ public class BackendApplication  {
 					drugRepository.save(grug);
 				}
 
-
 			});
-			Stream.of("อุปกรณ์การแพทย์","บริภัณฑ์การแพทย์","วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม","เครื่องมือแพทย์เฉพาะทาง").forEach(medicalInstrumentName ->{
-				MedicalInstrument medicalInstrument = new MedicalInstrument();
-				medicalInstrument.setMedicalInstrumentName(medicalInstrumentName);
-				medicalInstrumentRepository.save(medicalInstrument);
-			});
+			Stream.of("อุปกรณ์การแพทย์", "บริภัณฑ์การแพทย์", "วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม",
+					"เครื่องมือแพทย์เฉพาะทาง").forEach(medicalInstrumentName -> {
+						MedicalInstrument medicalInstrument = new MedicalInstrument();
+						medicalInstrument.setMedicalInstrumentName(medicalInstrumentName);
+						medicalInstrumentRepository.save(medicalInstrument);
+					});
 			medicalInstrumentRepository.findAll().forEach(System.out::println);
 
-		    Stream.of("ใช้ทั่วไป","ใช้เฉพาะทาง").forEach(ueabilityName ->{
+			Stream.of("ใช้ทั่วไป", "ใช้เฉพาะทาง").forEach(ueabilityName -> {
 				Useability ueability = new Useability();
 				ueability.setUseabilityName(ueabilityName);
 				useabilityRepository.save(ueability);
@@ -576,20 +516,54 @@ public class BackendApplication  {
 
 			Stream.of("Graph", "Sun").forEach(goldcardName -> {
 				Goldcard goldcard = new Goldcard();
+				Hospital hospital = new Hospital();
+				Officer officer = new Officer();
+				RightRegistration rightRegistration = new RightRegistration();
+
 				goldcard.setGoldcardName(goldcardName);
 				goldcardRepository.save(goldcard);
+
+				if(goldcardName == "Graph"){
+					goldcard.setDetail("โรคหอบหืด");
+
+					hospital = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+					goldcard.setHospital(hospital);
+
+					officer = officerRepository.findByOfficerName("OATTT");
+					goldcard.setOfficer(officer);
+
+					rightRegistration = rightRegistrationRepository.findByUsername("Graph");
+					goldcard.setRightRegistration(rightRegistration);
+
+					goldcardRepository.save(goldcard);
+				}
+				if(goldcardName == "Sun"){
+					goldcard.setDetail("โรคความดัน");
+
+					hospital = hospitalRepository.findByHospitalName("RatchasrimaHospital");
+					goldcard.setHospital(hospital);
+
+					officer = officerRepository.findByOfficerName("OATTT");
+					goldcard.setOfficer(officer);
+
+					rightRegistration = rightRegistrationRepository.findByUsername("Sun");
+					goldcard.setRightRegistration(rightRegistration);
+
+
+					goldcardRepository.save(goldcard);
+				}
 			});
 
-
-			Stream.of("Weerapat", "Nantika", "Nuntawut","Porramate").forEach(memberName -> {
+			Stream.of("Weerapat", "Nantika", "Nuntawut", "Porramate").forEach(memberName -> {
 				Member member = new Member();
 				member.setMemberName(memberName);
 				memberRepository.save(member);
 			});
 
-//Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2
+			// Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2
+			// Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2 Sprint2
 
-			Stream.of("P1", "F2","F3").forEach(acceptToUser -> {
+			Stream.of("P1", "F2", "F3").forEach(acceptToUser -> {
 
 				AcceptToUser acceptToUserId = new AcceptToUser();
 				Officer officerId = new Officer();
@@ -619,7 +593,6 @@ public class BackendApplication  {
 					officerId = officerRepository.findByOfficerName("Pichakorn Lohanut");
 					acceptToUserId.setOfficer(officerId);
 
-
 				} else if (acceptToUser == "F2") {
 					acceptToUserId.setAccId(2L);
 					acceptToUserId.setComment("เอกสารไม่ตรงกับข้อมูล");
@@ -634,7 +607,7 @@ public class BackendApplication  {
 					officerId = officerRepository.findByOfficerName("Kanathip Poungtham");
 					acceptToUserId.setOfficer(officerId);
 
-				}else if (acceptToUser == "F3") {
+				} else if (acceptToUser == "F3") {
 					acceptToUserId.setAccId(3L);
 					acceptToUserId.setComment("เอกสารไม่ตรงกับข้อมูล");
 					acceptToUserId.setDateAccept(adate2);
@@ -652,7 +625,6 @@ public class BackendApplication  {
 				acceptToUserRepository.save(acceptToUserId);
 			});
 
-
 			Stream.of("บัตรทอง", "บัตรทองพรีเมียม", "บัตรข้าราชการ").forEach(ExpensesName -> {
 				Expenses expenses = new Expenses();
 				expenses.setExpensesName(ExpensesName);
@@ -664,20 +636,18 @@ public class BackendApplication  {
 				LocalDate date0 = LocalDate.parse(Date0, formatter);
 				LocalDate date1 = LocalDate.parse(Date1, formatter);
 				LocalDate date2 = LocalDate.parse(Date2, formatter);
-				if(ExpensesName == "บัตรทอง"){
+				if (ExpensesName == "บัตรทอง") {
 
 					expenses.setNumber("100");
 					expenses.setComment("this is comment1");
 					expenses.setDate(date0);
 					expensesRepository.save(expenses);
-				}
-				else if(ExpensesName == "บัตรทองพรีเมียม"){
+				} else if (ExpensesName == "บัตรทองพรีเมียม") {
 					expenses.setNumber("150");
 					expenses.setComment("this is comment2");
 					expenses.setDate(date1);
 					expensesRepository.save(expenses);
-				}
-				else if(ExpensesName == "บัตรข้าราชการ"){
+				} else if (ExpensesName == "บัตรข้าราชการ") {
 					expenses.setNumber("200");
 					expenses.setComment("this is comment3");
 					expenses.setDate(date2);
@@ -687,21 +657,21 @@ public class BackendApplication  {
 
 			});
 
+			Stream.of("Cogblunt", "HotSale", "sterile").forEach(medicalSuppliesName -> {
 
-			Stream.of("Cogblunt","HotSale","sterile").forEach(medicalSuppliesName ->{
+				MedicalSupplies medicalSupplies = new MedicalSupplies();
+				MedicalInstrument medicalInstrument = new MedicalInstrument();
+				Useability useability = new Useability();
 
-				MedicalSupplies      medicalSupplies   = new MedicalSupplies();
-				MedicalInstrument    medicalInstrument = new MedicalInstrument();
-				Useability           useability        = new Useability();
-
-				if(medicalSuppliesName == "Cogblunt"){
+				if (medicalSuppliesName == "Cogblunt") {
 					medicalSupplies.setCodeNumber("C12345");
 					medicalSupplies.setModelNumber("Mono");
 					medicalSupplies.setMedicalsuppliesName("Cogblunt");
 					medicalSupplies.setBrandName("HIPREETY");
 					medicalSupplies.setProperties("Medical Adhesive");
 
-					medicalInstrument = medicalInstrumentRepository.findByMedicalInstrumentName("วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม");
+					medicalInstrument = medicalInstrumentRepository
+							.findByMedicalInstrumentName("วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม");
 					medicalSupplies.setMedicalInstrument(medicalInstrument);
 
 					useability = useabilityRepository.findByuseabilityName("ใช้เฉพาะทาง");
@@ -710,9 +680,8 @@ public class BackendApplication  {
 					medicalSuppliesRepository.save(medicalSupplies);
 					System.out.println(medicalInstrument);
 					System.out.println(useability);
-					
-				}
-				else if(medicalSuppliesName == "HotSale"){
+
+				} else if (medicalSuppliesName == "HotSale") {
 					medicalSupplies.setCodeNumber("C12346");
 					medicalSupplies.setModelNumber("SU001");
 					medicalSupplies.setMedicalsuppliesName("HotSale");
@@ -730,18 +699,17 @@ public class BackendApplication  {
 					System.out.println(medicalInstrument);
 					System.out.println(useability);
 
-				}
-				else if(medicalSuppliesName == "sterile"){
+				} else if (medicalSuppliesName == "sterile") {
 					medicalSupplies.setCodeNumber("C12347");
 					medicalSupplies.setModelNumber("Base");
 					medicalSupplies.setMedicalsuppliesName("sterile");
 					medicalSupplies.setBrandName("KLF");
 					medicalSupplies.setProperties("vaginal speculum");
 
-					medicalInstrument = medicalInstrumentRepository.findByMedicalInstrumentName("วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม");
+					medicalInstrument = medicalInstrumentRepository
+							.findByMedicalInstrumentName("วัสดุการแพทย์และวัสดุฝังในทางศัลยกรรม");
 					medicalSupplies.setMedicalInstrument(medicalInstrument);
 
-					
 					useability = useabilityRepository.findByuseabilityName("ใช้เฉพาะทาง");
 					medicalSupplies.setUseability(useability);
 
@@ -752,14 +720,11 @@ public class BackendApplication  {
 				}
 			});
 
-
 			System.out.println("Spring Boot Pass");
 			String colorwhite = "\u001b[37m";
 			String Success = "\u001b[32m";
-			System.out.println(Success+"Mvnw Spring-boot:Run ::  Success !!"+colorwhite);
+			System.out.println(Success + "Mvnw Spring-boot:Run ::  Success !!" + colorwhite);
 		};
-		};
+	};
 
-	}
-
-
+}

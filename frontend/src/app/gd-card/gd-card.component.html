@@ -1,38 +1,41 @@
 <div class="card">
   <H3 class="center">GoldCard</H3>
-
+  <alert></alert>
   <hr/>
-  <mat-form-field class="formcenter">
-    <mat-select placeholder="ชื่อเจ้าหน้าที่" [(ngModel)]="select.officerName">
-      <mat-option *ngFor="let officer of officers" [value]="officer.officerName">
-        {{officer.officerName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="formcenter">
-    <mat-select placeholder="Hospital" [(ngModel)]="select.hospitalname">
-      <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
-        {{hospital.hospitalName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="formcenter">
-    <mat-select placeholder="ชื่อผู้ใช้บัตรทอง" [(ngModel)]="select.membername">
-      <mat-option *ngFor="let member of members" [value]="member.memberName">
-        {{member.memberName}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="formtab">
-    <input matInput  placeholder="รายละเอียด"  [(ngModel)]="input.detail">
-  </mat-form-field>
-  <br/>
-  <div class="formcenter">
-    <button mat-flat-button color="accent" (click)="save()">บันทึก</button>
-  </div>
+  <form [formGroup]="gdcForm" (ngSubmit)="onFormSubmit()">
+    <mat-form-field class="formcenter">
+      <mat-select placeholder="ชื่อเจ้าหน้าที่" [(ngModel)]="select.officerName" formControlName="officerName_no">
+        <mat-option *ngFor="let officer of officers" [value]="officer.officerName">
+          {{officer.officerName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="formcenter">
+      <mat-select placeholder="Hospital" [(ngModel)]="select.hospitalname" formControlName="hospitalName_no">
+        <mat-option *ngFor="let hospital of hospitals" [value]="hospital.hospitalName">
+          {{hospital.hospitalName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="formcenter">
+      <mat-select placeholder="ชื่อผู้ใช้บัตรทอง" [(ngModel)]="select.usermame" formControlName="username_no">
+        <mat-option *ngFor="let username of usernames" [value]="username.username">
+          {{username.username}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="formtab">
+      <input matInput  placeholder="รายละเอียด"  [(ngModel)]="input.detail" autocomplete="off"  formControlName="detail_no">
+    </mat-form-field>
+    <br/>
+    <!--============================================================-->
+    <div class="formcenter">
+      <button mat-raised-button  color="primary" >บันทึก</button>
+    </div>
+  </form>
 
 
 

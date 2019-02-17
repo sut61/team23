@@ -22,14 +22,15 @@ import java.time.*;
 public class GoldcardController {
     @Autowired private final GoldcardRepository goldcardRepository;
     @Autowired private HospitalRepository hospitalRepository;
-    @Autowired private  MemberRepository memberRepository;
+    @Autowired private  RightRegistrationRepository rightRegistrationRepository;
     @Autowired private  OfficerRepository officerRepository;
 
-    public GoldcardController(GoldcardRepository goldcardRepository,HospitalRepository hospitalRepository,MemberRepository memberRepository,
-                              OfficerRepository officerRepository) {
+    public GoldcardController(GoldcardRepository goldcardRepository,HospitalRepository hospitalRepository
+                                ,RightRegistrationRepository rightRegistrationRepository
+                                ,OfficerRepository officerRepository) {
         this.goldcardRepository = goldcardRepository;
         this.hospitalRepository = hospitalRepository;
-        this.memberRepository = memberRepository;
+        this.rightRegistrationRepository = rightRegistrationRepository;
         this.officerRepository = officerRepository;
 
     }
@@ -37,13 +38,13 @@ public class GoldcardController {
     public Collection<Goldcard> Goldcard() {
         return goldcardRepository.findAll().stream().collect(Collectors.toList());
     }
-    @PostMapping("/Goldcard/{detail}/{officerName}/{HospialName}/{MemberName}")
+    @PostMapping("/Goldcard/{detail}/{officerName}/{HospialName}/{username}")
     public  Goldcard newGoldcard(@PathVariable String detail ,@PathVariable String officerName
-            ,@PathVariable String HospialName ,@PathVariable String MemberName){
+            ,@PathVariable String HospialName ,@PathVariable String username){
         Goldcard newGoldC = new Goldcard();
         Officer newOfficer = new Officer();
         Hospital newHospital = new Hospital();
-        Member newMember = new Member();
+        RightRegistration newReg = new RightRegistration();
 
         newGoldC.setDetail(detail);
         //newGoldC.setAuthorities(Authorities);
@@ -56,8 +57,11 @@ public class GoldcardController {
         newHospital = hospitalRepository.findByHospitalName(HospialName);
         newGoldC.setHospital(newHospital);
 
-        newMember = memberRepository.findByMemberName(MemberName);
-        newGoldC.setMember(newMember);
+//        newMember = memberRepository.findByMemberName(MemberName);
+//        newGoldC.setMember(newMember);
+
+        newReg = rightRegistrationRepository.findByUsername(username);
+        newGoldC.setRightRegistration(newReg);
 
         return goldcardRepository.save(newGoldC);
     }
