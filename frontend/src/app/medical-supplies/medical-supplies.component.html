@@ -10,10 +10,12 @@
 
     <mat-form-field class="example-full-width" hintLabel="Example C12345">
       <input matInput [(ngModel)]="view.codeNumber" name="codeNumber" placeholder="รหัสเวชภัณฑ์" autocomplete="off"
-        formControlName="codeNumber_no"   #input maxlength="6" >
-        <mat-hint align= "end">{{ view.codeNumber?.length || 0}}/6</mat-hint>
+        formControlName="codeNumber_no" #input maxlength="6">
+      <mat-hint align="end">{{ view.codeNumber?.length || 0}}/6</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['codeNumber_no'].hasError('pattern')">รหัสเวชภัณฑ์ต้องขึ้นต้นด้วย C และมีตัวเลขทั้งหมด 5 ตัว</a>
+    <a style="font-size:15px;color:red"
+      *ngIf="myForm.controls['codeNumber_no'].hasError('pattern')">รหัสเวชภัณฑ์ต้องขึ้นต้นด้วย C และมีตัวเลขทั้งหมด 5
+      ตัว</a>
 
 
     <!---------------------------------------------------------------------------------->
@@ -22,12 +24,13 @@
 
     <mat-form-field class="example-full-width" hintLabel="Min 1 and Max 5 characters">
       <input matInput type="text" [(ngModel)]="view.modelNumber" name="modelNumber" placeholder="หมายเลขรุ่น"
-        autocomplete="off" formControlName="modelNumber_no"  #input maxlength="5" >
-        <mat-hint align="end">{{ view.modelNumber?.length || 0}}/5</mat-hint>
+        autocomplete="off" formControlName="modelNumber_no" #input maxlength="5">
+      <mat-hint align="end">{{ view.modelNumber?.length || 0}}/5</mat-hint>
     </mat-form-field>
-   
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['modelNumber_no'].hasError('pattern')">กรุณากรอกหมายเลขรุ่น (1-5) ตัว</a>
-    
+
+    <a style="font-size:15px;color:red"
+      *ngIf="myForm.controls['modelNumber_no'].hasError('pattern')">กรุณากรอกหมายเลขรุ่น (1-5) ตัว</a>
+
 
     <!---------------------------------------------------------------------------------->
     <!-----------------------------------ชื่อเวชภัณฑ์----------------------------------------------->
@@ -36,10 +39,11 @@
 
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
       <input matInput [(ngModel)]="view.medicalSupplies" name="medicalSupplies" placeholder="ชื่อเวชภัณฑ์"
-        autocomplete="off" formControlName="medicalSupplies_no"  #input maxlength="30" >
-        <mat-hint align= "end">{{ view.medicalSupplies?.length || 0}}/30</mat-hint>
+        autocomplete="off" formControlName="medicalSupplies_no" #input maxlength="30">
+      <mat-hint align="end">{{ view.medicalSupplies?.length || 0}}/30</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['medicalSupplies_no'].hasError('pattern')">กรุณากรอกชื่อเวชภัณฑ์ (2-30) ตัว</a>
+    <a style="font-size:15px;color:red"
+      *ngIf="myForm.controls['medicalSupplies_no'].hasError('pattern')">กรุณากรอกชื่อเวชภัณฑ์ (2-30) ตัว</a>
 
 
     <!---------------------------------------------------------------------------------->
@@ -48,10 +52,11 @@
 
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 10 characters">
       <input matInput [(ngModel)]="view.brandName" name="brandName" placeholder="ชื่อแบรนด์" autocomplete="off"
-        formControlName="brandName_no"  #input maxlength="10" >
-        <mat-hint align= "end">{{ view.brandName?.length || 0}}/10</mat-hint>
+        formControlName="brandName_no" #input maxlength="10">
+      <mat-hint align="end">{{ view.brandName?.length || 0}}/10</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['brandName_no'].hasError('pattern')">กรุณากรอกชื่อแบรนด์ (2-10) ตัว</a>
+    <a style="font-size:15px;color:red" *ngIf="myForm.controls['brandName_no'].hasError('pattern')">กรุณากรอกชื่อแบรนด์
+      (2-10) ตัว</a>
 
 
     <!---------------------------------------------------------------------------------->
@@ -62,10 +67,11 @@
 
     <mat-form-field class="example-full-width" hintLabel="Min 2 and Max 30 characters">
       <input matInput [(ngModel)]="view.properties" name="properties" placeholder="คุณสมบัติ" autocomplete="off"
-        formControlName="properties_no"  #input maxlength="30" > 
-        <mat-hint align= "end">{{ view.properties?.length || 0}}/30</mat-hint>
+        formControlName="properties_no" #input maxlength="30">
+      <mat-hint align="end">{{ view.properties?.length || 0}}/30</mat-hint>
     </mat-form-field>
-    <a style="font-size:15px;color:red" *ngIf="myForm.controls['properties_no'].hasError('pattern')">กรุณากรอกคุณสมบัติ (2-30) ตัว</a>
+    <a style="font-size:15px;color:red" *ngIf="myForm.controls['properties_no'].hasError('pattern')">กรุณากรอกคุณสมบัติ
+      (2-30) ตัว</a>
 
 
 
@@ -91,7 +97,8 @@
             [value]="medicalInstrument.medicalInstrumentName">{{medicalInstrument.medicalInstrumentName}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <a style="font-size:15px;color:red" *ngIf="myForm.controls['medicalInstrument_no'].hasError('pattern')">กรุณาเลือกอุปกรณ์การแพทย์</a>
+      <a style="font-size:15px;color:red"
+        *ngIf="myForm.controls['medicalInstrument_no'].hasError('pattern')">กรุณาเลือกอุปกรณ์การแพทย์</a>
     </div>
     <!-------------------------------------------------------------------------->
 
@@ -107,7 +114,8 @@
             {{useability.useabilityName}}</mat-option>
         </mat-select>
       </mat-form-field>
-      <a style="font-size:15px;color:red" *ngIf="myForm.controls['useability_no'].hasError('pattern')">กรุณาเลือกการใช้งาน</a>
+      <a style="font-size:15px;color:red"
+        *ngIf="myForm.controls['useability_no'].hasError('pattern')">กรุณาเลือกการใช้งาน</a>
     </div>
     <!------------------------------------------------------------------------------->
 
@@ -123,87 +131,88 @@
 <mat-card class=background-image>
   <h1>Medical Supplies Table</h1>
 </mat-card>
+
 <mat-card>
-  <mat-card>
-    <h2 class="example-form-search">ค้นหาด้วยชื่อเวชภัณฑ์ <mat-icon matSuffix>search</mat-icon>
-    </h2>
-    <br>
-    <mat-form-field class="search">
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
-    </mat-form-field>
-  </mat-card>
-
-  <mat-card>
-
-
-
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-      <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" 
-      -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let row">
-          <button mat-raised-button class="botton-edit-background" (click)="onEdit(row.medicalsuppliesId)">Edit</button>
-          <button mat-raised-button class="botton-delete-background"
-            (click)="onDelete(row.medicalsuppliesId)">delete</button>
-        </td>
-      </ng-container>
-      <!-- Position Column -->
-      <ng-container matColumnDef="medicalsuppliesId">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesId}} </td>
-      </ng-container>
-      <!-- Name Column -->
-      <ng-container matColumnDef="codeNumber">
-        <th mat-header-cell *matHeaderCellDef> รหัสเวชภัณฑ์ </th>
-        <td mat-cell *matCellDef="let element"> {{element.codeNumber}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="medicalsuppliesName">
-        <th mat-header-cell *matHeaderCellDef> ชื่อเวชภัณฑ์ </th>
-        <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesName}} </td>
-      </ng-container>
-
-
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="brandName">
-        <th mat-header-cell *matHeaderCellDef> ชื่อแบรนด์ </th>
-        <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="modelNumber">
-        <th mat-header-cell *matHeaderCellDef> หมายเลขรุ่น </th>
-        <td mat-cell *matCellDef="let element"> {{element.modelNumber}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="properties">
-        <th mat-header-cell *matHeaderCellDef> คุณสมบัติ </th>
-        <td mat-cell *matCellDef="let element"> {{element.properties}} </td>
-      </ng-container>
-
-
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="medicalInstrument">
-        <th mat-header-cell *matHeaderCellDef> อุปกรณ์การแพทย์ </th>
-        <td mat-cell *matCellDef="let element"> {{element.medicalInstrument.medicalInstrumentName}} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="useability">
-        <th mat-header-cell *matHeaderCellDef> การใช้งาน </th>
-        <td mat-cell *matCellDef="let element"> {{element.useability.useabilityName}} </td>
-      </ng-container>
+  <h2 class="example-form-search">ค้นหาด้วยชื่อเวชภัณฑ์ <mat-icon matSuffix>search</mat-icon>
+  </h2>
+  <br>
+  <mat-form-field class="search">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+  </mat-form-field>
+</mat-card>
 
 
 
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+
+
+
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-raised-button class="botton-edit-background" (click)="onEdit(row.medicalsuppliesId)">Edit</button>
+      <button mat-raised-button class="botton-delete-background"
+        (click)="onDelete(row.medicalsuppliesId)">delete</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="medicalsuppliesId">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="codeNumber">
+    <th mat-header-cell *matHeaderCellDef> รหัสเวชภัณฑ์ </th>
+    <td mat-cell *matCellDef="let element"> {{element.codeNumber}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="medicalsuppliesName">
+    <th mat-header-cell *matHeaderCellDef> ชื่อเวชภัณฑ์ </th>
+    <td mat-cell *matCellDef="let element"> {{element.medicalsuppliesName}} </td>
+  </ng-container>
+
+
+
+
+  <ng-container matColumnDef="brandName">
+    <th mat-header-cell *matHeaderCellDef> ชื่อแบรนด์ </th>
+    <td mat-cell *matCellDef="let element"> {{element.brandName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="modelNumber">
+    <th mat-header-cell *matHeaderCellDef> หมายเลขรุ่น </th>
+    <td mat-cell *matCellDef="let element"> {{element.modelNumber}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="properties">
+    <th mat-header-cell *matHeaderCellDef> คุณสมบัติ </th>
+    <td mat-cell *matCellDef="let element"> {{element.properties}} </td>
+  </ng-container>
+
+
+
+
+  <ng-container matColumnDef="medicalInstrument">
+    <th mat-header-cell *matHeaderCellDef> อุปกรณ์การแพทย์ </th>
+    <td mat-cell *matCellDef="let element"> {{element.medicalInstrument.medicalInstrumentName}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="useability">
+    <th mat-header-cell *matHeaderCellDef> การใช้งาน </th>
+    <td mat-cell *matCellDef="let element"> {{element.useability.useabilityName}} </td>
+  </ng-container>
+
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

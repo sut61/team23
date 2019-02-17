@@ -87,12 +87,18 @@
   <h1>Medicine Table</h1>
 </mat-card>
 
+<mat-card>
+    <mat-card>
+      <h2 class="example-form-search">ค้นหาด้วยชื่อยา <mat-icon matSuffix>search</mat-icon>
+      </h2>
+      <br>
+      <mat-form-field class="search">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+      </mat-form-field>
+    </mat-card>
+  
+    <mat-card>
 
-<!--
-<mat-form-field class="example-form-search">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
-</mat-form-field> 
--->
 
 
 
@@ -100,13 +106,7 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" 
-
-
-
-
-      -->
+ 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let row">
@@ -116,37 +116,37 @@
   </ng-container>
 
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="drugId">
+  
+  <ng-container matColumnDef= "drugId">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element"> {{element.drugId}} </td>
   </ng-container>
 
-  <!-- Name Column -->
+
   <ng-container matColumnDef="drugName">
     <th mat-header-cell *matHeaderCellDef> ชื่อยา </th>
     <td mat-cell *matCellDef="let element"> {{element.drugName}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+ 
   <ng-container matColumnDef="typesOfDrugs">
     <th mat-header-cell *matHeaderCellDef> ประเภทยา </th>
     <td mat-cell *matCellDef="let element"> {{element.typesOfDrugs.typesOfDrugsName}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+
   <ng-container matColumnDef="drugRegistration">
     <th mat-header-cell *matHeaderCellDef> ประเภททะเบียนยา </th>
     <td mat-cell *matCellDef="let element"> {{element.drugRegistration.drugRegistrationName}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+ 
   <ng-container matColumnDef="typesOfDosageForms">
     <th mat-header-cell *matHeaderCellDef> รูปแบบผลิตภัณฑ์ </th>
     <td mat-cell *matCellDef="let element"> {{element.typesOfDosageForms.typesOfDosageFormsName}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+
   <ng-container matColumnDef="disease">
     <th mat-header-cell *matHeaderCellDef> โรค </th>
     <td mat-cell *matCellDef="let element"> {{element.disease.diseaseName}} </td>

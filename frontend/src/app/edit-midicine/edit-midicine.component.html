@@ -1,16 +1,22 @@
 <mat-card class=background-image>
   <h1 class="example-form">Edit Medicine</h1>
 </mat-card>
+<alert></alert>
 <mat-card class="background-image-matcart">
   <!-----------------------------------ชื่อยา----------------------------------------------->
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput [(ngModel)]="view.drug" name="drug" placeholder="ชื่อยา" #input maxlength="30">
-      <mat-hint align= "end">{{ view.drug?.length || 0}}/30 </mat-hint>
+
+  <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()" class="example-form">
+    <mat-form-field class="example-full-width" hintLabel="ชื่อยาต้องเป็นภาษาอังกฤษเท่านั้น ตัวอย่างเช่น paracetamol">
+      <input matInput [(ngModel)]="view.drug" name="drug" placeholder="ชื่อยา" #input maxlength="30" autocomplete="off"
+        formControlName="drugs_no">
+      <mat-hint align="end">{{ view.drug?.length || 0}}/30 </mat-hint>
     </mat-form-field>
-  </form>
-  <!---------------------------------------------------------------------------------->
-  <!--
+    <a style="font-size:15px;color:red"
+      *ngIf="myForm.controls['drugs_no'].hasError('pattern')">ชื่อยาต้องเป็นภาษาอังกฤษเท่านั้น
+      และมีความยาวตัวอักษรอย่างน้อย 2 - 30 ตัว</a>
+
+    <!---------------------------------------------------------------------------------->
+    <!--
 <mat-select [(ngModel)]="view.position" name="position" placeholder="ตำแหน่ง">
   <mat-option *ngFor="let position(นำค่าที่ได้มาใส่ position) of Position(ดึงมาจาก tyscrip)" [value]="(ชื่อจาก Position มาใส่ position)position.position(ชื่อจาก database)">
       {{position.position}}
@@ -18,54 +24,65 @@
 </mat-select>
 ถ้าใช้ ngmodelไม่ได้ให้ import { FormsModule} from '@angular/forms';
 -->
-  <!---------------------------------ประเภทยา----------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.typesOfDrugs" name="typesOfDrugs" placeholder="ประเภทยา" >
-        <mat-option >None</mat-option>
-        <mat-option *ngFor="let typesOfDrugs of TypesOfDrugs " [value]="typesOfDrugs.typesOfDrugsName" >{{typesOfDrugs.typesOfDrugsName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <!-------------------------------------------------------------------------->
+    <!---------------------------------ประเภทยา----------------------------------------------->
 
-
-
-  <!--------------------------------ประเภททะเบียนยา--------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.drugRegistration" name="drugRegistration" placeholder="ประเภททะเบียนยา">
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก ประเภทยา">
+      <mat-select [(ngModel)]="view.typesOfDrugs" name="typesOfDrugs" placeholder="ประเภทยา"
+        formControlName="typesOfDrugs_no">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let drugRegistration of DrugRegistration " [value]="drugRegistration.drugRegistrationName">{{drugRegistration.drugRegistrationName}}</mat-option>
+        <mat-option *ngFor="let typesOfDrugs of TypesOfDrugs " [value]="typesOfDrugs.typesOfDrugsName">
+          {{typesOfDrugs.typesOfDrugsName}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <!------------------------------------------------------------------------------->
 
 
-  <!--------------------------------รูปแบบผลิตภัณฑ์--------------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.typesOfDosageForms" name="typesOfDosageForms" placeholder="รูปแบบผลิตภัณฑ์">
+    <!-------------------------------------------------------------------------->
+
+
+
+    <!--------------------------------ประเภททะเบียนยา--------------------------------------------->
+
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก ประเภททะเบียนยา">
+      <mat-select [(ngModel)]="view.drugRegistration" name="drugRegistration" placeholder="ประเภททะเบียนยา"
+        formControlName="drugRegistration_no">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let typesOfDosageForm of TypesOfDosageForms " [value]="typesOfDosageForm.typesOfDosageFormsName">{{typesOfDosageForm.typesOfDosageFormsName}}</mat-option>
+        <mat-option *ngFor="let drugRegistration of DrugRegistration " [value]="drugRegistration.drugRegistrationName">
+          {{drugRegistration.drugRegistrationName}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <!---------------------------------------------------------------------------------->
 
-  <!----------------------------------โรค------------------------------------------------>
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.diseases" name="diseases" placeholder="โรค">
+    <!------------------------------------------------------------------------------->
+
+
+    <!--------------------------------รูปแบบผลิตภัณฑ์--------------------------------------------------->
+
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก รูปแบบผลิตภัณฑ์">
+      <mat-select [(ngModel)]="view.typesOfDosageForms" name="typesOfDosageForms" placeholder="รูปแบบผลิตภัณฑ์"
+        formControlName="typesOfDosageForms_no">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let disease of Diseases" [value]="disease.diseaseName">{{disease.diseaseName}}</mat-option>
+        <mat-option *ngFor="let typesOfDosageForm of TypesOfDosageForms "
+          [value]="typesOfDosageForm.typesOfDosageFormsName">{{typesOfDosageForm.typesOfDosageFormsName}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <!---------------------------------------------------------------------------------->
-  <div  class="button-background">
-    <button   (click)=onUpdate() class="button-background"  mat-raised-button>Update</button>
-    <button   (click)=onCancel() class="button-background"  mat-raised-button>Cancel</button> 
-   </div>
-  </mat-card>
+
+    <!---------------------------------------------------------------------------------->
+
+    <!----------------------------------โรค------------------------------------------------>
+
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก โรค">
+      <mat-select [(ngModel)]="view.diseases" name="diseases" placeholder="โรค" formControlName="diseases_no">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let disease of Diseases" [value]="disease.diseaseName">{{disease.diseaseName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!---------------------------------------------------------------------------------->
+
+    <button class="button-background" class="button-background" mat-raised-button>Update</button>
+    <button class="button-background" (click)=onCancel() class="button-background" mat-raised-button>Cancel</button>
+  </form>
+  
+
+
+</mat-card>
