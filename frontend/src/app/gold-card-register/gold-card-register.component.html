@@ -1,9 +1,7 @@
 <div class="card">
   <alert></alert>
-  <h4 class = "center">วันที่ขอรับสิทธิ์ : {{CurrentDate | date:'fullDate' }}</h4>
-
+  <h4 class = "center">วันที่ขอรับสิทธิ์ : <a> {{CurrentDate | date:'fullDate' }}</a> </h4>
   <mat-divider></mat-divider>
-
   <br>
   <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()">
 
