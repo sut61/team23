@@ -119,7 +119,6 @@ export class LoginComponent implements OnInit {
               }
     }
 }
-
 @Component({
   selector: 'error',
   templateUrl: './error.html'

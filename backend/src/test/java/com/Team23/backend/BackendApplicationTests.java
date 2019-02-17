@@ -35,30 +35,33 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 @DataJpaTest
 public class BackendApplicationTests {
 
-	@Autowired private DocumentRepositoty          documentRepositoty;
-	@Autowired private DiseaseRepository           diseaseRepository;
-	@Autowired private OfficerRepository           officerRepository;
-	@Autowired private EligibleDiseasesRepositoty  eligibleDiseasesRepositoty;
-	@Autowired private CardRepository              cardRepository;
-	@Autowired private ExpensesRepository          expensesRepository;
-	@Autowired private AcceptToUserRepository      acceptToUserRepository;
-	@Autowired private TestEntityManager           entityManager;
-	@Autowired private ProvinceRepository          provinceRepository;
-	@Autowired private HospitalRepository          hospitalRepository;
-	@Autowired private RightsTypeRepository        rightsTypeRepository;
-	@Autowired private RightRegistrationRepository rightRegistrationRepository;
-	@Autowired private StatusRepository            statusRepository;
-	@Autowired private PeopleDiseaseRepository 	   peopleDiseaseRepository;
-	@Autowired private TypeDiseaseRepository       typeDiseaseRepository;
-	@Autowired private TreatmenthistoryRepository  treatmenthistoryRepository;
-	@Autowired private DrugRepository              drugRepository;
-	@Autowired private GoldcardRepository          goldcardRepository;
-	@Autowired private MedicalSuppliesRepository   medicalSuppliesRepository;
-	@Autowired private TrainingRepository		   trainingRepository;
-	@Autowired private LecturerRepository          lecturerRepository;
-	@Autowired private TypeTrainingRepository      typeTrainingRepository;
-	@Autowired private AffiliationRepository       affiliationRepository;
-	@Autowired private TypeHospitalRepository      typeHospitalRepository;
+	@Autowired private DocumentRepositoty           documentRepositoty;
+	@Autowired private DiseaseRepository            diseaseRepository;
+	@Autowired private OfficerRepository            officerRepository;
+	@Autowired private EligibleDiseasesRepositoty   eligibleDiseasesRepositoty;
+	@Autowired private CardRepository               cardRepository;
+	@Autowired private ExpensesRepository           expensesRepository;
+	@Autowired private AcceptToUserRepository       acceptToUserRepository;
+	@Autowired private TestEntityManager            entityManager;
+	@Autowired private ProvinceRepository           provinceRepository;
+	@Autowired private HospitalRepository           hospitalRepository;
+	@Autowired private RightsTypeRepository         rightsTypeRepository;
+	@Autowired private RightRegistrationRepository  rightRegistrationRepository;
+	@Autowired private StatusRepository             statusRepository;
+	@Autowired private PeopleDiseaseRepository 	    peopleDiseaseRepository;
+	@Autowired private TypeDiseaseRepository        typeDiseaseRepository;
+	@Autowired private TreatmenthistoryRepository   treatmenthistoryRepository;
+	@Autowired private DrugRepository               drugRepository;
+	@Autowired private GoldcardRepository           goldcardRepository;
+	@Autowired private MedicalSuppliesRepository    medicalSuppliesRepository;
+	@Autowired private TrainingRepository		    trainingRepository;
+	@Autowired private LecturerRepository           lecturerRepository;
+	@Autowired private TypeTrainingRepository       typeTrainingRepository;
+	@Autowired private AffiliationRepository        affiliationRepository;
+	@Autowired private TypeHospitalRepository       typeHospitalRepository;
+	@Autowired private TypesOfDrugsRepository 	    typesOfDrugsRepository;
+	@Autowired private DrugRegistrationRepository   drugRegistrationRepository;
+	@Autowired private TypesOfDosageFormsRepository typesOfDosageFormsRepository;
 
 	private Validator validator;
 
@@ -3055,7 +3058,7 @@ public class BackendApplicationTests {
 			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-//-------------------------------------------------------------------B5913114----------------------------------------------------------------------
+//------------------------------------------------------------------Unit Test Sprit 2 B5913114----------------------------------------------------------------------
 //-------------------------------------------------------testMedicalSuppliesPass------------------------------------------------------
 @Test
 public void testMedicalSuppliesPass() {
@@ -3677,5 +3680,85 @@ public void branceNineUnique(){
 					System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
+
+
+	//--------------------------------------------------Unit Test Sprint 1 B5913114-----------------------------------------------------------------------------------------
+	// @Test
+	// public void TestDrugNamePass(){
+	// 	Drug               drug 			  = new Drug();
+	// 	TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+	// 	DrugRegistration   drugRegistration   = new DrugRegistration();
+	// 	TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+	// 	Disease            disease            = new Disease();
+
+	// 	typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+	// 	drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+	// 	typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+	// 	disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+	// 	drug.setDrugName("Tilennall");
+	// 	drug.setTypesOfDrugs(typesOfDrugs);
+	// 	drug.setDrugRegistration(drugRegistration);
+	// 	drug.setTypesOfDosageForms(typesOfDosageForms);
+	// 	drug.setDisease(disease);
+
+
+
+	// 	try{
+	// 		entityManager.persist(drug);
+	// 		entityManager.flush();
+	// 		System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+	// 		fail("Should not pass to this line");
+	// 	}catch(javax.validation.ConstraintViolationException e){
+	// 		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+	// 		assertEquals(violation.isEmpty(),false);
+	// 		assertEquals(violation.size(),2);
+	// 		System.out.println("\n\n\n\n\n");
+	// 		System.out.println("---------------------------------------------------DrugName isn't passed-------------------------------------------");
+	// 		System.out.println(e.getConstraintViolations());
+	// 		System.out.println("-------------------------------------------------------------------------------------------------------------------");
+	// 		System.out.println("\n\n\n\n\n\n\n");
+	// 	}
+
+	// }
+
+	// @Test
+	// public void TestDrugNameHavespecialCharacter(){
+	// 	Drug               drug 			  = new Drug();
+	// 	TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+	// 	DrugRegistration   drugRegistration   = new DrugRegistration();
+	// 	TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+	// 	Disease            disease            = new Disease();
+		
+
+	// 	typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+	// 	drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+	// 	typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+	// 	disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+	// 	drug.setDrugName("$#$$#%#$@$@$");
+	// 	drug.setTypesOfDrugs(typesOfDrugs);
+	// 	drug.setDrugRegistration(drugRegistration);
+	// 	drug.setTypesOfDosageForms(typesOfDosageForms);
+	// 	drug.setDisease(disease);
+
+	// 	try{
+	// 		entityManager.persist(drug);
+	// 		entityManager.flush();
+	// 		System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+	// 		fail("Should not pass to this line");
+	// 	}catch(javax.validation.ConstraintViolationException e){
+	// 		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+	// 		assertEquals(violation.isEmpty(),false);
+	// 		assertEquals(violation.size(),2);
+	// 		System.out.println("\n\n\n\n\n");
+	// 		System.out.println("---------------------------------------------------DrugName isn't passed-------------------------------------------");
+	// 		System.out.println(e.getConstraintViolations());
+	// 		System.out.println("-------------------------------------------------------------------------------------------------------------------");
+	// 		System.out.println("\n\n\n\n\n\n\n");
+	// 	}
+	// }
+
+
 }
 

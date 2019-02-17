@@ -5,7 +5,8 @@
   <!-----------------------------------ชื่อยา----------------------------------------------->
   <form class="example-form">
     <mat-form-field class="example-full-width">
-      <input matInput [(ngModel)]="view.drug" name="drug" placeholder="ชื่อยา">
+      <input matInput [(ngModel)]="view.drug" name="drug" placeholder="ชื่อยา" #input maxlength="30">
+      <mat-hint align= "end">{{ view.drug?.length || 0}}/30 </mat-hint>
     </mat-form-field>
   </form>
   <!---------------------------------------------------------------------------------->
