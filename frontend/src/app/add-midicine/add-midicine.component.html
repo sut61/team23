@@ -1,15 +1,20 @@
 <mat-card class=background-image>
+    <alert></alert>
   <h1 class="example-form">Medicine</h1>
 </mat-card>
 <mat-card class="background-image-matcart">
   <!-----------------------------------ชื่อยา----------------------------------------------->
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput [(ngModel)]="view.drug" name="drug" placeholder="ชื่อยา">
+
+  <form [formGroup]="myForm" (ngSubmit)= "onFormSubmit()" class="example-form">
+    <mat-form-field class="example-full-width" hintLabel="ชื่อยาต้องเป็นภาษาอังกฤษเท่านั้น ตัวอย่างเช่น paracetamol">
+      <input matInput [(ngModel)]="view.drug" name="drug" placeholder="ชื่อยา" #input maxlength="30" autocomplete="off"
+        formControlName="drugs_no">
+      <mat-hint align="end">{{ view.drug?.length || 0}}/30 </mat-hint>
     </mat-form-field>
-  </form>
-  <!---------------------------------------------------------------------------------->
-  <!--
+    <a style="font-size:15px;color:red" *ngIf="myForm.controls['drugs_no'].hasError('pattern')">ชื่อยาต้องเป็นภาษาอังกฤษเท่านั้น และมีความยาวตัวอักษรอย่างน้อย 2 - 30 ตัว</a>
+
+    <!---------------------------------------------------------------------------------->
+    <!--
 <mat-select [(ngModel)]="view.position" name="position" placeholder="ตำแหน่ง">
   <mat-option *ngFor="let position(นำค่าที่ได้มาใส่ position) of Position(ดึงมาจาก tyscrip)" [value]="(ชื่อจาก Position มาใส่ position)position.position(ชื่อจาก database)">
       {{position.position}}
@@ -17,55 +22,65 @@
 </mat-select>
 ถ้าใช้ ngmodelไม่ได้ให้ import { FormsModule} from '@angular/forms';
 -->
-  <!---------------------------------ประเภทยา----------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.typesOfDrugs" name="typesOfDrugs" placeholder="ประเภทยา" >
-        <mat-option >None</mat-option>
-        <mat-option *ngFor="let typesOfDrugs of TypesOfDrugs " [value]="typesOfDrugs.typesOfDrugsName" >{{typesOfDrugs.typesOfDrugsName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <!-------------------------------------------------------------------------->
+    <!---------------------------------ประเภทยา----------------------------------------------->
 
-
-
-  <!--------------------------------ประเภททะเบียนยา--------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.drugRegistration" name="drugRegistration" placeholder="ประเภททะเบียนยา">
+    <mat-form-field class="example-form"  hintLabel="กรุณาเลือก ประเภทยา">
+      <mat-select [(ngModel)]="view.typesOfDrugs" name="typesOfDrugs" placeholder="ประเภทยา"
+        formControlName="typesOfDrugs_no">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let drugRegistration of DrugRegistration " [value]="drugRegistration.drugRegistrationName">{{drugRegistration.drugRegistrationName}}</mat-option>
+        <mat-option *ngFor="let typesOfDrugs of TypesOfDrugs " [value]="typesOfDrugs.typesOfDrugsName">
+          {{typesOfDrugs.typesOfDrugsName}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <!------------------------------------------------------------------------------->
 
 
-  <!--------------------------------รูปแบบผลิตภัณฑ์--------------------------------------------------->
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.typesOfDosageForms" name="typesOfDosageForms" placeholder="รูปแบบผลิตภัณฑ์">
+    <!-------------------------------------------------------------------------->
+
+
+
+    <!--------------------------------ประเภททะเบียนยา--------------------------------------------->
+
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก ประเภททะเบียนยา">
+      <mat-select [(ngModel)]="view.drugRegistration" name="drugRegistration" placeholder="ประเภททะเบียนยา"
+        formControlName="drugRegistration_no">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let typesOfDosageForm of TypesOfDosageForms " [value]="typesOfDosageForm.typesOfDosageFormsName">{{typesOfDosageForm.typesOfDosageFormsName}}</mat-option>
+        <mat-option *ngFor="let drugRegistration of DrugRegistration " [value]="drugRegistration.drugRegistrationName">
+          {{drugRegistration.drugRegistrationName}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <!---------------------------------------------------------------------------------->
 
-  <!----------------------------------โรค------------------------------------------------>
-  <div class="example-form">
-    <mat-form-field class="example-form">
-      <mat-select [(ngModel)]="view.diseases" name="diseases" placeholder="โรค">
+    <!------------------------------------------------------------------------------->
+
+
+    <!--------------------------------รูปแบบผลิตภัณฑ์--------------------------------------------------->
+
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก รูปแบบผลิตภัณฑ์">
+      <mat-select [(ngModel)]="view.typesOfDosageForms" name="typesOfDosageForms" placeholder="รูปแบบผลิตภัณฑ์"
+        formControlName="typesOfDosageForms_no">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let disease of Diseases" [value]="disease.diseaseName">{{disease.diseaseName}}</mat-option>
+        <mat-option *ngFor="let typesOfDosageForm of TypesOfDosageForms "
+          [value]="typesOfDosageForm.typesOfDosageFormsName">{{typesOfDosageForm.typesOfDosageFormsName}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <!---------------------------------------------------------------------------------->
-  <div  class="button-background">
-    <button (click)="onSave()"  class="button-background"  mat-raised-button>ADD</button>
-  </div>
+
+    <!---------------------------------------------------------------------------------->
+
+    <!----------------------------------โรค------------------------------------------------>
+
+    <mat-form-field class="example-form" hintLabel="กรุณาเลือก โรค">
+      <mat-select [(ngModel)]="view.diseases" name="diseases" placeholder="โรค" formControlName="diseases_no">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let disease of Diseases" [value]="disease.diseaseName">{{disease.diseaseName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!---------------------------------------------------------------------------------->
+    <div class="button-background">
+      <button class="button-background" mat-raised-button>ADD</button>
+    </div>
+  </form>
+
 </mat-card>
 
 <mat-card class=background-image>
@@ -73,11 +88,17 @@
 </mat-card>
 
 <mat-card>
-  <!--
-<mat-form-field class="example-form-search">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
-</mat-form-field> 
--->
+    <mat-card>
+      <h2 class="example-form-search">ค้นหาด้วยชื่อยา <mat-icon matSuffix>search</mat-icon>
+      </h2>
+      <br>
+      <mat-form-field class="search">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ใส่คำค้นหา">
+      </mat-form-field>
+    </mat-card>
+  
+    <mat-card>
+
 
 
 
@@ -85,61 +106,54 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" 
-
-
-
-
-      -->
+ 
   <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Action </th>   
-        <td mat-cell *matCellDef="let row"> 
-         <button mat-raised-button class="botton-edit-background" (click)="onEdit(row.drugId)" >Edit</button> 
-         <button mat-raised-button class="botton-delete-background" (click)="onDelete(row.drugId)">delete</button> 
-        </td>
-  </ng-container>  
-
-  
-  <!-- Position Column -->
-  <ng-container matColumnDef="drugId">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element" > {{element.drugId}} </td>
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-raised-button class="botton-edit-background" (click)="onEdit(row.drugId)">Edit</button>
+      <button mat-raised-button class="botton-delete-background" (click)="onDelete(row.drugId)">delete</button>
+    </td>
   </ng-container>
 
-  <!-- Name Column -->
+
+  
+  <ng-container matColumnDef= "drugId">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.drugId}} </td>
+  </ng-container>
+
+
   <ng-container matColumnDef="drugName">
     <th mat-header-cell *matHeaderCellDef> ชื่อยา </th>
     <td mat-cell *matCellDef="let element"> {{element.drugName}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+ 
   <ng-container matColumnDef="typesOfDrugs">
     <th mat-header-cell *matHeaderCellDef> ประเภทยา </th>
     <td mat-cell *matCellDef="let element"> {{element.typesOfDrugs.typesOfDrugsName}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+
   <ng-container matColumnDef="drugRegistration">
     <th mat-header-cell *matHeaderCellDef> ประเภททะเบียนยา </th>
     <td mat-cell *matCellDef="let element"> {{element.drugRegistration.drugRegistrationName}} </td>
   </ng-container>
 
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="typesOfDosageForms">
+ 
+  <ng-container matColumnDef="typesOfDosageForms">
     <th mat-header-cell *matHeaderCellDef> รูปแบบผลิตภัณฑ์ </th>
     <td mat-cell *matCellDef="let element"> {{element.typesOfDosageForms.typesOfDosageFormsName}} </td>
   </ng-container>
 
-   <!-- Symbol Column -->
-   <ng-container matColumnDef="disease">
+
+  <ng-container matColumnDef="disease">
     <th mat-header-cell *matHeaderCellDef> โรค </th>
     <td mat-cell *matCellDef="let element"> {{element.disease.diseaseName}} </td>
   </ng-container>
 
-  
+
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-

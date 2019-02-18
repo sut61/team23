@@ -2,7 +2,7 @@
   <mat-card style="padding-left:40px;padding-right:40px;margin-top:130px">
     <alert></alert>
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]= "form" (ngSubmit)="onSubmit()">
         <p class="font1">Please login to continue</p>
         <mat-form-field class="full-width-input">
           <input matInput placeholder="Username" formControlName="userName" required autocomplete="off">

@@ -3,6 +3,9 @@ package com.Team23.backend.Entity;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -28,20 +31,31 @@ public class Drug {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="drug_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="DRUG_ID",unique = true, nullable = false)
     private @NonNull Long drugId;
-    private @NonNull String drugName;
+    
+    @Pattern(regexp="[a-zA-Z]*" ,message="drugName uses the English language only")
+    @Size(min=2,max=30,message="drugName should not have alphabet at less 2 alphabet and than 30 alphabet")
+    @NotNull(message="drugName must not be null to be valid")
+    @Column(unique = true)
+    private String drugName;
+
+
     @ManyToOne()
     @JoinColumn(name="typesOfDrugsnameId")
+    @NotNull(message="typesOfDrugs must not be null to be valid")
     private TypesOfDrugs  typesOfDrugs;
 
     @ManyToOne()
     @JoinColumn(name=" drugRegistrationId")
+    @NotNull(message="drugRegistration must not be null to be valid")
     private DrugRegistration  drugRegistration;
 
     @ManyToOne()
+    @NotNull(message="typesOfDosageForms must not be null to be valid")
     @JoinColumn(name="typesOfDosageFormsNameId")
     private TypesOfDosageForms  typesOfDosageForms;
 
     @ManyToOne()
+    @NotNull(message="disease must not be null to be valid")
     @JoinColumn(name="diseaseId")
     private Disease  disease;
 

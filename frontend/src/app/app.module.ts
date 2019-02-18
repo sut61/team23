@@ -14,7 +14,7 @@ import { AuthService } from './auth/auth.service';
 import { HospitalRegisterComponent } from './hospital-register/hospital-register.component';
 import { GDCardComponent } from './gd-card/gd-card.component';
 import { PubliczComponent } from './publicz/publicz.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -107,6 +107,7 @@ import { AddTrainingComponent } from './add-training/add-training.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
+<<<<<<< HEAD
     MatBadgeModule,
     MatBottomSheetModule,
     MatButtonModule,
@@ -145,6 +146,47 @@ import { AddTrainingComponent } from './add-training/add-training.component';
     HttpClientModule,
     MatNativeDateModule,
     FormsModule
+=======
+        MatBadgeModule,
+        MatBottomSheetModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatStepperModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTableModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatTreeModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        HttpClientModule,
+            MatNativeDateModule,
+            FormsModule
+>>>>>>> fixUI
   ],
   exports:[
     MatDialogModule
