@@ -32,7 +32,7 @@ public class Drug {
     @Column(name="DRUG_ID",unique = true, nullable = false)
     private @NonNull Long drugId;
     
-    // @Pattern(regexp="[a-zA-Z]*|[ก-์]*" ,message="drugName No have special character")
+    @Pattern(regexp="[a-zA-Z]*" ,message="drugName uses the English language only")
     @Size(min=2,max=30,message="drugName should not have alphabet at less 2 alphabet and than 30 alphabet")
     @NotNull(message="drugName must not be null to be valid")
     @Column(unique = true)

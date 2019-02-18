@@ -518,15 +518,15 @@ public class BackendApplication  {
 			});
 
 
-			Stream.of("Ampicillin (แอมพิซิลลิน)", "Enalapril (อีนาลาพริล)").forEach(drugName -> {
+			Stream.of("Ampicillin","Enalapril").forEach(drugName -> {
 				Drug               grug               = new Drug();
 				TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
 				DrugRegistration   drugRegistration   = new DrugRegistration();
 				TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
 				Disease            disease            = new Disease();
 				
-				if(drugName=="Ampicillin (แอมพิซิลลิน)"){
-					grug.setDrugName("Ampicillin (แอมพิซิลลิน)");
+				if(drugName == "Ampicillin"){
+					grug.setDrugName("Ampicillin");
 					typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
 					grug.setTypesOfDrugs(typesOfDrugs);
 
@@ -541,9 +541,9 @@ public class BackendApplication  {
 
 					drugRepository.save(grug);
 
-				}else if(drugName=="Enalapril (อีนาลาพริล)"){
+				}else if(drugName == "Enalapril"){
 
-					grug.setDrugName("Enalapril (อีนาลาพริล)");
+					grug.setDrugName("Enalapril");
 					typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาควบคุมพิเศษ");
 					grug.setTypesOfDrugs(typesOfDrugs);
 

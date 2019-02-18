@@ -2253,7 +2253,7 @@ public class BackendApplicationTests {
 		th.setCode("12345678TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Graph");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
@@ -2287,7 +2287,7 @@ public class BackendApplicationTests {
 		th.setCode("1234567AA");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
@@ -2323,7 +2323,7 @@ public class BackendApplicationTests {
 		th.setCode(null);
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
@@ -2359,7 +2359,7 @@ public class BackendApplicationTests {
 		th.setCode("123456TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
@@ -2395,7 +2395,7 @@ public class BackendApplicationTests {
 		th.setCode("123456789TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
@@ -2466,7 +2466,7 @@ public class BackendApplicationTests {
 		th.setCode("123456789TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(null);
@@ -2502,7 +2502,7 @@ public class BackendApplicationTests {
 		th.setCode("123456789TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(null);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
@@ -2533,12 +2533,14 @@ public class BackendApplicationTests {
 		Treatmenthistory th = new Treatmenthistory();
 		Goldcard goldcardid = new Goldcard();
 		Drug drugid = new Drug();
+	
 		Disease diseaseid = new Disease();
-
+		drugid.setDrugName("paracetamal");
+		
 		th.setCode("123456789TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Enalapril (อีนาลาพริล)");
+		drugid = drugRepository.findByDrugName("Enalapril");
 		th.setDrugs(drugid);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคความดันโลหิตสูง");
 		th.setDiseases(diseaseid);
@@ -2554,11 +2556,11 @@ public class BackendApplicationTests {
 			Goldcard goldcardid1 = new Goldcard();
 			Drug drugid1 = new Drug();
 			Disease diseaseid1 = new Disease();
-
+			drugid1.setDrugName("paracetamal");
 			th1.setCode("123456789TH");
 			goldcardid1 = goldcardRepository.findByGoldcardName("Sun");
 			th1.setGoldcards(goldcardid1);
-			drugid1 = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+			drugid1 = drugRepository.findByDrugName("Ampicillin");
 			th1.setDrugs(drugid1);
 			diseaseid1 = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 			th1.setDiseases(diseaseid1);
@@ -3683,81 +3685,385 @@ public void branceNineUnique(){
 
 
 	//--------------------------------------------------Unit Test Sprint 1 B5913114-----------------------------------------------------------------------------------------
-	// @Test
-	// public void TestDrugNamePass(){
-	// 	Drug               drug 			  = new Drug();
-	// 	TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-	// 	DrugRegistration   drugRegistration   = new DrugRegistration();
-	// 	TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-	// 	Disease            disease            = new Disease();
+	@Test
+	public void TestDrugNamePass(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
 
-	// 	typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-	// 	drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-	// 	typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-	// 	disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
-	// 	drug.setDrugName("Tilennall");
-	// 	drug.setTypesOfDrugs(typesOfDrugs);
-	// 	drug.setDrugRegistration(drugRegistration);
-	// 	drug.setTypesOfDosageForms(typesOfDosageForms);
-	// 	drug.setDisease(disease);
+		drug.setDrugName("Tilennall");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
 
+	
 
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),2);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------DrugName isn't passed-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+			fail("Should not pass to this line");
+		}
 
-	// 	try{
-	// 		entityManager.persist(drug);
-	// 		entityManager.flush();
-	// 		System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
-	// 		fail("Should not pass to this line");
-	// 	}catch(javax.validation.ConstraintViolationException e){
-	// 		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-	// 		assertEquals(violation.isEmpty(),false);
-	// 		assertEquals(violation.size(),2);
-	// 		System.out.println("\n\n\n\n\n");
-	// 		System.out.println("---------------------------------------------------DrugName isn't passed-------------------------------------------");
-	// 		System.out.println(e.getConstraintViolations());
-	// 		System.out.println("-------------------------------------------------------------------------------------------------------------------");
-	// 		System.out.println("\n\n\n\n\n\n\n");
-	// 	}
+	}
 
-	// }
-
-	// @Test
-	// public void TestDrugNameHavespecialCharacter(){
-	// 	Drug               drug 			  = new Drug();
-	// 	TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-	// 	DrugRegistration   drugRegistration   = new DrugRegistration();
-	// 	TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-	// 	Disease            disease            = new Disease();
+	@Test
+	public void TestDrugNameEnglishOnly(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
 		
 
-	// 	typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-	// 	drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-	// 	typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-	// 	disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
-	// 	drug.setDrugName("$#$$#%#$@$@$");
-	// 	drug.setTypesOfDrugs(typesOfDrugs);
-	// 	drug.setDrugRegistration(drugRegistration);
-	// 	drug.setTypesOfDosageForms(typesOfDosageForms);
-	// 	drug.setDisease(disease);
+		drug.setDrugName("พารา");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
 
-	// 	try{
-	// 		entityManager.persist(drug);
-	// 		entityManager.flush();
-	// 		System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
-	// 		fail("Should not pass to this line");
-	// 	}catch(javax.validation.ConstraintViolationException e){
-	// 		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-	// 		assertEquals(violation.isEmpty(),false);
-	// 		assertEquals(violation.size(),2);
-	// 		System.out.println("\n\n\n\n\n");
-	// 		System.out.println("---------------------------------------------------DrugName isn't passed-------------------------------------------");
-	// 		System.out.println(e.getConstraintViolations());
-	// 		System.out.println("-------------------------------------------------------------------------------------------------------------------");
-	// 		System.out.println("\n\n\n\n\n\n\n");
-	// 	}
-	// }
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugNameEnglishOnly-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestDrugNameminSize(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName("s");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugNameminSize-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+	@Test
+	public void TestDrugNamemaxSize(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName("guyguyguyguuygyguygugyguygyuguyguyguyguygyguyguyguyguyguyguyguygyuguygyugyuguuyguguygyuguyguyguyguyguyg");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugNamemaxSize-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+	@Test
+	public void TestDrugNamenotNull(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName(null);
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugNamenotNull-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+	@Test
+	public void TestDrugNameUnique(){
+		Drug               drug 			  = new Drug();
+		Drug               drug1 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName("abcd");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		drug1.setDrugName("abcd");
+		drug1.setTypesOfDrugs(typesOfDrugs);
+		drug1.setDrugRegistration(drugRegistration);
+		drug1.setTypesOfDosageForms(typesOfDosageForms);
+		drug1.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			entityManager.persist(drug1);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.persistence.PersistenceException e){
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugNameUnique-------------------------------------------");
+			System.out.println(e +"TestDrugNameUnique");
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+
+	@Test
+	public void TestTypesOfDrugsnotNull(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName(null);
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName("abcd");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestTypesOfDrugsnotNull-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+
+	@Test
+	public void TestDrugRegistrationnotNull(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName(null);
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName("abcd");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugRegistrationnotNull-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+	@Test
+	public void TestTypesOfDosageFormsnotNull(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName(null);
+		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+
+		drug.setDrugName("abcd");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestTypesOfDosageFormsnotNull-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestDiseasenotNull(){
+		Drug               drug 			  = new Drug();
+		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
+		DrugRegistration   drugRegistration   = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease            disease            = new Disease();
+		
+
+		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease 				= 	diseaseRepository.findByDiseaseName(null);
+
+		drug.setDrugName("abcd");
+		drug.setTypesOfDrugs(typesOfDrugs);
+		drug.setDrugRegistration(drugRegistration);
+		drug.setTypesOfDosageForms(typesOfDosageForms);
+		drug.setDisease(disease);
+
+		try{
+			entityManager.persist(drug);
+			entityManager.flush();
+			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			fail("Should not pass to this line");
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TestDrugNamenotNull-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+
 
 
 }
