@@ -118,8 +118,8 @@
               </mat-select>
             </mat-form-field>
 
-
-
+            <a *ngIf="!ed.DeleteSelect" style="font-size:10px;color:red">*กรุณากรอกข้อมูลให้ครบถ้วน</a>
+            <br>
             <button mat-raised-button (click)="Delete()" color="warn">ลบ</button>
 
             <br/><br/><br/>
