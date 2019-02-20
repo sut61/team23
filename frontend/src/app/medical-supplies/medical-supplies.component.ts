@@ -69,7 +69,7 @@ export class MedicalSuppliesComponent implements OnInit {
   isValidFormSubmitted = null;
   codeNumber = "(C).+";
   modelNumber = ".{1,5}";
-  medicalSupplies = ".{2,30}";
+  medicalSupplies = "[A-Za-zก-์].{1,30}";
   brandName = ".{2,10}";
   properties = ".{2,30}";
   myForm = this.formbuilder.group({
@@ -87,15 +87,17 @@ export class MedicalSuppliesComponent implements OnInit {
   onFormSubmit() {
     this.isValidFormSubmitted = false;
     if (this.myForm.invalid) {
-      this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน');
+      this.alertService.error('กรุณา กรอกข้อมูล ให้ครบถ้วน และถูกต้อง');
       if (this.myForm.controls['codeNumber_no'].hasError('pattern')) {
         this.alertService.error('กรุณากรอก C นำหน้า');
       }else if (this.view.codeNumber == null) {
         this.alertService.error('กรุณากรอกรหัสเวชภัณฑ์');
       }
+
       else if (this.view.modelNumber == null) {
         this.alertService.error('กรุณากรอกหมายเลขรุ่น');
       }
+      
       else if (this.view.medicalSupplies == null) {
         this.alertService.error('กรุณากรอกชื่อเวชภัณฑ์');
       }
@@ -120,7 +122,7 @@ export class MedicalSuppliesComponent implements OnInit {
     else if (this.myForm.valid) {
       this.onSave(this.myForm.value);
       this.isValidFormSubmitted = true;
-      this.alertService.success("บันทึกข้อมูลเวชภัณฑ์ สำเร็จ");
+     
     }
 
     this.isValidFormSubmitted = true;
@@ -172,7 +174,7 @@ export class MedicalSuppliesComponent implements OnInit {
       .subscribe
       (
         data => {
-
+          this.alertService.success("บันทึกข้อมูลเวชภัณฑ์ สำเร็จ");
           console.log('Post Request is seccessful', data);
 
 

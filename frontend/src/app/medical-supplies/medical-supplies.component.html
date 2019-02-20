@@ -1,5 +1,6 @@
 
 <mat-card class=background-image>
+ 
   <h1 class="example-form">Medical Supplies</h1>
 </mat-card>
 <alert></alert>
@@ -44,7 +45,7 @@
       <mat-hint align="end">{{ view.medicalSupplies?.length || 0}}/30</mat-hint>
     </mat-form-field>
     <a style="font-size:15px;color:red"
-      *ngIf="myForm.controls['medicalSupplies_no'].hasError('pattern')">กรุณากรอกชื่อเวชภัณฑ์ (2-30) ตัว</a>
+      *ngIf="myForm.controls['medicalSupplies_no'].hasError('pattern')">กรุณากรอกชื่อเวชภัณฑ์ (2-30) ตัว และห้ามมีอักขระพิเศษเช่น ^$%#</a>
 
 
     <!---------------------------------------------------------------------------------->
