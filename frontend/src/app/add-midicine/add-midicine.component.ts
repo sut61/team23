@@ -84,6 +84,7 @@ export class AddMidicineComponent implements OnInit {
 
       }else if (this.view.drug == null) {
         this.alertService.error('กรุณากรอกชื่อยา');
+        
       }
       else if (this.view.drugRegistration == null) {
         this.alertService.error('กรุณาเลือกประเภทยา');
@@ -161,8 +162,9 @@ export class AddMidicineComponent implements OnInit {
           console.log('Post Request is seccessful', data);
         },
         error => {
-          console.log('Rrror', error);
           this.alertService.error('ไม่สามารถบันทึกได้ เนื่องจากชื่อยานี้มีอยู่ในระบบอยู่แล้ว โปรดกรุณาตรวจสอบข้อมูลอีกครั้ง');
+          console.log('Rrror', error);
+         
         }
       );
   }

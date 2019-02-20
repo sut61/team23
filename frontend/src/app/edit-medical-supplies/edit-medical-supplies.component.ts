@@ -134,13 +134,13 @@ onUpdate(editMidical:EditMedical){
     .subscribe
     (
       data =>{
-      alert('บันทึกเรียบร้อย');
+        this.alertService.success('อัพเดตข้อมูลเวชภณฑ์เสร็จสิ้น');
       console.log('Put Request is seccessful',data);
-      window.location.reload();
+      
     },
     error=>{
       console.log('Rrror',error);
-      alert('ไม่สามารถบันทึกได้ โปรดกรุณาใส่ข้อมูลอีกครั้ง');
+      this.alertService.success('ไม่สามารถบันทึกได้ โปรดกรุณาใส่ข้อมูลอีกครั้ง');
     }
     );
   }
