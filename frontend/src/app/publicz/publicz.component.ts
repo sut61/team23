@@ -56,7 +56,7 @@ export class PubliczComponent implements OnInit {
   isValidFormSubmitted = null;
   Header = ".{5,20}";
   Detail = "^\\S.+";
-  email  = "\\w{2,10}@\\w{2,10}\\.(com)||\\w{2,10}@\\w{2,10}\\.(\w{2,3}\\.\\w{2,3})||\\w{2,10}@\\w{2,10}\\.(COM)";
+  email  = "\\w{2,10}@\\w{2,10}\\.(com)";
   call   = "[0][896]\\d{8}"
   pubForm  = this.formbuilder.group({
     publiczHead_no : ['', [Validators.required, Validators.pattern(this.Header)]],
