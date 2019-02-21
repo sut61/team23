@@ -1380,7 +1380,7 @@ public class BackendApplicationTests {
 		acc.setStatus(statusid);
 
 		Officer officerid = new Officer();
-		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		officerid = officerRepository.findByOfficerName("admin");
 		acc.setOfficer(officerid);
 
 		acc.setDocumentCode("N3");
@@ -1424,7 +1424,7 @@ public class BackendApplicationTests {
 		acc.setStatus(null);
 
 		Officer officerid = new Officer();
-		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		officerid = officerRepository.findByOfficerName("admin");
 		acc.setOfficer(null);
 
 		try {
@@ -1436,7 +1436,7 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 5);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have AcceptCodeNull -----------------------------------------------------------------------\n\n");
+			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have anyFieldNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
 			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
@@ -1464,7 +1464,7 @@ public class BackendApplicationTests {
 		acc.setStatus(statusid);
 
 		Officer officerid = new Officer();
-		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		officerid = officerRepository.findByOfficerName("admin");
 		acc.setOfficer(officerid);
 
 		acc.setDocumentCode("N3");
@@ -1490,7 +1490,7 @@ public class BackendApplicationTests {
 		acc2.setStatus(statusid2);
 
 		Officer officerid2 = new Officer();
-		officerid2 = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		officerid2 = officerRepository.findByOfficerName("admin");
 		acc.setOfficer(officerid2);
 
 		acc2.setDocumentCode("N4");
@@ -1531,7 +1531,7 @@ public class BackendApplicationTests {
 		acc.setStatus(statusid);
 
 		Officer officerid = new Officer();
-		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		officerid = officerRepository.findByOfficerName("admin");
 		acc.setOfficer(officerid);
 
 		acc.setDocumentCode("N8");
@@ -1589,7 +1589,7 @@ public class BackendApplicationTests {
 		acc.setStatus(statusid);
 
 		Officer officerid = new Officer();
-		officerid = officerRepository.findByOfficerName("ไม่มีเจ้าหน้าที่");
+		officerid = officerRepository.findByOfficerName("admin");
 		acc.setOfficer(officerid);
 
 		acc.setDocumentCode("N10");
