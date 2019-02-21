@@ -9,7 +9,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import { DataSource } from '@angular/cdk/collections';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {DatePipe} from '@angular/common';
-
 function wait(ms){
    var start = new Date().getTime();
    var end = start;
@@ -120,7 +119,9 @@ Add(){
       .subscribe(
           data => {
               console.log('Put data Request is successful', data);
-alert("บันทึกแล้วเรียบร้อย");
+//alert("บันทึกแล้วเรียบร้อย");
+
+this.alertService.success('บันทึกแล้วเรียบร้อย')
         this.router.navigate(['/reload/Card']);
 
           },
