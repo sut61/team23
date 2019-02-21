@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { GoldcardService } from '../goldcard.service';
+import { AlertService } from '../alert.service';
 
 export interface PeriodicElement  {
 ideligibleDiseases: string;
@@ -42,6 +43,7 @@ userpass:''
 
 constructor(private formbuilder: FormBuilder,
            private service: GoldcardService ,
+            private alertService : AlertService,
            private httpClient: HttpClient,
            private route: ActivatedRoute,
            private router: Router  ) { }
@@ -188,16 +190,16 @@ this.httpClient.post("http://localhost:8080/checkdoc/"+this.ed.DocumentSelect,th
   this.httpClient.post("http://localhost:8080/EligibleDiseases/add/"+this.ed.DiseaseSelect+','+this.ed.DocumentSelect+','+this.ed.UsernameSelect+','+this.ed.CodeSelect,this.ed).subscribe(
       data => {
         console.log("add  success");
-         alert("เพิ่มแล้วเรียบร้อย");
-
+       //  alert("เพิ่มแล้วเรียบร้อย");
+this.alertService.success('บันทึกแล้วเรียบร้อย')
 
         this.router.navigate(['/reload/EligibleDiseases']);
 
       },
       error => {
 this.output.code="*Code Eligible dieses ซ้ำซ้อน";
-alert("Code Eligible dieses ซ้ำซ้อน");
-
+//alert("Code Eligible dieses ซ้ำซ้อน");
+this.alertService.error('Code Eligible dieses ซ้ำซ้อน')
         console.log("Error", error);
 
       }
@@ -209,7 +211,8 @@ alert("Code Eligible dieses ซ้ำซ้อน");
       error => {
         console.log("Error", error);
 this.output.userpass = "username หรือ password ผิด"
-        alert("username หรือ password ผิด");
+        //alert("username หรือ password ผิด");
+this.alertService.error('username หรือ password ผิด')
       }
          );
 
