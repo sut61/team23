@@ -2431,7 +2431,7 @@ public class BackendApplicationTests {
 		th.setCode("123456789TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
-		drugid = drugRepository.findByDrugName("Ampicillin (แอมพิซิลลิน)");
+		drugid = drugRepository.findByDrugName("Ampicillin");
 		th.setDrugs(null);
 		diseaseid = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		th.setDiseases(diseaseid);
