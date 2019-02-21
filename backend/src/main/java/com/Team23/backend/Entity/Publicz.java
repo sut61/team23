@@ -32,7 +32,7 @@ public class Publicz {
     @Pattern(regexp = "^\\S.+")
     private @NonNull String PublicizeDetail;
 //--------------------------------------------------------------------ช่องทางติดต่อ
-    @Pattern(regexp = "\\w{2,10}@\\w{2,10}\\.(com)||\\w{2,10}@\\w{2,10}\\.(\\w{2,3}\\.\\w{2,3})||\\w{2,10}@\\w{2,10}\\.(COM)")
+    @Pattern(regexp = "\\w{2,10}@\\w{2,10}\\.(com)")
     private  @NonNull String email;
     @Pattern(regexp = "[0][896]\\d{8}")
 //    @NotNull(message = "PhoneNumeber must not be null") //---------------------------ใส่แล้วแดง

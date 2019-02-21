@@ -11,6 +11,10 @@ import javax.persistence.OneToMany;
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import java.util.*;
 
@@ -28,8 +32,9 @@ public class Goldcard {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="goldcard_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="GOLDCARD_ID",unique = true, nullable = false)
     private @NonNull Long goldcardId;
-
+    @Column(name = "goldcardName" ,unique = true)
     private @NonNull String goldcardName;
+    @Pattern(regexp = "^\\S.+")
     private @NonNull String detail;
 
     //--------------------------------------Hospital
