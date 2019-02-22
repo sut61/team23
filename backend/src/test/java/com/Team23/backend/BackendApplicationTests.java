@@ -62,6 +62,8 @@ public class BackendApplicationTests {
 	@Autowired private TypesOfDrugsRepository 	    typesOfDrugsRepository;
 	@Autowired private DrugRegistrationRepository   drugRegistrationRepository;
 	@Autowired private TypesOfDosageFormsRepository typesOfDosageFormsRepository;
+	@Autowired private PubliczRepository publiczRepository;
+	@Autowired private  TypeOfPubliczRepository typeOfPubliczRepository;
 
 	private Validator validator;
 
@@ -2579,6 +2581,7 @@ public class BackendApplicationTests {
 			System.out.println("\n\n------------------------------------------------------------------Code Unique End Exception--------------------------------------------------------------------\n\n");
 		}
 	}
+
 	//1.33
 	@Test
 	public void Publicz_True_All() {
@@ -3060,6 +3063,85 @@ public class BackendApplicationTests {
 			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
+
+//	20
+	@Test
+	public void GoldCard_isNotTrue_DetailBlank(){
+
+		Goldcard goldcard = new Goldcard();
+
+		goldcard.setGoldcardName("Killer1412321");
+		goldcard.setDetail(" Weerapat");
+
+		try {
+			entityManager.persist(goldcard);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		}
+		catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have GoldCard_isNotTrue_DetailBlank at GoldCard -----------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+//	21
+@Test
+public void GoldCard_True_All() {
+	Goldcard   goldcard    = new Goldcard();
+
+	goldcard.setGoldcardName("Suranaree");
+	goldcard.setDetail("SuranareeUniversity");
+
+
+	try {
+		entityManager.persist(goldcard);
+		entityManager.flush();
+
+		//fail("Should not pass to this line");
+	}
+	catch(javax.validation.ConstraintViolationException e) {
+		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+		assertEquals(violations.isEmpty(), false);
+		assertEquals(violations.size(), 1);
+		System.out.println("\n\n---------------------------------------------------------------------------- 1 Have GoldCard_True_All at Goldcard ------------------------------------------------------------------\n\n");
+		System.out.println(violations);
+		System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+	}
+}
+
+//	22
+	@Test
+	public void Goldcard_GoldcardName_Unique() {
+
+		Goldcard   goldcard1    = new Goldcard();
+
+		goldcard1.setGoldcardName("Killer1234");
+		goldcard1.setDetail("SuranareeUniversity");
+
+		entityManager.persist(goldcard1);
+		entityManager.flush();
+
+		Goldcard goldcard2 = new Goldcard();
+
+		goldcard2.setGoldcardName("Killer1234");
+		goldcard2.setDetail("SuranareeUniversity");
+
+		try {
+			entityManager.persist(goldcard2);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch(javax.persistence.PersistenceException e) {
+			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at Member -----------------------------------------------------------------------\n\n");
+			System.out.println(e);
+			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+
 //------------------------------------------------------------------Unit Test Sprit 2 B5913114----------------------------------------------------------------------
 //-------------------------------------------------------testMedicalSuppliesPass------------------------------------------------------
 @Test
@@ -4062,9 +4144,5 @@ public void branceNineUnique(){
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
-
-
-
-
 }
 
