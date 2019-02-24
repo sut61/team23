@@ -1,8 +1,11 @@
 package com.Team23.backend.Entity;
+
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 import lombok.*;
 
 @Entity
@@ -14,6 +17,7 @@ public class MedicalInstrument{
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="medicalinsturment_seq")   // Annotations Generate id เอง ตอน insert
     @Column(name="MEDICALINSTRUMENT_ID",unique = true, nullable = false)
     private Long medicalInstrumentId;
+    @NotNull(message="typesOfDosageFormsName must not be null to be valid")
     private String  medicalInstrumentName;
 
     public MedicalInstrument(){}
