@@ -26,7 +26,6 @@ import org.junit.Test;
 import com.Team23.backend.Entity.*;
 import com.Team23.backend.Repository.*;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -35,35 +34,64 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 @DataJpaTest
 public class BackendApplicationTests {
 
-	@Autowired private DocumentRepositoty           documentRepositoty;
-	@Autowired private DiseaseRepository            diseaseRepository;
-	@Autowired private OfficerRepository            officerRepository;
-	@Autowired private EligibleDiseasesRepositoty   eligibleDiseasesRepositoty;
-	@Autowired private CardRepository               cardRepository;
-	@Autowired private ExpensesRepository           expensesRepository;
-	@Autowired private AcceptToUserRepository       acceptToUserRepository;
-	@Autowired private TestEntityManager            entityManager;
-	@Autowired private ProvinceRepository           provinceRepository;
-	@Autowired private HospitalRepository           hospitalRepository;
-	@Autowired private RightsTypeRepository         rightsTypeRepository;
-	@Autowired private RightRegistrationRepository  rightRegistrationRepository;
-	@Autowired private StatusRepository             statusRepository;
-	@Autowired private PeopleDiseaseRepository 	    peopleDiseaseRepository;
-	@Autowired private TypeDiseaseRepository        typeDiseaseRepository;
-	@Autowired private TreatmenthistoryRepository   treatmenthistoryRepository;
-	@Autowired private DrugRepository               drugRepository;
-	@Autowired private GoldcardRepository           goldcardRepository;
-	@Autowired private MedicalSuppliesRepository    medicalSuppliesRepository;
-	@Autowired private TrainingRepository		    trainingRepository;
-	@Autowired private LecturerRepository           lecturerRepository;
-	@Autowired private TypeTrainingRepository       typeTrainingRepository;
-	@Autowired private AffiliationRepository        affiliationRepository;
-	@Autowired private TypeHospitalRepository       typeHospitalRepository;
-	@Autowired private TypesOfDrugsRepository 	    typesOfDrugsRepository;
-	@Autowired private DrugRegistrationRepository   drugRegistrationRepository;
-	@Autowired private TypesOfDosageFormsRepository typesOfDosageFormsRepository;
-	@Autowired private PubliczRepository publiczRepository;
-	@Autowired private  TypeOfPubliczRepository typeOfPubliczRepository;
+	@Autowired
+	private DocumentRepositoty documentRepositoty;
+	@Autowired
+	private DiseaseRepository diseaseRepository;
+	@Autowired
+	private OfficerRepository officerRepository;
+	@Autowired
+	private EligibleDiseasesRepositoty eligibleDiseasesRepositoty;
+	@Autowired
+	private CardRepository cardRepository;
+	@Autowired
+	private ExpensesRepository expensesRepository;
+	@Autowired
+	private AcceptToUserRepository acceptToUserRepository;
+	@Autowired
+	private TestEntityManager entityManager;
+	@Autowired
+	private ProvinceRepository provinceRepository;
+	@Autowired
+	private HospitalRepository hospitalRepository;
+	@Autowired
+	private RightsTypeRepository rightsTypeRepository;
+	@Autowired
+	private RightRegistrationRepository rightRegistrationRepository;
+	@Autowired
+	private StatusRepository statusRepository;
+	@Autowired
+	private PeopleDiseaseRepository peopleDiseaseRepository;
+	@Autowired
+	private TypeDiseaseRepository typeDiseaseRepository;
+	@Autowired
+	private TreatmenthistoryRepository treatmenthistoryRepository;
+	@Autowired
+	private DrugRepository drugRepository;
+	@Autowired
+	private GoldcardRepository goldcardRepository;
+	@Autowired
+	private MedicalSuppliesRepository medicalSuppliesRepository;
+	@Autowired
+	private TrainingRepository trainingRepository;
+	@Autowired
+	private LecturerRepository lecturerRepository;
+	@Autowired
+	private TypeTrainingRepository typeTrainingRepository;
+	@Autowired
+	private AffiliationRepository affiliationRepository;
+	@Autowired
+	private TypeHospitalRepository typeHospitalRepository;
+	@Autowired
+	private TypesOfDrugsRepository typesOfDrugsRepository;
+	@Autowired
+	private DrugRegistrationRepository drugRegistrationRepository;
+	@Autowired
+	private TypesOfDosageFormsRepository typesOfDosageFormsRepository;
+	@Autowired
+	private PubliczRepository publiczRepository;
+	@Autowired
+	private TypeOfPubliczRepository typeOfPubliczRepository;
 
 	private Validator validator;
 
@@ -73,14 +101,13 @@ public class BackendApplicationTests {
 		validator = factory.getValidator();
 	}
 
-	/////////////    EligibleDiseases    /////////////
+	///////////// EligibleDiseases /////////////
 	@Test
 	public void test_EligibleDiseases_All_Pass() {
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"El0123456789");
-
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease, documentWork, officer, "El0123456789");
 
 		try {
 			entityManager.persist(eligibleDiseases);
@@ -88,10 +115,11 @@ public class BackendApplicationTests {
 			String color = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
 
-			System.out.println(color+"--------------------------------------------------" +
-					"------------------------------------------------ test EligibleDiseases All Pass it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
-		} catch(javax.validation.ConstraintViolationException e) {
+			System.out.println(color + "--------------------------------------------------"
+					+ "------------------------------------------------ test EligibleDiseases All Pass it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
@@ -100,202 +128,211 @@ public class BackendApplicationTests {
 
 		}
 	}
+
 	@Test
 	public void test_EligibleDiseases_Unique() {
-//(expected=javax.persistence.PersistenceException.class)
+		// (expected=javax.persistence.PersistenceException.class)
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases1 = new EligibleDiseases(disease,documentWork,officer,"El0123456789");
+		EligibleDiseases eligibleDiseases1 = new EligibleDiseases(disease, documentWork, officer, "El0123456789");
 
 		entityManager.persist(eligibleDiseases1);
 		entityManager.flush();
 
 		try {
-			EligibleDiseases eligibleDiseases2 = new EligibleDiseases(disease,documentWork,officer,"El0123456789");
-					entityManager.persist(eligibleDiseases2);
+			EligibleDiseases eligibleDiseases2 = new EligibleDiseases(disease, documentWork, officer, "El0123456789");
+			entityManager.persist(eligibleDiseases2);
 			entityManager.flush();
 			fail("Should not pass to this line");
 
-
-		}catch(javax.persistence.PersistenceException e) {
+		} catch (javax.persistence.PersistenceException e) {
 
 			String color1 = "\u001b[35m";
 			String colorwhite = "\u001b[37m";
 
-			System.out.println(color1+e);
-			System.out.println("-----------------------------------------------------" +
-					"--------------------------------------------- test EligibleDiseases Unique it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e);
+			System.out.println("-----------------------------------------------------"
+					+ "--------------------------------------------- test EligibleDiseases Unique it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_EligibleDiseases_Disease_Null() {
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases = new EligibleDiseases(null,documentWork,officer,"El0123456789");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(null, documentWork, officer, "El0123456789");
 		try {
 			entityManager.persist(eligibleDiseases);
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[36m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println("--------------------------------------------------" +
-					"------------------------------------------------ test EligibleDiseases Disease Null it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
-
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println("--------------------------------------------------"
+					+ "------------------------------------------------ test EligibleDiseases Disease Null it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
+
 	@Test
 	public void test_EligibleDiseases_Document_Null() {
 
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,null,officer,"El0123456789");
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease, null, officer, "El0123456789");
 
 		try {
 			entityManager.persist(eligibleDiseases);
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
 
-			System.out.println(color1+e.getConstraintViolations());
+			System.out.println(color1 + e.getConstraintViolations());
 
-			System.out.println("--------------------------------------------------" +
-					"------------------------------------------------ test EligibleDiseases Document Null it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
-
+			System.out.println("--------------------------------------------------"
+					+ "------------------------------------------------ test EligibleDiseases Document Null it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
+
 	@Test
 	public void test_EligibleDiseases_Officer_Null() {
-
 
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,null,"El0123456789");
-
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease, documentWork, null, "El0123456789");
 
 		try {
 			entityManager.persist(eligibleDiseases);
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test EligibleDiseases Officer Null it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "-----------------------------------------------------"
+					+ "--------------------------------------------- test EligibleDiseases Officer Null it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 
 	}
+
 	@Test
 	public void test_EligibleDiseases_Code_Max_Size() {
 
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"El01234567892222222222222222222222222222222222222222222");
-
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease, documentWork, officer,
+				"El01234567892222222222222222222222222222222222222222222");
 
 		try {
 			entityManager.persist(eligibleDiseases);
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[34m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"--------------------------------------------------------" +
-					"------------------------------------------ test EligibleDiseases Code Max Size Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "--------------------------------------------------------"
+					+ "------------------------------------------ test EligibleDiseases Code Max Size Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 
 	}
+
 	@Test
 	public void test_EligibleDiseases_Code_Min_Size() {
 
 		Disease disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 		Officer officer = officerRepository.findByOfficerName("Kanathip Poungtham");
 		DocumentWork documentWork = documentRepositoty.findBynumberDocument("10001");
-		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease,documentWork,officer,"El1");
-
+		EligibleDiseases eligibleDiseases = new EligibleDiseases(disease, documentWork, officer, "El1");
 
 		try {
 			entityManager.persist(eligibleDiseases);
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[32m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"--------------------------------------------------------" +
-					"------------------------------------------ test EligibleDiseases Code Min Size Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "--------------------------------------------------------"
+					+ "------------------------------------------ test EligibleDiseases Code Min Size Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 
 	}
 
-	/////////////    DocumentWork    /////////////
+	///////////// DocumentWork /////////////
 	@Test
 	public void test_DocumentWork_Number_Pattern() {
-		DocumentWork d = new DocumentWork("ThisisnotNumber","0123456789","httpB5901609");
+		DocumentWork d = new DocumentWork("ThisisnotNumber", "0123456789", "httpB5901609");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate adate1 = LocalDate.parse(Date1, formatter);
 		d.setDate(adate1);
 
-
 		try {
 			entityManager.persist(d);
 			entityManager.flush();
 
 			fail("Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println("--------------------------------------------------" +
-					"------------------------------------------------ test DocumentWork_Number Pattern Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println("--------------------------------------------------"
+					+ "------------------------------------------------ test DocumentWork_Number Pattern Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_DocumentWork_Title_Max_Size() {
-		DocumentWork d1 = new DocumentWork("00000","1sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss","httpsB5901609");
+		DocumentWork d1 = new DocumentWork("00000",
+				"1sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+				"httpsB5901609");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate adate1 = LocalDate.parse(Date1, formatter);
@@ -306,21 +343,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[34m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test DocumentWork_Title Max Size Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "-----------------------------------------------------"
+					+ "--------------------------------------------- test DocumentWork_Title Max Size Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_DocumentWork_Title_Min_Size() {
-		DocumentWork d1 = new DocumentWork("00000","1","httpsB5901609");
+		DocumentWork d1 = new DocumentWork("00000", "1", "httpsB5901609");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate adate1 = LocalDate.parse(Date1, formatter);
@@ -331,21 +370,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[32m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test DocumentWork_Title Min Size Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "-----------------------------------------------------"
+					+ "--------------------------------------------- test DocumentWork_Title Min Size Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_DocumentWork_Url_Pattern() {
-		DocumentWork d1 = new DocumentWork("00000","012345","imnotpatternifusaw");
+		DocumentWork d1 = new DocumentWork("00000", "012345", "imnotpatternifusaw");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate adate1 = LocalDate.parse(Date1, formatter);
@@ -356,60 +397,63 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test DocumentWork_Url Pattern Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "-----------------------------------------------------"
+					+ "--------------------------------------------- test DocumentWork_Url Pattern Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_DocumentWork_Date_Null() {
-		DocumentWork d = new DocumentWork("102345","0123456789","httpB5901609");
+		DocumentWork d = new DocumentWork("102345", "0123456789", "httpB5901609");
 		d.setDate(null);
-
 
 		try {
 			entityManager.persist(d);
 			entityManager.flush();
 
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[36m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println("--------------------------------------------------" +
-					"------------------------------------------------ test DocumentWork_Date Null Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println("--------------------------------------------------"
+					+ "------------------------------------------------ test DocumentWork_Date Null Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_DocumentWork_All_Pass() {
-		DocumentWork d = new DocumentWork("102345","0123456789","httpB5901609");
+		DocumentWork d = new DocumentWork("102345", "0123456789", "httpB5901609");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate adate1 = LocalDate.parse(Date1, formatter);
 		d.setDate(adate1);
-
 
 		try {
 			entityManager.persist(d);
 			entityManager.flush();
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test DocumentWork All Pass is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test DocumentWork All Pass is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
@@ -418,31 +462,33 @@ public class BackendApplicationTests {
 		}
 	}
 
-	/////////////    Officer    /////////////
+	///////////// Officer /////////////
 	@Test
 	public void test_Officer_CallNumber_Pattern() {
-		Officer officer = new Officer("test","test1","1234","this is not Number");
+		Officer officer = new Officer("test", "test1", "1234", "this is not Number");
 
 		try {
 			entityManager.persist(officer);
 			entityManager.flush();
 
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e.getConstraintViolations());
-			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer CallNumber Pattern Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e.getConstraintViolations());
+			System.out.println(color1 + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer CallNumber Pattern Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Officer_All_Pass() {
-		Officer officer = new Officer("test","test1","1234","044852461");
+		Officer officer = new Officer("test", "test1", "1234", "044852461");
 
 		try {
 			entityManager.persist(officer);
@@ -450,142 +496,150 @@ public class BackendApplicationTests {
 
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer All pass it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
-		} catch(javax.validation.ConstraintViolationException e) {
+			System.out.println(color1 + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer All pass it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			fail(" Should Fail");
 		}
 	}
+
 	@Test
 	public void test_Officer_Name_Null() {
-		Officer officer = new Officer(null,"test1","1234","044852461");
+		Officer officer = new Officer(null, "test1", "1234", "044852461");
 
 		try {
 			entityManager.persist(officer);
 			entityManager.flush();
 
-
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer Name Null it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer Name Null it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Officer_Username_Min_Size() {
-		Officer officer = new Officer("test","min","1234","044852461");
+		Officer officer = new Officer("test", "min", "1234", "044852461");
 
 		try {
 			entityManager.persist(officer);
 			entityManager.flush();
 
-
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[32m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer Username Min size it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer Username Min size it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Officer_Username_Max_Size() {
-		Officer officer = new Officer("test","Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","1234","044852461");
+		Officer officer = new Officer("test", "Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+				"1234", "044852461");
 
 		try {
 			entityManager.persist(officer);
 			entityManager.flush();
 
-
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[34m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer Username Max size it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer Username Max size it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Officer_Password_Min_Size() {
-		Officer officer = new Officer("test","username","min","044852461");
+		Officer officer = new Officer("test", "username", "min", "044852461");
 
 		try {
 			entityManager.persist(officer);
 			entityManager.flush();
 
-
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[32m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer Password Min size it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer Password Min size it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Officer_Password_Max_Size() {
-		Officer officer = new Officer("test","test1","Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","044852461");
+		Officer officer = new Officer("test", "test1", "Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+				"044852461");
 
 		try {
 			entityManager.persist(officer);
 			entityManager.flush();
 
-
 			fail(" Should Fail");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[34m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"-----------------------------------------------------" +
-					"--------------------------------------------- test Officer Password Max size it Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "-----------------------------------------------------"
+					+ "--------------------------------------------- test Officer Password Max size it Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
 
-	/////////////    Expenses    /////////////
+	///////////// Expenses /////////////
 	@Test
 	public void test_Expenses_All_Pass() {
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
-
 
 		try {
 			entityManager.persist(expenses);
 			entityManager.flush();
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Expenses All Pass is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Expenses All Pass is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
@@ -593,316 +647,328 @@ public class BackendApplicationTests {
 
 		}
 	}
+
 	@Test
 	public void test_Expenses_Number_Pattern() {
-		Expenses expenses = new Expenses("Expenses","this is not Number(int)","this is comment");
+		Expenses expenses = new Expenses("Expenses", "this is not Number(int)", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
-
 
 		try {
 			entityManager.persist(expenses);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Expenses Number Pattern is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Expenses Number Pattern is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
+
 	@Test
 	public void test_Expenses_Comment_Max_Size() {
-		Expenses expenses = new Expenses("Expenses","220","this is comment Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		Expenses expenses = new Expenses("Expenses", "220",
+				"this is comment Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
-
 
 		try {
 			entityManager.persist(expenses);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[34m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Expenses Comment Max Size is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Expenses Comment Max Size is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
+
 	@Test
 	public void test_Expenses_Comment_Min_Size() {
-		Expenses expenses = new Expenses("Expenses","220","min");
+		Expenses expenses = new Expenses("Expenses", "220", "min");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
-
 
 		try {
 			entityManager.persist(expenses);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[32m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Expenses Comment Min Size is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Expenses Comment Min Size is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
+
 	@Test
 	public void test_Expenses_Date_Null() {
-		Expenses expenses = new Expenses("Expenses","220","comment");
+		Expenses expenses = new Expenses("Expenses", "220", "comment");
 		expenses.setDate(null);
-
 
 		try {
 			entityManager.persist(expenses);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Expenses Date Null is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Expenses Date Null is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
+
 	@Test
 	public void test_Expenses_Name_Null() {
-		Expenses expenses = new Expenses(null,"220","comment");
+		Expenses expenses = new Expenses(null, "220", "comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 
-
 		try {
 			entityManager.persist(expenses);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Expenses Name Null is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Expenses Name Null is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
 		}
 	}
 
-	/////////////    Card    /////////////
+	///////////// Card /////////////
 	@Test
 	public void test_Card_All_Pass() {
 		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
 
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 		expensesRepository.save(expenses);
-		Card card = new Card("card12345",acceptToUser,expenses,"commenttt");
+		Card card = new Card("card12345", acceptToUser, expenses, "commenttt");
 		card.setDate(date);
-
 
 		try {
 			entityManager.persist(card);
 			entityManager.flush();
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+"--------------------------------------------------" +
-					"------------------------------------------------ test Card All Pass is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + "--------------------------------------------------"
+					+ "------------------------------------------------ test Card All Pass is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+colorwhite);
+			System.out.println(color1 + e + colorwhite);
 			fail(" Should Fail");
 
 		}
 	}
+
 	@Test
 	public void test_Card_Cardcord_Pattern() {
 		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 		expensesRepository.save(expenses);
-		Card card = new Card("This is not Card pattern",acceptToUser,expenses,"commenttt");
+		Card card = new Card("This is not Card pattern", acceptToUser, expenses, "commenttt");
 		card.setDate(date);
-
 
 		try {
 			entityManager.persist(card);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"--------------------------------------------------" +
-					"------------------------------------------------ test Card Cardcord Pattern is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "--------------------------------------------------"
+					+ "------------------------------------------------ test Card Cardcord Pattern is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Card_Date_Null() {
 		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 		expensesRepository.save(expenses);
-		Card card = new Card("card code",acceptToUser,expenses,"commenttt");
+		Card card = new Card("card code", acceptToUser, expenses, "commenttt");
 		card.setDate(null);
-
 
 		try {
 			entityManager.persist(card);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"--------------------------------------------------" +
-					"------------------------------------------------ test Card Date Null is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "--------------------------------------------------"
+					+ "------------------------------------------------ test Card Date Null is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Card_Comment_Min_Size() {
 		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 		expensesRepository.save(expenses);
-		Card card = new Card("card code",acceptToUser,expenses,"min");
+		Card card = new Card("card code", acceptToUser, expenses, "min");
 		card.setDate(date);
-
 
 		try {
 			entityManager.persist(card);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[32m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"--------------------------------------------------" +
-					"------------------------------------------------ test Card Comment min size is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "--------------------------------------------------"
+					+ "------------------------------------------------ test Card Comment min size is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Card_Comment_Max_Size() {
 		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 		expensesRepository.save(expenses);
-		Card card = new Card("card code",acceptToUser,expenses,"Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		Card card = new Card("card code", acceptToUser, expenses,
+				"Maxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		card.setDate(date);
-
 
 		try {
 			entityManager.persist(card);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[34m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"--------------------------------------------------" +
-					"------------------------------------------------ test Card Comment max size is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "--------------------------------------------------"
+					+ "------------------------------------------------ test Card Comment max size is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
+
 	@Test
 	public void test_Card_Expensese_Null() {
 		AcceptToUser acceptToUser = acceptToUserRepository.findByAccId('1');
-		Expenses expenses = new Expenses("Expenses","120","this is comment");
+		Expenses expenses = new Expenses("Expenses", "120", "this is comment");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yyyy");
 		String Date1 = "08:02:2019";
 		LocalDate date = LocalDate.parse(Date1, formatter);
 		expenses.setDate(date);
 		expensesRepository.save(expenses);
-		Card card = new Card("card code",acceptToUser,null,"This is comment true");
+		Card card = new Card("card code", acceptToUser, null, "This is comment true");
 		card.setDate(date);
-
 
 		try {
 			entityManager.persist(card);
 			entityManager.flush();
 			fail(" Should Fail");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
 			String color1 = "\u001b[33m";
 			String colorwhite = "\u001b[37m";
-			System.out.println(color1+e+"--------------------------------------------------" +
-					"------------------------------------------------ test Card Expenses Null is Passed !! " +
-					"--------------------------------------------------------------------------------------------------"+colorwhite);
+			System.out.println(color1 + e + "--------------------------------------------------"
+					+ "------------------------------------------------ test Card Expenses Null is Passed !! "
+					+ "--------------------------------------------------------------------------------------------------"
+					+ colorwhite);
 		}
 	}
 
-	//RightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistration
+	// RightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistrationRightRegistration
 	@Test
 	public void anyTrue() {
 
@@ -940,17 +1006,21 @@ public class BackendApplicationTests {
 			entityManager.persist(rr);
 			entityManager.flush();
 
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Success anyTrue -----------------------------------------------------------------------\n\n");
-		} catch(javax.validation.ConstraintViolationException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Success anyTrue -----------------------------------------------------------------------\n\n");
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have anyTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have anyTrue -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	@Test
 	public void anyFieldCannotBeNull() {
 
@@ -988,17 +1058,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 11);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have anyFieldCannotBeNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have anyFieldCannotBeNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void userMoreTwenty() {
 
@@ -1036,17 +1109,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have userMoreTwenty -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have userMoreTwenty -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void userLessThree() {
 
@@ -1084,17 +1160,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have userLessThree -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have userLessThree -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void firstTelNotZero() {
 
@@ -1133,17 +1212,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have firstTelNotZero -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have firstTelNotZero -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void userUnique() {
 
@@ -1206,12 +1288,15 @@ public class BackendApplicationTests {
 
 			fail("Should not pass to this line");
 		} catch (javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have userUnique -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have userUnique -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	@Test
 	public void personalUnique() {
 
@@ -1273,15 +1358,18 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have personalUnique -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have personalUnique -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
-	//RightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsType
+
+	// RightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsTypeRightsType
 	@Test
 	public void rightsTypeAnyFieldTrue() {
 		RightsType rightstypeid = new RightsType();
@@ -1290,17 +1378,21 @@ public class BackendApplicationTests {
 			entityManager.persist(rightstypeid);
 			entityManager.flush();
 
-			System.out.println("\n\n---------------------------------------------------------------------------------- ๅ Success rightsTypeAnyFieldTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- ๅ Success rightsTypeAnyFieldTrue -----------------------------------------------------------------------\n\n");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have rightsTypeAnyFieldTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have rightsTypeAnyFieldTrue -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
+
 	@Test
 	public void rightsTypeAnyFieldNotNull() {
 		RightsType rightstypeid = new RightsType();
@@ -1310,16 +1402,19 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have rightsTypeAnyFieldNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have rightsTypeAnyFieldNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//ProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvince
+
+	// ProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvinceProvince
 	@Test
 	public void provinceAnyFieldTrue() {
 		Province provinceid = new Province();
@@ -1328,17 +1423,21 @@ public class BackendApplicationTests {
 			entityManager.persist(provinceid);
 			entityManager.flush();
 
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Success provinceAnyFieldTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Success provinceAnyFieldTrue -----------------------------------------------------------------------\n\n");
 
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have provinceAnyFieldTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have provinceAnyFieldTrue -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
+
 	@Test
 	public void provinceAnyFieldNotNull() {
 		Province provinceid = new Province();
@@ -1348,17 +1447,19 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have provinceAnyFieldNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have provinceAnyFieldNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
 
-	//AccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUser
+	// AccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUserAccecptToUser
 	@Test
 	public void AcceptAnyTure() {
 
@@ -1388,16 +1489,19 @@ public class BackendApplicationTests {
 		acc.setDocumentCode("N3");
 		try {
 			entityManager.persist(acc);
-//			entityManager.flush();
+			// entityManager.flush();
 
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Success AcceptAnyTure -----------------------------------------------------------------------\n\n");
-		} catch(javax.validation.ConstraintViolationException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Success AcceptAnyTure -----------------------------------------------------------------------\n\n");
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have AcceptAnyTure -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have AcceptAnyTure -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
@@ -1434,17 +1538,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 5);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have anyFieldNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have anyFieldNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void codeAcceptUnique() {
 
@@ -1502,10 +1609,12 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have codeAcceptUnique -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have codeAcceptUnique -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
@@ -1560,10 +1669,12 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have documentCodeUnique -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have documentCodeUnique -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
@@ -1618,10 +1729,12 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have acceptIDUnique -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have acceptIDUnique -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
@@ -1658,17 +1771,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have AcceptCodeNotTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have AcceptCodeNotTrue -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void CommentNotShort() {
 
@@ -1699,24 +1815,28 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have CommentNotShort -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have CommentNotShort -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
+
 	@Test
 	public void CommentNotLong() {
 
 		AcceptToUser acc = new AcceptToUser();
 		acc.setAccId(5L);
 		acc.setCodeAccept("F1");
-		acc.setComment("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+		acc.setComment(
+				"0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
 		RightRegistration rightRegistrationId = new RightRegistration();
 		rightRegistrationId = rightRegistrationRepository.findByRegId(1L);
 		acc.setRightRegistration(rightRegistrationId);
@@ -1740,13 +1860,15 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have CommentNotLong -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have CommentNotLong -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
@@ -1783,41 +1905,44 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have documentCodeNotTrue -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have documentCodeNotTrue -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 
 	}
 
-
-	//StatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatus
+	// StatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatusStatus
 	@Test
 	public void statusAnyfieldNotnull() {
-		Status statusid= new Status();
+		Status statusid = new Status();
 		statusid.setStatusName(null);
 		try {
 			entityManager.persist(statusid);
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 2 Have statusAnyfieldNotnull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 2 Have statusAnyfieldNotnull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 
 		}
 	}
 
-	//Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease//
+	// Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease////Disease//
 	// ทดสอบหข้อมูลปกติ
 	@Test
 	public void testDiseaseNameTrue() {
@@ -1837,10 +1962,11 @@ public class BackendApplicationTests {
 			entityManager.persist(dis);
 			entityManager.flush();
 
-			System.out.println("\n\n------------------------------------------------------------------Disease Success --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Disease Success --------------------------------------------------------------------\n\n");
 			System.out.println("Success");
-			System.out.println("\n\n------------------------------------------------------------------Disease Success --------------------------------------------------------------------\n\n");
-
+			System.out.println(
+					"\n\n------------------------------------------------------------------Disease Success --------------------------------------------------------------------\n\n");
 
 		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
@@ -1874,9 +2000,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName Null  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName Null  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName Null  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName Null  --------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -1905,9 +2033,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -1936,9 +2066,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Symptom DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Symptom DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Symptom DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Symptom DiseaseName SizeShot  --------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -1967,9 +2099,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeLong  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName SizeLong  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName SizeLong  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName SizeLong  --------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -1998,14 +2132,17 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName Pattern  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName Pattern  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName Pattern  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName Pattern  --------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	@Test
-	//(expected=javax.persistence.PersistenceException.class)
+	// (expected=javax.persistence.PersistenceException.class)
 	public void testUniqueNameDisease() {
 		Disease dis1 = new Disease();
 		TypeDisease typeDiseaseid1 = new TypeDisease();
@@ -2021,7 +2158,7 @@ public class BackendApplicationTests {
 		dis1.setRemedy("กินยาพักผ่อน");
 		entityManager.persist(dis1);
 		entityManager.flush();
-		try{
+		try {
 			Disease dis2 = new Disease();
 			TypeDisease typeDiseaseid2 = new TypeDisease();
 			PeopleDisease peopleDiseaseid2 = new PeopleDisease();
@@ -2038,11 +2175,13 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch (javax.persistence.PersistenceException e){
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName Unique  --------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName Unique  --------------------------------------------------------------------\n\n");
 			System.out.println(e);
 
-			System.out.println("\n\n------------------------------------------------------------------DiseaseName Unique  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------DiseaseName Unique  --------------------------------------------------------------------\n\n");
 		}
 	}
 
@@ -2070,12 +2209,15 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Symptom Null  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Symptom Null  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Symptom Null  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Symptom Null  --------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	// ทดสอบห้ามเป็น not null
 	@Test
 	public void testCauseCannotBeNull() {
@@ -2100,12 +2242,15 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Cause Null  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Cause Null  --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Cause Null  --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Cause Null  --------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	// ทดสอบห้ามเป็น not null
 	@Test
 	public void testRemedyCannotBeNull() {
@@ -2130,9 +2275,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Remedy Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Remedy Null --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Remedy Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Remedy Null --------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -2161,9 +2308,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------TypeDiseaseName Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------TypeDiseaseName Null --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------TypeDiseaseName Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------TypeDiseaseName Null --------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -2192,13 +2341,16 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------PopulationRate Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------PopulationRate Null --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------PopulationRate Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------PopulationRate Null --------------------------------------------------------------------\n\n");
 
 		}
 	}
-	//PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease//
+
+	// PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease////PeopleDisease//
 	// ทดสอบห้ามเป็น not null
 	@Test
 	public void testPeopleCannotBeNull() {
@@ -2214,14 +2366,16 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------People Name Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------People Name Null --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------People Name Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------People Name Null --------------------------------------------------------------------\n\n");
 
 		}
 	}
 
-	//TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease//
+	// TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease////TypeDisease//
 	@Test
 	public void testTypeDiseaseCannotBeNull() {
 		TypeDisease td = new TypeDisease();
@@ -2236,14 +2390,16 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------TypeDisease Name Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------TypeDisease Name Null --------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------TypeDisease Name Null --------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------TypeDisease Name Null --------------------------------------------------------------------\n\n");
 
 		}
 	}
 
-	//Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory//
+	// Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory////Treatmenthistory//
 	// ทดสอบหข้อมูลปกติ
 	@Test
 	public void testCodeTrueTH() {
@@ -2272,12 +2428,15 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Code Success Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code Success Exception--------------------------------------------------------------------\n\n");
 			System.out.println("Success");
-			System.out.println("\n\n------------------------------------------------------------------Code Success Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code Success Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	// ทดสอบ Pattern ไม่ตรง
 	@Test
 	public void testPatternCodeCannotTH() {
@@ -2307,9 +2466,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("------------------------------------------------------------------Pattern Code Have Exception--------------------------------------------------------------------");
+			System.out.println(
+					"------------------------------------------------------------------Pattern Code Have Exception--------------------------------------------------------------------");
 			System.out.println(e.getMessage());
-			System.out.println("------------------------------------------------------------------Pattern Code End Exception--------------------------------------------------------------------");
+			System.out.println(
+					"------------------------------------------------------------------Pattern Code End Exception--------------------------------------------------------------------");
 
 		}
 	}
@@ -2343,9 +2504,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Code Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code Null Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Code Null End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code Null End Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -2379,9 +2542,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Code SizeShot Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code SizeShot Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Code SizeShot End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code SizeShot End Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -2415,9 +2580,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Date Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Date Null Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Date Null End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Date Null End Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -2451,12 +2618,15 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Drug Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Drug Null Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Drug Null End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Drug Null End Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
+
 	// ทดสอบห้ามเป็น not null
 	@Test
 	public void testDiseaseCannotNullTH() {
@@ -2486,9 +2656,11 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Disease Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Disease Null Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Disease Null End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Disease Null End Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
@@ -2522,23 +2694,25 @@ public class BackendApplicationTests {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n------------------------------------------------------------------Goldcard Null Have Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Goldcard Null Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n------------------------------------------------------------------Goldcard Null End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Goldcard Null End Exception--------------------------------------------------------------------\n\n");
 
 		}
 	}
 
 	@Test
-	//(expected=javax.persistence.PersistenceException.class)
-	public void testUniqueTreatmenthistoryCodeTH () {
+	// (expected=javax.persistence.PersistenceException.class)
+	public void testUniqueTreatmenthistoryCodeTH() {
 		Treatmenthistory th = new Treatmenthistory();
 		Goldcard goldcardid = new Goldcard();
 		Drug drugid = new Drug();
-	
+
 		Disease diseaseid = new Disease();
 		drugid.setDrugName("paracetamal");
-		
+
 		th.setCode("123456789TH");
 		goldcardid = goldcardRepository.findByGoldcardName("Sun");
 		th.setGoldcards(goldcardid);
@@ -2553,7 +2727,7 @@ public class BackendApplicationTests {
 
 		entityManager.persist(th);
 		entityManager.flush();
-		try{
+		try {
 			Treatmenthistory th1 = new Treatmenthistory();
 			Goldcard goldcardid1 = new Goldcard();
 			Drug drugid1 = new Drug();
@@ -2575,17 +2749,19 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch (javax.persistence.PersistenceException e){
-			System.out.println("\n\n------------------------------------------------------------------Code Unique Have Exception--------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code Unique Have Exception--------------------------------------------------------------------\n\n");
 			System.out.println(e);
-			System.out.println("\n\n------------------------------------------------------------------Code Unique End Exception--------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n------------------------------------------------------------------Code Unique End Exception--------------------------------------------------------------------\n\n");
 		}
 	}
 
-	//1.33
+	// 1.33
 	@Test
 	public void Publicz_True_All() {
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Suranaree");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2596,22 +2772,24 @@ public class BackendApplicationTests {
 			entityManager.persist(publicz);
 			entityManager.flush();
 
-			//fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+			// fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Publicz_True_All at Publicz ------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------- 1 Have Publicz_True_All at Publicz ------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//2.34
+
+	// 2.34
 	@Test
 	public void Publicz_PubliczHead_isShortSize() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Sur");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2623,21 +2801,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isShortSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isShortSize at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	3.35
+
+	// 3.35
 	@Test
 	public void Publicz_PubliczHead_isLongSize() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("SuranareeUniversity Thailand");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2649,21 +2829,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isLongSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isLongSize at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	4.36
+
+	// 4.36
 	@Test
 	public void Publicz_PublicizeDetail_FristBlank() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Suranaree");
 		publicz.setPublicizeDetail(" SuranareeUniversity");
@@ -2675,21 +2857,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PublicizeDetail_FristBlank at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PublicizeDetail_FristBlank at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//5.37
+
+	// 5.37
 	@Test
 	public void Publicz_PubliczHead_isNull() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead(null);
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2701,21 +2885,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isNull at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_isNull at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	6.38
+
+	// 6.38
 	@Test
 	public void Publicz_PubliczHead_Unique() {
 
-		Publicz   publicz1    = new Publicz();
+		Publicz publicz1 = new Publicz();
 
 		publicz1.setPubliczHead("WEERAPAT");
 		publicz1.setPublicizeDetail("SuranareeUniversity");
@@ -2725,7 +2911,7 @@ public class BackendApplicationTests {
 		entityManager.persist(publicz1);
 		entityManager.flush();
 
-		Publicz   publicz2    = new Publicz();
+		Publicz publicz2 = new Publicz();
 
 		publicz2.setPubliczHead("WEERAPAT");
 		publicz2.setPublicizeDetail("SuranareeUniversity");
@@ -2737,17 +2923,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_Unique at Publicz -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PubliczHead_Unique at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(e);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//7.39
+
+	// 7.39
 	@Test
 	public void Publicz_Email_isTrue() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Suranaree");
 		publicz.setPublicizeDetail(" SuranareeUniversity");
@@ -2759,21 +2948,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_Email_isTrue at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_Email_isTrue at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	8.40
+
+	// 8.40
 	@Test
 	public void Publicz_Email_isNotTrue() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Suranaree");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2785,21 +2976,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_Email_isNotTrue at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_Email_isNotTrue at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//9.41
+
+	// 9.41
 	@Test
 	public void Publicz_PhoneNotTrue_pattern() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Surdfhssdfg");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2811,21 +3004,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue_pattern at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue_pattern at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	10.42
+
+	// 10.42
 	@Test
 	public void Publicz_PhoneNotTrue_sSize() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Suranaree");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2837,21 +3032,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue_sSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue_sSize at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	11.43
+
+	// 11.43
 	@Test
 	public void Publicz_PhoneNotTrue__lSize() {
 
-		Publicz   publicz    = new Publicz();
+		Publicz publicz = new Publicz();
 
 		publicz.setPubliczHead("Suranaree");
 		publicz.setPublicizeDetail("SuranareeUniversity");
@@ -2863,21 +3060,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue__lSize at Publicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue__lSize at Publicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	12.44
+
+	// 12.44
 	@Test
 	public void Merber_MemberName_NotTrue_isNull() {
 
-		Member   member = new Member();
+		Member member = new Member();
 
 		member.setMemberName(null);
 
@@ -2886,21 +3085,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Merber_MemberName_NotTrue_isNull at Member -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Merber_MemberName_NotTrue_isNull at Member -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	13.45
+
+	// 13.45
 	@Test
 	public void Member_True_All() {
 
-		Member   member    = new Member();
+		Member member = new Member();
 
 		member.setMemberName("Suranaree");
 
@@ -2908,29 +3109,31 @@ public class BackendApplicationTests {
 			entityManager.persist(member);
 			entityManager.flush();
 
-			//fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+			// fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at Member ------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at Member ------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	14.46
+
+	// 14.46
 	@Test
 	public void Member_MemberName_Unique() {
 
-		Member   member1    = new Member();
+		Member member1 = new Member();
 
 		member1.setMemberName("WEERAPAT11");
 
 		entityManager.persist(member1);
 		entityManager.flush();
 
-		Member   member2    = new Member();
+		Member member2 = new Member();
 
 		member2.setMemberName("WEERAPAT11");
 
@@ -2939,24 +3142,27 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at Member -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at Member -----------------------------------------------------------------------\n\n");
 			System.out.println(e);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	15.47
+
+	// 15.47
 	@Test
 	public void TypeOfPublicz_TypePubName_Unique() {
 
-		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+		TypeOfPublicz typeOfPublicz1 = new TypeOfPublicz();
 
 		typeOfPublicz1.setTypePubName("TypeA");
 
 		entityManager.persist(typeOfPublicz1);
 		entityManager.flush();
 
-		TypeOfPublicz   typeOfPublicz2    = new TypeOfPublicz();
+		TypeOfPublicz typeOfPublicz2 = new TypeOfPublicz();
 
 		typeOfPublicz2.setTypePubName("TypeA");
 
@@ -2965,17 +3171,20 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at TypeOfPublicz -----------------------------------------------------------------------\n\n");
 			System.out.println(e);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	16.48
+
+	// 16.48
 	@Test
 	public void TypeOfPublicz_True_All() {
 
-		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+		TypeOfPublicz typeOfPublicz1 = new TypeOfPublicz();
 
 		typeOfPublicz1.setTypePubName("TypeA");
 
@@ -2983,22 +3192,24 @@ public class BackendApplicationTests {
 			entityManager.persist(typeOfPublicz1);
 			entityManager.flush();
 
-			//fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+			// fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at TypeOfPublicz ------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------- 1 Have Member_True_All at TypeOfPublicz ------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	17.49
+
+	// 17.49
 	@Test
 	public void TypeOfPublicz_TypePubName_NotTrue_isNull() {
 
-		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+		TypeOfPublicz typeOfPublicz1 = new TypeOfPublicz();
 
 		typeOfPublicz1.setTypePubName(null);
 
@@ -3007,21 +3218,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Merber_MemberName_NotTrue_isNull at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Merber_MemberName_NotTrue_isNull at TypeOfPublicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	18.50
+
+	// 18.50
 	@Test
 	public void TypeOfPublicz_TypePubName_NotTrue_isLsize() {
 
-		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+		TypeOfPublicz typeOfPublicz1 = new TypeOfPublicz();
 
 		typeOfPublicz1.setTypePubName("123456789012345678901234567890");
 
@@ -3030,21 +3243,23 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue__lSize at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Publicz_PhoneNotTrue__lSize at TypeOfPublicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-	//	19.51
+
+	// 19.51
 	@Test
 	public void TypeOfPublicz_TypePubName_NotTrue_isSsize() {
 
-		TypeOfPublicz   typeOfPublicz1    = new TypeOfPublicz();
+		TypeOfPublicz typeOfPublicz1 = new TypeOfPublicz();
 
 		typeOfPublicz1.setTypePubName("1");
 
@@ -3053,20 +3268,21 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have TypeOfPublicz_TypePubName_NotTrue_isSSize at TypeOfPublicz -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have TypeOfPublicz_TypePubName_NotTrue_isSSize at TypeOfPublicz -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
 
-//	20
+	// 20
 	@Test
-	public void GoldCard_isNotTrue_DetailBlank(){
+	public void GoldCard_isNotTrue_DetailBlank() {
 
 		Goldcard goldcard = new Goldcard();
 
@@ -3078,46 +3294,48 @@ public class BackendApplicationTests {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		}
-		catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have GoldCard_isNotTrue_DetailBlank at GoldCard -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have GoldCard_isNotTrue_DetailBlank at GoldCard -----------------------------------------------------------------------\n\n");
 			System.out.println(violations);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
-//	21
-@Test
-public void GoldCard_True_All() {
-	Goldcard   goldcard    = new Goldcard();
 
-	goldcard.setGoldcardName("Suranaree");
-	goldcard.setDetail("SuranareeUniversity");
+	// 21
+	@Test
+	public void GoldCard_True_All() {
+		Goldcard goldcard = new Goldcard();
 
+		goldcard.setGoldcardName("Suranaree");
+		goldcard.setDetail("SuranareeUniversity");
 
-	try {
-		entityManager.persist(goldcard);
-		entityManager.flush();
+		try {
+			entityManager.persist(goldcard);
+			entityManager.flush();
 
-		//fail("Should not pass to this line");
+			// fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------- 1 Have GoldCard_True_All at Goldcard ------------------------------------------------------------------\n\n");
+			System.out.println(violations);
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
 	}
-	catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		System.out.println("\n\n---------------------------------------------------------------------------- 1 Have GoldCard_True_All at Goldcard ------------------------------------------------------------------\n\n");
-		System.out.println(violations);
-		System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
-	}
-}
 
-//	22
+	// 22
 	@Test
 	public void Goldcard_GoldcardName_Unique() {
 
-		Goldcard   goldcard1    = new Goldcard();
+		Goldcard goldcard1 = new Goldcard();
 
 		goldcard1.setGoldcardName("Killer1234");
 		goldcard1.setDetail("SuranareeUniversity");
@@ -3135,410 +3353,720 @@ public void GoldCard_True_All() {
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.persistence.PersistenceException e) {
-			System.out.println("\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at Member -----------------------------------------------------------------------\n\n");
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- 1 Have Member_MemberName_Unique at Member -----------------------------------------------------------------------\n\n");
 			System.out.println(e);
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
 
-//------------------------------------------------------------------Unit Test Sprit 2 B5913114----------------------------------------------------------------------
-//-------------------------------------------------------testMedicalSuppliesPass------------------------------------------------------
-@Test
-public void testMedicalSuppliesPass() {
-	MedicalSupplies   medicalSupplies    = new MedicalSupplies();
-	medicalSupplies.setCodeNumber("C59741");
-	medicalSupplies.setMedicalsuppliesName("ABCDE");
-	medicalSupplies.setBrandName("STD");
-	medicalSupplies.setModelNumber("ADED");
-	try {
-		entityManager.persist(medicalSupplies);
-		entityManager.flush();
-		System.out.println("\n\n\n\n\n");
-		System.out.println("-------------------------------------------------------testMedicalSuppliesPass------------------------------------------------------");
-		System.out.println("testMedicalSuppliesPass");
-		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n");
-		
-	} catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		
-		
-	}
-	
-}
+	// ------------------------------------------------------------------Unit Test
+	// Sprit 2
+	// B5913114----------------------------------------------------------------------
 
-//-------------------------------------------------------testMedicalSuppliesNotNull------------------------------------------------------
-@Test
-public void testMedicalSuppliesNotNull() {
-	MedicalSupplies   medicalSupplies    = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName(null);
-
-	try {
-		entityManager.persist(medicalSupplies);
-		entityManager.flush();
-
-		fail("Should not pass to this line");
-	} catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		System.out.println("\n\n\n\n\n");
-		System.out.println("-------------------------------------------------------testMedicalSuppliesNotNull------------------------------------------------------");
-		System.out.println( e.getConstraintViolations());
-		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n");
-	}
-}
-
-//-------------------------------------------------------testMedicalSuppliesless2----------------------------------------------------	
-@Test
-public void testMedicalSuppliesless2() {
-	MedicalSupplies   medicalSupplies    = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("a");
-	try {
-		entityManager.persist(medicalSupplies);
-		entityManager.flush();
-
-		fail("Should not pass to this line");
-	} catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		System.out.println("\n\n\n\n\n");
-		System.out.println("-------------------------------------------------------testMedicalSuppliesless2------------------------------------------------------");
-		System.out.println( e.getConstraintViolations());
-		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n");
-	}
-}
-
-//-------------------------------------------------------testMedicalSuppliesthan30------------------------------------------------------
-   @Test
-	public void testMedicalSuppliesthan30() {
-	MedicalSupplies   medicalSupplies    = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhoihsdfoihdsf");
-	try {
-		entityManager.persist(medicalSupplies);
-		entityManager.flush();
-
-		fail("Should not pass to this line");
-	} catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		System.out.println("\n\n\n\n\n");
-		System.out.println("-------------------------------------------------------testMedicalSuppliesthan30------------------------------------------------------");
-		System.out.println( e.getConstraintViolations());
-		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n");
-	}
-
-}
-
-//-------------------------------------------------------MedicalSuppliesShouldbeEnglish------------------------------------------------------
-@Test
-public void testMedicalSuppliesShouldbeEnglish() {
-MedicalSupplies   medicalSupplies    = new MedicalSupplies();
-medicalSupplies.setMedicalsuppliesName("๓๒๔&หน้ากากอนามัย");
-try {
-	entityManager.persist(medicalSupplies);
-	entityManager.flush();
-
-	fail("Should not pass to this line");
-} catch(javax.validation.ConstraintViolationException e) {
-	Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-	assertEquals(violations.isEmpty(), false);
-	assertEquals(violations.size(), 1);
-	System.out.println("\n\n\n\n\n");
-	System.out.println("-------------------------------------------------------MedicalSuppliesShouldbeEnglish------------------------------------------------------");
-	System.out.println( e.getConstraintViolations());
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n\n");	
-}
-
-}
-//-------------------------------------------------------testMedicalSuppliesunique------------------------------------------------------
-@Test
-public void testMedicalSuppliesunique() {
-MedicalSupplies   medicalSupplies    = new MedicalSupplies();
-MedicalSupplies   medicalSuppliesunique    = new MedicalSupplies();
-medicalSupplies.setMedicalsuppliesName("days");
-medicalSuppliesunique.setMedicalsuppliesName("days");
-try {
-	entityManager.persist(medicalSupplies);
-	entityManager.flush();
-	entityManager.persist(medicalSuppliesunique);
-	entityManager.flush();
-
-
-	fail("Should not pass to this line");
-} catch(javax.persistence.PersistenceException e) {
-	// Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-	// assertEquals(violations.isEmpty(), false);
-	// assertEquals(violations.size(), 1);
-	System.out.println("\n\n\n\n\n");
-	System.out.println("-------------------------------------------------------testMedicalSuppliesunique------------------------------------------------------");
-	System.out.println( e+"testMedicalSuppliesunique");
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n\n");	
-}
-
-}
-//-------------------------------------------------------testcodeNumberunique------------------------------------------------------
-@Test
-public void testcodeNumberunique(){
-	MedicalSupplies medicalsupplies  = new MedicalSupplies();
-	MedicalSupplies medicalSuppliesunique = new MedicalSupplies();
-	medicalsupplies.setMedicalsuppliesName("ABCDE"); //Message MedicalSupplies should not null มีข้อความนี้มาจึงต้องเพิ่ม setMedicalSuppliesName
-	medicalSuppliesunique.setMedicalsuppliesName("ABCDED");
-
-	medicalsupplies.setCodeNumber("C123456");
-	medicalSuppliesunique.setCodeNumber("C123456");
-try{
-
-	entityManager.persist(medicalsupplies);
-	entityManager.flush();
-	entityManager.persist(medicalSuppliesunique);
-	entityManager.flush();
-	fail("Should not pass to this line");
-}catch(javax.validation.ConstraintViolationException e){
-	Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-	assertEquals(violations.isEmpty(), false);
-	assertEquals(violations.size(), 1);
-	System.out.println("\n\n\n\n\n");
-	System.out.println("-------------------------------------------------------testcodeNumberunique------------------------------------------------------");
-	System.out.println(e+"testcodeNumberunique");
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n\n\n\n");
-}
-
-}
-@Test
-public void testcodeNumberpattern(){
-	MedicalSupplies medicalsupplies  = new MedicalSupplies();
-	medicalsupplies.setMedicalsuppliesName("ABCDE"); //Message MedicalSupplies should not null มีข้อความนี้มาจึงต้องเพิ่ม setMedicalSuppliesName
-	medicalsupplies.setCodeNumber("C123456");
-try{
-	entityManager.persist(medicalsupplies);
-	entityManager.flush();
-	fail("Should not pass to this line");
-}catch(javax.validation.ConstraintViolationException e){
-	Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-	assertEquals(violations.isEmpty(), false);
-	assertEquals(violations.size(), 1);
-	System.out.println("\n\n\n\n\n");
-	System.out.println("-------------------------------------------------------testcodeNumberpattern------------------------------------------------------");
-	System.out.println(e+"testcodeNumberpattern");
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n\n\n\n");
-}
-
-}
-
-//-------------------------------------------------------modelNumberuque------------------------------------------------------
-@Test
-public void testmodelNumberuque(){
-	MedicalSupplies medicalSupplies  = new MedicalSupplies();
-	MedicalSupplies medicalSupplies1 = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("Mask");
-	medicalSupplies1.setMedicalsuppliesName("Masks");
-	medicalSupplies.setModelNumber("MODEL");
-	medicalSupplies1.setModelNumber("MODEL");
-try{
-	entityManager.persist(medicalSupplies);
-	entityManager.flush();
-	entityManager.persist(medicalSupplies1);
-	entityManager.flush();
-
-}catch(javax.persistence.PersistenceException e){
-	System.out.println("\n\n\n\n");
-	System.out.println("-------------------------------------------------------testmodelNumberuque------------------------------------------------------");
-	System.out.println(e+"testmodelNumberuque");
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n");
-}
-
-}
-@Test
-public void testmodelNumberless1(){
-	MedicalSupplies medicalSupplies  = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("Mask");
-	medicalSupplies.setModelNumber("");
-
-try{
-	entityManager.persist(medicalSupplies);
-	entityManager.flush();
-	fail("Should not pass to this line");
-}catch(javax.validation.ConstraintViolationException  e){
-	Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-	assertEquals(violations.isEmpty(), false);
-	assertEquals(violations.size(), 1);
-	System.out.println("\n\n\n\n");
-	System.out.println("-------------------------------------------------------testmodelNumberless1------------------------------------------------------");
-	System.out.println(e+"testmodelNumberless1");
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n");
-}
-
-}
-@Test
-public void testmodelNumberthan5(){
-	MedicalSupplies medicalSupplies  = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("Mask");
-	medicalSupplies.setModelNumber("GHUJ58");
-
-try{
-	entityManager.persist(medicalSupplies);
-	entityManager.flush();
-	fail("Should not pass to this line");
-}catch(javax.validation.ConstraintViolationException e){
-	Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-	assertEquals(violations.isEmpty(), false);
-	assertEquals(violations.size(), 1);
-	System.out.println("\n\n\n\n");
-	System.out.println("-------------------------------------------------------testmodelNumberthan5------------------------------------------------------");
-	System.out.println(e+"testmodelNumberthan5");
-	System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-	System.out.println("\n\n\n\n");
-}
-
-}
-//--------------------------------------------------------------------testbrandNameshort-------------------------------------------------------------
-@Test
-public void testbrandNameshort(){
-	MedicalSupplies medicalsupplies = new MedicalSupplies();
-	medicalsupplies.setMedicalsuppliesName("ABCD");
-	medicalsupplies.setBrandName("a");
-	try{
-		entityManager.persist(medicalsupplies);
-		entityManager.flush();
-
-	}catch(javax.validation.ConstraintViolationException e){
-		Set<ConstraintViolation<?>> violations =e.getConstraintViolations();
-		assertEquals(violations.isEmpty(),false);
-		assertEquals(violations.size(),1);
-		System.out.println("\n\n\n\n\n");
-		System.out.println("---------------------------------------------------testbrandNameshort-------------------------------------------");
-		System.out.println(e.getConstraintViolations());
-		System.out.println("-----------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n\n\n");			
-	}
-
-}
-//--------------------------------------------------------------------testbrandNamelong-------------------------------------------------------------
-@Test
-public void testbrandNamelong(){
-	MedicalSupplies medicalsupplies = new MedicalSupplies();
-	medicalsupplies.setMedicalsuppliesName("Mask");
-	medicalsupplies.setBrandName("askdhifoihidohfiwhioekdhfpowsiehfkdkofwiheofihosdfieidkfhowiehfodkfhoekidowfoijdfieik");
-	try{
-		entityManager.persist(medicalsupplies);
-		entityManager.flush();
-	}catch(javax.validation.ConstraintViolationException e){
-		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-		assertEquals(violation.isEmpty(),false);
-		assertEquals(violation.size(),1);
-
-		System.out.println("\n\n\n\n\n");
-		System.out.println("---------------------------------------------------testbrandNamelong-------------------------------------------");
-		System.out.println(e.getConstraintViolations());
-		System.out.println("-----------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n\n\n");	
-		
-	}
-}
-//--------------------------------------------------------------------testpropertiesshort-------------------------------------------------------------
-@Test
-public void testpropertiesshort(){
-	MedicalSupplies medicalSupplies =new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("Mask");
-	medicalSupplies.setProperties("d");
-	try{
-		entityManager.persist(medicalSupplies);
-		entityManager.flush();
-	}catch(javax.validation.ConstraintViolationException e){
-		Set<ConstraintViolation<?>> validation =e.getConstraintViolations();
-		assertEquals(validation.isEmpty(),false);
-		assertEquals(validation.size(),1);
-		System.out.println("\n\n\n\n\n");
-		System.out.println("---------------------------------------------------testpropertiesshort-------------------------------------------");
-		System.out.println(e.getConstraintViolations());
-		System.out.println("-----------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n\n\n");	
-	}
-}
-//--------------------------------------------------------------------testpropertieslong-------------------------------------------------------------
-
-@Test
-public void testpropertieslong(){
-	MedicalSupplies medicalSupplies = new MedicalSupplies();
-	medicalSupplies.setMedicalsuppliesName("Mask");
-	medicalSupplies.setProperties("ihsoadfihsoidhfoihwkdofjowihdofihwihodhsifhowoiheifhoiwheifoihididifowhiefhooihef");
-	
-	try{
-		entityManager.persist(medicalSupplies);
-		entityManager.flush();
-
-	}catch(javax.validation.ConstraintViolationException e){
-		Set<ConstraintViolation<?>> validation = e.getConstraintViolations();
-		assertEquals(validation.isEmpty(),false);
-		assertEquals(validation.size(),1);
-		System.out.println("\n\n\n\n\n\n\n\n");
-		System.out.println("-----------------------------------------testpropertieslong-----------------------------------");
-		System.out.println(e.getConstraintViolations());
-		System.out.println("----------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n\n\n\n");
-
-	}
-
-}
-@Test
-public void MedicalInstrumentNotNull() {
-	MedicalInstrument medicalInstrument = new MedicalInstrument();
-	medicalInstrument.setMedicalInstrumentName(null);
-	try {
-		entityManager.persist(medicalInstrument);
-		entityManager.flush();
-
-		fail("Should not pass to this line");
-	} catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		System.out.println("\n\n---------------------------------------------------------------------------------- MedicalInstrumentNotNull -----------------------------------------------------------------------\n\n");
-		System.out.println(e.getMessage());
-		System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
-	}
-}
-
-@Test
-public void UseabilityNotNull() {
-	Useability useability = new Useability();
-	useability.setUseabilityName(null);
-	try {
-		entityManager.persist(useability);
-		entityManager.flush();
-
-		fail("Should not pass to this line");
-	} catch(javax.validation.ConstraintViolationException e) {
-		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-		assertEquals(violations.isEmpty(), false);
-		assertEquals(violations.size(), 1);
-		System.out.println("\n\n---------------------------------------------------------------------------------- UseabilityNotNull -----------------------------------------------------------------------\n\n");
-		System.out.println(e.getMessage());
-		System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
-	}
-}
-
-
-
-
-	/////////////    Training    /////////////
+	// -------------------------------------------------------testMedicalSuppliesPass------------------------------------------------------
 	@Test
-	public void traningaddtrue(){
+	public void testMedicalSuppliesPass() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setCodeNumber("C59741");
+		medicalSupplies.setMedicalsuppliesName("ABCDE");
+		medicalSupplies.setBrandName("STD");
+		medicalSupplies.setModelNumber("ADED");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testMedicalSuppliesPass------------------------------------------------------");
+			System.out.println("testMedicalSuppliesPass");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+
+		}
+
+	}
+
+	// -------------------------------------------------------testMedicalSuppliesNotNull------------------------------------------------------
+	@Test
+	public void testMedicalSuppliesNotNull() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName(null);
+
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testMedicalSuppliesNotNull------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	// -------------------------------------------------------testMedicalSuppliesless2----------------------------------------------------
+	@Test
+	public void testMedicalSuppliesless2() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("a");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testMedicalSuppliesless2------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	// -------------------------------------------------------testMedicalSuppliesthan30------------------------------------------------------
+	@Test
+	public void testMedicalSuppliesthan30() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhoihsdfoihdsf");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testMedicalSuppliesthan30------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	// -------------------------------------------------------MedicalSuppliesShouldbeEnglish------------------------------------------------------
+	@Test
+	public void testMedicalSuppliesShouldbeEnglish() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("๓๒๔&หน้ากากอนามัย");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------MedicalSuppliesShouldbeEnglish------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	// -------------------------------------------------------testMedicalSuppliesunique------------------------------------------------------
+	@Test
+	public void testMedicalSuppliesunique() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		MedicalSupplies medicalSuppliesunique = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("days");
+		medicalSuppliesunique.setMedicalsuppliesName("days");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+			entityManager.persist(medicalSuppliesunique);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+			// Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			// assertEquals(violations.isEmpty(), false);
+			// assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testMedicalSuppliesunique------------------------------------------------------");
+			System.out.println(e + "testMedicalSuppliesunique");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	// -------------------------------------------------------testcodeNumberunique------------------------------------------------------
+	@Test
+	public void testcodeNumberunique() {
+		MedicalSupplies medicalsupplies = new MedicalSupplies();
+		MedicalSupplies medicalSuppliesunique = new MedicalSupplies();
+		medicalsupplies.setMedicalsuppliesName("ABCDE"); // Message MedicalSupplies should not null
+															// มีข้อความนี้มาจึงต้องเพิ่ม setMedicalSuppliesName
+		medicalSuppliesunique.setMedicalsuppliesName("ABCDED");
+
+		medicalsupplies.setCodeNumber("C123456");
+		medicalSuppliesunique.setCodeNumber("C123456");
+		try {
+
+			entityManager.persist(medicalsupplies);
+			entityManager.flush();
+			entityManager.persist(medicalSuppliesunique);
+			entityManager.flush();
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testcodeNumberunique------------------------------------------------------");
+			System.out.println(e + "testcodeNumberunique");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void testcodeNumberpattern() {
+		MedicalSupplies medicalsupplies = new MedicalSupplies();
+		medicalsupplies.setMedicalsuppliesName("ABCDE"); // Message MedicalSupplies should not null
+															// มีข้อความนี้มาจึงต้องเพิ่ม setMedicalSuppliesName
+		medicalsupplies.setCodeNumber("C123456");
+		try {
+			entityManager.persist(medicalsupplies);
+			entityManager.flush();
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testcodeNumberpattern------------------------------------------------------");
+			System.out.println(e + "testcodeNumberpattern");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+
+	}
+
+	// -------------------------------------------------------modelNumberuque------------------------------------------------------
+	@Test
+	public void testmodelNumberuque() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		MedicalSupplies medicalSupplies1 = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("Mask");
+		medicalSupplies1.setMedicalsuppliesName("Masks");
+		medicalSupplies.setModelNumber("MODEL");
+		medicalSupplies1.setModelNumber("MODEL");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+			entityManager.persist(medicalSupplies1);
+			entityManager.flush();
+
+		} catch (javax.persistence.PersistenceException e) {
+			System.out.println("\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testmodelNumberuque------------------------------------------------------");
+			System.out.println(e + "testmodelNumberuque");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void testmodelNumberless1() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("Mask");
+		medicalSupplies.setModelNumber("");
+
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testmodelNumberless1------------------------------------------------------");
+			System.out.println(e + "testmodelNumberless1");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void testmodelNumberthan5() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("Mask");
+		medicalSupplies.setModelNumber("GHUJ58");
+
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testmodelNumberthan5------------------------------------------------------");
+			System.out.println(e + "testmodelNumberthan5");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n");
+		}
+
+	}
+
+	// --------------------------------------------------------------------testbrandNameshort-------------------------------------------------------------
+	@Test
+	public void testbrandNameshort() {
+		MedicalSupplies medicalsupplies = new MedicalSupplies();
+		medicalsupplies.setMedicalsuppliesName("ABCD");
+		medicalsupplies.setBrandName("a");
+		try {
+			entityManager.persist(medicalsupplies);
+			entityManager.flush();
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------testbrandNameshort-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+
+	}
+
+	// --------------------------------------------------------------------testbrandNamelong-------------------------------------------------------------
+	@Test
+	public void testbrandNamelong() {
+		MedicalSupplies medicalsupplies = new MedicalSupplies();
+		medicalsupplies.setMedicalsuppliesName("Mask");
+		medicalsupplies
+				.setBrandName("askdhifoihidohfiwhioekdhfpowsiehfkdkofwiheofihosdfieidkfhowiehfodkfhoekidowfoijdfieik");
+		try {
+			entityManager.persist(medicalsupplies);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------testbrandNamelong-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+
+		}
+	}
+
+	// --------------------------------------------------------------------testpropertiesshort-------------------------------------------------------------
+	@Test
+	public void testpropertiesshort() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("Mask");
+		medicalSupplies.setProperties("d");
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> validation = e.getConstraintViolations();
+			assertEquals(validation.isEmpty(), false);
+			assertEquals(validation.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------testpropertiesshort-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+	// --------------------------------------------------------------------testpropertieslong-------------------------------------------------------------
+
+	@Test
+	public void testpropertieslong() {
+		MedicalSupplies medicalSupplies = new MedicalSupplies();
+		medicalSupplies.setMedicalsuppliesName("Mask");
+		medicalSupplies
+				.setProperties("ihsoadfihsoidhfoihwkdofjowihdofihwihodhsifhowoiheifhoiwheifoihididifowhiefhooihef");
+
+		try {
+			entityManager.persist(medicalSupplies);
+			entityManager.flush();
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> validation = e.getConstraintViolations();
+			assertEquals(validation.isEmpty(), false);
+			assertEquals(validation.size(), 1);
+			System.out.println("\n\n\n\n\n\n\n\n");
+			System.out.println(
+					"-----------------------------------------testpropertieslong-----------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n\n");
+
+		}
+
+	}
+
+
+	// -------------------------------------------------------TestMedicalInstrument------------------------------------------------------
+
+	@Test
+	public void TestMedicalInstrumentPass() {
+		MedicalInstrument medicalInstrument = new MedicalInstrument();
+		medicalInstrument.setMedicalInstrumentName("การแพทย์");
+		try {
+			entityManager.persist(medicalInstrument);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestMedicalInstrumentPass------------------------------------------------------");
+			System.out.println("MedicalInstrumentPass");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+
+		}
+
+	}
+
+	@Test
+	public void TestMedicalInstrumentNotNull() {
+		MedicalInstrument medicalInstrument = new MedicalInstrument();
+		medicalInstrument.setMedicalInstrumentName(null);
+		try {
+			entityManager.persist(medicalInstrument);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- TestMedicalInstrumentNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+
+
+
+	
+	@Test
+	public void TestMedicalInstrumentUnique() {
+		MedicalInstrument medicalInstrument = new MedicalInstrument();
+		medicalInstrument.setMedicalInstrumentName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+		MedicalInstrument medicalInstrument1 = new MedicalInstrument();
+		medicalInstrument1.setMedicalInstrumentName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+
+		try {
+			entityManager.persist(medicalInstrument);
+			entityManager.flush();
+			entityManager.persist(medicalInstrument1);
+			entityManager.flush();
+			System.out.println(
+					"---------------------------------------------------TestMedicalInstrumentUnique is passed------------------------------------");
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------TestMedicalInstrumentUnique-------------------------------------------");
+			System.out.println(e + "TestMedicalInstrumentUnique");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestMedicalInstrumentless2() {
+		MedicalInstrument medicalInstrument = new MedicalInstrument();
+		medicalInstrument.setMedicalInstrumentName("a");
+		try {
+			entityManager.persist(medicalInstrument);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestMedicalInstrumentless2------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestMedicalInstrumentthan100() {
+		MedicalInstrument medicalInstrument = new MedicalInstrument();
+		medicalInstrument.setMedicalInstrumentName(
+				"siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhodigoisdofdjsifjosijdijfosoidjfijsodfijdsoijfisjdofisjdofjisjdifjpaosdijfiooisdjfijsoidjfoijdiofjosjdfojsdfiosdidoijfsoijdosijfiojsoidjfijsiodjfoijsidojfoihsdfoihdsf");
+		try {
+			entityManager.persist(medicalInstrument);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestMedicalInstrumentthan100------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void TestMedicalInstrumentShouldnotHaveSpecialCharacter() {
+		MedicalInstrument medicalInstrument = new MedicalInstrument();
+		medicalInstrument.setMedicalInstrumentName("#@$%^&*()");
+		try {
+			entityManager.persist(medicalInstrument);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestMedicalInstrumentShouldnotHaveSpecialCharacter------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+	// -------------------------------------------------------TestMedicalInstrument end------------------------------------------------------
+
+
+	// -------------------------------------------------------Useability-----------------------------------------------------
+	@Test
+	public void TestUseabilityPass() {
+		Useability useability = new Useability();
+		useability.setUseabilityName("้ทั่วไป");
+		try {
+			entityManager.persist(useability);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------UseabilityPass------------------------------------------------------");
+			System.out.println("UseabilityPass");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+
+		}
+
+	}
+
+	@Test
+	public void TestUseabilityNotNull() {
+		Useability useability = new Useability();
+		useability.setUseabilityName(null);
+		try {
+			entityManager.persist(useability);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- TestUseabilityNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(e.getMessage());
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+		}
+	}
+
+
+
+		
+	@Test
+	public void TestUseabilityUnique() {
+		Useability useability = new Useability();
+		useability.setUseabilityName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+		Useability useability1 = new Useability();
+		useability1.setUseabilityName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+
+		try {
+			entityManager.persist(useability);
+			entityManager.flush();
+			entityManager.persist(useability1);
+			entityManager.flush();
+			System.out.println(
+					"---------------------------------------------------TestUseabilityUnique is passed------------------------------------");
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------TestUseabilityUnique-------------------------------------------");
+			System.out.println(e + "TestUseabilityUnique");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestUseabilityUniqueless2() {
+		Useability useability = new Useability();
+		useability.setUseabilityName("a");
+		try {
+			entityManager.persist(useability);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestUseabilityUniqueless2------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestUseabilitythan100() {
+		Useability useability = new Useability();
+		useability.setUseabilityName(
+				"siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhodigoisdofdjsifjosijdijfosoidjfijsodfijdsoijfisjdofisjdofjisjdifjpaosdijfiooisdjfijsoidjfoijdiofjosjdfojsdfiosdidoijfsoijdosijfiojsoidjfijsiodjfoijsidojfoihsdfoihdsf");
+		try {
+			entityManager.persist(useability);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestUseabilitythan100------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void TestUseabilityShouldnotHaveSpecialCharacter() {
+		Useability useability = new Useability();
+		useability.setUseabilityName("#@$%^&*()");
+		try {
+			entityManager.persist(useability);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestUseabilityShouldnotHaveSpecialCharacter------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+	// -------------------------------------------------------Useability end-----------------------------------------------------
+
+
+	///////////// Training /////////////
+	@Test
+	public void traningaddtrue() {
 		Training ta = new Training();
 		ta.setTopicTraining("การอบรมการออกบัตรใหม่");
 		ta.setObjectiveTraining("Objective2");
@@ -3547,293 +4075,318 @@ public void UseabilityNotNull() {
 		ta.setExpenditure(15000l);
 		System.out.println("\n\n\n\n");
 
-		System.out.println("-----------------------------------------Training Pattern passed -----------------------------------");
+		System.out.println(
+				"-----------------------------------------Training Pattern passed -----------------------------------");
 		System.out.println("\n\n\n\n");
-
 
 	}
 
 	@Test
-	public void topictrainingisnull(){
+	public void topictrainingisnull() {
 		Training ta = new Training();
 		ta.setTopicTraining(null);
 		ta.setObjectiveTraining("Objective3");
 		ta.setImportantTopicTraining("important3");
 		ta.setAttendess(123L);
 		ta.setExpenditure(15003l);
-		try{
+		try {
 			entityManager.persist(ta);
 			entityManager.flush();
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
-	
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------Training Topic is Null-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------Training Topic is Null-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-----------------------------------------------------------------------------------------------------------");
-			System.out.println("\n\n\n\n\n\n\n");	
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
 
+		}
 	}
-}
 
-@Test
-public void topictrainingisnotstartwithKARN(){
-	Training ta = new Training();
-	ta.setTopicTraining("aaaaaaaaaaaaaaaaaaaaaaaa");
-	ta.setObjectiveTraining("Objective9");
-	ta.setImportantTopicTraining("important9");
-	ta.setAttendess(129L);
-	ta.setExpenditure(15009l);
-	try{
-		entityManager.persist(ta);
-		entityManager.flush();
-	}catch(javax.validation.ConstraintViolationException e){
-		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-		assertEquals(violation.isEmpty(),false);
-		assertEquals(violation.size(),1);
-
-		System.out.println("\n\n\n\n\n");
-		System.out.println("---------------------------------------------------Training Topic is Start with KARN-------------------------------------------");
-		System.out.println(e.getConstraintViolations());
-		System.out.println("-----------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n\n\n");	
-
-}
-}
 	@Test
-	public void topictrainingmorethansixty(){
+	public void topictrainingisnotstartwithKARN() {
+		Training ta = new Training();
+		ta.setTopicTraining("aaaaaaaaaaaaaaaaaaaaaaaa");
+		ta.setObjectiveTraining("Objective9");
+		ta.setImportantTopicTraining("important9");
+		ta.setAttendess(129L);
+		ta.setExpenditure(15009l);
+		try {
+			entityManager.persist(ta);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------Training Topic is Start with KARN-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+
+		}
+	}
+
+	@Test
+	public void topictrainingmorethansixty() {
 		Training ta = new Training();
 		ta.setTopicTraining("การaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		ta.setObjectiveTraining("Objectives");
 		ta.setImportantTopicTraining("importants");
 		ta.setAttendess(125L);
 		ta.setExpenditure(15005l);
-		try{
+		try {
 			entityManager.persist(ta);
 			entityManager.flush();
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
-	
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------Training Topic more than sixty-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------Training Topic more than sixty-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-----------------------------------------------------------------------------------------------------------");
-			System.out.println("\n\n\n\n\n\n\n");	
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+
+		}
 
 	}
 
-
-
-
-}
-@Test
-	public void topictraininglessthanfive(){
+	@Test
+	public void topictraininglessthanfive() {
 		Training ta = new Training();
 		ta.setTopicTraining("การa");
 		ta.setObjectiveTraining("Objectives");
 		ta.setImportantTopicTraining("importants");
 		ta.setAttendess(126L);
 		ta.setExpenditure(15006l);
-		try{
+		try {
 			entityManager.persist(ta);
 			entityManager.flush();
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
-	
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------Training Topic less than five-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------Training Topic less than five-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
+		}
+
 	}
 
-
-
-
-}
-//--------------------------------------------------------------------Type of Training test sub of training -------------------------------------------------------------
-@Test
-	public void typetrainingisnull(){
+	// --------------------------------------------------------------------Type of
+	// Training test sub of training
+	// -------------------------------------------------------------
+	@Test
+	public void typetrainingisnull() {
 		TypeTraining ttt = new TypeTraining();
 		ttt.setTypeTrainingName(null);
-		try{
+		try {
 			entityManager.persist(ttt);
 			entityManager.flush();
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
-	
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TypeTraining is NULL-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TypeTraining is NULL-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
+		}
 	}
-}
-//--------------------------------------------------------------------Lecturer test sub of training -------------------------------------------------------------
-@Test
-	public void lecturerisnull(){
+
+	// --------------------------------------------------------------------Lecturer
+	// test sub of training
+	// -------------------------------------------------------------
+	@Test
+	public void lecturerisnull() {
 		Lecturer lec = new Lecturer();
 		lec.setLecturerName(null);
-		try{
+		try {
 			entityManager.persist(lec);
 			entityManager.flush();
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
-	
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------Lecturer is NULL-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------Lecturer is NULL-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
+		}
 	}
-}
 
-//--------------------------------------------------------------------Hospital Test-------------------------------------------------------------
-@Test 
-public void hospitalAllPass(){
+	// --------------------------------------------------------------------Hospital
+	// Test-------------------------------------------------------------
+	@Test
+	public void hospitalAllPass() {
 
-				Hospital ho = new Hospital();
-				ho.setHospitalName("St.Marry Hospital");
-				ho.setBranceFive(52341L);
-				ho.setBranceNine(523456289L);
-				ho.setHospitalAddress("hospitalAddress66");
-				ho.setHospitalPhone("0440005061");
-				ho.setHospitalPostcode(30607L);
+		Hospital ho = new Hospital();
+		ho.setHospitalName("St.Marry Hospital");
+		ho.setBranceFive(52341L);
+		ho.setBranceNine(523456289L);
+		ho.setHospitalAddress("hospitalAddress66");
+		ho.setHospitalPhone("0440005061");
+		ho.setHospitalPostcode(30607L);
 		System.out.println("\n\n\n\n");
-		System.out.println("-----------------------------------------Hospital Pattern passed -----------------------------------");
-		
+		System.out.println(
+				"-----------------------------------------Hospital Pattern passed -----------------------------------");
+
 		System.out.println("\n\n\n\n");
-}
+	}
 
-@Test
-public void hospitalphonenotzeroinfirst(){
-				Hospital ho = new Hospital();
-				ho.setHospitalName("St.Marry HospitalA");
-				ho.setBranceFive(52342L);
-				ho.setBranceNine(523456287L);
-				ho.setHospitalAddress("hospitalAddress67");
-				ho.setHospitalPhone("1144000506");
-				ho.setHospitalPostcode(31107L);
-				try{
-					entityManager.persist(ho);
-					entityManager.flush();
-				}catch(javax.validation.ConstraintViolationException e){
-					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-					assertEquals(violation.isEmpty(),false);
-					assertEquals(violation.size(),1);
-			
-					System.out.println("\n\n\n\n\n");
-					System.out.println("---------------------------------------------------Hospital First digit phone number is not ZERO-------------------------------------------");
-					System.out.println(e.getConstraintViolations());
-					System.out.println("-----------------------------------------------------------------------------------------------------------");
-					System.out.println("\n\n\n\n\n\n\n");
-			}
-}
+	@Test
+	public void hospitalphonenotzeroinfirst() {
+		Hospital ho = new Hospital();
+		ho.setHospitalName("St.Marry HospitalA");
+		ho.setBranceFive(52342L);
+		ho.setBranceNine(523456287L);
+		ho.setHospitalAddress("hospitalAddress67");
+		ho.setHospitalPhone("1144000506");
+		ho.setHospitalPostcode(31107L);
+		try {
+			entityManager.persist(ho);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 
-@Test
-public void hospitalNameIsNull(){
-				Hospital ho = new Hospital();
-				ho.setHospitalName(null);
-				ho.setBranceFive(82342L);
-				ho.setBranceNine(823456287L);
-				ho.setHospitalAddress("hospitalAddress87");
-				ho.setHospitalPhone("0440008506");
-				ho.setHospitalPostcode(31187L);
-				try{
-					entityManager.persist(ho);
-					entityManager.flush();
-				}catch(javax.validation.ConstraintViolationException e){
-					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-					assertEquals(violation.isEmpty(),false);
-					assertEquals(violation.size(),1);
-			
-					System.out.println("\n\n\n\n\n");
-					System.out.println("---------------------------------------------------Hospital Name is Null-------------------------------------------");
-					System.out.println(e.getConstraintViolations());
-					System.out.println("-----------------------------------------------------------------------------------------------------------");
-					System.out.println("\n\n\n\n\n\n\n");
-			}
-}
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------Hospital First digit phone number is not ZERO-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
 
-@Test
-public void hospitalNameIslessThanThree(){
-				Hospital ho = new Hospital();
-				ho.setHospitalName("H");
-				ho.setBranceFive(82442L);
-				ho.setBranceNine(823444287L);
-				ho.setHospitalAddress("hospitalAddress44");
-				ho.setHospitalPhone("0444485006");
-				ho.setHospitalPostcode(31447L);
-				try{
-					entityManager.persist(ho);
-					entityManager.flush();
-				}catch(javax.validation.ConstraintViolationException e){
-					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-					assertEquals(violation.isEmpty(),false);
-					assertEquals(violation.size(),1);
-			
-					System.out.println("\n\n\n\n\n");
-					System.out.println("---------------------------------------------------Hospital Name less than Three-------------------------------------------");
-					System.out.println(e.getConstraintViolations());
-					System.out.println("-----------------------------------------------------------------------------------------------------------");
-					System.out.println("\n\n\n\n\n\n\n");
-			}
-}
+	@Test
+	public void hospitalNameIsNull() {
+		Hospital ho = new Hospital();
+		ho.setHospitalName(null);
+		ho.setBranceFive(82342L);
+		ho.setBranceNine(823456287L);
+		ho.setHospitalAddress("hospitalAddress87");
+		ho.setHospitalPhone("0440008506");
+		ho.setHospitalPostcode(31187L);
+		try {
+			entityManager.persist(ho);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 
-@Test
-public void hospitalbranceisNULL(){
-				Hospital ho = new Hospital();
-				ho.setHospitalName("Rama 9 Hospital");
-				ho.setBranceFive(null);
-				ho.setBranceNine(null);
-				ho.setHospitalAddress("hospitalAddress111");
-				ho.setHospitalPhone("0444481106");
-				ho.setHospitalPostcode(31417L);
-				try{
-					entityManager.persist(ho);
-					entityManager.flush();
-				}catch(javax.validation.ConstraintViolationException e){
-					Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-					assertEquals(violation.isEmpty(),false);
-					assertEquals(violation.size(),2);
-			
-					System.out.println("\n\n\n\n\n");
-					System.out.println("---------------------------------------------------Hospital brance is NULL -------------------------------------------");
-					System.out.println(e.getConstraintViolations());
-					System.out.println("------------------------------------------(branceNine and branceFive)--------------------------------------------------");
-					System.out.println("\n\n\n\n\n\n\n");
-			}
-}
-@Test
-public void branceNineUnique(){
-	Province pro = new Province();
-	Affiliation aff = new Affiliation();
-	TypeHospital ty = new TypeHospital();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------Hospital Name is Null-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
 
-	Hospital hoo = new Hospital();
-	hoo.setHospitalName("PoaloHospital");
-	hoo.setBranceFive(55555L);
-	hoo.setBranceNine(555555555L);
-	hoo.setHospitalAddress("hospitalAddress1");
-	hoo.setHospitalPhone("0440000000");
-	hoo.setHospitalPostcode(30000L);
+	@Test
+	public void hospitalNameIslessThanThree() {
+		Hospital ho = new Hospital();
+		ho.setHospitalName("H");
+		ho.setBranceFive(82442L);
+		ho.setBranceNine(823444287L);
+		ho.setHospitalAddress("hospitalAddress44");
+		ho.setHospitalPhone("0444485006");
+		ho.setHospitalPostcode(31447L);
+		try {
+			entityManager.persist(ho);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 
-	aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
-	hoo.setAffiliationName(aff);
-	pro = provinceRepository.findByProvinceName("นครราชสีมา");
-	hoo.setProvinceName(pro);
-	ty = typeHospitalRepository.findByTypeName("เอกชน");
-	hoo.setTypeName(ty);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------Hospital Name less than Three-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void hospitalbranceisNULL() {
+		Hospital ho = new Hospital();
+		ho.setHospitalName("Rama 9 Hospital");
+		ho.setBranceFive(null);
+		ho.setBranceNine(null);
+		ho.setHospitalAddress("hospitalAddress111");
+		ho.setHospitalPhone("0444481106");
+		ho.setHospitalPostcode(31417L);
+		try {
+			entityManager.persist(ho);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 2);
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------Hospital brance is NULL -------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"------------------------------------------(branceNine and branceFive)--------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void branceNineUnique() {
+		Province pro = new Province();
+		Affiliation aff = new Affiliation();
+		TypeHospital ty = new TypeHospital();
+
+		Hospital hoo = new Hospital();
+		hoo.setHospitalName("PoaloHospital");
+		hoo.setBranceFive(55555L);
+		hoo.setBranceNine(555555555L);
+		hoo.setHospitalAddress("hospitalAddress1");
+		hoo.setHospitalPhone("0440000000");
+		hoo.setHospitalPostcode(30000L);
+
+		aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+		hoo.setAffiliationName(aff);
+		pro = provinceRepository.findByProvinceName("นครราชสีมา");
+		hoo.setProvinceName(pro);
+		ty = typeHospitalRepository.findByTypeName("เอกชน");
+		hoo.setTypeName(ty);
 
 		entityManager.persist(hoo);
 		entityManager.flush();
@@ -3846,12 +4399,12 @@ public void branceNineUnique(){
 		hoo2.setHospitalPhone("0440000002");
 		hoo2.setHospitalPostcode(30002L);
 
-	aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
-	hoo2.setAffiliationName(aff);
-	pro = provinceRepository.findByProvinceName("นครราชสีมา");
-	hoo2.setProvinceName(pro);
-	ty = typeHospitalRepository.findByTypeName("เอกชน");
-	hoo2.setTypeName(ty);
+		aff = affiliationRepository.findByAffiliationName("โรงพยาบาล");
+		hoo2.setAffiliationName(aff);
+		pro = provinceRepository.findByProvinceName("นครราชสีมา");
+		hoo2.setProvinceName(pro);
+		ty = typeHospitalRepository.findByTypeName("เอกชน");
+		hoo2.setTypeName(ty);
 
 		try {
 			entityManager.persist(hoo2);
@@ -3859,72 +4412,82 @@ public void branceNineUnique(){
 
 			fail("Should not pass to this line");
 		} catch (javax.persistence.PersistenceException e) {
-			
+
 			System.out.println("\n\n\n\n\n");
-					System.out.println("---------------------------------------------------ฺBranceNine is Unique -------------------------------------------");
-					System.out.println(e.getMessage());
-					System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
-					System.out.println("\n\n\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------ฺBranceNine is Unique -------------------------------------------");
+			System.out.println(e.getMessage());
+			System.out.println(
+					"---------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
-	//--------------------------------------------------------------------Affiliation test sub of Hospital -------------------------------------------------------------
-@Test
-public void affiliationisNULL(){
-	Affiliation afff = new Affiliation();
-	afff.setAffiliationName(null);
-	try{
-		entityManager.persist(afff);
-		entityManager.flush();
-	}catch(javax.validation.ConstraintViolationException e){
-		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-		assertEquals(violation.isEmpty(),false);
-		assertEquals(violation.size(),1);
 
-		System.out.println("\n\n\n\n\n");
-		System.out.println("---------------------------------------------------Affliation is NULL-------------------------------------------");
-		System.out.println(e.getConstraintViolations());
-		System.out.println("-----------------------------------------------------------------------------------------------------------");
-		System.out.println("\n\n\n\n\n\n\n");
-}
-}
-//--------------------------------------------------------------------TypeHospital test sub of hospital -------------------------------------------------------------
-@Test
-	public void typehospitalisNULL(){
+	// --------------------------------------------------------------------Affiliation
+	// test sub of Hospital
+	// -------------------------------------------------------------
+	@Test
+	public void affiliationisNULL() {
+		Affiliation afff = new Affiliation();
+		afff.setAffiliationName(null);
+		try {
+			entityManager.persist(afff);
+			entityManager.flush();
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------Affliation is NULL-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	// --------------------------------------------------------------------TypeHospital
+	// test sub of hospital
+	// -------------------------------------------------------------
+	@Test
+	public void typehospitalisNULL() {
 		TypeHospital tth = new TypeHospital();
 		tth.setTypeName(null);
-		try{
+		try {
 			entityManager.persist(tth);
 			entityManager.flush();
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
-	
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TypeHospital is NULL-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TypeHospital is NULL-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-----------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
+		}
 	}
-}
 
-
-
-
-
-	//--------------------------------------------------Unit Test Sprint 1 B5913114-----------------------------------------------------------------------------------------
+	// --------------------------------------------------Unit Test Sprint 1
+	// B5913114-----------------------------------------------------------------------------------------
 	@Test
-	public void TestDrugNamePass(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestDrugNamePass() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("Tilennall");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -3932,21 +4495,22 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-	
-
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
-			
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),2);
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 2);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------DrugName isn't passed-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------DrugName isn't passed-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 			fail("Should not pass to this line");
 		}
@@ -3954,18 +4518,18 @@ public void affiliationisNULL(){
 	}
 
 	@Test
-	public void TestDrugNameEnglishOnly(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestDrugNameEnglishOnly() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("พารา");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -3973,36 +4537,39 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugNameEnglishOnly-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNameEnglishOnly-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
 
 	@Test
-	public void TestDrugNameminSize(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestDrugNameminSize() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("s");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4010,71 +4577,80 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugNameminSize-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNameminSize-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
+
 	@Test
-	public void TestDrugNamemaxSize(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestDrugNamemaxSize() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
-		drug.setDrugName("guyguyguyguuygyguygugyguygyuguyguyguyguygyguyguyguyguyguyguyguygyuguygyugyuguuyguguygyuguyguyguyguyguyg");
+		drug.setDrugName(
+				"guyguyguyguuygyguygugyguygyuguyguyguyguygyguyguyguyguyguyguyguygyuguygyugyuguuyguguygyuguyguyguyguyguyg");
 		drug.setTypesOfDrugs(typesOfDrugs);
 		drug.setDrugRegistration(drugRegistration);
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugNamemaxSize-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamemaxSize-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
-	@Test
-	public void TestDrugNamenotNull(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
-		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+	@Test
+	public void TestDrugNamenotNull() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease disease = new Disease();
+
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName(null);
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4082,36 +4658,40 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugNamenotNull-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamenotNull-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
-	@Test
-	public void TestDrugNameUnique(){
-		Drug               drug 			  = new Drug();
-		Drug               drug1 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
-		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+	@Test
+	public void TestDrugNameUnique() {
+		Drug drug = new Drug();
+		Drug drug1 = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease disease = new Disease();
+
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("abcd");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4125,37 +4705,39 @@ public void affiliationisNULL(){
 		drug1.setTypesOfDosageForms(typesOfDosageForms);
 		drug1.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
 			entityManager.persist(drug1);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.persistence.PersistenceException e){
-	
+		} catch (javax.persistence.PersistenceException e) {
+
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugNameUnique-------------------------------------------");
-			System.out.println(e +"TestDrugNameUnique");
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNameUnique-------------------------------------------");
+			System.out.println(e + "TestDrugNameUnique");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
 
-
 	@Test
-	public void TestTypesOfDrugsnotNull(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestTypesOfDrugsnotNull() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName(null);
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName(null);
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("abcd");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4163,37 +4745,38 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestTypesOfDrugsnotNull-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestTypesOfDrugsnotNull-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
 
-
 	@Test
-	public void TestDrugRegistrationnotNull(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestDrugRegistrationnotNull() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName(null);
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository.findByDrugRegistrationName(null);
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("abcd");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4201,35 +4784,39 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugRegistrationnotNull-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugRegistrationnotNull-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
-	@Test
-	public void TestTypesOfDosageFormsnotNull(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
-		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName(null);
-		disease 				= 	diseaseRepository.findByDiseaseName("โรคเบาหวาน");
+	@Test
+	public void TestTypesOfDosageFormsnotNull() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		Disease disease = new Disease();
+
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName(null);
+		disease = diseaseRepository.findByDiseaseName("โรคเบาหวาน");
 
 		drug.setDrugName("abcd");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4237,36 +4824,39 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestTypesOfDosageFormsnotNull-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestTypesOfDosageFormsnotNull-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
 
 	@Test
-	public void TestDiseasenotNull(){
-		Drug               drug 			  = new Drug();
-		TypesOfDrugs       typesOfDrugs       = new TypesOfDrugs();
-		DrugRegistration   drugRegistration   = new DrugRegistration();
+	public void TestTestDiseasenotNull() {
+		Drug drug = new Drug();
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		DrugRegistration drugRegistration = new DrugRegistration();
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
-		Disease            disease            = new Disease();
-		
+		Disease disease = new Disease();
 
-		typesOfDrugs 			= 	typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
-		drugRegistration 		=	drugRegistrationRepository.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
-		typesOfDosageForms 		= 	typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
-		disease 				= 	diseaseRepository.findByDiseaseName(null);
+		typesOfDrugs = typesOfDrugsRepository.findByTypesOfDrugsName("ยาสามัญ");
+		drugRegistration = drugRegistrationRepository
+				.findByDrugRegistrationName("ทะเบียนยาแผนปัจจุบันสำหรับมนุษย์ชนิดเม็ด");
+		typesOfDosageForms = typesOfDosageFormsRepository.findByTypesOfDosageFormsName("เม็ดวงรี");
+		disease = diseaseRepository.findByDiseaseName(null);
 
 		drug.setDrugName("abcd");
 		drug.setTypesOfDrugs(typesOfDrugs);
@@ -4274,25 +4864,61 @@ public void affiliationisNULL(){
 		drug.setTypesOfDosageForms(typesOfDosageForms);
 		drug.setDisease(disease);
 
-		try{
+		try {
 			entityManager.persist(drug);
 			entityManager.flush();
-			System.out.println("---------------------------------------------------TestDrugNamePass is passed------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamePass is passed------------------------------------");
 			fail("Should not pass to this line");
-		}catch(javax.validation.ConstraintViolationException e){
-			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
-			assertEquals(violation.isEmpty(),false);
-			assertEquals(violation.size(),1);
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violation = e.getConstraintViolations();
+			assertEquals(violation.isEmpty(), false);
+			assertEquals(violation.size(), 1);
 			System.out.println("\n\n\n\n\n");
-			System.out.println("---------------------------------------------------TestDrugNamenotNull-------------------------------------------");
+			System.out.println(
+					"---------------------------------------------------TestDrugNamenotNull-------------------------------------------");
 			System.out.println(e.getConstraintViolations());
-			System.out.println("-------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
 
+
+
+
+
+
+
+	//------------------------------------------------------------------------TestTypesOfDosageForms-----------------------------------------------------------------------------------------------------
+
 	@Test
-	public void TypesOfDosageFormsNotNull() {
+	public void TestTypesOfDosageFormsPass() {
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		typesOfDosageForms.setTypesOfDosageFormsName("สามเหลี่ยม");
+		try {
+			entityManager.persist(typesOfDosageForms);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TypesOfDosageFormsPass------------------------------------------------------");
+			System.out.println("TypesOfDosageFormsPass");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+
+		}
+
+	}
+
+	@Test
+	public void TestTypesOfDosageFormsNotNull() {
 		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
 		typesOfDosageForms.setTypesOfDosageFormsName(null);
 		try {
@@ -4300,18 +4926,151 @@ public void affiliationisNULL(){
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- TypesOfDosageFormsNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- TestTypesOfDosageFormsNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
 	
 	@Test
-	public void TypesOfDrugsNotNull() {
+	public void TestTypesOfDosageFormsUnique() {
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		typesOfDosageForms.setTypesOfDosageFormsName("ยาสามัญ");
+
+
+		TypesOfDosageForms typesOfDosageForms1 = new TypesOfDosageForms();
+		typesOfDosageForms1.setTypesOfDosageFormsName("ยาสามัญ");
+
+		try {
+			entityManager.persist(typesOfDosageForms);
+			entityManager.flush();
+			entityManager.persist(typesOfDosageForms1);
+			entityManager.flush();
+			System.out.println(
+					"---------------------------------------------------TestTypesOfDosageFormsUnique is passed------------------------------------");
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------TestTypesOfDosageFormsUnique-------------------------------------------");
+			System.out.println(e + "TestTypesOfDosageFormsUnique");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestTypesOfDosageFormsless2() {
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		typesOfDosageForms.setTypesOfDosageFormsName("a");
+		try {
+			entityManager.persist(typesOfDosageForms);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestTypesOfDosageFormsless2------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestTypesOfDosageFormsthan100() {
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		typesOfDosageForms.setTypesOfDosageFormsName(
+				"siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhodigoisdofdjsifjosijdijfosoidjfijsodfijdsoijfisjdofisjdofjisjdifjpaosdijfiooisdjfijsoidjfoijdiofjosjdfojsdfiosdidoijfsoijdosijfiojsoidjfijsiodjfoijsidojfoihsdfoihdsf");
+		try {
+			entityManager.persist(typesOfDosageForms);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestTypesOfDosageFormsthan100------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void TestTypesOfDosageFormsShouldnotHaveSpecialCharacter() {
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		typesOfDosageForms.setTypesOfDosageFormsName("#@$%^&*()");
+		try {
+			entityManager.persist(typesOfDosageForms);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestTypesOfDosageFormsShouldnotHaveSpecialCharacter------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	//------------------------------------------------------------------------TestTypesOfDosageForms end-----------------------------------------------------------------------------------------------------
+
+
+	//------------------------------------------------------------------------TestTypesOfDrugs-----------------------------------------------------------------------------------------------------
+
+	@Test
+	public void TestTypesOfDrugsPass() {
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		typesOfDrugs.setTypesOfDrugsName("สามัญ");
+		try {
+			entityManager.persist(typesOfDrugs);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TypesOfDrugsPass------------------------------------------------------");
+			System.out.println("TypesOfDrugsPass");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+
+		}
+
+	}
+
+	@Test
+	public void TestTypesOfDrugsNotNull() {
 		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
 		typesOfDrugs.setTypesOfDrugsName(null);
 		try {
@@ -4319,17 +5078,150 @@ public void affiliationisNULL(){
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- TypesOfDrugsNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- TypesOfDrugsNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
+
+
 	@Test
-	public void DrugRegistrationNotNull() {
+	public void TestTypesOfDrugsUnique() {
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		typesOfDrugs.setTypesOfDrugsName("ยาสามัญ");
+
+
+		TypesOfDrugs typesOfDrugs1 = new TypesOfDrugs();
+		typesOfDrugs1.setTypesOfDrugsName("ยาสามัญ");
+
+		try {
+			entityManager.persist(typesOfDrugs);
+			entityManager.flush();
+			entityManager.persist(typesOfDrugs1);
+			entityManager.flush();
+			System.out.println(
+					"---------------------------------------------------TestTypesOfDrugsUnique is passed------------------------------------");
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------TestTypesOfDrugsUnique-------------------------------------------");
+			System.out.println(e + "TestTypesOfDrugsUnique");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestTypesOfDrugsless2() {
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		typesOfDrugs.setTypesOfDrugsName("a");
+		try {
+			entityManager.persist(typesOfDrugs);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestTypesOfDrugsless2------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestTypesOfDrugsthan100() {
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		typesOfDrugs.setTypesOfDrugsName(
+				"siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhodigoisdofdjsifjosijdijfosoidjfijsodfijdsoijfisjdofisjdofjisjdifjpaosdijfiooisdjfijsoidjfoijdiofjosjdfojsdfiosdidoijfsoijdosijfiojsoidjfijsiodjfoijsidojfoihsdfoihdsf");
+		try {
+			entityManager.persist(typesOfDrugs);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestDrugRegistrationthan100------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void TestTypesOfDrugsShouldnotHaveSpecialCharacter() {
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		typesOfDrugs.setTypesOfDrugsName("#@$%^&*()");
+		try {
+			entityManager.persist(typesOfDrugs);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestDrugRegistrationShouldnotHaveSpecialCharacter------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+//------------------------------------------------------------------------TestTypesOfDrugs end-----------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------TestDrugRegistration-----------------------------------------------------------------------------------------------------
+	@Test
+	public void TestDrugRegistrationPass() {
+		DrugRegistration DrugRegistration = new DrugRegistration();
+		DrugRegistration.setDrugRegistrationName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+		try {
+			entityManager.persist(DrugRegistration);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------DrugRegistrationPass------------------------------------------------------");
+			System.out.println("DrugRegistrationPass");
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+
+		}
+
+	}
+
+	@Test
+	public void TestDrugRegistrationNotNull() {
 		DrugRegistration DrugRegistration = new DrugRegistration();
 		DrugRegistration.setDrugRegistrationName(null);
 		try {
@@ -4337,20 +5229,119 @@ public void affiliationisNULL(){
 			entityManager.flush();
 
 			fail("Should not pass to this line");
-		} catch(javax.validation.ConstraintViolationException e) {
+		} catch (javax.validation.ConstraintViolationException e) {
 			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 			assertEquals(violations.isEmpty(), false);
 			assertEquals(violations.size(), 1);
-			System.out.println("\n\n---------------------------------------------------------------------------------- DrugRegistrationNotNull -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------- DrugRegistrationNotNull -----------------------------------------------------------------------\n\n");
 			System.out.println(e.getMessage());
-			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
+			System.out.println(
+					"\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
 
+	@Test
+	public void TestDrugRegistrationUnique() {
+		DrugRegistration DrugRegistration = new DrugRegistration();
+		DrugRegistration.setDrugRegistrationName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+		DrugRegistration DrugRegistration1 = new DrugRegistration();
+		DrugRegistration1.setDrugRegistrationName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+
+		try {
+			entityManager.persist(DrugRegistration);
+			entityManager.flush();
+			entityManager.persist(DrugRegistration1);
+			entityManager.flush();
+			System.out.println(
+					"---------------------------------------------------DrugRegistrationUnique is passed------------------------------------");
+			fail("Should not pass to this line");
+		} catch (javax.persistence.PersistenceException e) {
+
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"---------------------------------------------------DrugRegistrationUnique-------------------------------------------");
+			System.out.println(e + "DrugRegistrationUnique");
+			System.out.println(
+					"-------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestDrugRegistrationless2() {
+		DrugRegistration DrugRegistration = new DrugRegistration();
+		DrugRegistration.setDrugRegistrationName("a");
+		try {
+			entityManager.persist(DrugRegistration);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------testMedicalSuppliesless2------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+	}
+
+	@Test
+	public void TestDrugRegistrationthan100() {
+		DrugRegistration DrugRegistration = new DrugRegistration();
+		DrugRegistration.setDrugRegistrationName(
+				"siohfoihasoidhfoihsoidhfoihsdoihfoiihsdoifhodigoisdofdjsifjosijdijfosoidjfijsodfijdsoijfisjdofisjdofjisjdifjpaosdijfiooisdjfijsoidjfoijdiofjosjdfojsdfiosdidoijfsoijdosijfiojsoidjfijsiodjfoijsidojfoihsdfoihdsf");
+		try {
+			entityManager.persist(DrugRegistration);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestDrugRegistrationthan100------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
+
+	@Test
+	public void TestDrugRegistrationShouldnotHaveSpecialCharacter() {
+		DrugRegistration DrugRegistration = new DrugRegistration();
+		DrugRegistration.setDrugRegistrationName("#@$%^&*()");
+		try {
+			entityManager.persist(DrugRegistration);
+			entityManager.flush();
+
+			fail("Should not pass to this line");
+		} catch (javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			System.out.println("\n\n\n\n\n");
+			System.out.println(
+					"-------------------------------------------------------TestDrugRegistrationShouldnotHaveSpecialCharacter------------------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println(
+					"----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+		}
+
+	}
 
 
-
+//------------------------------------------------------------------------TestDrugRegistration End-----------------------------------------------------------------------------------------------------
 
 
 }
-
