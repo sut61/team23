@@ -3164,7 +3164,7 @@ public void testMedicalSuppliesPass() {
 		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
 		assertEquals(violations.isEmpty(), false);
 		assertEquals(violations.size(), 1);
-		
+		fail("Should not pass to this line");
 		
 	}
 	
@@ -3496,6 +3496,29 @@ public void testpropertieslong(){
 
 }
 @Test
+public void MedicalInstrumentPass() {
+	MedicalInstrument medicalInstrument = new MedicalInstrument();
+	medicalInstrument.setMedicalInstrumentName("การแพทย์");
+	try {
+		entityManager.persist(medicalInstrument);
+		entityManager.flush();
+		System.out.println("\n\n\n\n\n");
+		System.out.println("-------------------------------------------------------MedicalInstrumentPass------------------------------------------------------");
+		System.out.println("MedicalInstrumentPass");
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("\n\n\n\n\n");
+		
+	} catch(javax.validation.ConstraintViolationException e) {
+		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+		assertEquals(violations.isEmpty(), false);
+		assertEquals(violations.size(), 1);
+		fail("Should not pass to this line");
+		
+	}
+	
+}
+
+@Test
 public void MedicalInstrumentNotNull() {
 	MedicalInstrument medicalInstrument = new MedicalInstrument();
 	medicalInstrument.setMedicalInstrumentName(null);
@@ -3512,6 +3535,31 @@ public void MedicalInstrumentNotNull() {
 		System.out.println(e.getMessage());
 		System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 	}
+}
+
+
+
+@Test
+public void UseabilityPass() {
+	Useability useability = new Useability();
+	useability.setUseabilityName("้ทั่วไป");
+	try {
+		entityManager.persist(useability);
+		entityManager.flush();
+		System.out.println("\n\n\n\n\n");
+		System.out.println("-------------------------------------------------------UseabilityPass------------------------------------------------------");
+		System.out.println("UseabilityPass");
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("\n\n\n\n\n");
+		
+	} catch(javax.validation.ConstraintViolationException e) {
+		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+		assertEquals(violations.isEmpty(), false);
+		assertEquals(violations.size(), 1);
+		fail("Should not pass to this line");
+		
+	}
+	
 }
 
 @Test
@@ -4290,6 +4338,28 @@ public void affiliationisNULL(){
 			System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
+	@Test
+	public void TypesOfDosageFormsPass() {
+		TypesOfDosageForms typesOfDosageForms = new TypesOfDosageForms();
+		typesOfDosageForms.setTypesOfDosageFormsName("สามเหลี่ยม");
+		try {
+			entityManager.persist(typesOfDosageForms);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println("-------------------------------------------------------TypesOfDosageFormsPass------------------------------------------------------");
+			System.out.println("TypesOfDosageFormsPass");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+			
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+			
+		}
+		
+	}
 
 	@Test
 	public void TypesOfDosageFormsNotNull() {
@@ -4308,6 +4378,29 @@ public void affiliationisNULL(){
 			System.out.println(e.getMessage());
 			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
+	}
+
+	@Test
+	public void TypesOfDrugsPass() {
+		TypesOfDrugs typesOfDrugs = new TypesOfDrugs();
+		typesOfDrugs.setTypesOfDrugsName("สามัญ");
+		try {
+			entityManager.persist(typesOfDrugs);
+			entityManager.flush();
+			System.out.println("\n\n\n\n\n");
+			System.out.println("-------------------------------------------------------TypesOfDrugsPass------------------------------------------------------");
+			System.out.println("TypesOfDrugsPass");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n");
+			
+		} catch(javax.validation.ConstraintViolationException e) {
+			Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+			assertEquals(violations.isEmpty(), false);
+			assertEquals(violations.size(), 1);
+			fail("Should not pass to this line");
+			
+		}
+		
 	}
 	
 	@Test
@@ -4328,6 +4421,34 @@ public void affiliationisNULL(){
 			System.out.println("\n\n----------------------------------------------------------------------------------- End Exception -----------------------------------------------------------------------\n\n");
 		}
 	}
+
+
+
+	@Test
+public void DrugRegistrationPass() {
+	DrugRegistration DrugRegistration = new DrugRegistration();
+	DrugRegistration.setDrugRegistrationName("ยาแผนปัจจุบันสำหรับมนุษย์ชนิดแคปซูล");
+	try {
+		entityManager.persist(DrugRegistration);
+		entityManager.flush();
+		System.out.println("\n\n\n\n\n");
+		System.out.println("-------------------------------------------------------DrugRegistrationPass------------------------------------------------------");
+		System.out.println("DrugRegistrationPass");
+		System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("\n\n\n\n\n");
+		
+	} catch(javax.validation.ConstraintViolationException e) {
+		Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+		assertEquals(violations.isEmpty(), false);
+		assertEquals(violations.size(), 1);
+		fail("Should not pass to this line");
+		
+	}
+	
+}
+
+
+
 	@Test
 	public void DrugRegistrationNotNull() {
 		DrugRegistration DrugRegistration = new DrugRegistration();
