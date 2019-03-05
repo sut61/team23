@@ -31,6 +31,8 @@ public class Training {
     @Column(name = "Training_ID", unique = true, nullable = false)
     private  Long trainingId;
 
+    
+    @Pattern(regexp = "(การ).+")
     @NotNull
     @Size(min=5,max=60)
     private  String topicTraining;

@@ -11,7 +11,8 @@ import javax.persistence.OneToMany;
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
-
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.*;
 
 @Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
@@ -30,6 +31,7 @@ public class Affiliation {
     @Column(name="Affiliation_ID",unique=true,nullable=false)
     private Long affiliationId;
 
+    @NotNull
     private String affiliationName;
 
     public void setAffiliationName(String affiliationName) {

@@ -12,6 +12,8 @@ import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
 import java.util.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 @Entity // บอกว่าเป็น class entity class ที่เก็บขอมูล
 @Data // lombox จะสร้าง method getter setter ให้เอง
@@ -27,10 +29,11 @@ public class Lecturer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lecturer_seq")
     // Annotations Generate id เอง ตอน insert
     @Column(name = "Lecturer_ID", unique = true, nullable = false)
-    private @NonNull Long lecturerId;
+    private Long lecturerId;
 
 
-    private @NonNull String lecturerName;
+    @NotNull
+    private String lecturerName;
     
 
     /**
