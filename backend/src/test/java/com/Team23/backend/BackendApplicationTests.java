@@ -3536,16 +3536,11 @@ public void UseabilityNotNull() {
 
 
 
-
-
-
-
-
 	/////////////    Training    /////////////
 	@Test
 	public void traningaddtrue(){
 		Training ta = new Training();
-		ta.setTopicTraining("Topic 2");
+		ta.setTopicTraining("การอบรมการออกบัตรใหม่");
 		ta.setObjectiveTraining("Objective2");
 		ta.setImportantTopicTraining("important2");
 		ta.setAttendess(120L);
@@ -3582,10 +3577,35 @@ public void UseabilityNotNull() {
 
 	}
 }
+
+@Test
+public void topictrainingisnotstartwithKARN(){
+	Training ta = new Training();
+	ta.setTopicTraining("aaaaaaaaaaaaaaaaaaaaaaaa");
+	ta.setObjectiveTraining("Objective9");
+	ta.setImportantTopicTraining("important9");
+	ta.setAttendess(129L);
+	ta.setExpenditure(15009l);
+	try{
+		entityManager.persist(ta);
+		entityManager.flush();
+	}catch(javax.validation.ConstraintViolationException e){
+		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+		assertEquals(violation.isEmpty(),false);
+		assertEquals(violation.size(),1);
+
+		System.out.println("\n\n\n\n\n");
+		System.out.println("---------------------------------------------------Training Topic is Start with KARN-------------------------------------------");
+		System.out.println(e.getConstraintViolations());
+		System.out.println("-----------------------------------------------------------------------------------------------------------");
+		System.out.println("\n\n\n\n\n\n\n");	
+
+}
+}
 	@Test
 	public void topictrainingmorethansixty(){
 		Training ta = new Training();
-		ta.setTopicTraining("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		ta.setTopicTraining("การaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		ta.setObjectiveTraining("Objectives");
 		ta.setImportantTopicTraining("importants");
 		ta.setAttendess(125L);
@@ -3613,7 +3633,7 @@ public void UseabilityNotNull() {
 @Test
 	public void topictraininglessthanfive(){
 		Training ta = new Training();
-		ta.setTopicTraining("a");
+		ta.setTopicTraining("การa");
 		ta.setObjectiveTraining("Objectives");
 		ta.setImportantTopicTraining("importants");
 		ta.setAttendess(126L);
@@ -3637,7 +3657,46 @@ public void UseabilityNotNull() {
 
 
 }
-
+//--------------------------------------------------------------------Type of Training test sub of training -------------------------------------------------------------
+@Test
+	public void typetrainingisnull(){
+		TypeTraining ttt = new TypeTraining();
+		ttt.setTypeTrainingName(null);
+		try{
+			entityManager.persist(ttt);
+			entityManager.flush();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TypeTraining is NULL-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+	}
+}
+//--------------------------------------------------------------------Lecturer test sub of training -------------------------------------------------------------
+@Test
+	public void lecturerisnull(){
+		Lecturer lec = new Lecturer();
+		lec.setLecturerName(null);
+		try{
+			entityManager.persist(lec);
+			entityManager.flush();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------Lecturer is NULL-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+	}
+}
 
 //--------------------------------------------------------------------Hospital Test-------------------------------------------------------------
 @Test 
@@ -3802,12 +3861,55 @@ public void branceNineUnique(){
 		} catch (javax.persistence.PersistenceException e) {
 			
 			System.out.println("\n\n\n\n\n");
-					System.out.println("---------------------------------------------------Have ฺBranceNine of Hospital Unique -------------------------------------------");
+					System.out.println("---------------------------------------------------ฺBranceNine is Unique -------------------------------------------");
 					System.out.println(e.getMessage());
 					System.out.println("---------------------------------------------------------------------------------------------------------------------------------");
 					System.out.println("\n\n\n\n\n\n\n");
 		}
 	}
+	//--------------------------------------------------------------------Affiliation test sub of Hospital -------------------------------------------------------------
+@Test
+public void affiliationisNULL(){
+	Affiliation afff = new Affiliation();
+	afff.setAffiliationName(null);
+	try{
+		entityManager.persist(afff);
+		entityManager.flush();
+	}catch(javax.validation.ConstraintViolationException e){
+		Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+		assertEquals(violation.isEmpty(),false);
+		assertEquals(violation.size(),1);
+
+		System.out.println("\n\n\n\n\n");
+		System.out.println("---------------------------------------------------Affliation is NULL-------------------------------------------");
+		System.out.println(e.getConstraintViolations());
+		System.out.println("-----------------------------------------------------------------------------------------------------------");
+		System.out.println("\n\n\n\n\n\n\n");
+}
+}
+//--------------------------------------------------------------------TypeHospital test sub of hospital -------------------------------------------------------------
+@Test
+	public void typehospitalisNULL(){
+		TypeHospital tth = new TypeHospital();
+		tth.setTypeName(null);
+		try{
+			entityManager.persist(tth);
+			entityManager.flush();
+		}catch(javax.validation.ConstraintViolationException e){
+			Set<ConstraintViolation<?>> violation=e.getConstraintViolations();
+			assertEquals(violation.isEmpty(),false);
+			assertEquals(violation.size(),1);
+	
+			System.out.println("\n\n\n\n\n");
+			System.out.println("---------------------------------------------------TypeHospital is NULL-------------------------------------------");
+			System.out.println(e.getConstraintViolations());
+			System.out.println("-----------------------------------------------------------------------------------------------------------");
+			System.out.println("\n\n\n\n\n\n\n");
+	}
+}
+
+
+
 
 
 	//--------------------------------------------------Unit Test Sprint 1 B5913114-----------------------------------------------------------------------------------------

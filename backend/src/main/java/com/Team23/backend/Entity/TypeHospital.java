@@ -10,7 +10,8 @@ import javax.persistence.OneToMany;
 import lombok.*;
 import java.time.format.DateTimeFormatter;
 import java.time.*;
-
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.*;
 
 @Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
@@ -29,7 +30,8 @@ public class TypeHospital {
     @Column(name = "Type_ID", unique = true, nullable = false)
     private @NonNull Long typeId;
 
-    private @NonNull String typeName;
+    @NotNull
+    private String typeName;
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
